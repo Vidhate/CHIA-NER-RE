@@ -1,0 +1,81 @@
+T1	Condition 18 36	systemic infection
+T2	Condition 56 90	human Immunodeficiency virus (HIV)
+T3	Condition 92 115	hepatitis B virus (HBV)
+T4	Condition 121 144	hepatitis C virus (HCV)
+T5	Grammar_Error 117 120	and
+*	OR T3 T4 T2
+T6	Context_Error 172 222	the medicine which is prohibited during this study
+T7	Non-query-able 159 171	need to take
+T8	Condition 242 248	asthma
+T9	Non-query-able 263 275	can not stop
+T10	Drug 291 307	topical steroids
+T11	Context_Error 309 318	group 1~5
+T12	Drug 321 337	oral antibiotics
+T13	Procedure 339 367	whole body photochemotherapy
+T14	Drug 369 391	immunosuppressive drug
+T15	Temporal 392 413	within 4 weeks before
+T16	Reference_point 418 433	treatment visit
+R1	Has_index Arg1:T15 Arg2:T16	
+T17	Scope 291 391	topical steroids (group 1~5), oral antibiotics, whole body photochemotherapy, immunosuppressive drug
+*	OR T10 T12 T13 T14
+R2	AND Arg1:T17 Arg2:T9	
+R3	Has_temporal Arg1:T9 Arg2:T15	
+T18	Condition 435 443	Pregnant
+T19	Condition 445 459	breast-feeding
+T20	Person 460 465	women
+T21	Person 469 474	women
+T22	Non-query-able 479 493	plan to become
+T23	Condition 494 502	pregnant
+R4	AND Arg1:T23 Arg2:T22	
+T24	Temporal 503 520	during this study
+R5	Has_temporal Arg1:T22 Arg2:T24	
+T25	Condition 533 555	childbearing potential
+T26	Person 522 529	Females
+T27	Measurement 577 597	urine pregnancy test
+T28	Value 568 576	negative
+R6	Has_value Arg1:T27 Arg2:T28	
+A1	Optional T20
+A2	Optional T21
+A3	Optional T26
+A4	Optional T25
+R7	AND Arg1:T25 Arg2:T27	
+R8	AND Arg1:T26 Arg2:T25	
+T29	Scope 435 459	Pregnant, breast-feeding
+R9	Has_scope Arg1:T20 Arg2:T29	
+R10	AND Arg1:T21 Arg2:T23	
+*	OR T20 T21 T26
+T30	Non-query-able 600 713	Subjects who currently participate in other clinical trial or participated in other clinical trial within 30 days
+T31	Context_Error 600 713	Subjects who currently participate in other clinical trial or participated in other clinical trial within 30 days
+T32	Undefined_semantics 734 756	serious adverse events
+T33	Condition 734 756	serious adverse events
+T34	Temporal 757 763	during
+T35	Reference_point 764 781	stem cell therapy
+T36	Procedure 764 781	stem cell therapy
+R11	Has_index Arg1:T34 Arg2:T35	
+R12	Has_temporal Arg1:T33 Arg2:T34	
+T37	Condition 802 818	hypersensitivity
+T38	Drug 822 833	antibiotics
+T39	Drug 837 849	antimycotics
+*	OR T38 T39
+T40	Scope 822 849	antibiotics or antimycotics
+R13	Has_scope Arg1:T37 Arg2:T40	
+T41	Measurement 864 874	creatinine
+T42	Value 884 942	more than two times of the upper limit of the normal range
+T43	Temporal 943 960	at screening test
+T44	Reference_point 946 960	screening test
+R14	Has_index Arg1:T43 Arg2:T44	
+R15	Has_value Arg1:T41 Arg2:T42	
+R16	Has_temporal Arg1:T41 Arg2:T43	
+T45	Measurement 975 1029	aspartate transaminase/alkaline transaminase (AST/ALT)
+T46	Value 1039 1099	more than three times of the upper limit of the normal range
+T47	Temporal 1100 1117	at screening test
+T48	Reference_point 1103 1117	screening test
+R17	Has_temporal Arg1:T45 Arg2:T47	
+R18	Has_value Arg1:T45 Arg2:T46	
+R19	Has_index Arg1:T47 Arg2:T48	
+T49	Condition 1137 1156	any other condition
+T50	Qualifier 1163 1241	the investigator judges would make patients unsuitable for study participation
+T51	Subjective_judgement 1163 1241	the investigator judges would make patients unsuitable for study participation
+T52	Undefined_semantics 1163 1241	the investigator judges would make patients unsuitable for study participation
+T53	Context_Error 1163 1241	the investigator judges would make patients unsuitable for study participation
+R20	Has_qualifier Arg1:T49 Arg2:T50	

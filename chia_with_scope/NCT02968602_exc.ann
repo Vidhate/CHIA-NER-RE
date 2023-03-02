@@ -1,0 +1,143 @@
+T1	Condition 11 32	organic brain disease
+T2	Observation 0 10	History of
+R1	Has_temporal Arg1:T1 Arg2:T2	
+T3	Qualifier 34 40	DSM-IV
+T4	Condition 54 61;75 85	Alcohol Dependence
+T5	Condition 65 85	Substance Dependence
+*	OR T5 T4
+T6	Scope 54 85	Alcohol or Substance Dependence
+R2	Has_qualifier Arg1:T6 Arg2:T3	
+T7	Temporal 86 112	within the last six months
+R3	Has_temporal Arg1:T6 Arg2:T7	
+T8	Drug 121 129	nicotine
+T9	Negation 114 120	except
+R4	Has_negation Arg1:T8 Arg2:T9	
+R5	AND Arg1:T6 Arg2:T8	
+T10	Qualifier 134 139	DSM-5
+T11	Condition 153 175	Substance Use Disorder
+R6	Has_qualifier Arg1:T11 Arg2:T10	
+T12	Temporal 176 198	in the last six months
+T13	Drug 207 215	nicotine
+T14	Negation 200 206	except
+R7	Has_negation Arg1:T13 Arg2:T14	
+R8	Has_temporal Arg1:T11 Arg2:T12	
+R9	Has_negation Arg1:T11 Arg2:T14	
+T15	Qualifier 218 224	DSM-IV
+T16	Condition 238 245;259 264	Alcohol Abuse
+T17	Condition 249 264	Substance Abuse
+*	OR T17 T16
+T18	Scope 238 264	Alcohol or Substance Abuse
+R10	Has_qualifier Arg1:T18 Arg2:T15	
+T19	Temporal 265 290	within the last one month
+T20	Drug 299 307	nicotine
+T21	Negation 292 298	except
+R11	Has_negation Arg1:T20 Arg2:T21	
+R12	Has_temporal Arg1:T18 Arg2:T19	
+R13	AND Arg1:T18 Arg2:T20	
+T22	Qualifier 312 317	DSM-5
+T23	Condition 331 353	Substance Use Disorder
+T24	Temporal 354 376	in the last six months
+R14	Has_temporal Arg1:T23 Arg2:T24	
+R15	Has_qualifier Arg1:T23 Arg2:T22	
+T25	Drug 385 393	nicotine
+T26	Negation 378 384	except
+R16	Has_negation Arg1:T25 Arg2:T26	
+R17	AND Arg1:T23 Arg2:T25	
+T27	Scope 312 394	DSM-5 diagnosis of Substance Use Disorder in the last six months (except nicotine)
+*	OR T18 T27
+T28	Condition 396 405	Pregnancy
+T29	Condition 409 418	lactation
+*	OR T28 T29
+T30	Condition 427 444	liver dysfunction
+T31	Qualifier 420 426	Severe
+R18	Has_qualifier Arg1:T30 Arg2:T31	
+T32	Measurement 446 449	LFT
+T33	Value 450 474	3X upper limit of normal
+R19	Has_value Arg1:T32 Arg2:T33	
+T34	Scope 446 474	LFT 3X upper limit of normal
+R20	Has_scope Arg1:T30 Arg2:T34	
+T35	Condition 492 508	hypersensitivity
+T36	Drug 512 525	tetracyclines
+R21	AND Arg1:T35 Arg2:T36	
+T37	Temporal 477 485	Previous
+R22	Has_temporal Arg1:T35 Arg2:T37	
+T38	Temporal 527 534	Current
+T39	Procedure 535 544	treatment
+T40	Drug 550 562	tetracycline
+T41	Drug 550 562;566 576	tetracycline derivative
+*	OR T40 T41
+R23	Has_temporal Arg1:T39 Arg2:T38	
+T42	Scope 550 576	tetracycline or derivative
+R24	Has_scope Arg1:T39 Arg2:T42	
+T43	Drug 593 612	oral contraceptives
+T44	Procedure 578 587	Treatment
+R25	AND Arg1:T44 Arg2:T43	
+T45	Observation 638 651	birth control
+T46	Qualifier 623 634	second form
+R26	Has_qualifier Arg1:T45 Arg2:T46	
+T47	Negation 614 620	unless
+R27	Has_negation Arg1:T45 Arg2:T47	
+R28	Has_context Arg1:T44 Arg2:T45	
+T48	Drug 692 706	cholestyramine
+T49	Drug 710 720	colestipol
+*	OR T48 T49
+T50	Procedure 677 686	Treatment
+T51	Scope 692 720	cholestyramine or colestipol
+R29	Has_scope Arg1:T50 Arg2:T51	
+T52	Procedure 722 731	Treatment
+T53	Drug 737 757	Urinary alkalinizers
+T54	Drug 765 779	sodium lactate
+T55	Drug 781 798	potassium citrate
+*	OR T54 T55
+T56	Scope 765 798	sodium lactate, potassium citrate
+R30	Subsumes Arg1:T53 Arg2:T56	
+R31	AND Arg1:T52 Arg2:T53	
+T57	Drug 816 824	warfarin
+T58	Procedure 801 810	Treatment
+R32	AND Arg1:T58 Arg2:T57	
+T59	Drug 841 850	bupropion
+T60	Drug 852 863	varenicline
+T61	Drug 868 897	nicotine replacement products
+*	OR T60 T61 T59
+T62	Scope 841 897	bupropion, varenicline, or nicotine replacement products
+T63	Temporal 898 935	in the month prior to study inclusion
+T64	Reference_point 920 935	study inclusion
+R33	Has_index Arg1:T63 Arg2:T64	
+T65	Procedure 826 835	Treatment
+R34	Has_scope Arg1:T65 Arg2:T62	
+R35	Has_temporal Arg1:T62 Arg2:T63	
+T66	Multiplier 937 957	Less than two months
+T67	Procedure 958 967	treatment
+T68	Drug 971 993	adjunctive medications
+T69	Multiplier 998 1017	less than one month
+T70	Multiplier 1021 1030	same dose
+T71	Drug 1032 1045	beta blockers
+T72	Drug 1047 1062	antidepressants
+T73	Drug 1064 1080	mood stabilizers
+R36	AND Arg1:T67 Arg2:T68	
+R37	Has_multiplier Arg1:T67 Arg2:T66	
+R38	Has_multiplier Arg1:T70 Arg2:T69	
+R39	Has_multiplier Arg1:T67 Arg2:T70	
+*	OR T71 T72 T73 T74
+T74	Drug 1082 1105	antianxiety medications
+T75	Scope 1032 1105	beta blockers, antidepressants, mood stabilizers, antianxiety medications
+R40	Subsumes Arg1:T68 Arg2:T75	
+T76	Condition 1108 1125	Medical condition
+T77	Qualifier 1155 1230	would significantly increase the risk associated with the proposed protocol
+R41	Has_qualifier Arg1:T76 Arg2:T77	
+T78	Condition 1244 1255	head injury
+T79	Condition 1257 1265	seizures
+T80	Condition 1270 1276	stroke
+*	OR T80 T79 T78
+T81	Observation 1233 1240	History
+T82	Scope 1244 1276	head injury, seizures, or stroke
+R42	Has_temporal Arg1:T82 Arg2:T81	
+T83	Measurement 1287 1310	urine toxicology screen
+T84	Qualifier 1315 1348	substances of non-therapeutic use
+T85	Value 1278 1286	Positive
+R43	Has_qualifier Arg1:T83 Arg2:T84	
+R44	Has_value Arg1:T83 Arg2:T85	
+T86	Temporal 1349 1377	prior to craving assessments
+T87	Reference_point 1358 1377	craving assessments
+R45	Has_index Arg1:T86 Arg2:T87	
+R46	Has_temporal Arg1:T83 Arg2:T86	

@@ -1,0 +1,13 @@
+T1	Drug 19 60	nonsteroid anti-inflammatory drug (NSAID)
+T2	Temporal 71 107	on the day when consent was obtained
+T3	Reference_point 74 107	the day when consent was obtained
+R1	Has_index Arg1:T2 Arg2:T3	
+T4	Condition 268 281	gastric ulcer
+T5	Condition 285 299	duodenal ulcer
+*	OR T4 T5
+T6	Observation 257 264	history
+T7	Scope 268 299	gastric ulcer or duodenal ulcer
+R2	Has_temporal Arg1:T7 Arg2:T6	
+R3	Has_temporal Arg1:T1 Arg2:T2	
+T8	Observation 87 94	consent
+R4	multi Arg1:T3 Arg2:T8	

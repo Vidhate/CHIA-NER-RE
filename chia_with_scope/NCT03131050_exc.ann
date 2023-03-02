@@ -1,0 +1,90 @@
+T1	Competing_trial 0 140	Currently enrolled in, or discontinued within the last 30 days from, a clinical trial involving an off-label use of an investigational drug.
+T2	Condition 165 186	psychiatric diagnosis
+T3	Qualifier 157 164	primary
+T4	Qualifier 150 156	Axis I
+R1	Has_qualifier Arg1:T2 Arg2:T3	
+R2	Has_qualifier Arg1:T2 Arg2:T4	
+T5	Negation 187 197	other than
+T6	Condition 198 223	major depressive disorder
+R3	Has_negation Arg1:T6 Arg2:T5	
+R4	AND Arg1:T2 Arg2:T6	
+T7	Condition 226 248	Organic mental disease
+T8	Condition 260 278	mental retardation
+R5	Subsumes Arg1:T7 Arg2:T8	
+T9	Qualifier 292 314	clinically significant
+T10	Condition 315 322	disease
+R6	Has_qualifier Arg1:T10 Arg2:T9	
+T11	Condition 338 352;426 433	cardiovascular disease
+T12	Condition 396 410;426 433	endocrinologic disease
+T13	Condition 383 394;426 433	hematologic disease
+T14	Condition 370 381;426 433	respiratory disease
+T15	Condition 363 368;426 433	renal disease
+T16	Condition 354 361;426 433	hepatic disease
+T17	Condition 415 433	neurologic disease
+*	OR T13 T14 T15 T11 T12 T16 T19 T10
+T18	Qualifier 438 460	clinically significant
+T19	Condition 461 483	laboratory abnormality
+T20	Negation 492 495	not
+T21	Qualifier 496 506	stabilized
+R7	Has_negation Arg1:T21 Arg2:T20	
+T22	Mood 513 535	anticipated to require
+T23	Procedure 536 545	treatment
+T24	Temporal 546 562	during the study
+R8	Has_temporal Arg1:T23 Arg2:T24	
+R9	Has_mood Arg1:T23 Arg2:T22	
+*	OR T21 T23
+T25	Scope 492 562	not stabilized or is anticipated to require treatment during the study
+R10	Has_qualifier Arg1:T19 Arg2:T18	
+R11	Has_scope Arg1:T19 Arg2:T25	
+T26	Competing_trial 565 730	Subjects receiving an investigational agent (including different formulation and generic agents of investigational drug) in the previous 3 months prior to screening.
+T27	Pregnancy_considerations 732 845	Women in pregnancy or lactation, or female of child bearing potential without appropriate birth control measures.
+T28	Drug 854 868	antipsychotics
+T29	Drug 872 888	mood stabilizers
+T30	Temporal 889 921	within 5 days prior to screening
+*	OR T28 T29
+T31	Scope 854 888	antipsychotics or mood stabilizers
+R12	Has_temporal Arg1:T31 Arg2:T30	
+T32	Drug 937 967	depot antipsychotic medication
+T33	Temporal 968 1003	within one cycle prior to screening
+R13	Has_temporal Arg1:T32 Arg2:T33	
+T34	Condition 1012 1019	allergy
+T35	Condition 1023 1039	lack of response
+T36	Drug 1043 1054	mirtazapine
+*	OR T35 T34
+T37	Scope 1012 1039	allergy or lack of response
+R14	AND Arg1:T37 Arg2:T36	
+T38	Temporal 1082 1116	within 3 months prior to screening
+T39	Reference_point 994 1003	screening
+T40	Reference_point 912 921	screening
+R15	Has_index Arg1:T30 Arg2:T40	
+R16	Has_index Arg1:T33 Arg2:T39	
+T41	Reference_point 1107 1116	screening
+R17	Has_index Arg1:T38 Arg2:T41	
+T42	Procedure 1070 1073	ECT
+T43	Procedure 1077 1081	MECT
+*	OR T42 T43
+T44	Scope 1070 1081	ECT or MECT
+R18	Has_temporal Arg1:T44 Arg2:T38	
+T45	Drug 1130 1150	anticholinergic drug
+T46	Condition 1151 1158	allergy
+T47	Condition 1177 1194	allergic reaction
+T48	Condition 1196 1205	skin rash
+T49	Condition 1207 1216	urticaria
+T50	Condition 1227 1245	allergic reactions
+T51	Drug 1262 1267	drugs
+T52	Qualifier 1221 1226	other
+R19	Has_qualifier Arg1:T50 Arg2:T52	
+*	OR T47 T48 T49 T50
+T53	Scope 1177 1245	allergic reaction, skin rash, urticaria and other allergic reactions
+R20	AND Arg1:T53 Arg2:T51	
+T54	Scope 1177 1267	allergic reaction, skin rash, urticaria and other allergic reactions which caused by drugs
+R21	AND Arg1:T46 Arg2:T45	
+T55	Scope 1130 1158	anticholinergic drug allergy
+R22	Subsumes Arg1:T55 Arg2:T54	
+T56	Observation 1271 1278	Smokers
+T57	Mood 1293 1300	risk of
+T58	Observation 1301 1309;1327 1336	suicidal behaviors
+T59	Observation 1317 1336	self-harm behaviors
+*	OR T59 T58
+T60	Scope 1301 1336	suicidal and/or self-harm behaviors
+R23	Has_mood Arg1:T60 Arg2:T57	

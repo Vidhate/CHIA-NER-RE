@@ -1,0 +1,29 @@
+T1	Observation 0 15	Patient refusal
+T2	Procedure 20 41	supraclavicular block
+R1	AND Arg1:T1 Arg2:T2	
+T3	Observation 43 77	Inability to give informed consent
+T4	Condition 79 86	Allergy
+T5	Drug 90 107	local anesthetics
+R2	AND Arg1:T4 Arg2:T5	
+T6	Condition 109 138	Hemidiaphragmatic dysfunction
+T7	Condition 159 162	PNP
+T8	Qualifier 153 158	known
+T9	Qualifier 140 149	suspected
+*	OR T9 T8
+T10	Scope 140 158	suspected or known
+R3	Has_scope Arg1:T7 Arg2:T10	
+*	OR T7 T6
+T11	Condition 164 185	Neuromuscular disease
+T12	Condition 202 231	restrictive pulmonary disease
+T13	Condition 187 198;214 231	Obstructive pulmonary disease
+*	OR T13 T12
+T14	Qualifier 244 252	anatomic
+T15	Qualifier 233 240	Medical
+T16	Condition 253 269	contraindication
+T17	Procedure 273 297	supraclavicular blockade
+*	OR T14 T15
+T18	Scope 233 252	Medical or anatomic
+R4	Has_scope Arg1:T16 Arg2:T18	
+R5	AND Arg1:T16 Arg2:T17	
+T19	Non-representable 298 320	as judged by clinician
+T20	Condition 322 331	Pregnancy

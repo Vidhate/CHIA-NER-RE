@@ -1,0 +1,76 @@
+T1	Temporal 0 8	Previous
+T2	Drug 21 26	drugs
+T3	Drug 35 45	fingolimod
+T4	Drug 47 58	natalizumab
+T5	Drug 60 71	alemtuzumab
+T6	Drug 73 85	mitoxantrone
+T7	Drug 90 101	ocrelizumab
+*	OR T7 T6 T5 T4 T3
+T8	Scope 35 101	fingolimod, natalizumab, alemtuzumab, mitoxantrone and ocrelizumab
+R1	Subsumes Arg1:T2 Arg2:T8	
+R2	Has_temporal Arg1:T2 Arg2:T1	
+T9	Value 104 112	Positive
+T10	Measurement 113 124;140 160	hepatitis C surface antigen test
+T11	Measurement 128 160	hepatitis B surface antigen test
+T12	Measurement 168 197	hepatits B core antibody test
+T13	Qualifier 202 224	immunoglobulin G (IgG)
+T14	Qualifier 232 254	immunoglobulin M (IgM)
+*	OR T13 T14
+T15	Scope 202 254	immunoglobulin G (IgG) and/or immunoglobulin M (IgM)
+R3	Has_scope Arg1:T12 Arg2:T15	
+*	OR T10 T11 T12
+T16	Scope 113 254	hepatitis C or hepatitis B surface antigen test and/or hepatits B core antibody test for immunoglobulin G (IgG) and/or immunoglobulin M (IgM)
+R4	Has_value Arg1:T16 Arg2:T9	
+T17	Temporal 257 264	Current
+T18	Temporal 268 284	previous history
+T20	Condition 288 315	immune deficiency disorders
+T21	Measurement 337 371	human immunodeficiency virus (HIV)
+T22	Value 328 336	positive
+R5	Has_value Arg1:T21 Arg2:T22	
+R6	Subsumes Arg1:T20 Arg2:T21	
+*	OR T18 T17
+T19	Scope 257 284	Current or previous history
+R7	Has_scope Arg1:T20 Arg2:T19	
+T23	Procedure 401 418;439 446	immunosuppressive therapy
+T24	Procedure 422 446	myelosuppressive therapy
+*	OR T24 T23
+T25	Temporal 381 390	Currently
+T26	Drug 466 487	monoclonal antibodies
+T27	Drug 489 501	methotrexate
+T28	Drug 503 519	cyclophosphamide
+T29	Drug 521 533	cyclosporine
+T30	Drug 537 549	azathioprine
+T31	Drug 569 584	corticosteroids
+T32	Multiplier 554 565	chronic use
+R8	Has_multiplier Arg1:T31 Arg2:T32	
+*	OR T30 T31 T29 T28 T27 T26
+T33	Scope 466 584	monoclonal antibodies, methotrexate, cyclophosphamide, cyclosporine or azathioprine, or chronic use of corticosteroids
+T34	Scope 401 446	immunosuppressive or myelosuppressive therapy
+R9	Subsumes Arg1:T34 Arg2:T33	
+R10	Has_temporal Arg1:T34 Arg2:T25	
+T35	Procedure 598 610	tuberculosis
+T36	Procedure 632 644	tuberculosis
+T37	Procedure 656 668	tuberculosis
+T38	Qualifier 649 655	latent
+T39	Qualifier 625 631	active
+R11	Has_qualifier Arg1:T36 Arg2:T39	
+R12	Has_qualifier Arg1:T37 Arg2:T38	
+T40	Observation 587 594	History
+R13	Has_temporal Arg1:T35 Arg2:T40	
+*	OR T35 T36 T37
+T41	Condition 693 741	Progressive Multifocal Leukoencephalopathy (PML)
+T42	Procedure 745 777	Magnetic Resonance Imaging (MRI)
+R14	AND Arg1:T42 Arg2:T41	
+T43	Mood 670 678	Evidence
+T44	Mood 682 689	suspect
+*	OR T44 T43
+T45	Scope 670 689	Evidence or suspect
+R15	Has_scope Arg1:T41 Arg2:T45	
+T46	Observation 801 808	history
+T47	Condition 812 822	malignancy
+T48	Condition 787 797	malignancy
+T49	Qualifier 780 786	Active
+R16	Has_temporal Arg1:T47 Arg2:T46	
+R17	Has_qualifier Arg1:T48 Arg2:T49	
+*	OR T48 T47
+T50	Non-representable 825 879	Other protocol defined exclusion criteria could apply.

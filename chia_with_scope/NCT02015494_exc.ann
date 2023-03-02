@@ -1,0 +1,213 @@
+T1	Drug 45 49	drug
+T2	Drug 53 68	vaccine product
+T3	Qualifier 11 26	investigational
+T4	Qualifier 30 44	non-registered
+*	OR T4 T3
+T5	Scope 11 44	investigational or non-registered
+*	OR T2 T1
+T6	Temporal 69 133	within 30 days preceding the administration of the study vaccine
+T7	Reference_point 94 133	the administration of the study vaccine
+R1	Has_index Arg1:T6 Arg2:T7	
+T8	Non-query-able 137 148	planned use
+T9	Temporal 149 195	within the first six weeks of the study period
+T10	Observation 137 148	planned use
+R2	Has_mood Arg1:T9 Arg2:T10	
+T11	Reference_point 179 195	the study period
+R3	Has_index Arg1:T9 Arg2:T11	
+*	OR T9 T6
+T12	Scope 69 195	within 30 days preceding the administration of the study vaccine or planned use within the first six weeks of the study period
+T13	Scope 45 68	drug or vaccine product
+R4	Has_scope Arg1:T13 Arg2:T5	
+R5	Has_scope Arg1:T13 Arg2:T12	
+T14	Context_Error 0 195	Use of any investigational or non-registered drug or vaccine product within 30 days preceding the administration of the study vaccine or planned use within the first six weeks of the study period
+T15	Drug 248 265	influenza vaccine
+T16	Qualifier 214 222	licensed
+T17	Qualifier 226 247	other investigational
+*	OR T17 T16
+T18	Scope 214 247	licensed or other investigational
+R6	Has_scope Arg1:T15 Arg2:T18	
+T19	Temporal 266 315	within 3 months prior to enrollment in this study
+T20	Reference_point 291 315	enrollment in this study
+R7	Has_index Arg1:T19 Arg2:T20	
+T21	Observation 319 335	expected receipt
+T22	Non-query-able 319 335	expected receipt
+T23	Drug 339 364	any influenza vaccination
+T24	Temporal 365 382	before the Day 21
+T25	Reference_point 376 382	Day 21
+R8	Has_index Arg1:T24 Arg2:T25	
+R9	Has_temporal Arg1:T15 Arg2:T19	
+R10	Has_context Arg1:T23 Arg2:T21	
+R11	Has_temporal Arg1:T23 Arg2:T24	
+*	OR T23 T15
+T26	Observation 401 408	History
+T27	Condition 412 433	excessive alcohol use
+T28	Condition 435 445	drug abuse
+T29	Condition 461 480	psychiatric illness
+T30	Undefined_semantics 461 480	psychiatric illness
+T31	Qualifier 449 460	significant
+R12	Has_qualifier Arg1:T29 Arg2:T31	
+*	OR T29 T28 T27
+T32	Scope 412 480	excessive alcohol use, drug abuse or significant psychiatric illness
+R13	Has_temporal Arg1:T32 Arg2:T26	
+T33	Condition 482 493	Tobacco use
+T34	Temporal 494 523	within 3 months of enrollment
+T35	Reference_point 513 523	enrollment
+R14	Has_index Arg1:T34 Arg2:T35	
+R15	Has_temporal Arg1:T33 Arg2:T34	
+T36	Temporal 528 566	throughout first 6 months of the study
+T37	Reference_point 557 566	the study
+R16	Has_index Arg1:T36 Arg2:T37	
+R17	Has_temporal Arg1:T33 Arg2:T36	
+T38	Condition 574 589	chronic illness
+T39	Undefined_semantics 574 589	chronic illness
+T40	Condition 597 602;613 620	liver disease
+T41	Condition 606 620	kidney disease
+*	OR T41 T40
+T42	Scope 597 620	liver or kidney disease
+R18	Subsumes Arg1:T38 Arg2:T42	
+T43	Procedure 647 654	therapy
+T44	Temporal 635 646	concomitant
+R19	Has_temporal Arg1:T43 Arg2:T44	
+T45	Undefined_semantics 647 654	therapy
+T46	Condition 663 682	any other condition
+T47	Qualifier 688 749	could interfere with the subject's participation in the study
+R20	Has_qualifier Arg1:T46 Arg2:T47	
+T48	Measurement 829 849	liver function tests
+T49	Value 820 828	abnormal
+T50	Qualifier 797 819	Clinically significant
+R21	Has_value Arg1:T48 Arg2:T49	
+R22	Has_qualifier Arg1:T48 Arg2:T50	
+T51	Subjective_judgement 797 819	Clinically significant
+T52	Temporal 850 862	at screening
+T53	Reference_point 853 862	screening
+R23	Has_index Arg1:T52 Arg2:T53	
+R24	Has_temporal Arg1:T48 Arg2:T52	
+T54	Measurement 886 891;904 914	HBsAg antibodies
+T55	Measurement 893 896;904 914	HCV antibodies
+T56	Measurement 900 914	HIV antibodies
+*	OR T54 T55 T56
+T57	Scope 886 914	HBsAg, HCV or HIV antibodies
+T58	Value 864 872	Positive
+R25	Has_value Arg1:T57 Arg2:T58	
+T59	Condition 916 924	Pregnant
+T60	Condition 928 937	lactating
+T61	Person 938 944	female
+*	OR T60 T59
+T62	Condition 953 959	cancer
+T63	Condition 991 997	cancer
+T64	Procedure 977 997	treatment for cancer
+R26	AND Arg1:T64 Arg2:T63	
+T65	Temporal 998 1016	within three years
+*	OR T62 T64
+T66	Scope 953 997	cancer or have received treatment for cancer
+R27	Has_temporal Arg1:T66 Arg2:T65	
+T67	Condition 1044 1050	cancer
+T68	Observation 1033 1040	history
+T69	Condition 1059 1071	disease-free
+T70	Procedure 1080 1089	treatment
+T71	Negation 1072 1079	without
+R28	Has_negation Arg1:T70 Arg2:T71	
+R29	AND Arg1:T67 Arg2:T70	
+T72	Temporal 1090 1113	for three years or more
+R30	Has_temporal Arg1:T67 Arg2:T68	
+R31	AND Arg1:T67 Arg2:T69	
+T73	Grammar_Error 1114 1126	are eligible
+T74	Scope 1033 1126	history of cancer who are disease-free without treatment for three years or more are eligible
+*	OR T74 T66
+T75	Condition 1230 1260	impaired immune responsiveness
+T76	Condition 1287 1304	diabetes mellitus
+T77	Condition 1309 1329	autoimmune disorders
+*	OR T77 T76
+T78	Scope 1287 1329	diabetes mellitus and autoimmune disorders
+R32	Subsumes Arg1:T75 Arg2:T78	
+T79	Temporal 1400 1426	within the past six months
+T80	Drug 1428 1442	any medication
+T81	Procedure 1446 1466	therapeutic modality
+*	OR T81 T80
+T82	Qualifier 1472 1497	affects the immune system
+T83	Drug 1506 1519	allergy shots
+T84	Drug 1521 1536	immune globulin
+T85	Drug 1538 1548	interferon
+T86	Drug 1550 1566	immunomodulators
+T87	Procedure 1568 1585	radiation therapy
+T88	Drug 1587 1602	cytotoxic drugs
+T89	Drug 1606 1683	drugs known to be frequently associated with significant major organ toxicity
+T90	Qualifier 1612 1683	known to be frequently associated with significant major organ toxicity
+R33	Has_qualifier Arg1:T89 Arg2:T90	
+T91	Drug 1688 1712	systemic corticosteroids
+T92	Qualifier 1714 1718	oral
+T93	Qualifier 1722 1732	injectable
+*	OR T93 T92
+T94	Scope 1714 1732	oral or injectable
+R34	Has_scope Arg1:T91 Arg2:T94	
+T95	Grammar_Error 1735 1783	Inhaled and topical corticosteroids are allowed.
+T96	Scope 1428 1497	any medication or therapeutic modality that affects the immune system
+R35	Has_qualifier Arg1:T96 Arg2:T82	
+*	OR T83 T84 T85 T86 T87 T88 T89 T91
+T97	Scope 1506 1733	allergy shots, immune globulin, interferon, immunomodulators, radiation therapy, cytotoxic drugs or drugs known to be frequently associated with significant major organ toxicity, or systemic corticosteroids (oral or injectable)
+R36	Subsumes Arg1:T96 Arg2:T97	
+R37	Has_temporal Arg1:T96 Arg2:T79	
+T98	Condition 1818 1835	allergic reaction
+T99	Qualifier 1811 1817	severe
+R38	Has_qualifier Arg1:T98 Arg2:T99	
+T100	Observation 1800 1807	history
+R39	Has_temporal Arg1:T98 Arg2:T100	
+T101	Temporal 1836 1863	after previous vaccinations
+T102	Reference_point 1842 1863	previous vaccinations
+R40	Has_index Arg1:T101 Arg2:T102	
+R41	Has_temporal Arg1:T98 Arg2:T101	
+T103	Condition 1867 1927	hypersensitivity to any seasonal influenza vaccine component
+*	OR T98 T103
+T104	Drug 1891 1927	seasonal influenza vaccine component
+T105	Condition 1955 1978	Guillain-Barré Syndrome
+T106	Procedure 1980 1996	Receipt of blood
+T107	Procedure 1980 1990;2000 2014	Receipt of blood products
+*	OR T106 T107
+T108	Temporal 2015 2043	8 weeks prior to vaccination
+T109	Reference_point 2032 2043	vaccination
+R42	Has_index Arg1:T108 Arg2:T109	
+T110	Temporal 2070 2126	during the three week study period following vaccination
+T111	Reference_point 2081 2126	three week study period following vaccination
+R43	Has_index Arg1:T110 Arg2:T111	
+T112	Observation 2047 2069	planned administration
+T113	Scope 1980 2014	Receipt of blood or blood products
+*	OR T108 T112
+R44	Has_temporal Arg1:T112 Arg2:T110	
+T114	Scope 2015 2126	8 weeks prior to vaccination or planned administration during the three week study period following vaccination
+R45	Has_scope Arg1:T113 Arg2:T114	
+T115	Procedure 2128 2145	Donation of blood
+T116	Procedure 2128 2139;2149 2163	Donation of blood products
+*	OR T116 T115
+T117	Temporal 2164 2199	within 8 weeks prior to vaccination
+T118	Reference_point 2188 2199	vaccination
+R46	Has_index Arg1:T117 Arg2:T118	
+T119	Temporal 2203 2237	during the three week study period
+T120	Reference_point 2210 2237	the three week study period
+R47	Has_index Arg1:T119 Arg2:T120	
+*	OR T117 T119
+T121	Scope 2164 2237	within 8 weeks prior to vaccination or during the three week study period
+T122	Scope 2128 2163	Donation of blood or blood products
+R48	Has_scope Arg1:T122 Arg2:T121	
+T123	Measurement 2252 2268	oral temperature
+T124	Value 2269 2276	>100.4°
+R49	Has_value Arg1:T123 Arg2:T124	
+T125	Condition 2280 2293	acute disease
+T126	Temporal 2294 2330	within 72 hours prior to vaccination
+T127	Reference_point 2319 2330	vaccination
+R50	Has_index Arg1:T126 Arg2:T127	
+*	OR T125 T123
+T128	Scope 2252 2293	oral temperature >100.4° or acute disease
+R51	Has_temporal Arg1:T128 Arg2:T126	
+T129	Condition 2361 2369;2380 2387	moderate illness
+T130	Condition 2373 2387	severe illness
+*	OR T130 T129
+T131	Measurement 2548 2563	Body Mass Index
+T132	Value 2564 2569	>29.9
+R52	Has_value Arg1:T131 Arg2:T132	
+T133	Condition 2575 2598	disorder of coagulation
+T134	Condition 2624 2633	influenza
+T135	Temporal 2634 2663	within the previous 12 months
+R53	Has_temporal Arg1:T134 Arg2:T135	
+T136	Subjective_judgement 2665 2811	Any other condition or circumstance which, in the opinion of the Principal Investigator, poses an unacceptable risk for participation in the study
+T137	Context_Error 2665 2811	Any other condition or circumstance which, in the opinion of the Principal Investigator, poses an unacceptable risk for participation in the study
+T138	Post-eligibility 2665 2811	Any other condition or circumstance which, in the opinion of the Principal Investigator, poses an unacceptable risk for participation in the study

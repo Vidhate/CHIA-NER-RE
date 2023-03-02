@@ -1,0 +1,22 @@
+T1	Condition 14 50	Non-androgenetic causes of hair loss
+T2	Person 53 59	Female
+T3	Condition 74 95	androgenetic alopecia
+T4	Procedure 120 144	anti-hair loss treatment
+T5	Temporal 145 171	within the past six months
+R1	Has_temporal Arg1:T4 Arg2:T5	
+T6	Condition 199 217	bleeding disorders
+T7	Procedure 224 245	anticoagulant therapy
+T8	Condition 273 294	chronic liver disease
+T9	Condition 296 302	cancer
+T10	Condition 306 333	connective tissue disorders
+*	OR T9 T10 T8
+T11	Temporal 350 357	current
+T12	Condition 358 373	scalp infection
+R2	Has_temporal Arg1:T12 Arg2:T11	
+T13	Observation 188 195	history
+T14	Observation 262 269	history
+*	OR T6 T7
+T15	Scope 199 245	bleeding disorders or on anticoagulant therapy
+R3	Has_temporal Arg1:T15 Arg2:T13	
+T16	Scope 273 333	chronic liver disease, cancer or connective tissue disorders
+R4	Has_temporal Arg1:T16 Arg2:T14	

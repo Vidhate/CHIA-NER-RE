@@ -1,0 +1,21 @@
+T1	Measurement 0 19	Response assessment
+T2	Value 23 45	complete response (CR)
+T3	Value 47 68	partial response (PR)
+T4	Value 70 94	long stable disease (SD)
+T5	Temporal 95 108	for >3 months
+*	OR T3 T4 T2
+T6	Scope 23 94	complete response (CR), partial response (PR), long stable disease (SD)
+R1	Has_scope Arg1:T1 Arg2:T6	
+R2	Has_temporal Arg1:T6 Arg2:T5	
+T7	Qualifier 116 122	cancer
+T8	Procedure 123 146	immunotherapy treatment
+R3	Has_qualifier Arg1:T8 Arg2:T7	
+T9	Condition 151 168	metastatic cancer
+T10	Condition 172 196	hematologic malignancies
+T11	Procedure 214 226	marketed CPI
+T12	Observation 238 291	participation in a Roche/Genentech CPI clinical trial
+*	OR T11 T12
+*	OR T9 T10
+T13	Scope 151 196	metastatic cancer or hematologic malignancies
+R4	Has_scope Arg1:T8 Arg2:T13	
+T14	Non-representable 294 381	Availability of tumor biopsy material extracted and preserved by the investigating site

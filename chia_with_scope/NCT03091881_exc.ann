@@ -1,0 +1,41 @@
+T1	Condition 0 17	Contraindications
+T2	Procedure 22 39	spinal anesthesia
+R1	AND Arg1:T1 Arg2:T2	
+T3	Condition 46 64	bleeding diathesis
+T4	Condition 68 86	regional infection
+T5	Qualifier 90 114	site of neuroaxial block
+*	OR T3 T4
+T6	Scope 46 86	bleeding diathesis or regional infection
+R2	Has_qualifier Arg1:T6 Arg2:T5	
+T7	Condition 123 130	allergy
+T8	Drug 134 145	Granisetron
+T9	Drug 149 166	local anaesthetic
+T10	Drug 168 185	heavy bupivacaine
+T11	Drug 187 213	Marcaine Spinal 0.5% Heavy
+T12	Qualifier 215 221	5mg/ml
+T13	Qualifier 223 241	AstraZeneca ampule
+R3	Subsumes Arg1:T10 Arg2:T11	
+R4	Has_qualifier Arg1:T11 Arg2:T12	
+R5	Has_qualifier Arg1:T11 Arg2:T13	
+T14	Scope 168 241	heavy bupivacaine, Marcaine Spinal 0.5% Heavy, 5mg/ml, AstraZeneca ampule
+*	OR T8 T9
+R6	Subsumes Arg1:T9 Arg2:T14	
+T15	Scope 134 242	Granisetron or local anaesthetic (heavy bupivacaine, Marcaine Spinal 0.5% Heavy, 5mg/ml, AstraZeneca ampule)
+R7	Has_scope Arg1:T7 Arg2:T15	
+T16	Condition 244 253	Pregnancy
+T17	Condition 262 274	hypertension
+T18	Qualifier 244 261	Pregnancy induced
+R8	multi Arg1:T18 Arg2:T16	
+R9	Has_qualifier Arg1:T17 Arg2:T18	
+T19	Qualifier 276 286	Congenital
+T20	Qualifier 290 299	rheumatic
+T21	Condition 300 314	heart diseases
+*	OR T20 T19
+T22	Scope 276 299	Congenital or rheumatic
+R10	Has_scope Arg1:T21 Arg2:T22	
+T23	Condition 316 338	Antepartum haemorrhage
+T24	Condition 340 354	Fetal destress
+T25	Measurement 358 373	gestational age
+T26	Value 374 383	< 36 week
+R11	Has_value Arg1:T25 Arg2:T26	
+*	OR T24 T25

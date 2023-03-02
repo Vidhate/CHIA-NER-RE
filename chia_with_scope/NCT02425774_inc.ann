@@ -1,0 +1,8 @@
+T1	Procedure 31 61	full resection of the pancreas
+T2	Procedure 20 27;36 61	partial resection of the pancreas
+T3	Condition 81 96	malignant tumor
+T4	Condition 71 77;91 96	benign tumor
+*	OR T3 T4
+T5	Scope 71 96	benign or malignant tumor
+T6	Scope 20 61	partial or full resection of the pancreas
+R1	Has_scope Arg1:T6 Arg2:T5	

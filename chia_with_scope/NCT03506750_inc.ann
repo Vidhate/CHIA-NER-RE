@@ -1,0 +1,19 @@
+T1	Value 0 17	18 years or older
+T2	Person 12 17	older
+R1	Has_value Arg1:T2 Arg2:T1	
+T3	Condition 19 25;31 39	Type 1 diabetes
+T4	Condition 19 23;29 39	Type 2 diabetes
+*	OR T3 T4
+T5	Condition 41 44	PDR
+T6	Procedure 64 85	surgical intervention
+T7	Mood 54 63	requiring
+R2	Has_mood Arg1:T6 Arg2:T7	
+T8	Condition 107 126	vitreous hemorrhage
+T9	Condition 130 157	traction retinal detachment
+T10	Qualifier 162 175	pre-operative
+T11	Procedure 176 189	IVC treatment
+R3	Has_qualifier Arg1:T11 Arg2:T10	
+*	OR T8 T9 T11
+T12	Scope 107 189	vitreous hemorrhage or traction retinal detachment and pre-operative IVC treatment
+R4	Has_scope Arg1:T6 Arg2:T12	
+T13	Pregnancy_considerations 192 312	women postmenopausal for 12 months before the study, surgically sterile, or not pregnant and on effective contraception.

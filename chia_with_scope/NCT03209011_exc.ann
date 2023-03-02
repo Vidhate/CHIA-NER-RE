@@ -1,0 +1,19 @@
+T1	Condition 7 29	consumption of alcohol
+T2	Condition 37 42;7 21	drugs consumption of
+*	OR T2 T1
+T3	Condition 62 90	human immunodeficiency virus
+T4	Condition 92 109	hepatitis C virus
+T5	Condition 114 131	hepatitis D virus
+*	OR T3 T4 T5
+T6	Condition 144 164	autoimmune hepatitis
+T7	Qualifier 0 6	Active
+T8	Scope 7 42	consumption of alcohol and/or drugs
+R1	Has_qualifier Arg1:T8 Arg2:T7	
+T9	Observation 133 140	History
+R2	Has_temporal Arg1:T6 Arg2:T9	
+T10	Condition 166 185	Psychiatric disease
+T11	Condition 199 218	neoplastic diseases
+T12	Mood 187 198	Evidence of
+R3	Has_mood Arg1:T11 Arg2:T12	
+T13	Qualifier 226 231	liver
+R4	Has_qualifier Arg1:T11 Arg2:T13	

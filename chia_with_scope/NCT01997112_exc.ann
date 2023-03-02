@@ -1,0 +1,38 @@
+T1	Condition 11 34	ischaemic heart disease
+T2	Condition 36 51	cardiac failure
+T3	Condition 53 76	cerebrovascular disease
+T4	Condition 78 94	liver impairment
+T5	Measurement 96 99	ALT
+T6	Measurement 100 103	AST
+*	OR T6 T5
+T7	Value 103 110	>50IU/L
+R1	Has_value Arg1:T6 Arg2:T7	
+R2	Has_value Arg1:T5 Arg2:T7	
+T8	Measurement 115 120	stage
+T9	Value 121 124	3-5
+R3	Has_value Arg1:T8 Arg2:T9	
+T10	Condition 125 147	chronic kidney disease
+R4	AND Arg1:T10 Arg2:T8	
+T11	Scope 96 110	ALT/AST>50IU/L
+R5	Subsumes Arg1:T4 Arg2:T11	
+*	OR T1 T2 T3 T4 T8
+T12	Condition 161 169	overdose
+T13	Condition 173 190	suicidal ideation
+*	OR T13 T12
+T14	Measurement 201 209	weighing
+T15	Value 210 216	<55kgs
+R6	Has_value Arg1:T14 Arg2:T15	
+T16	Condition 233 245	chronic pain
+T17	Qualifier 246 265	requiring treatment
+R7	Has_qualifier Arg1:T16 Arg2:T17	
+T18	Condition 274 287	known allergy
+T19	Drug 291 302	paracetamol
+R8	AND Arg1:T18 Arg2:T19	
+T20	Drug 326 359	non-steroidal anti-inflammatories
+T21	Temporal 307 318	concomitant
+T22	Drug 362 381	oral anticoagulants
+T23	Drug 385 400	corticosteroids
+*	OR T23 T22 T20
+T24	Scope 326 400	non-steroidal anti-inflammatories , oral anticoagulants or corticosteroids
+R9	Has_temporal Arg1:T24 Arg2:T21	
+*	OR T18 T24

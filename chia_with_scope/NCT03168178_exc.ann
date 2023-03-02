@@ -1,0 +1,10 @@
+T1	Condition 6 19	fetal anomaly
+T2	Condition 27 37	indication
+T3	Drug 42 65	intrapartum antibiotics
+R1	AND Arg1:T2 Arg2:T3	
+T4	Condition 67 91	endocarditis prophylaxis
+T5	Condition 105 123	maternal infection
+*	OR T4 T5
+T6	Scope 27 65	indication for intrapartum antibiotics
+T7	Scope 67 123	endocarditis prophylaxis, other known maternal infection
+R2	Subsumes Arg1:T6 Arg2:T7	

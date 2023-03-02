@@ -1,0 +1,17 @@
+T1	Person 0 4	Male
+T2	Measurement 10 20	ASA status
+T3	Value 21 28	I or II
+R1	Has_value Arg1:T2 Arg2:T3	
+T4	Measurement 30 33	BMI
+T5	Value 34 57	between 20 and 34 kg/m2
+R2	Has_value Arg1:T4 Arg2:T5	
+T6	Procedure 89 111	reconstructive surgery
+T7	Qualifier 59 88	Cruciate ligament of the knee
+R3	Has_qualifier Arg1:T6 Arg2:T7	
+T8	Condition 116 133	contraindications
+T9	Procedure 149 168	regional anesthesia
+T10	Procedure 137 144;158 168	general anesthesia
+T11	Negation 113 115	No
+T12	Scope 137 168	general and regional anesthesia
+R4	Has_scope Arg1:T8 Arg2:T12	
+R5	Has_negation Arg1:T8 Arg2:T11	

@@ -1,0 +1,81 @@
+T1	Temporal 0 12	Preoperative
+T2	Measurement 13 23	Hemoglobin
+T3	Value 24 39	<U+2266>11 g/dl
+R1	Has_value Arg1:T2 Arg2:T3	
+R2	Has_temporal Arg1:T2 Arg2:T1	
+T4	Condition 52 61	infection
+T5	Condition 65 88	intraarticular fracture
+T6	Qualifier 96 109	affective hip
+*	OR T5 T4
+T7	Scope 52 88	infection or intraarticular fracture
+R3	Has_qualifier Arg1:T7 Arg2:T6	
+T8	Observation 41 48	History
+R4	Has_temporal Arg1:T7 Arg2:T8	
+T9	Condition 111 136	Renal function deficiency
+T10	Measurement 138 141	GFR
+T11	Value 142 159	<30 ml/min/1.73m2
+R5	Has_value Arg1:T10 Arg2:T11	
+T12	Scope 138 159	GFR <30 ml/min/1.73m2
+R6	Subsumes Arg1:T9 Arg2:T12	
+T13	Measurement 171 183	liver enzyme
+T14	Value 162 170	Elevated
+R7	Has_value Arg1:T13 Arg2:T14	
+T15	Measurement 185 246	aspartate transaminase (AST)/ alanine transaminase(ALT) level
+T16	Value 251 279	more than twice normal range
+R8	Has_value Arg1:T15 Arg2:T16	
+T17	Observation 283 290	history
+T18	Condition 294 309	liver cirrhosis
+T19	Condition 311 334	impaired liver function
+T20	Value 335 343	elevated
+T21	Measurement 344 365	total bilirubin level
+R9	Has_value Arg1:T21 Arg2:T20	
+T22	Condition 371 383	coagulopathy
+T23	Multiplier 395 408	long-term use
+T24	Drug 409 422	anticoagulant
+R10	Has_multiplier Arg1:T24 Arg2:T23	
+T25	Scope 395 422	long-term use anticoagulant
+T26	Condition 436 456	deep vein thrombosis
+T27	Condition 458 480	ischemic heart disease
+T28	Condition 484 490	stroke
+*	OR T27 T28 T26
+T29	Condition 492 509	Contraindications
+T30	Drug 513 528	tranexamic acid
+T31	Drug 530 537	floseal
+T32	Drug 542 553	rivaroxaban
+*	OR T31 T32 T30
+T33	Scope 513 553	tranexamic acid, floseal, or rivaroxaban
+R11	Has_scope Arg1:T29 Arg2:T33	
+T34	Condition 555 562	Allergy
+T35	Drug 566 581	tranexamic acid
+T36	Drug 583 590	floseal
+T37	Drug 592 603	rivaroxaban
+T38	Drug 612 622	excipients
+*	OR T38 T37 T36 T35
+T39	Scope 566 622	tranexamic acid, floseal, rivaroxaban, or the excipients
+R12	Subsumes Arg1:T34 Arg2:T39	
+T40	Condition 635 673	heparin-induced thrombocytopenia (HIT)
+T41	Observation 624 631	History
+R13	Has_temporal Arg1:T40 Arg2:T41	
+T42	Condition 675 687	Coagulopathy
+T43	Condition 691 708	bleeding tendency
+T44	Condition 719 736	organ dysfunction
+T45	Condition 746 755	cirrhosis
+T46	Condition 757 780	bone marrow suppression
+*	OR T45 T46
+T47	Scope 746 780	cirrhosis, bone marrow suppression
+R14	Subsumes Arg1:T44 Arg2:T47	
+*	OR T43 T42
+T48	Scope 675 708	Coagulopathy or bleeding tendency
+R15	AND Arg1:T48 Arg2:T44	
+T49	Qualifier 804 810	active
+T50	Condition 811 828	bleeding disorder
+T51	Condition 838 861	intracranial hemorrhage
+T52	Condition 863 894	upper gastrointestinal bleeding
+T53	Condition 896 905	hematuria
+*	OR T52 T53 T51
+T54	Scope 838 905	intracranial hemorrhage, upper gastrointestinal bleeding, hematuria
+R16	Has_qualifier Arg1:T50 Arg2:T49	
+R17	Subsumes Arg1:T50 Arg2:T54	
+T55	Condition 928 937	allergies
+T56	Drug 941 967	materials of bovine origin
+R18	AND Arg1:T55 Arg2:T56	

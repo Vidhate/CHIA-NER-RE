@@ -1,0 +1,12 @@
+T1	Person 0 3	Age
+T2	Value 4 21	18 years or older
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Condition 32 50	penetrating trauma
+T4	Condition 23 28;44 50	Blunt trauma
+*	OR T3 T4
+T5	Condition 61 64	VTE
+T6	Procedure 65 83	thromboprophylaxis
+R2	AND Arg1:T6 Arg2:T5	
+T7	Mood 85 94	High-risk
+T8	Condition 99 102	VTE
+R3	Has_mood Arg1:T8 Arg2:T7	

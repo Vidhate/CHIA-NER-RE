@@ -1,0 +1,14 @@
+T1	Condition 31 40	deep peel
+T2	Person 41 46	women
+T3	Condition 48 55	exoderm
+R1	Subsumes Arg1:T1 Arg2:T3	
+T4	Value 58 77	older than 18 years
+T5	Person 78 81	old
+R2	Has_value Arg1:T5 Arg2:T4	
+T6	Non-representable 132 265	The treatment group will receive 5 consecutive daily hyperbaric treatments, 1 hours long each, at 2 ATF, starting from day 7 to peel.
+T7	Observation 384 397	control group
+T8	Person 443 446	age
+T9	Person 448 458	skin color
+T10	Person 463 467	type
+T11	Scope 443 467	age, skin color and type
+R3	Has_context Arg1:T11 Arg2:T7	

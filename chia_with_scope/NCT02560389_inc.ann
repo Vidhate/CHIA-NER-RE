@@ -1,0 +1,11 @@
+T1	Person 15 18	age
+T2	Value 0 11	25-50 years
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Observation 36 44;55 62	physical assault
+T4	Observation 48 62	sexual assault
+*	OR T4 T3
+T5	Condition 20 24	PTSD
+T6	Scope 36 62	physical or sexual assault
+R2	Has_scope Arg1:T5 Arg2:T6	
+T7	Observation 64 81	Medically healthy
+T8	Observation 83 99	English speaking

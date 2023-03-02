@@ -1,0 +1,16 @@
+T1	Qualifier 14 22	acquired
+T2	Qualifier 0 10	congenital
+T3	Condition 23 40	bleeding tendency
+*	OR T1 T2
+T4	Scope 0 22	congenital or acquired
+R1	Has_scope Arg1:T3 Arg2:T4	
+T5	Measurement 42 56	platelet count
+T6	Value 57 68	<50,000/ µL
+R2	Has_value Arg1:T5 Arg2:T6	
+T7	Condition 70 86	hypersensitivity
+T8	Qualifier 90 97	shrimps
+T9	Qualifier 99 107	lobsters
+T10	Qualifier 111 118	beetles
+*	OR T9 T10 T8
+T11	Scope 90 118	shrimps, lobsters or beetles
+R3	Has_scope Arg1:T7 Arg2:T11	

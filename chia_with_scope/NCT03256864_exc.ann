@@ -1,0 +1,50 @@
+T1	Multiplier 31 39	multiple
+T2	Procedure 40 51;73 84	solid organ transplants
+T3	Procedure 55 84	islet cell tissue transplants
+*	OR T3 T2
+T4	Scope 40 84	solid organ or islet cell tissue transplants
+R1	Has_multiplier Arg1:T4 Arg2:T1	
+T5	Temporal 94 104	previously
+T6	Procedure 117 122;133 143	organ transplant
+T7	Procedure 126 143	tissue transplant
+*	OR T7 T6
+T8	Scope 117 143	organ or tissue transplant
+R2	Has_temporal Arg1:T8 Arg2:T5	
+T9	Procedure 165 197	combined liver-kidney transplant
+*	OR T4 T8 T9
+T10	Observation 200 207	History
+T11	Condition 211 221	malignancy
+T12	Qualifier 225 241	any organ system
+R3	Has_qualifier Arg1:T11 Arg2:T12	
+R4	Has_temporal Arg1:T11 Arg2:T10	
+T13	Negation 243 253	other than
+T14	Condition 254 296	localized basal cell carcinoma of the skin
+R5	Has_negation Arg1:T14 Arg2:T13	
+T15	Scope 243 296	other than localized basal cell carcinoma of the skin
+R6	Has_scope Arg1:T11 Arg2:T15	
+T16	Qualifier 299 306	treated
+T17	Qualifier 310 319	untreated
+*	OR T16 T17
+T18	Temporal 321 344	within the past 5 years
+T19	Non-representable 346 419	regardless of whether there is evidence of local recurrence or metastases
+T20	Scope 299 319	treated or untreated
+R7	Has_scope Arg1:T11 Arg2:T20	
+R8	Has_temporal Arg1:T11 Arg2:T18	
+T21	Condition 439 447;467 477	surgical conditions
+T22	Condition 449 456;467 477	medical conditions
+T23	Condition 460 477	mental conditions
+*	OR T21 T22 T23
+T24	Negation 479 489	other than
+T25	Temporal 494 501	current
+T26	Procedure 502 517	transplantation
+R9	Has_temporal Arg1:T26 Arg2:T25	
+R10	Has_negation Arg1:T26 Arg2:T24	
+T27	Scope 439 477	surgical, medical or mental conditions
+R11	AND Arg1:T27 Arg2:T26	
+T28	Qualifier 562 610	might interfere with the objectives of the study
+R12	Has_qualifier Arg1:T27 Arg2:T28	
+T29	Condition 613 621	Pregnant
+T30	Observation 625 632	nursing
+T31	Observation 634 643	lactating
+T32	Person 645 650	women
+R13	Subsumes Arg1:T30 Arg2:T31	

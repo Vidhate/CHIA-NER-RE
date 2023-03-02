@@ -1,0 +1,35 @@
+T1	Qualifier 11 26	weight-lowering
+T2	Drug 27 32	drugs
+R1	Has_qualifier Arg1:T2 Arg2:T1	
+T3	Qualifier 38 53	investigational
+T4	Qualifier 71 85	lipid-lowering
+T5	Qualifier 54 67	blood-glucose
+T6	Drug 86 91	agent
+*	OR T4 T5
+T7	Scope 54 85	blood-glucose or lipid-lowering
+R2	Has_scope Arg1:T6 Arg2:T7	
+R3	Has_qualifier Arg1:T6 Arg2:T3	
+*	OR T2 T6
+T8	Temporal 137 150	past 3 months
+T9	Negation 93 98	other
+T10	Drug 104 111	statins
+T11	Drug 115 124	ezetimibe
+*	OR T10 T11
+T12	Scope 104 124	statins or ezetimibe
+R4	Has_negation Arg1:T12 Arg2:T9	
+T13	Scope 11 91	weight-lowering drugs, any investigational blood-glucose or lipid-lowering agent
+R5	Has_temporal Arg1:T13 Arg2:T8	
+T14	Drug 176 200	systemic corticosteroids
+T15	Drug 226 242	thyroid hormones
+T16	Qualifier 206 222	change in dosage
+R6	Has_qualifier Arg1:T15 Arg2:T16	
+T17	Temporal 250 266	previous 6 weeks
+*	OR T14 T15
+T18	Scope 176 242	systemic corticosteroids or a change in dosage of thyroid hormones
+R7	Has_temporal Arg1:T18 Arg2:T17	
+T19	Drug 279 286	insulin
+T20	Temporal 287 325	within the 3 months prior to screening
+T21	Reference_point 316 325	screening
+R8	Has_temporal Arg1:T19 Arg2:T20	
+R9	Has_index Arg1:T20 Arg2:T21	
+T22	Non-query-able 327 333	Others

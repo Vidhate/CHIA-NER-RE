@@ -1,0 +1,36 @@
+T1	Observation 9 33	admitted to the hospital
+T2	Condition 56 73	medical illnesses
+T3	Qualifier 48 55	chronic
+T4	Qualifier 39 44	acute
+T5	Scope 39 55	acute or chronic
+R1	Has_scope Arg1:T2 Arg2:T5	
+T6	Condition 104 120	surgical illness
+T7	Condition 124 130	trauma
+T8	Qualifier 94 103	emergency
+T9	Qualifier 81 89	elective
+T10	Scope 81 103	elective and emergency
+T11	Grammar_Error 90 93	and
+*	OR T8 T9
+*	OR T3 T4
+T12	Scope 104 130	surgical illness or trauma
+*	OR T7 T6
+R2	Has_scope Arg1:T12 Arg2:T10	
+*	OR T2 T12
+R3	AND Arg1:T1 Arg2:T2	
+R4	Has_scope Arg1:T1 Arg2:T12	
+T13	Condition 149 173	Type 2 diabetes mellitus
+T14	Value 178 187	>3 months
+R5	Has_value Arg1:T13 Arg2:T14	
+T15	Procedure 209 213	diet
+T16	Drug 240 264	oral antidiabetic agents
+T17	Drug 293 300	insulin
+T18	Drug 266 289;301 308	non-insulin injectables therapy
+*	OR T16 T18 T17 T15
+T19	Measurement 310 330	Blood glucose levels
+T20	Value 339 361	>140 mg and <400 mg/dL
+T21	Negation 362 369	without
+T22	Qualifier 370 389	laboratory evidence
+T23	Condition 393 414	diabetic ketoacidosis
+R6	Has_qualifier Arg1:T23 Arg2:T22	
+R7	Has_negation Arg1:T23 Arg2:T21	
+R8	Has_value Arg1:T19 Arg2:T20	

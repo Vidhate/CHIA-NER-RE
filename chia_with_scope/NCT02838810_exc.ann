@@ -1,0 +1,45 @@
+T1	Condition 14 29	liver cirrhosis
+T2	Condition 31 55	Hepatocellular Carcinoma
+T3	Measurement 59 62	AFP
+T4	Value 63 69	>2 ULN
+T5	Condition 79 91	malignancies
+*	OR T1 T2 T3 T5
+R1	Has_value Arg1:T3 Arg2:T4	
+T6	Condition 130 144	liver diseases
+T7	Non-query-able 94 144	Patients with other factors causing liver diseases
+T8	Pregnancy_considerations 147 175	Pregnant and lactating women
+T9	Condition 204 217	HIV infection
+T10	Qualifier 192 203	concomitant
+R2	Has_qualifier Arg1:T9 Arg2:T10	
+T11	Condition 221 258	congenital immune deficiency diseases
+T12	Condition 275 283	diabetes
+T13	Condition 285 304	autoimmune diseases
+*	OR T9 T11
+*	OR T13 T12
+T14	Condition 331 349	organ dysfunctions
+T15	Qualifier 321 330	important
+R3	Has_qualifier Arg1:T14 Arg2:T15	
+T16	Qualifier 366 373	serious
+T17	Condition 374 387	complications
+T18	Condition 395 404	infection
+T19	Condition 406 428	hepatic encephalopathy
+T20	Condition 430 450	hepatorenal syndrome
+T21	Condition 452 477	gastrointestinal bleeding
+*	OR T21 T20 T19 T18
+T22	Scope 395 477	infection, hepatic encephalopathy, hepatorenal syndrome, gastrointestinal bleeding
+R4	Has_qualifier Arg1:T17 Arg2:T16	
+R5	Subsumes Arg1:T17 Arg2:T22	
+T23	Procedure 502 516;537 544	antineoplastic therapy
+T24	Procedure 520 544	immunomodulatory therapy
+*	OR T24 T23
+T25	Scope 502 544	antineoplastic or immunomodulatory therapy
+T26	Temporal 552 566	past 12 months
+R6	Has_temporal Arg1:T25 Arg2:T26	
+T27	Drug 601 604	IFN
+T28	Qualifier 605 627	anti hepatitis B virus
+R7	Has_qualifier Arg1:T27 Arg2:T28	
+T29	Condition 655 665	resistance
+T30	Drug 646 654	NAs drug
+R8	AND Arg1:T29 Arg2:T30	
+*	OR T27 T29
+T31	Post-eligibility 668 732	Patients who can't come back to clinic for follow-up on schedule

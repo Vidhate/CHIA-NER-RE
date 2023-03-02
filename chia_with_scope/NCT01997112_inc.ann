@@ -1,0 +1,54 @@
+T1	Value 0 3	=18
+T2	Person 4 13	years old
+R1	Has_value Arg1:T2 Arg2:T1	
+T3	Person 15 18	men
+T4	Condition 22 37	post-menopausal
+T5	Person 38 43	women
+A1	Optional T3
+A2	Optional T5
+R2	AND Arg1:T5 Arg2:T4	
+*	OR T3 T5
+T6	Condition 56 66	no periods
+T7	Temporal 67 88	for 12 months or more
+T8	Procedure 114 122	surgical
+T9	Condition 123 132	menopause
+R3	AND Arg1:T9 Arg2:T8	
+R4	Has_temporal Arg1:T6 Arg2:T7	
+*	OR T6 T9
+T10	Scope 56 132	no periods for 12 months or more, or those who have had a surgical menopause
+R5	Subsumes Arg1:T4 Arg2:T10	
+T11	Condition 143 155	hypertensive
+T12	Qualifier 135 142	Treated
+R6	Has_qualifier Arg1:T11 Arg2:T12	
+T13	Measurement 173 233	average daytime ambulatory blood pressure measurement (ABPM)
+T14	Value 234 245	<150/95mmHg
+R7	Has_value Arg1:T13 Arg2:T14	
+T15	Qualifier 249 261	stable doses
+T16	Drug 277 304	antihypertensive medication
+T17	Multiplier 265 276	one or more
+R8	Has_multiplier Arg1:T16 Arg2:T17	
+R9	Has_qualifier Arg1:T16 Arg2:T15	
+T18	Drug 342 355	ACE inhibitor
+T19	Drug 357 385	angiotensin receptor blocker
+T20	Drug 389 397	diuretic
+*	OR T18 T19 T20
+T21	Multiplier 306 318	at least one
+T22	Scope 342 397	ACE inhibitor, angiotensin receptor blocker or diuretic
+R10	Has_multiplier Arg1:T22 Arg2:T21	
+R11	Subsumes Arg1:T16 Arg2:T22	
+T23	Temporal 399 411	for 3 months
+R12	Has_temporal Arg1:T15 Arg2:T23	
+T24	Qualifier 416 425	untreated
+T25	Condition 426 447	hypertensive patients
+T26	Measurement 456 476	average daytime ABPM
+T27	Value 477 496	=135/85 but <150/95
+R13	Has_value Arg1:T26 Arg2:T27	
+T28	Scope 135 155	Treated hypertensive
+A3	Optional T28
+T29	Scope 416 447	untreated hypertensive patients
+A4	Optional T29
+R14	Has_qualifier Arg1:T25 Arg2:T24	
+R15	AND Arg1:T29 Arg2:T26	
+T30	Scope 173 411	average daytime ambulatory blood pressure measurement (ABPM) <150/95mmHg on stable doses of one or more antihypertensive medication (at least one of which should be; an ACE inhibitor, angiotensin receptor blocker or diuretic) for 3 months
+R16	Has_scope Arg1:T28 Arg2:T30	
+*	OR T28 T29

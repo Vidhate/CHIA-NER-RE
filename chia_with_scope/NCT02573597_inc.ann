@@ -1,0 +1,22 @@
+T1	Measurement 0 3	ASA
+T2	Value 4 10	I & II
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Condition 12 23	Nulliparous
+T4	Condition 28 39	Multiparous
+T5	Procedure 61 76	Augmented Labor
+T6	Procedure 53 60;71 76	Induced Labor
+T7	Condition 41 52;71 76	Spontaneous Labor
+*	OR T6 T5 T7
+T8	Condition 78 96	Early active labor
+T9	Measurement 98 104	cervix
+T10	Value 105 110	<5 cm
+R2	Has_value Arg1:T9 Arg2:T10	
+A1	Optional T9
+T11	Measurement 124 134	Pain (VPS)
+T12	Value 135 138	> 3
+R3	Has_value Arg1:T11 Arg2:T12	
+T13	Value 140 151	18-45 years
+T14	Person 155 158	age
+R4	Has_value Arg1:T14 Arg2:T13	
+T15	Scope 98 121	cervix <5 cm (if known)
+R5	Subsumes Arg1:T8 Arg2:T15	

@@ -1,0 +1,66 @@
+T1	Condition 13 35	primary sleep disorder
+T2	Negation 36 41	other
+T3	Condition 47 50	RLS
+R1	Has_negation Arg1:T3 Arg2:T2	
+T4	Measurement 103 117	Serum ferritin
+T5	Value 124 134	< 20 ng/mL
+R2	Has_value Arg1:T4 Arg2:T5	
+T6	Condition 161 168	allergy
+T7	Condition 170 186	hypersensitivity
+T8	Condition 191 202	intolerance
+T9	Scope 161 202	allergy, hypersensitivity, or intolerance
+*	OR T6 T7 T8
+T10	Drug 206 214	HORIZANT
+T11	Drug 228 238	gabapentin
+*	OR T10 T11
+T12	Drug 253 262	Neurontin
+T13	Drug 265 272	Gralise
+T14	Scope 253 273	Neurontin®, Gralise®
+R3	Subsumes Arg1:T11 Arg2:T14	
+*	OR T12 T13
+T15	Scope 206 273	HORIZANT or any other gabapentin products (eg, Neurontin®, Gralise®
+R4	Has_scope Arg1:T9 Arg2:T15	
+T16	Condition 294 311	movement disorder
+T17	Condition 376 395	Tourette's syndrome
+T18	Condition 397 409	tic disorder
+T19	Condition 411 442	periodic limb movement disorder
+T20	Condition 444 448	PLMD
+T21	Condition 451 466	sleep disorders
+*	OR T17 T18 T19 T21
+R5	Subsumes Arg1:T19 Arg2:T20	
+T22	Scope 376 466	Tourette's syndrome, tic disorder, periodic limb movement disorder [PLMD], sleep disorders
+R6	Subsumes Arg1:T16 Arg2:T22	
+T23	Condition 576 598	substance use disorder
+T24	Temporal 620 636	within 12 months
+R7	Has_temporal Arg1:T23 Arg2:T24	
+T25	Measurement 485 554	Diagnostic and Statistical Manual of Mental Disorders - Fifth Edition
+T26	Measurement 556 561	DSM-5
+R8	Subsumes Arg1:T25 Arg2:T26	
+R9	AND Arg1:T25 Arg2:T23	
+T27	Condition 696 716	psychiatric disorder
+T28	Qualifier 684 695	significant
+R10	Has_qualifier Arg1:T27 Arg2:T28	
+T29	Condition 748 758	depression
+T30	Drug 775 790	antidepressants
+T31	Condition 793 809	bipolar disorder
+T32	Condition 814 827	schizophrenia
+R11	AND Arg1:T29 Arg2:T30	
+*	OR T29 T31 T32
+T33	Scope 748 827	depression (treatment with antidepressants), bipolar disorder, or schizophrenia
+R12	Subsumes Arg1:T27 Arg2:T33	
+T34	Condition 843 883	attention-deficit hyperactivity disorder
+T35	Condition 885 889	ADHD
+R13	Subsumes Arg1:T34 Arg2:T35	
+T36	Negation 894 901	allowed
+R14	AND Arg1:T36 Arg2:T34	
+T37	Observation 1006 1023	suicidal behavior
+T38	Condition 1027 1044	suicidal ideation
+*	OR T37 T38
+T39	Condition 1194 1210	seizure disorder
+T40	Condition 1301 1328	complicated febrile seizure
+T41	Condition 1356 1367	head injury
+*	OR T40 T41
+T42	Scope 1301 1367	complicated febrile seizure and history of significant head injury
+R15	Subsumes Arg1:T39 Arg2:T42	
+T43	Non-query-able 1370 1758	Medical condition or disorder that would interfere with the action, absorption, distribution, metabolism, or excretion of gabapentin enacarbil, or, in the investigator's judgment is considered to be clinically significant and may pose a safety concern, or, could interfere with the accurate assessment of safety or efficacy, or could potentially affect a patient's safety or study outcome
+T44	Non-query-able 1761 1891	Clinically significant abnormal laboratory result or physical examination finding not resolved by the time of baseline assessments

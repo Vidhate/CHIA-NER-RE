@@ -1,0 +1,25 @@
+T1	Non-query-able 0 69	Provision of informed consent prior to any study specific procedures;
+T2	Person 71 74	Men
+T3	Person 79 84	women
+T4	Value 85 103	18 years and older
+T5	Person 88 93	years
+R1	Has_value Arg1:T5 Arg2:T4	
+*	OR T3 T2
+T6	Qualifier 106 113	Group I
+T7	Condition 114 117	PAH
+R2	Has_qualifier Arg1:T7 Arg2:T6	
+T8	Measurement 132 136	mPAP
+T9	Value 136 143	=25mmHg
+R3	Has_value Arg1:T8 Arg2:T9	
+T10	Measurement 145 149	PCWP
+T11	Value 149 156	<15mmHg
+R4	Has_value Arg1:T10 Arg2:T11	
+T12	Measurement 161 164	PVR
+T13	Measurement 174 188	(mPAP-PCWP)/CO
+T14	Value 189 204	>3.0 Woods unit
+R5	Subsumes Arg1:T12 Arg2:T13	
+T15	Scope 161 189	PVR[The PVR =(mPAP-PCWP)/CO]
+R6	Has_value Arg1:T15 Arg2:T14	
+T16	Scope 132 204	mPAP=25mmHg, PCWP<15mmHg and PVR[The PVR =(mPAP-PCWP)/CO]>3.0 Woods unit
+T17	Scope 106 117	Group I PAH
+R7	Subsumes Arg1:T17 Arg2:T16	

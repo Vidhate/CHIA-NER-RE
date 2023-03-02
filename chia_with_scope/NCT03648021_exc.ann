@@ -1,0 +1,44 @@
+T1	Condition 6 22	hypersensitivity
+T2	Drug 26 37	paracetamol
+T3	Drug 41 49	mannitol
+*	OR T2 T3
+T4	Non-representable 50 79	(excipient with known effect)
+T5	Scope 26 49	paracetamol or mannitol
+R1	Has_scope Arg1:T1 Arg2:T5	
+T6	Condition 88 116	hepatocellular insufficiency
+T7	Measurement 118 122	ASAT
+T8	Measurement 126 130	ALAT
+T9	Value 131 135	> 5N
+*	OR T7 T8 T11
+T11	Measurement 140 149	bilirubin
+T12	Value 150 154	> 2N
+R2	Has_value Arg1:T11 Arg2:T12	
+R3	Has_value Arg1:T8 Arg2:T9	
+R4	Has_value Arg1:T7 Arg2:T9	
+T10	Scope 118 154	ASAT or ALAT > 5N, or bilirubin > 2N
+R5	Subsumes Arg1:T6 Arg2:T10	
+T13	Procedure 157 185	Pharmacological intervention
+T14	Drug 157 172	Pharmacological
+R6	multi Arg1:T13 Arg2:T14	
+T15	Drug 205 220	corticosteroids
+T16	Drug 222 228	NSAIDs
+T17	Drug 232 243	paracetamol
+*	OR T16 T17 T15
+T18	Scope 205 243	corticosteroids, NSAIDs or paracetamol
+T19	Procedure 248 269	physical intervention
+T20	Procedure 271 297	external cooling technique
+T21	Qualifier 299 329	that may influence temperature
+T22	Temporal 330 349	in the last 6 hours
+R7	Subsumes Arg1:T19 Arg2:T20	
+R8	Has_scope Arg1:T13 Arg2:T18	
+*	OR T13 T19
+T23	Scope 157 298	Pharmacological intervention (administration of corticosteroids, NSAIDs or paracetamol) or physical intervention (external cooling technique)
+R9	Has_qualifier Arg1:T23 Arg2:T21	
+R10	Has_temporal Arg1:T23 Arg2:T22	
+T24	Measurement 318 329	temperature
+R11	multi Arg1:T21 Arg2:T24	
+T25	Condition 352 360	Pregnant
+T26	Observation 364 377	breastfeeding
+*	OR T26 T25
+T27	Person 378 383	women
+T28	Competing_trial 385 421	Previous participation in this study

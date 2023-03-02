@@ -1,0 +1,117 @@
+T1	Procedure 6 29	endobronchial treatment
+T2	Condition 34 43	emphysema
+T3	Temporal 0 5	Prior
+R1	causal Arg1:T1 Arg2:T2	
+R2	Has_temporal Arg1:T1 Arg2:T3	
+T4	Condition 45 52;69 76	Pleural disease
+T5	Condition 56 76	interstitial disease
+T6	Procedure 92 99	surgery
+*	OR T4 T5
+T7	Scope 45 76	Pleural or interstitial disease
+T8	Negation 82 91	precludes
+R3	Has_negation Arg1:T6 Arg2:T8	
+T9	Qualifier 82 99	precludes surgery
+R4	Has_qualifier Arg1:T7 Arg2:T9	
+T10	Procedure 108 123	lung transplant
+T11	Temporal 102 107	Prior
+T12	Procedure 125 129	LVRS
+T13	Procedure 131 148	median sternotomy
+T14	Procedure 150 160	bullectomy
+T15	Procedure 164 173	lobectomy
+*	OR T15 T14 T13 T12 T10
+T16	Scope 108 174	lung transplant, LVRS, median sternotomy, bullectomy or lobectomy.
+R5	Has_temporal Arg1:T16 Arg2:T11	
+T17	Condition 199 213	bronchiectasis
+T18	Qualifier 176 198	Clinically significant
+R6	Has_qualifier Arg1:T17 Arg2:T18	
+T19	Procedure 242 249	surgery
+T20	Condition 215 231	Pulmonary nodule
+R7	causal Arg1:T19 Arg2:T20	
+T21	Condition 272 294	respiratory infections
+T22	Multiplier 262 271	recurrent
+T23	Observation 251 258	History
+R8	Has_multiplier Arg1:T21 Arg2:T22	
+T24	Multiplier 296 299;316 332	> 3 in the last year
+T25	Procedure 300 315	hospitalization
+R9	Has_multiplier Arg1:T25 Arg2:T24	
+R10	Has_temporal Arg1:T21 Arg2:T23	
+T26	Scope 296 332	> 3 hospitalization in the last year
+R11	Subsumes Arg1:T21 Arg2:T26	
+T27	Qualifier 335 357	Clinically significant
+T28	Multiplier 359 382	> 4 Tablespoons per day
+T29	Observation 384 401	sputum production
+R13	Subsumes Arg1:T27 Arg2:T28	
+R12	Has_qualifier Arg1:T29 Arg2:T27	
+T30	Condition 403 408	Fever
+T31	Measurement 419 435	white cell count
+T32	Value 410 418	elevated
+R14	Has_value Arg1:T31 Arg2:T32	
+T33	Condition 458 474	active infection
+T34	Mood 446 454	evidence
+R15	Has_mood Arg1:T33 Arg2:T34	
+*	OR T33 T31 T30
+T35	Condition 476 487	Dysrhythmia
+T36	Condition 499 510	pose a risk
+T37	Temporal 511 526	during exercise
+T38	Reference_point 518 526	exercise
+R16	multi Arg1:T37 Arg2:T38	
+T39	Temporal 511 517;530 538	during training
+T40	Reference_point 530 538	training
+R17	multi Arg1:T39 Arg2:T40	
+*	OR T39 T37
+T41	Scope 511 538	during exercise or training
+R18	Has_scope Arg1:T36 Arg2:T41	
+R19	AND Arg1:T35 Arg2:T36	
+T42	Condition 540 564	Congestive heart failure
+T43	Temporal 565 576	within 6 mo
+T44	Measurement 581 585	LVEF
+T45	Value 586 591	< 45%
+R20	Has_value Arg1:T44 Arg2:T45	
+R21	Has_temporal Arg1:T42 Arg2:T43	
+T46	Condition 616 629	Cor Pulmonale
+T47	Mood 593 601	Evidence
+T48	Observation 605 612	history
+*	OR T48 T47
+T49	Scope 593 612	Evidence or history
+R22	Has_scope Arg1:T46 Arg2:T49	
+T50	Condition 631 650	Resting bradycardia
+T51	Value 652 666	< 50 beats/min
+R23	Has_value Arg1:T50 Arg2:T51	
+T52	Condition 678 693	multifocal PVCs
+T53	Multiplier 669 677	frequent
+R24	Has_multiplier Arg1:T52 Arg2:T53	
+T54	Condition 695 725	complex ventricular arrhythmia
+T55	Condition 727 740	sustained SVT
+*	OR T50 T52 T54 T55
+T56	Condition 770 777	syncope
+T57	Qualifier 753 769	exercise-related
+R25	Has_qualifier Arg1:T56 Arg2:T57	
+T58	Observation 742 749	History
+R26	Has_temporal Arg1:T56 Arg2:T58	
+T59	Condition 779 781	MI
+T60	Temporal 782 793	within 6 mo
+T61	Measurement 798 802	LVEF
+T62	Value 803 808	< 45%
+R27	Has_temporal Arg1:T59 Arg2:T60	
+R28	Has_value Arg1:T61 Arg2:T62	
+T67	Condition 1136 1166	Alpha-1-Antitrypsin Deficiency
+T63	Condition 822 838	systemic disease
+T68	Condition 842 851	neoplasia
+*	OR T63 T68
+T69	Qualifier 852 883	expected to compromise survival
+T70	Scope 822 851	systemic disease or neoplasia
+R29	Has_qualifier Arg1:T70 Arg2:T69	
+T71	Temporal 884 902	during 5-yr period
+R30	Has_temporal Arg1:T69 Arg2:T71	
+T65	Observation 1019 1053	enrolled in another clinical trial
+T66	Observation 1066 1084	unable to complete
+T72	Qualifier 1085 1134	3 minutes of unloaded peddling on cycle ergometer
+R31	Has_qualifier Arg1:T66 Arg2:T72	
+T64	Condition 908 915	disease
+T73	Condition 919 928	condition
+*	OR T64 T73
+T74	Qualifier 934 996	interferes with completion of initial or follow-up assessments
+T75	Scope 908 928	disease or condition
+R32	Has_qualifier Arg1:T75 Arg2:T74	
+T76	Temporal 1009 1018	currently
+R33	Has_temporal Arg1:T65 Arg2:T76	

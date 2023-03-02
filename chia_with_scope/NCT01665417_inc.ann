@@ -1,0 +1,33 @@
+T1	Condition 27 46	lung adenocarcinoma
+T2	Procedure 0 10	Pathologic
+T3	Value 11 23	confirmation
+R1	Has_value Arg1:T2 Arg2:T3	
+T4	Qualifier 47 70	with measurable disease
+R3	Has_qualifier Arg1:T1 Arg2:T4	
+T5	Multiplier 83 95	at least one
+T6	Condition 96 102	lesion
+T7	Qualifier 108 160	can be accurately measured in at least one dimension
+R4	Has_multiplier Arg1:T6 Arg2:T5	
+R5	Has_qualifier Arg1:T6 Arg2:T7	
+T8	Qualifier 232 241	untreated
+T9	Qualifier 242 258	locally advanced
+T10	Qualifier 262 272	metastatic
+T11	Condition 273 278	NSCLC
+*	OR T10 T9
+T12	Scope 242 272	locally advanced or metastatic
+R6	Has_scope Arg1:T11 Arg2:T12	
+R7	Has_qualifier Arg1:T11 Arg2:T8	
+T13	Condition 299 310	lung cancer
+T14	Qualifier 311 315;329 353	with EGFR activating mutation
+R8	Has_qualifier Arg1:T13 Arg2:T14	
+T15	Condition 355 371	exon 19 deletion
+T16	Condition 373 378	L858R
+*	OR T15 T16
+T17	Scope 355 378	exon 19 deletion, L858R
+R9	Subsumes Arg1:T14 Arg2:T17	
+T18	Scope 27 70	lung adenocarcinoma with measurable disease
+R2	AND Arg1:T18 Arg2:T2	
+R10	Subsumes Arg1:T18 Arg2:T6	
+T19	Line 0 200	Pathologic confirmation of lung adenocarcinoma with measurable disease, defined as at least one lesion that can be accurately measured in at least one dimension (longest diameter to be recorded on CT)
+T20	Line 202 278	Patients must have previously untreated locally advanced or metastatic NSCLC
+T21	Line 280 380	Patients must have lung cancer with a documented EGFR activating mutation (exon 19 deletion, L858R).

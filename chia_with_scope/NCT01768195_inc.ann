@@ -1,0 +1,15 @@
+T1	Condition 0 9	treatment
+T2	Condition 30 45	B-cell lymphoma
+T3	Negation 10 15	naive
+R1	Has_negation Arg1:T1 Arg2:T3	
+T4	Condition 47 61	HBsAg positive
+T5	Temporal 62 73	at baseline
+R2	Has_temporal Arg1:T4 Arg2:T5	
+T6	Qualifier 88 103	rituximab-based
+T7	Drug 88 97	rituximab
+R3	multi Arg1:T6 Arg2:T7	
+T8	Procedure 104 122	immunochemotherapy
+R4	Has_qualifier Arg1:T8 Arg2:T6	
+T9	Observation 124 139	life expectancy
+T10	Value 143 161	more than 3 months
+R5	Has_value Arg1:T9 Arg2:T10	

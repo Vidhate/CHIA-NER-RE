@@ -1,0 +1,12 @@
+T1	Condition 0 20	Inability to perform
+T2	Procedure 21 35	exercise tests
+R1	AND Arg1:T1 Arg2:T2	
+T3	Condition 62 81	cognitive disorders
+T4	Condition 47 58;72 81	psychiatric disorders
+*	OR T3 T4
+T5	Condition 125 134;83 107	disorders Progressive neurological
+T6	Condition 111 134;83 94	neuromuscular disorders Progressive
+T7	Condition 150 177	impact on exercise capacity
+*	OR T5 T6
+T8	Scope 83 134	Progressive neurological or neuromuscular disorders
+R2	AND Arg1:T8 Arg2:T7	

@@ -1,0 +1,39 @@
+T1	Person 0 3	age
+T2	Value 4 13	<18 years
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Condition 16 25	Pregnancy
+T4	Informed_consent 27 70	inability to give informed written consent;
+T5	Procedure 81 97	thoracic surgery
+T6	Procedure 101 121	thrombolytic therapy
+T7	Condition 126 143	pleural infection
+*	OR T5 T6
+T8	Scope 81 121	thoracic surgery or thrombolytic therapy
+T9	Temporal 72 80	previous
+R2	Has_temporal Arg1:T8 Arg2:T9	
+R3	AND Arg1:T8 Arg2:T7	
+T10	Procedure 146 166	medical thoracoscopy
+T11	Mood 167 186	cannot be performed
+T12	Temporal 187 202	within 48 hours
+R4	Has_temporal Arg1:T10 Arg2:T12	
+R5	Has_mood Arg1:T10 Arg2:T11	
+T13	Negation 167 173	cannot
+R6	multi Arg1:T11 Arg2:T13	
+T14	Condition 205 226	inability to tolerate
+T15	Procedure 227 236	procedure
+R7	AND Arg1:T14 Arg2:T15	
+T16	Condition 244 267	hemodynamic instability
+T17	Condition 278 287	hypoxemia
+*	OR T16 T17
+T18	Qualifier 271 277	severe
+R8	Has_qualifier Arg1:T17 Arg2:T18	
+T19	Scope 244 287	hemodynamic instability or severe hypoxemia
+T20	Scope 205 236	inability to tolerate procedure
+R9	Has_scope Arg1:T20 Arg2:T19	
+T21	Condition 311 323	coagulopathy
+T22	Procedure 303 310	correct
+R10	AND Arg1:T22 Arg2:T21	
+T23	Mood 290 302	inability to
+R11	Has_mood Arg1:T22 Arg2:T23	
+T24	Condition 340 372	homogeneously echogenic effusion
+T25	Procedure 376 386	pleural US
+R12	AND Arg1:T24 Arg2:T25	

@@ -1,0 +1,58 @@
+T1	Qualifier 0 12	Uncontrolled
+T2	Condition 13 29	medical problems
+T3	Condition 40 49;80 87	pulmonary disease
+T4	Condition 51 65;80 87	cardiovascular disease
+T5	Condition 69 87	orthopedic disease
+*	OR T3 T4 T5
+T6	Scope 40 87	pulmonary, cardiovascular or orthopedic disease
+R1	Subsumes Arg1:T2 Arg2:T6	
+R2	Has_qualifier Arg1:T2 Arg2:T1	
+T7	Condition 143 163	exercise intolerance
+T8	Condition 93 113	debilitating disease
+T9	Temporal 114 130	prior to the SCI
+T10	Reference_point 123 130	the SCI
+R3	Has_index Arg1:T9 Arg2:T10	
+R4	Has_temporal Arg1:T8 Arg2:T9	
+R5	AND Arg1:T8 Arg2:T7	
+T11	Qualifier 165 174	Premorbid
+T12	Temporal 176 183	ongoing
+T13	Condition 184 200	major depression
+T14	Condition 204 213	psychosis
+T15	Condition 215 239	altered cognitive status
+*	OR T13 T14
+T16	Scope 184 213	major depression or psychosis
+R6	Has_temporal Arg1:T16 Arg2:T12	
+R7	Has_qualifier Arg1:T16 Arg2:T11	
+*	OR T16 T15
+T17	Condition 252 263	head injury
+T18	Condition 267 273	stroke
+*	OR T18 T17
+T19	Device 275 295	Metal plate in skull
+T20	Condition 308 316	seizures
+T21	Observation 241 248	History
+T22	Scope 252 273	head injury or stroke
+R8	Has_temporal Arg1:T22 Arg2:T21	
+T23	Observation 297 304	History
+R9	Has_temporal Arg1:T20 Arg2:T23	
+T24	Drug 328 380	drugs acting primarily on the central nervous system
+T25	Qualifier 388 415	lower the seizure threshold
+R10	Has_qualifier Arg1:T24 Arg2:T25	
+T26	Condition 434 442	Pregnant
+T27	Person 443 450	females
+T28	Condition 460 476	cord compression
+T29	Condition 482 488	syrinx
+T30	Qualifier 496 507	spinal cord
+R11	Has_qualifier Arg1:T29 Arg2:T30	
+T31	Condition 557 572	spinal stenosis
+T32	Condition 529 548	spinal cord disease
+T33	Condition 574 586	spina bifida
+T34	Condition 588 590	MS
+T35	Condition 595 609	herniated disk
+*	OR T35 T34 T33 T31
+T36	Scope 557 609	spinal stenosis, spina bifida, MS, or herniated disk
+R12	Subsumes Arg1:T32 Arg2:T36	
+*	OR T29 T32 T28
+T37	Device 628 642	scalp shrapnel
+T38	Device 644 661	cochlear implants
+T39	Device 666 680	aneurysm clips
+*	OR T37 T38 T39

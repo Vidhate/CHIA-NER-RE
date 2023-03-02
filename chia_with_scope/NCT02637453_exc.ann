@@ -1,0 +1,64 @@
+T1	Condition 5 19	acute diseases
+T2	Temporal 29 40	acute phase
+T3	Condition 47 68	myocardial infarction
+T4	Temporal 70 85	within 3 months
+R1	Has_temporal Arg1:T3 Arg2:T2	
+R2	Subsumes Arg1:T2 Arg2:T4	
+T5	Temporal 88 103	within 3 months
+T6	Condition 110 129	acute heart failure
+T7	Condition 137 156	cerebral infarction
+*	OR T7 T6
+T8	Scope 110 156	acute heart failure or new cerebral infarction
+R3	Has_temporal Arg1:T8 Arg2:T5	
+*	OR T3 T8
+T9	Scope 29 156	acute phase after myocardial infarction (within 3 months), within 3 months after acute heart failure or new cerebral infarction
+R4	Subsumes Arg1:T1 Arg2:T9	
+T10	Procedure 174 195	heart transplantation
+T11	Mood 159 170	In the list
+R5	Has_mood Arg1:T10 Arg2:T11	
+T12	Observation 198 215	Expected survival
+T13	Value 216 232	less than 1 year
+R6	Has_value Arg1:T12 Arg2:T13	
+T14	Condition 246 266	hemorrhagic diseases
+T15	Qualifier 240 245	other
+R7	Has_qualifier Arg1:T14 Arg2:T15	
+T16	Procedure 271 292	anticoagulant therapy
+T17	Condition 296 307	not allowed
+R8	AND Arg1:T16 Arg2:T17	
+R9	AND Arg1:T14 Arg2:T16	
+T18	Condition 310 320	Thrombosis
+T19	Qualifier 324 335	left atrium
+R10	Has_qualifier Arg1:T18 Arg2:T19	
+T20	Condition 338 351	Heart failure
+T21	Measurement 353 385	New York Heart Association(NYHA)
+T22	Value 386 392	III/IV
+R11	Has_value Arg1:T21 Arg2:T22	
+T23	Measurement 396 414	eject fraction(EF)
+T24	Value 414 418	<40%
+R12	Has_value Arg1:T23 Arg2:T24	
+*	OR T20 T21 T23
+T25	Qualifier 435 447	uncontrolled
+T26	Condition 448 454	cancer
+R13	Has_qualifier Arg1:T26 Arg2:T25	
+T27	Condition 480 496	renal impairment
+T28	Condition 469 476;486 496	hepatic impairment
+*	OR T27 T28
+T29	Qualifier 457 468	Significant
+T30	Scope 469 496	hepatic or renal impairment
+R14	Has_qualifier Arg1:T30 Arg2:T29	
+T31	Measurement 505 530	alanine transaminase(ALT)
+T32	Measurement 534 561	Aspartate transaminase(AST)
+T33	Value 562 592	>2 times upper limit of normal
+R15	Has_value Arg1:T32 Arg2:T33	
+T34	Measurement 594 624	creatinine clearance rate(CCr)
+T35	Value 624 628	<50%
+R16	Has_value Arg1:T34 Arg2:T35	
+*	OR T32 T31 T34
+T36	Scope 505 628	alanine transaminase(ALT) or Aspartate transaminase(AST) >2 times upper limit of normal, creatinine clearance rate(CCr)<50%
+R17	Subsumes Arg1:T30 Arg2:T36	
+T37	Procedure 641 673	catheter radiofrequency ablation
+T38	Condition 678 680	AF
+T39	Procedure 684 699	cardiac surgery
+R18	AND Arg1:T37 Arg2:T38	
+*	OR T37 T39
+T40	Pregnancy_considerations 702 839	Pregnant and lactating women, women who plan to become pregnant, or women of child bearing age not using reliable contraceptive measures.

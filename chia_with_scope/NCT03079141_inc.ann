@@ -1,0 +1,33 @@
+T1	Person 0 3	Age
+T2	Value 7 17	= 18 years
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Observation 29 66	able to give written informed consent
+T4	Qualifier 69 75	Active
+T5	Qualifier 76 83	chronic
+T6	Condition 84 123	central serous chorioretinopathy (cCSC)
+R2	Has_qualifier Arg1:T6 Arg2:T5	
+R3	Has_qualifier Arg1:T6 Arg2:T4	
+T7	Condition 126 148	Subjective visual loss
+T8	Temporal 149 158	> 6 weeks
+R4	Has_temporal Arg1:T7 Arg2:T8	
+T9	Non-representable 160 199	interpreted as onset of active disease;
+T10	Condition 201 230	Foveal subretinal fluid (SRF)
+T11	Procedure 235 269	optical coherence tomography (OCT)
+R5	AND Arg1:T11 Arg2:T10	
+T12	Temporal 271 294	at Baseline Examination
+R6	Has_temporal Arg1:T11 Arg2:T12	
+T13	Reference_point 274 294	Baseline Examination
+R7	Has_index Arg1:T12 Arg2:T13	
+T14	Multiplier 297 299	=1
+T15	Qualifier 300 311	ill-defined
+T16	Condition 312 342	hyperfluorescent leakage areas
+R8	Has_qualifier Arg1:T16 Arg2:T15	
+R9	Has_multiplier Arg1:T16 Arg2:T14	
+T17	Procedure 346 374	fluorescein angiography (FA)
+R10	AND Arg1:T17 Arg2:T16	
+T18	Condition 380 423	retinal pigment epithelial window defect(s)
+R11	AND Arg1:T17 Arg2:T18	
+T19	Non-representable 424 453	that are compatible with cCSC
+T20	Condition 456 478	Hyperfluorescent areas
+T21	Procedure 482 518	indocyanine green angiography (ICGA)
+R12	AND Arg1:T21 Arg2:T20	

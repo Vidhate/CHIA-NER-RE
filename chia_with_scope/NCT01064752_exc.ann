@@ -1,0 +1,64 @@
+T1	Drug 12 24	tetracycline
+T2	Temporal 25 40	within 6 months
+R1	Has_temporal Arg1:T1 Arg2:T2	
+T3	Observation 44 51	history
+T4	Condition 55 71	adverse reaction
+T5	Drug 75 86	minocycline
+T6	Drug 98 110	tetracycline
+*	OR T6 T5
+T7	Scope 75 110	minocycline or another tetracycline
+R2	Has_scope Arg1:T4 Arg2:T7	
+R3	Has_temporal Arg1:T4 Arg2:T3	
+T8	Procedure 135 150	lumbar puncture
+T9	Mood 116 129	Enhanced risk
+R4	Has_mood Arg1:T8 Arg2:T9	
+T10	Condition 186 206	cerebral mass lesion
+T11	Qualifier 207 261	predisposing to brain herniation or bleeding diathesis
+T12	Mood 207 222	predisposing to
+T13	Condition 223 239	brain herniation
+T14	Condition 243 261	bleeding diathesis
+*	OR T14 T13
+T15	Scope 223 261	brain herniation or bleeding diathesis
+R5	Has_mood Arg1:T15 Arg2:T12	
+R6	multi Arg1:T11 Arg2:T15	
+R7	Has_qualifier Arg1:T10 Arg2:T11	
+T16	Mood 162 172	documented
+T17	Mood 176 185	suspected
+*	OR T17 T16
+T18	Scope 162 185	documented or suspected
+R8	Has_scope Arg1:T10 Arg2:T18	
+T19	Scope 162 261	documented or suspected cerebral mass lesion predisposing to brain herniation or bleeding diathesis
+T20	Scope 116 150	Enhanced risk from lumbar puncture
+R9	Subsumes Arg1:T20 Arg2:T19	
+T21	Condition 267 276	Pregnancy
+T22	Mood 280 291	expectation
+T23	Condition 295 304	pregnancy
+T24	Temporal 305 321	during the study
+R10	Has_mood Arg1:T23 Arg2:T22	
+*	OR T23 T21
+T25	Scope 267 304	Pregnancy or expectation of pregnancy
+R11	Has_temporal Arg1:T25 Arg2:T24	
+T26	Condition 334 357	opportunistic infection
+T27	Qualifier 334 347	opportunistic
+R12	multi Arg1:T26 Arg2:T27	
+T28	Temporal 327 333	Active
+R13	Has_temporal Arg1:T26 Arg2:T28	
+T29	Condition 368 388	neurological disease
+T30	Temporal 361 367	active
+R14	Has_temporal Arg1:T29 Arg2:T30	
+*	OR T29 T26
+T31	Measurement 425 434	ADC Stage
+T32	Value 435 438	> 1
+R15	Has_value Arg1:T31 Arg2:T32	
+T33	Measurement 444 454	Hemoglobin
+T34	Value 455 466	< 10 Gms/dL
+R16	Has_value Arg1:T33 Arg2:T34	
+T35	Measurement 472 475	BUN
+T36	Measurement 479 487	creatine
+T37	Value 488 511	above the normal limits
+*	OR T35 T36
+T38	Scope 472 487	BUN or creatine
+R17	Has_value Arg1:T38 Arg2:T37	
+T39	Drug 570 581	minocycline
+T40	Non-representable 545 581	reduce the metabolism of minocycline
+T41	Non-representable 517 628	Taking other drugs known to reduce the metabolism of minocycline and thus increase the probability of toxicity.

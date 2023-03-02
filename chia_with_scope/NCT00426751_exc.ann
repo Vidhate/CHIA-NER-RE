@@ -1,0 +1,92 @@
+T1	Condition 44 68	Left Bundle Branch Block
+T2	Procedure 70 90	Thrombolytic therapy
+T3	Temporal 91 127	within 24 hours before randomization
+T4	Procedure 129 149	Oral anticoagulation
+T5	Measurement 155 191	International Normalized Ratio (INR)
+T6	Value 192 195	> 2
+R1	Has_value Arg1:T5 Arg2:T6	
+T7	Measurement 203 212	platelets
+T8	Value 213 225	< 100.000/µl
+*	OR T7 T8 T9
+T9	Condition 235 256	hemorrhagic diathesis
+T10	Condition 268 299	Transient Ischemic Attack (TIA)
+T11	Condition 258 264	Stroke
+*	OR T11 T10
+T12	Scope 258 299	Stroke or Transient Ischemic Attack (TIA)
+T13	Temporal 300 324	within the past 6 months
+T14	Condition 342 370	residual neurological defect
+R2	Has_temporal Arg1:T12 Arg2:T13	
+*	OR T12 T14
+T15	Condition 394 410;425 433	gastrointestinal bleeding
+T16	Condition 414 433	urogenital bleeding
+T17	Temporal 387 393	active
+*	OR T15 T16
+T18	Scope 394 433	gastrointestinal or urogenital bleeding
+R3	Has_temporal Arg1:T18 Arg2:T17	
+T19	Temporal 449 463	within 6 weeks
+T20	Procedure 435 448	Major surgery
+R4	Has_temporal Arg1:T20 Arg2:T19	
+T21	Condition 476 493	allergic reaction
+T22	Observation 465 472	History
+T23	Drug 497 506	abciximab
+T24	Drug 510 522	eptifibatide
+T25	Drug 530 557	component used in the study
+T26	Drug 569 583	contrast media
+R5	Subsumes Arg1:T25 Arg2:T26	
+T27	Scope 497 584	abciximab or eptifibatide or any component used in the study (including contrast media)
+*	OR T23 T24 T25 T26
+R6	AND Arg1:T22 Arg2:T21	
+R7	Has_scope Arg1:T21 Arg2:T27	
+T28	Measurement 606 626	creatinine clearance
+T29	Value 627 636	<30ml/min
+R8	Has_value Arg1:T28 Arg2:T29	
+T30	Condition 641 662	hepatic insufficiency
+T31	Measurement 674 700	Alanine transaminase (ALT)
+T32	Measurement 701 729	aspartate transaminase (AST)
+T33	Value 730 740	elevations
+T34	Value 743 769	3xUpper limit normal (ULN)
+R9	Subsumes Arg1:T33 Arg2:T34	
+R10	Has_value Arg1:T31 Arg2:T33	
+R11	Has_value Arg1:T32 Arg2:T33	
+T35	Condition 599 604;649 662	renal insufficiency
+*	OR T35 T30 T37
+T36	Scope 606 636	creatinine clearance <30ml/min
+R12	Subsumes Arg1:T35 Arg2:T36	
+T37	Scope 674 769	Alanine transaminase (ALT)/aspartate transaminase (AST) elevations = 3xUpper limit normal (ULN)
+T38	Condition 860 866;879 886	Severe disease
+T39	Measurement 892 908	life expectation
+T40	Value 909 917	< 1 year
+*	OR T39 T40
+R13	AND Arg1:T38 Arg2:T39	
+T41	Qualifier 592 598	severe
+R14	Has_qualifier Arg1:T35 Arg2:T41	
+R15	Has_qualifier Arg1:T30 Arg2:T41	
+T42	Temporal 867 878	concomitant
+R16	Has_temporal Arg1:T38 Arg2:T42	
+T43	Observation 931 956	participated in any study
+T44	Drug 966 986	investigational drug
+T45	Device 990 996	device
+*	OR T44 T45
+T46	Scope 966 996	investigational drug or device
+R17	Has_scope Arg1:T43 Arg2:T46	
+T47	Temporal 1035 1062;997 1011	of the investigational drug within 30 days
+T48	Temporal 1015 1062	within 5 half-lives of the investigational drug
+*	OR T47 T48
+T49	Reference_point 1035 1062	of the investigational drug
+T50	Scope 997 1062	within 30 days or within 5 half-lives of the investigational drug
+R18	Has_scope Arg1:T43 Arg2:T50	
+R19	Has_index Arg1:T50 Arg2:T49	
+T51	Observation 1133 1145	inaccessible
+T52	Temporal 1182 1211	during treatment or follow-up
+T53	Reference_point 1189 1198	treatment
+T54	Reference_point 1202 1211	follow-up
+T55	Non-representable 1213 1309	In France, a subject is neither affiliated with nor a beneficiary of a social security category.
+R20	Has_temporal Arg1:T2 Arg2:T3	
+R21	Has_temporal Arg1:T51 Arg2:T52	
+T56	Negation 9 12	not
+T57	Informed_consent 21 42	give informed consent
+T58	Mood 13 20	able to
+R22	Has_mood Arg1:T57 Arg2:T58	
+R23	Has_negation Arg1:T57 Arg2:T56	
+T59	Reference_point 114 127	randomization
+R24	Has_index Arg1:T3 Arg2:T59	

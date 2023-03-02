@@ -1,0 +1,31 @@
+T1	Condition 12 25	comorbidities
+T2	Qualifier 5 11	severe
+R1	Has_qualifier Arg1:T1 Arg2:T2	
+T3	Condition 35 57	cardiovascular disease
+T4	Undefined_semantics 12 25	comorbidities
+T5	Condition 59 96	chronic obstructive pulmonary disease
+T6	Condition 98 115	diabetes mellitus
+T7	Condition 121 146	chronic renal dysfunction
+T8	Grammar_Error 117 120	and
+*	OR T7 T6 T5 T3
+T9	Scope 35 146	cardiovascular disease, chronic obstructive pulmonary disease, diabetes mellitus, and chronic renal dysfunction
+T10	Scope 5 25	severe comorbidities
+R2	Subsumes Arg1:T10 Arg2:T9	
+T11	Condition 154 168	bad compliance
+T12	Subjective_judgement 154 168	bad compliance
+T13	Condition 172 202	contraindication to enrollment
+T14	Subjective_judgement 172 202	contraindication to enrollment
+T15	Undefined_semantics 172 202	contraindication to enrollment
+*	OR T13 T11
+T16	Condition 205 213	Pregnant
+T17	Person 214 219	woman
+T18	Condition 223 232	lactating
+T19	Person 233 238	woman
+T20	Scope 223 238	lactating woman
+T21	Scope 205 219	Pregnant woman
+*	OR T21 T20
+T22	Condition 246 262	contraindication
+T23	Procedure 274 295	adjuvant chemotherapy
+R3	AND Arg1:T22 Arg2:T23	
+T24	Subjective_judgement 246 262	contraindication
+T25	Undefined_semantics 246 262	contraindication

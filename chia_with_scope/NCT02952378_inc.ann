@@ -1,0 +1,19 @@
+T1	Condition 25 32	Healthy
+T2	Condition 4 11	healthy
+T3	Person 96 104	patients
+A1	Optional T2
+A2	Optional T3
+T4	Negation 34 41	without
+T5	Condition 42 51	allergies
+T6	Value 72 89	18 years or above
+T7	Person 65 68	age
+R1	Has_value Arg1:T7 Arg2:T6	
+R2	Has_negation Arg1:T5 Arg2:T4	
+T8	Scope 25 89	Healthy, without allergies and with the age of 18 years or above
+R3	Has_scope Arg1:T2 Arg2:T8	
+T9	Condition 106 117	Burn injury
+T10	Value 118 131;158 159	exceeding 6-8 %
+T11	Measurement 132 157	Total Burned Surface Area
+R4	Has_value Arg1:T11 Arg2:T10	
+T12	Scope 106 159	Burn injury exceeding 6-8 Total Burned Surface Area %
+R5	Has_scope Arg1:T3 Arg2:T12	

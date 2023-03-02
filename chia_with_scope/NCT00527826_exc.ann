@@ -1,0 +1,113 @@
+T1	Condition 12 33	respiratory disorders
+T2	Condition 37 46;53 74	signs for respiratory disorders
+T3	Condition 81 87	asthma
+T4	Condition 89 100	lung cancer
+T5	Condition 102 113	sarcoidosis
+T6	Condition 115 127	tuberculosis
+T7	Condition 129 142	lung fibrosis
+T8	Condition 144 159	cystic fibrosis
+T9	Condition 161 175	bronchoectasis
+*	OR T3 T4 T5 T6 T7 T8 T9
+T10	Scope 81 175	asthma, lung cancer, sarcoidosis, tuberculosis, lung fibrosis, cystic fibrosis, bronchoectasis
+*	OR T1 T2
+T11	Scope 12 74	respiratory disorders or signs for other respiratory disorders
+R1	Subsumes Arg1:T11 Arg2:T10	
+T12	Condition 208 228	inflammatory disease
+T13	Condition 241 245	COPD
+T14	Condition 252 272	rheumatoid arthritis
+T15	Condition 277 305	systemic lupus erythematosus
+*	OR T14 T15
+T16	Negation 230 240	other than
+R2	Has_negation Arg1:T13 Arg2:T16	
+T17	Condition 330 359	alpha-1-antitrypsin deficient
+T18	Procedure 392 404	lung surgery
+T19	Procedure 411 425	lung resection
+T20	Procedure 436 465	lung volume reduction surgery
+T21	Procedure 467 482	lung transplant
+*	OR T20 T21
+R4	Subsumes Arg1:T18 Arg2:T19	
+T22	Procedure 510 517	surgery
+T23	Observation 496 505	scheduled
+R5	AND Arg1:T23 Arg2:T22	
+T24	Drug 531 554	medication from Visit 1
+T25	Drug 629 657	monoamine oxidase inhibitors
+T26	Drug 662 687	tricyclic antidepressants
+T27	Drug 693 702	ritonavir
+T28	Drug 720 749	cytochrome P450 3A4 inhibitor
+*	OR T25 T26 T27
+R6	Subsumes Arg1:T27 Arg2:T28	
+T29	Scope 629 750	monoamine oxidase inhibitors and tricyclic antidepressants, and ritonavir (a highly potent cytochrome P450 3A4 inhibitor)
+R7	Subsumes Arg1:T24 Arg2:T29	
+T30	Procedure 783 814	prophylactic antibiotic therapy
+T31	Procedure 772 779;796 814	chronic antibiotic therapy
+*	OR T31 T30
+T32	Condition 826 846	uncontrolled disease
+T33	Condition 866 889	psychological disorders
+R8	Subsumes Arg1:T32 Arg2:T33	
+T34	Condition 1010 1017;1035 1040	alcohol abuse
+T35	Condition 1019 1023;1035 1040	drug abuse
+T36	Condition 1027 1040	solvent abuse
+*	OR T34 T35 T36
+T37	Condition 1113 1129	drug sensitivity
+T38	Condition 1156 1173	allergic reaction
+T39	Drug 1177 1192	corticosteroids
+T40	Drug 1196 1206	salmeterol
+T41	Scope 1177 1206	corticosteroids or salmeterol
+*	OR T39 T40
+*	OR T37 T38
+T42	Scope 1113 1173	drug sensitivity or clinically significant allergic reaction
+R9	Has_scope Arg1:T42 Arg2:T41	
+T43	Condition 1228 1245	COPD exacerbation
+T44	Qualifier 1221 1227	severe
+T45	Qualifier 1209 1217	Moderate
+*	OR T45 T44
+T46	Scope 1209 1227	Moderate or severe
+R10	Has_scope Arg1:T43 Arg2:T46	
+T47	Drug 1257 1272	corticosteroids
+T48	Drug 1296 1311	corticosteroids
+T49	Qualifier 1276 1292	increased dosage
+R11	Has_qualifier Arg1:T48 Arg2:T49	
+R12	AND Arg1:T48 Arg2:T47	
+T50	Drug 1319 1330	antibiotics
+T51	Visit 1334 1349	hospitalization
+*	OR T48 T50 T51
+T52	Scope 1257 1349	corticosteroids or increased dosage of corticosteroids and/or antibiotics or hospitalization
+R13	Has_scope Arg1:T43 Arg2:T52	
+T53	Temporal 1351 1386	within the 4 weeks prior to Visit 1
+T54	Condition 1388 1421	Lower respiratory tract infection
+T55	Temporal 1422 1457	within the 4 weeks prior to Visit 1
+T56	Condition 1461 1469	Pregnant
+T57	Condition 1473 1482	lactating
+*	OR T56 T57 T59
+T58	Person 1483 1489	female
+T59	Condition 1504 1526	childbearing potential
+T60	Person 1494 1500	female
+R14	AND Arg1:T12 Arg2:T13	
+T61	Scope 252 305	rheumatoid arthritis and systemic lupus erythematosus
+T62	Scope 208 245	inflammatory disease, other than COPD
+R15	Subsumes Arg1:T62 Arg2:T61	
+T63	Scope 436 482	lung volume reduction surgery, lung transplant
+R3	Subsumes Arg1:T19 Arg2:T63	
+*	OR T18 T22
+R16	Has_temporal Arg1:T43 Arg2:T53	
+T64	Reference_point 1379 1386	Visit 1
+R17	Has_index Arg1:T53 Arg2:T64	
+T65	Reference_point 1450 1457	Visit 1
+R18	Has_index Arg1:T55 Arg2:T65	
+R19	Has_temporal Arg1:T54 Arg2:T55	
+T66	Non-representable 1529 1764	Subject is a participating investigator, sub-investigator, study coordinator, or other employee of a participating investigator, or is an immediate family member of the before mentioned. Subject is an employee of GlaxoSmithKline (GSK).
+T67	Observation 1774 1819	participated in an investigational drug study
+T68	Temporal 1820 1851	within 30 days prior to Visit 1
+T69	Reference_point 1844 1851	Visit 1
+R20	Has_index Arg1:T68 Arg2:T69	
+R21	Has_temporal Arg1:T67 Arg2:T68	
+T70	Qualifier 196 207	significant
+R22	Has_qualifier Arg1:T62 Arg2:T70	
+T71	Qualifier 321 329	severely
+R23	Has_qualifier Arg1:T17 Arg2:T71	
+T72	Observation 1043 1053	History of
+T73	Condition 1054 1064	depression
+R24	Has_temporal Arg1:T73 Arg2:T72	
+T74	Non-representable 962 996	in the opinion of the investigator
+T75	Scope 1010 1040	alcohol, drug or solvent abuse
+R25	AND Arg1:T75 Arg2:T74	

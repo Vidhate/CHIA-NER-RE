@@ -1,0 +1,128 @@
+T1	Person 0 4	Aged
+T2	Value 5 13	under 18
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Negation 16 23	Lack of
+T4	Observation 24 47	informed consent signed
+R2	Has_negation Arg1:T4 Arg2:T3	
+T5	Procedure 50 74	Radiofrequency treatment
+T6	Observation 75 82	history
+R3	Has_temporal Arg1:T5 Arg2:T6	
+T7	Temporal 85 93	on going
+T8	Condition 94 104	neoplastic
+T9	Observation 105 112	history
+R4	Has_temporal Arg1:T8 Arg2:T9	
+R5	Has_temporal Arg1:T8 Arg2:T7	
+T10	Value 120 125	short
+T11	Measurement 126 135	prognosis
+R6	Has_value Arg1:T11 Arg2:T10	
+R7	AND Arg1:T8 Arg2:T11	
+T12	Observation 150 189	participation in another clinical study
+T13	Temporal 138 149	Concomitant
+R8	Has_temporal Arg1:T12 Arg2:T13	
+T14	Condition 191 207	Contraindication
+T15	Procedure 211 229	general anesthesia
+R9	AND Arg1:T14 Arg2:T15	
+T16	Qualifier 248 267	esophageal location
+T17	Condition 271 282	scleroderma
+R10	Has_qualifier Arg1:T17 Arg2:T16	
+T18	Device 298 315	cardiac pacemaker
+T19	Device 298 305;319 329	cardiac stimulator
+*	OR T18 T19
+T20	Observation 331 339	Pregnant
+T21	Person 340 345	women
+T22	Mood 349 361	likely to be
+T23	Observation 331 339	Pregnant
+R11	Has_mood Arg1:T20 Arg2:T22	
+*	OR T23 T20
+T24	Qualifier 362 403	in the absence of effective contraception
+R12	Has_qualifier Arg1:T20 Arg2:T24	
+T25	Condition 406 425	Esophageal stenosis
+T26	Mood 426 440	preventing the
+T27	Device 455 464	endoscope
+T28	Procedure 441 464	passage of an endoscope
+R13	multi Arg1:T28 Arg2:T27	
+R14	Has_mood Arg1:T28 Arg2:T26	
+R15	AND Arg1:T25 Arg2:T28	
+T29	Procedure 467 476	Histology
+T30	Condition 488 507	glandular neoplasia
+T31	Qualifier 477 487	other than
+R16	Has_qualifier Arg1:T30 Arg2:T31	
+R17	AND Arg1:T29 Arg2:T30	
+T32	Observation 510 517	History
+T33	Temporal 524 531	current
+T34	Condition 543 560	esophageal cancer
+T35	Qualifier 561 607	invading the submucosal layer of the esophagus
+R18	Has_qualifier Arg1:T34 Arg2:T35	
+*	OR T33 T32
+T36	Scope 510 531	History of or current
+R19	Has_scope Arg1:T34 Arg2:T36	
+T37	Procedure 618 636	Surgical treatment
+T38	Observation 637 644	history
+R20	Has_temporal Arg1:T37 Arg2:T38	
+T39	Procedure 653 674	anti-reflux treatment
+T40	Negation 646 652	except
+R21	Has_negation Arg1:T39 Arg2:T40	
+T41	Procedure 679 702	esophageal radiotherapy
+R22	AND Arg1:T37 Arg2:T39	
+*	OR T37 T41
+T42	Temporal 705 713	previous
+T43	Procedure 714 734	esophageal treatment
+T44	Qualifier 738 752	another method
+T45	Procedure 753 761	ablation
+R24	Has_qualifier Arg1:T45 Arg2:T44	
+R25	Has_temporal Arg1:T43 Arg2:T42	
+T46	Procedure 763 783	photodynamic therapy
+T47	Procedure 785 809	argon plasma coagulation
+T48	Procedure 811 816	laser
+*	OR T46 T47 T48
+T49	Scope 763 816	photodynamic therapy, argon plasma coagulation, laser
+T50	Scope 738 761	another method ablation
+R23	Subsumes Arg1:T50 Arg2:T49	
+R26	Has_scope Arg1:T43 Arg2:T50	
+T51	Condition 824 842	Esophageal varices
+T52	Procedure 855 864	endoscopy
+R27	AND Arg1:T52 Arg2:T51	
+T53	Condition 867 879	Coagulopathy
+T54	Drug 890 904	anticoagulants
+T55	Measurement 920 923	INR
+T56	Value 923 928	> 1.3
+R28	Has_value Arg1:T55 Arg2:T56	
+T57	Measurement 934 948	platelet count
+T58	Value 949 967	<75,000 per microL
+R29	Has_value Arg1:T57 Arg2:T58	
+*	OR T57 T55
+*	OR T53 T54
+T59	Non-representable 905 919	responsible an
+T60	Measurement 970 985	Life expectancy
+T61	Value 989 1006	less than 3 years
+*	OR T60 T61
+T62	Condition 1015 1035	intercurrent disease
+T63	Condition 1048 1058	neoplastic
+T64	Scope 1015 1058	intercurrent disease, especially neoplastic
+R30	AND Arg1:T64 Arg2:T60	
+T65	Non-representable 1008 1014	due to
+T66	Condition 1061 1076	Liver cirrhosis
+T67	Measurement 1078 1088	Child-Pugh
+T68	Value 1089 1099	all stages
+R31	Has_value Arg1:T67 Arg2:T68	
+R32	AND Arg1:T66 Arg2:T67	
+T69	Condition 1102 1121	Respiratory failure
+T70	Condition 1124 1137	Renal failure
+T71	Measurement 1139 1144	Cl Cr
+T72	Value 1145 1164	< 60 mL /min /1,73m
+R33	Has_value Arg1:T71 Arg2:T72	
+R34	AND Arg1:T70 Arg2:T71	
+T73	Condition 1168 1180	Heart attack
+T74	Temporal 1181 1207	within the last six months
+T75	Condition 1211 1246	progressive coronary artery disease
+R35	Has_temporal Arg1:T73 Arg2:T74	
+T76	Reference_point 1188 1207	the last six months
+R36	Has_index Arg1:T74 Arg2:T76	
+*	OR T73 T75
+T77	Qualifier 1249 1255	Severe
+T78	Condition 1256 1276	distal arteriopathie
+T79	Measurement 1279 1284;1288 1311	stage of Leriche and Fontaine
+T80	Value 1277 1278;1285 1287	> II
+R37	Has_value Arg1:T79 Arg2:T80	
+R38	Has_qualifier Arg1:T78 Arg2:T77	
+R39	AND Arg1:T78 Arg2:T79	

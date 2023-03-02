@@ -1,0 +1,102 @@
+{
+  "@type": "Dataset",
+  "identifier": "10.1038/s41597-020-00620-0",
+  "title": "Metadata record for: Chia, a large annotated corpus of clinical trial eligibility criteria",
+  "relatedPublications": [],
+  "repositories": [
+    {
+      "name": "figshare",
+      "value": "https://doi.org/10.6084/m9.figshare.11855817.v2",
+      "@type": "DataCatalog"
+    }
+  ],
+  "assays": [
+    {
+      "measurementType": {
+        "annotationValue": "Clinical Trial Eligibility Criteria",
+        "termAccession": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C16112",
+        "termSource": "NCIT",
+        "@type": "PropertyValue"
+      },
+      "technologyType": {
+        "annotationValue": "digital curation",
+        "termAccession": "http://purl.obolibrary.org/obo/OBI_0302914",
+        "termSource": "OBI",
+        "@type": "PropertyValue"
+      },
+      "@type": "variableMeasured"
+    },
+    {
+      "measurementType": {
+        "annotationValue": "Analytical Procedure Accuracy",
+        "termAccession": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C134242",
+        "termSource": "NCIT",
+        "@type": "PropertyValue"
+      },
+      "technologyType": {
+        "annotationValue": "computational modeling technique",
+        "termAccession": "http://purl.obolibrary.org/obo/ERO_0001251",
+        "termSource": "ERO",
+        "@type": "PropertyValue"
+      },
+      "@type": "variableMeasured"
+    }
+  ],
+  "factors": [],
+  "studyCharacteristics": {
+    "organism": [
+      {
+        "annotationValue": "Homo sapiens",
+        "termAccession": "http://purl.bioontology.org/ontology/NCBITAXON/9606",
+        "termSource": "NCBITAXON",
+        "@type": "PropertyValue"
+      }
+    ],
+    "environmentType": [],
+    "geographicalLocation": [],
+    "@type": "variableMeasured"
+  },
+  "ontologySourceReferences": {
+    "NCIT": {
+      "name": "NCIT",
+      "description": "National Cancer Institute Thesaurus",
+      "file": "http://data.bioontology.org/ontologies/NCIT",
+      "version": "20.01d",
+      "@type": "DefinedTermSet"
+    },
+    "OBI": {
+      "name": "OBI",
+      "description": "Ontology for Biomedical Investigations",
+      "file": "http://data.bioontology.org/ontologies/OBI",
+      "version": "2018-08-27",
+      "@type": "DefinedTermSet"
+    },
+    "ERO": {
+      "name": "ERO",
+      "description": "Eagle-I Research Resource Ontology",
+      "file": "http://data.bioontology.org/ontologies/ERO",
+      "version": "2013-08-02",
+      "@type": "DefinedTermSet"
+    },
+    "NCBITAXON": {
+      "name": "NCBITAXON",
+      "description": "National Center for Biotechnology Information (NCBI) Organismal Classification",
+      "file": "http://data.bioontology.org/ontologies/NCBITAXON",
+      "version": "2019AB",
+      "@type": "DefinedTermSet"
+    },
+    "@type": "CategoryCodeSet"
+  },
+  "comments": [
+    {
+      "name": "Created With Configuration",
+      "value": "1.0",
+      "@type": "SoftwareApplication"
+    },
+    {
+      "name": "Data Descriptor License",
+      "value": "CC-BY-4.0",
+      "@type": "CreativeWork"
+    }
+  ]
+}

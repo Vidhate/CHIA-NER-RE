@@ -1,0 +1,77 @@
+T3	Condition 67 104	elective replacement indication (ERI)
+T4	Condition 106 126	end of service (EOS)
+*	OR T3 T4
+T5	Scope 67 126	elective replacement indication (ERI), end of service (EOS)
+T1	Condition 9 28	clinical indication
+T2	Procedure 33 60	pectoral pacemaker exchange
+R1	AND Arg1:T1 Arg2:T2	
+T6	Scope 9 60	clinical indication for pectoral pacemaker exchange
+R2	Subsumes Arg1:T6 Arg2:T5	
+T7	Qualifier 131 137;146 153	single chamber
+T8	Qualifier 141 153	dual chamber
+*	OR T7 T8
+T9	Scope 131 153	single or dual chamber
+T10	Device 170 179	pacemaker
+T11	Device 181 185	BSCI
+R3	Has_scope Arg1:T10 Arg2:T9	
+T12	Scope 131 179	single or dual chamber MRI conditional pacemaker
+R4	Subsumes Arg1:T12 Arg2:T11	
+T13	Device 221 243	MRI conditional system
+T14	Device 245 249	BSCI
+*	OR T13 T14
+T15	Device 206 219	successor IPG
+T16	Qualifier 195 205	comparable
+R5	Has_qualifier Arg1:T15 Arg2:T16	
+T17	Scope 195 219	comparable successor IPG
+T18	Scope 221 249	MRI conditional system, BSCI
+R6	Subsumes Arg1:T17 Arg2:T18	
+T19	Device 268 295	Implanted Fineline-II-leads
+T20	Device 297 301	BSCI
+R7	Subsumes Arg1:T19 Arg2:T20	
+T21	Qualifier 304 319	MRI conditional
+T22	Qualifier 154 169	MRI conditional
+R8	Has_qualifier Arg1:T10 Arg2:T22	
+T23	Scope 268 302	Implanted Fineline-II-leads (BSCI)
+R9	Has_qualifier Arg1:T23 Arg2:T21	
+T24	Measurement 325 351	ascertained lead impedance
+T25	Value 355 379	between 200 and 1500 Ohm
+R10	Has_value Arg1:T24 Arg2:T25	
+T26	Measurement 386 411	pacing capture thresholds
+T27	Measurement 413 416	PCT
+R11	Subsumes Arg1:T26 Arg2:T27	
+T28	Value 418 452	do not exceed 2.0 V @0.4 or 0.5 ms
+T29	Condition 456 475	pacemaker dependent
+A1	Optional T29
+T30	Scope 386 417	pacing capture thresholds (PCT)
+R12	Has_value Arg1:T30 Arg2:T28	
+R13	Has_scope Arg1:T29 Arg2:T30	
+T31	Person 486 490	Male
+T32	Person 494 500	female
+T33	Value 501 518	18 years or older
+T34	Person 504 518	years or older
+R14	Has_value Arg1:T34 Arg2:T33	
+*	OR T31 T32
+T35	Non-query-able 520 558	Understand the nature of the procedure
+T36	Post-eligibility 560 589	Give written informed consent
+T37	Post-eligibility 591 653	Able to complete all testing required by the clinical protocol
+T38	Post-eligibility 655 736	Ability to measure atrial and/or ventricular pacing threshold(s) at 0.4 or 0.5 ms
+T39	Measurement 746 757	body height
+T40	Value 758 784	greater or equal to 140 cm
+R15	Has_value Arg1:T39 Arg2:T40	
+T41	Device 786 811	Pectoral implanted device
+T42	Mood 839 857	willing to undergo
+T43	Qualifier 858 866	elective
+T44	Procedure 867 893;899 907	cardiac magnetic resonance scanning
+T45	Procedure 895 897	MR
+R16	Subsumes Arg1:T44 Arg2:T45	
+T46	Qualifier 908 924	without sedation
+R17	Has_qualifier Arg1:T44 Arg2:T46	
+R18	Has_qualifier Arg1:T44 Arg2:T43	
+R19	Has_mood Arg1:T44 Arg2:T42	
+T47	Person 955 976	geographically stable
+T48	Observation 981 1004	available for follow-up
+T49	Visit 1005 1024	at the study center
+T50	Temporal 1025 1052	for the length of the study
+T51	Scope 955 1004	geographically stable and available for follow-up
+T52	Scope 1005 1052	at the study center for the length of the study
+R20	Has_scope Arg1:T51 Arg2:T52	

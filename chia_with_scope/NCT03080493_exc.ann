@@ -1,0 +1,34 @@
+T1	Drug 15 25	gabapentin
+T2	Temporal 0 7	Current
+T3	Drug 29 39	pregabalin
+*	OR T1 T3
+T4	Scope 15 39	gabapentin or pregabalin
+R1	Has_temporal Arg1:T4 Arg2:T2	
+T5	Condition 41 48	Allergy
+T6	Drug 52 62	gabapentin
+T7	Drug 64 77	acetaminophen
+T8	Drug 79 86	codeine
+T9	Drug 91 100	ibuprofen
+*	OR T8 T9 T7 T6
+T10	Scope 52 100	gabapentin, acetaminophen, codeine, or ibuprofen
+R2	Has_scope Arg1:T5 Arg2:T10	
+T11	Qualifier 102 115	Self reported
+T12	Condition 116 129	renal disease
+R3	Has_qualifier Arg1:T12 Arg2:T11	
+T13	Qualifier 131 137	severe
+T14	Condition 138 161	impaired renal function
+R4	Has_qualifier Arg1:T14 Arg2:T13	
+T15	Scope 102 129	Self reported renal disease
+T16	Scope 131 161	severe impaired renal function
+R5	Subsumes Arg1:T15 Arg2:T16	
+T17	Qualifier 164 177	Self reported
+T18	Temporal 178 185	current
+T19	Qualifier 189 196	chronic
+T20	Condition 197 209	narcotic use
+*	OR T19 T18
+T21	Scope 178 196	current or chronic
+R6	Has_scope Arg1:T20 Arg2:T21	
+R7	Has_qualifier Arg1:T20 Arg2:T17	
+T22	Multiplier 219 228	daily use
+R8	Has_multiplier Arg1:T20 Arg2:T22	
+T23	Non-representable 231 368	Women with any issue that, in the opinion of the investigator, would interfere with study participation or generating accurate study data

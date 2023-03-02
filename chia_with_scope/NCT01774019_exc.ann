@@ -1,0 +1,35 @@
+T1	Condition 0 18	Biliary strictures
+T2	Condition 39 52	benign tumors
+T3	Qualifier 29 38	confirmed
+R1	Has_qualifier Arg1:T2 Arg2:T3	
+R2	AND Arg1:T1 Arg2:T2	
+T4	Condition 54 72	Biliary strictures
+T5	Condition 83 95	malignancies
+T6	Negation 96 106	other than
+T7	Condition 107 124	pancreatic cancer
+T8	Condition 126 155	distal CBD cholangiocarcinoma
+T9	Condition 160 187	other periampullary cancers
+*	OR T9 T8 T7
+T10	Scope 107 187	pancreatic cancer, distal CBD cholangiocarcinoma and other periampullary cancers
+R3	Has_negation Arg1:T10 Arg2:T6	
+R4	Has_scope Arg1:T5 Arg2:T10	
+R5	AND Arg1:T4 Arg2:T5	
+T11	Condition 189 229	Surgically altered biliary tract anatomy
+T12	Procedure 251 266	cholecystectomy
+T13	Temporal 245 250	prior
+R6	Has_temporal Arg1:T12 Arg2:T13	
+T14	Negation 231 234	not
+R7	Has_negation Arg1:T12 Arg2:T14	
+R8	AND Arg1:T11 Arg2:T12	
+T15	Procedure 268 292	Neoadjuvant chemotherapy
+T16	Condition 305 315	malignancy
+R9	AND Arg1:T15 Arg2:T16	
+T17	Non-query-able 317 390	Palliative indication due to reasons other than surgical candidate status
+T18	Procedure 401 429	biliary drainage by ERCP/PTC
+T19	Temporal 392 400	Previous
+R10	Has_temporal Arg1:T18 Arg2:T19	
+T20	Condition 475 490	contraindicated
+T21	Procedure 449 470	endoscopic techniques
+R11	AND Arg1:T20 Arg2:T21	
+T22	Non-query-able 492 553	Participation in another investigational trial within 90 days
+T23	Condition 555 564	Pregnancy

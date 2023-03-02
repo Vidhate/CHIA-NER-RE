@@ -1,0 +1,26 @@
+T1	Negation 0 10	don't have
+T2	Condition 11 19	Diabetes
+T3	Condition 24 52	abnormal metabolism of sugar
+*	OR T3 T2
+T4	Scope 11 52	Diabetes and abnormal metabolism of sugar
+R1	Has_negation Arg1:T4 Arg2:T1	
+T5	Negation 54 57	not
+T6	Mood 58 65	noticed
+T7	Condition 69 85	bipolar disorder
+R2	Has_mood Arg1:T7 Arg2:T6	
+R3	Has_negation Arg1:T7 Arg2:T5	
+T8	Condition 95 116	organic brain disease
+T9	Condition 118 126	pregnant
+T10	Observation 130 143	breastfeeding
+T11	Person 144 149	women
+*	OR T10 T9
+T12	Negation 151 161	don't have
+T13	Condition 162 175	heart disease
+R4	Has_negation Arg1:T13 Arg2:T12	
+T14	Condition 182 207	actively suicidal thought
+T15	Measurement 208 240	Suicidal ideation score of MADRS
+T16	Value 244 245	6
+R5	Has_value Arg1:T15 Arg2:T16	
+T17	Scope 208 245	Suicidal ideation score of MADRS is 6
+R6	Subsumes Arg1:T14 Arg2:T17	
+T18	Observation 256 319	judged by the investigator to should be excluded from the study

@@ -1,0 +1,6 @@
+T1	Procedure 19 23	ICSI
+T2	Person 0 5	Women
+T3	Procedure 32 73	controlled ovarian hyperstimulation (COH)
+T4	Procedure 79 112	pituitary downregulation by GnRHa
+T5	Scope 32 112	controlled ovarian hyperstimulation (COH) with pituitary downregulation by GnRHa
+R1	Subsumes Arg1:T1 Arg2:T5	

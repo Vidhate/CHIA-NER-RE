@@ -1,0 +1,76 @@
+T1	Condition 0 8	Pregnant
+T2	Condition 12 21	lactating
+T3	Person 22 27	women
+*	OR T1 T2
+T4	Condition 30 52	Evolutive skin disease
+T5	Qualifier 60 72	testing zone
+T6	Qualifier 74 84	lower back
+R1	Subsumes Arg1:T5 Arg2:T6	
+R2	Has_qualifier Arg1:T4 Arg2:T5	
+T7	Procedure 168 191	Systemic corticotherapy
+T8	Procedure 195 222	immunosuppressive treatment
+*	OR T7 T8
+T9	Temporal 223 248	during the previous month
+T10	Scope 168 222	Systemic corticotherapy or immunosuppressive treatment
+R3	Has_temporal Arg1:T10 Arg2:T9	
+T11	Procedure 253 278	local corticoid treatment
+T12	Temporal 279 294	the week before
+T13	Condition 386 401	Exposure to sun
+T14	Condition 386 397;405 418	Exposure to UV radiations
+*	OR T14 T13
+T15	Temporal 420 452	15 days before the patch testing
+T16	Scope 386 418	Exposure to sun or UV radiations
+R4	Has_temporal Arg1:T16 Arg2:T15	
+T17	Condition 464 494	deprived of their civic rights
+T18	Condition 496 506	in custody
+T19	Condition 511 532	subject to a tutorial
+T20	Condition 511 523;534 543;562 570	subject to a judiciary decision
+T21	Condition 511 521;547 570	subject to administrative decision
+*	OR T17 T18 T19 T20 T21
+T22	Condition 630 656	critical medical situation
+T23	Condition 582 613	subject to a protection measure
+T24	Qualifier 104 126	clinically significant
+T25	Condition 127 134	disease
+R5	Has_qualifier Arg1:T25 Arg2:T24	
+T26	Qualifier 136 143	chronic
+T27	Qualifier 145 154	recurrent
+T28	Qualifier 158 164	active
+*	OR T27 T28 T26
+T29	Scope 136 164	chronic, recurrent or active
+R6	Subsumes Arg1:T24 Arg2:T29	
+T30	Qualifier 315 320	Local
+T31	Qualifier 324 332	systemic
+T32	Drug 333 337	drug
+T33	Qualifier 348 383	interacts with the outcome measures
+*	OR T31 T30
+T34	Scope 315 332	Local or systemic
+R7	Has_scope Arg1:T32 Arg2:T34	
+R8	Has_qualifier Arg1:T32 Arg2:T33	
+T35	Reference_point 435 452	the patch testing
+R9	Has_index Arg1:T15 Arg2:T35	
+T36	Observation 675 693	personal situation
+T37	Non-representable 694 789	judged by the investigator as unlikely to be compatible with optimal participation in the study
+T38	Non-query-able 800 839	could constitute a risk for the patient
+*	OR T37 T38
+T39	Scope 694 839	judged by the investigator as unlikely to be compatible with optimal participation in the study, or which could constitute a risk for the patient
+R10	Has_scope Arg1:T36 Arg2:T39	
+T40	Observation 842 860	Linguistic barrier
+T41	Condition 864 885	psychological profile
+T42	Negation 886 896	preventing
+T43	Informed_consent 914 938	signing the consent form
+R11	Has_negation Arg1:T43 Arg2:T42	
+*	OR T41 T40
+T44	Scope 842 885	Linguistic barrier or psychological profile
+R12	AND Arg1:T44 Arg2:T43	
+T45	Competing_trial 992 1031	participation in another clinical trial
+T46	Temporal 949 987	still in an exclusion period following
+R13	Has_temporal Arg1:T45 Arg2:T46	
+T47	Competing_trial 1092 1124	participation in clinical trials
+T48	Temporal 1125 1154	during the previous 12 months
+T49	Reference_point 1132 1154	the previous 12 months
+R14	Has_index Arg1:T48 Arg2:T49	
+R15	Has_temporal Arg1:T47 Arg2:T48	
+T50	Observation 1050 1087	earned more than 4500€ in indemnities
+T51	Non-query-able 1050 1087	earned more than 4500€ in indemnities
+R16	AND Arg1:T50 Arg2:T51	
+R17	AND Arg1:T50 Arg2:T47	

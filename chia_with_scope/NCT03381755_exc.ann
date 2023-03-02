@@ -1,0 +1,19 @@
+T1	Drug 6 54	adenosine diphosphate (ADP) receptor antagonists
+T2	Temporal 55 69	within 2 weeks
+R1	Has_temporal Arg1:T1 Arg2:T2	
+T3	Measurement 71 85	Platelet count
+T4	Value 86 93	<100g/L
+R2	Has_value Arg1:T3 Arg2:T4	
+T5	Condition 109 126	bleeding tendency
+T6	Observation 98 105	history
+R3	Has_temporal Arg1:T5 Arg2:T6	
+T7	Drug 129 136	Aspirin
+T8	Drug 138 148	ticagrelor
+T9	Drug 152 163	clopidogrel
+T10	Condition 164 173	allergies
+*	OR T8 T9 T7
+T11	Scope 129 163	Aspirin, ticagrelor or clopidogrel
+R4	Has_scope Arg1:T10 Arg2:T11	
+T12	Condition 183 195	liver injury
+T13	Qualifier 176 182	Severe
+R5	Has_qualifier Arg1:T12 Arg2:T13	

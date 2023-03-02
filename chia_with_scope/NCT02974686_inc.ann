@@ -1,0 +1,12 @@
+T1	Procedure 0 17	Kidney transplant
+T2	Visit 32 76	Washington University/Barnes-Jewish Hospital
+R1	AND Arg1:T1 Arg2:T2	
+T3	Procedure 91 102	GI toxicity
+T4	Drug 108 111	MPA
+R2	AND Arg1:T3 Arg2:T4	
+T5	Procedure 195 221	standard immunosuppression
+T6	Drug 227 237	tacrolimus
+T7	Drug 242 251	prednison
+*	OR T6 T7
+T8	Scope 227 251	tacrolimus and prednison
+R3	Has_scope Arg1:T5 Arg2:T8	

@@ -1,0 +1,145 @@
+T1	Qualifier 28 34	active
+T2	Condition 35 38	CSC
+R1	Has_qualifier Arg1:T2 Arg2:T1	
+T3	Procedure 13 23	treatments
+R2	AND Arg1:T3 Arg2:T2	
+T4	Temporal 4 12	previous
+R3	Has_temporal Arg1:T3 Arg2:T4	
+T5	Temporal 41 49	Previous
+T6	Drug 66 104	mineralocorticoid receptor antagonists
+T7	Condition 110 114	cCSC
+T8	Condition 122 136	other diseases
+*	OR T7 T8
+T9	Scope 110 136	cCSC or for other diseases
+R4	Has_scope Arg1:T6 Arg2:T9	
+R5	Has_temporal Arg1:T6 Arg2:T5	
+T10	Drug 162 177	corticosteroids
+T11	Temporal 139 146	Current
+R6	Has_temporal Arg1:T10 Arg2:T11	
+T12	Qualifier 179 186	topical
+T13	Qualifier 190 198	systemic
+T14	Scope 179 198	topical or systemic
+R7	Has_scope Arg1:T10 Arg2:T14	
+T15	Procedure 201 219	corticosteroid use
+T16	Temporal 220 276	within 3 months before possible start of trial treatment
+T17	Reference_point 243 276	possible start of trial treatment
+R8	Has_index Arg1:T16 Arg2:T17	
+T18	Procedure 302 326	corticosteroid treatment
+T19	Temporal 327 386	within the first 2 years from the start of the trial period
+T20	Reference_point 334 386	the first 2 years from the start of the trial period
+R9	Has_index Arg1:T19 Arg2:T20	
+T21	Mood 281 292	anticipated
+R10	Has_mood Arg1:T18 Arg2:T21	
+R11	Has_temporal Arg1:T18 Arg2:T19	
+R12	Has_temporal Arg1:T15 Arg2:T16	
+*	OR T10 T15 T18
+T22	Non-representable 389 462	Evidence of another diagnosis that can explain serous SRF or visual loss;
+T23	Measurement 464 492	Best-corrected visual acuity
+T24	Value 493 501	< 20/200
+R13	Has_value Arg1:T23 Arg2:T24	
+T25	Qualifier 525 533	Profound
+T26	Condition 534 555	chorioretinal atrophy
+R14	Has_qualifier Arg1:T26 Arg2:T25	
+T27	Qualifier 559 579	central macular area
+R15	Has_qualifier Arg1:T26 Arg2:T27	
+T28	Procedure 583 597	ophthalmoscopy
+T29	Procedure 602 605	OCT
+T30	Scope 583 605	ophthalmoscopy and OCT
+R16	AND Arg1:T30 Arg2:T26	
+T31	Measurement 608 614	Myopia
+T32	Value 615 619	> 6D
+R17	Has_value Arg1:T31 Arg2:T32	
+T33	Condition 622 633	Visual loss
+T34	Condition 641 658	serous detachment
+T35	Procedure 662 665	OCT
+T36	Temporal 666 675	< 6 weeks
+*	OR T34 T33
+T37	Scope 622 658	Visual loss and/or serous detachment
+R18	Has_scope Arg1:T35 Arg2:T37	
+R19	Has_temporal Arg1:T35 Arg2:T36	
+T38	Qualifier 678 688	Continuous
+T39	Qualifier 696 707	progressive
+T40	Condition 708 719	visual loss
+*	OR T39 T38
+T41	Scope 678 707	Continuous and/or progressive
+R20	Has_scope Arg1:T40 Arg2:T41	
+T42	Temporal 720 731	> 18 months
+T43	Condition 735 752	serous detachment
+T44	Procedure 756 759	OCT
+T45	Temporal 760 771	> 18 months
+R21	Has_temporal Arg1:T44 Arg2:T45	
+R22	Has_temporal Arg1:T40 Arg2:T42	
+R23	AND Arg1:T44 Arg2:T43	
+*	OR T44 T40
+T46	Measurement 798 802	ICGA
+T47	Value 777 794	hyperfluorescence
+T48	Negation 774 776	No
+R24	Has_negation Arg1:T47 Arg2:T48	
+R25	Has_value Arg1:T46 Arg2:T47	
+T49	Condition 805 823	Intraretinal edema
+T50	Procedure 827 830	OCT
+R26	AND Arg1:T50 Arg2:T49	
+T51	Condition 844 861	Contraindications
+T52	Procedure 866 868	FA
+T53	Procedure 872 876	ICGA
+*	OR T52 T53
+T54	Scope 866 876	FA or ICGA
+R27	Has_scope Arg1:T51 Arg2:T54	
+T55	Condition 890 907	Contraindications
+T56	Procedure 912 934	photodynamic treatment
+T57	Condition 936 945	pregnancy
+T58	Condition 947 956	porphyria
+T59	Qualifier 958 966	severely
+T60	Condition 967 991	disturbed liver function
+R28	Has_qualifier Arg1:T60 Arg2:T59	
+*	OR T57 T58 T60
+T61	Scope 936 991	pregnancy, porphyria, severely disturbed liver function
+R29	AND Arg1:T55 Arg2:T56	
+T62	Scope 890 934	Contraindications for photodynamic treatment
+R30	Subsumes Arg1:T62 Arg2:T61	
+T63	Non-representable 994 1120	Pregnancy will not be routinely tested in female patients, but the possibility of pregnancy will be discussed during screening
+T64	Condition 1139 1156	contraindications
+T65	Drug 1175 1185	eplerenone
+T66	Condition 1197 1209	hyperkalemia
+T67	Condition 1211 1235	abnormal renal clearance
+T68	Measurement 1220 1235	renal clearance
+T69	Value 1211 1219	abnormal
+R31	Has_value Arg1:T68 Arg2:T69	
+T70	Condition 1237 1265	severe hepatic insufficiency
+T71	Measurement 1267 1277	Child-Pugh
+T72	Value 1278 1279	C
+R32	Has_value Arg1:T71 Arg2:T72	
+R33	AND Arg1:T64 Arg2:T65	
+*	OR T66 T68 T70 T75 T83
+R34	multi Arg1:T68 Arg2:T67	
+R35	Subsumes Arg1:T70 Arg2:T71	
+T73	Condition 1282 1306	type 2 diabetes mellitus
+T74	Condition 1312 1328	microalbuminuria
+T75	Scope 1282 1328	type 2 diabetes mellitus with microalbuminuria
+T76	Temporal 1330 1341	concomitant
+T77	Drug 1349 1370	potassium supplements
+T78	Drug 1372 1399	potassium-sparing diuretics
+T79	Drug 1401 1425	strong CYP3A4 inhibitors
+T80	Drug 1452 1465	ACE-inhibitor
+T81	Drug 1473 1508	angiotensin receptor blocking agent
+T82	Scope 1452 1508	ACE-inhibitor and an angiotensin receptor blocking agent
+*	OR T77 T78 T79 T82
+T83	Scope 1349 1508	potassium supplements, potassium-sparing diuretics, strong CYP3A4 inhibitors, or the combination of an ACE-inhibitor and an angiotensin receptor blocking agent
+R36	Has_temporal Arg1:T83 Arg2:T76	
+T84	Non-representable 1511 1638	Pregnancy will not be routinely tested in female patients, but the possibility of pregnancy will be discussed during screening;
+T85	Condition 1640 1651	Soft drusen
+T86	Qualifier 1655 1666	treated eye
+T87	Qualifier 1670 1680	fellow eye
+*	OR T86 T87
+T88	Scope 1655 1680	treated eye or fellow eye
+T89	Condition 1691 1719	choroidal neovascularization
+T90	Procedure 1723 1737	ophthalmoscopy
+R38	Has_scope Arg1:T85 Arg2:T88	
+T91	Procedure 1745 1747	FA
+T92	Procedure 1748 1752	ICGA
+T93	Qualifier 1760 1769	study eye
+T94	Scope 1723 1752	ophthalmoscopy and/or FA/ICGA
+*	OR T90 T91 T92
+R37	AND Arg1:T94 Arg2:T89	
+R39	Has_qualifier Arg1:T94 Arg2:T93	
+*	OR T85 T94

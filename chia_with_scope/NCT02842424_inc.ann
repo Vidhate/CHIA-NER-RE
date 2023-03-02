@@ -1,0 +1,28 @@
+T1	Observation 2 18	positive history
+T2	Condition 22 42	chronic claudication
+R1	Has_temporal Arg1:T2 Arg2:T1	
+T3	Condition 45 75	Exercise-limiting claudication
+T4	Observation 91 98	history
+T5	Procedure 103 121	direct observation
+T6	Procedure 131 153	screening walking test
+T7	Scope 91 153	history and direct observation during a screening walking test
+R2	Has_scope Arg1:T3 Arg2:T7	
+T8	Condition 204 230	Arterial occlusive disease
+T9	Procedure 235 268	ankle Brachial index measurements
+T10	Procedure 282 300	imaging modalities
+*	OR T9 T10
+T11	Scope 235 300	ankle Brachial index measurements and/or other imaging modalities
+R3	AND Arg1:T11 Arg2:T8	
+T12	Qualifier 303 309	Stable
+T13	Procedure 310 332	blood pressure regimen
+R4	Has_qualifier Arg1:T13 Arg2:T12	
+T14	Qualifier 334 340	stable
+T15	Procedure 341 354	lipid regimen
+R5	Has_qualifier Arg1:T15 Arg2:T14	
+T16	Qualifier 356 362	stable
+T17	Procedure 363 379	diabetes regimen
+R6	Has_qualifier Arg1:T17 Arg2:T16	
+T18	Procedure 384 403	risk factor control
+T19	Multiplier 404 415	for 6 weeks
+T20	Scope 303 403	Stable blood pressure regimen, stable lipid regimen, stable diabetes regimen and risk factor control
+R7	Has_multiplier Arg1:T20 Arg2:T19	

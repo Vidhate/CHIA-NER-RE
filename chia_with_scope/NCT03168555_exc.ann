@@ -1,0 +1,33 @@
+T1	Procedure 0 21	small bowel resection
+T2	Procedure 23 48	right sided hemicolectomy
+T3	Condition 56 81	chronic diarrheal disease
+T4	Condition 83 97	celiac disease
+T5	Condition 99 120	lactose malabsorption
+T6	Condition 122 149	Inflammatory bowel diseases
+T7	Condition 156 175	microscopic colitis
+*	OR T6 T7 T5 T4
+T8	Scope 83 175	celiac disease, lactose malabsorption, Inflammatory bowel diseases, incl microscopic colitis
+R1	Subsumes Arg1:T3 Arg2:T8	
+T9	Condition 178 187	pregnancy
+T10	Temporal 208 232	within next three months
+T11	Condition 198 207	pregnancy
+T12	Mood 189 197	wish for
+R2	Has_mood Arg1:T11 Arg2:T12	
+R3	Has_temporal Arg1:T11 Arg2:T10	
+T13	Condition 234 241	allergy
+T14	Drug 245 249	eggs
+R4	AND Arg1:T13 Arg2:T14	
+T15	Condition 251 258	allergy
+T16	Drug 262 286	constituents in Xenbilox
+T17	Drug 302 323	chenodeoxycholic acid
+R5	Subsumes Arg1:T16 Arg2:T17	
+R6	AND Arg1:T15 Arg2:T16	
+T18	Condition 326 345	acute cholecystitis
+T19	Temporal 346 363	within two months
+R7	Has_temporal Arg1:T18 Arg2:T19	
+T20	Condition 365 386	chronic cholecystitis
+T21	Condition 388 410	cirrhosis of the liver
+T22	Mood 412 421	suspected
+T23	Condition 422 453	obstructive choledocholithiasis
+R8	Has_mood Arg1:T23 Arg2:T22	
+T24	Condition 455 462	icterus

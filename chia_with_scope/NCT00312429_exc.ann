@@ -1,0 +1,7 @@
+T1	Procedure 11 39	Interleukin-2 (IL-2) therapy
+T2	Temporal 40 69	within 8 weeks of study entry
+R1	Has_temporal Arg1:T1 Arg2:T2	
+T3	Condition 111 162;88 95	illness that may interfere with study participation medical
+T4	Condition 99 162	psychiatric illness that may interfere with study participation
+*	OR T3 T4
+T5	Condition 164 172	Pregnant

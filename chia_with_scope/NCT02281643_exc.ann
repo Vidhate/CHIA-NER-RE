@@ -1,0 +1,20 @@
+T1	Condition 6 36	intolerance to the doxycycline
+T2	Drug 25 36	doxycycline
+R1	AND Arg1:T1 Arg2:T2	
+T3	Measurement 37 48	Body weight
+T4	Value 49 55	<40 kg
+R2	Has_value Arg1:T3 Arg2:T4	
+T5	Condition 56 65	Pregnancy
+T6	Observation 69 82	breastfeeding
+*	OR T6 T5 T13 T3 T1
+T7	Condition 101 118	allergic reaction
+T8	Qualifier 94 100	severe
+R3	Has_qualifier Arg1:T7 Arg2:T8	
+T9	Condition 122 133	anaphylaxis
+T10	Condition 134 141;150 155	Alcohol abuse
+T11	Condition 145 155	drug abuse
+*	OR T9 T7
+*	OR T10 T11
+T12	Observation 83 93	History of
+T13	Scope 94 155	severe allergic reaction or anaphylaxis Alcohol or drug abuse
+R4	Has_temporal Arg1:T13 Arg2:T12	

@@ -1,0 +1,52 @@
+T1	Condition 6 22	hypersensitivity
+T2	Drug 26 38	tetracycline
+T3	Drug 40 51	doxycycline
+T4	Drug 55 67	azithromycin
+*	OR T3 T4 T2
+T5	Scope 26 67	tetracycline, doxycycline or azithromycin
+R1	Has_scope Arg1:T1 Arg2:T5	
+T6	Drug 87 98	doxycycline
+T7	Drug 100 112	azithromycin
+T8	Drug 114 129	chloramphenicol
+T9	Drug 131 141	rifampicin
+T10	Drug 146 158	tetracycline
+T11	Temporal 159 186	during the preceding 7 days
+*	OR T10 T9 T8 T7 T6
+T12	Scope 87 158	doxycycline, azithromycin, chloramphenicol, rifampicin, or tetracycline
+R2	Has_temporal Arg1:T12 Arg2:T11	
+T13	Condition 188 197	Pregnancy
+T14	Observation 201 215	breast-feeding
+*	OR T13 T14
+T15	Condition 231 248	myasthenia gravis
+T16	Condition 252 280	systemic lupus erythematosus
+*	OR T15 T16
+T17	Condition 311 320	infection
+T18	Procedure 322 337	diagnostic test
+R3	AND Arg1:T17 Arg2:T18	
+T19	Condition 353 366	acute malaria
+T20	Condition 368 374	dengue
+T21	Condition 376 389	leptospirosis
+T22	Condition 391 398	typhoid
+T23	Condition 400 421	Japanese encephalitis
+*	OR T23 T22 T21 T20 T19
+T24	Scope 353 421	acute malaria, dengue, leptospirosis, typhoid, Japanese encephalitis
+R4	Subsumes Arg1:T17 Arg2:T24	
+T25	Condition 436 438	TB
+T26	Procedure 442 454	TB treatment
+T27	Temporal 455 468	in = 6 months
+*	OR T25 T26
+R5	Has_temporal Arg1:T26 Arg2:T27	
+T28	Procedure 529 534	HAART
+T29	Condition 543 546	HIV
+R6	AND Arg1:T28 Arg2:T29	
+T30	Multiplier 548 561	long term use
+T31	Drug 565 583	immunosuppressants
+R7	Has_multiplier Arg1:T31 Arg2:T30	
+T32	Drug 590 598	steroids
+T33	Drug 600 612	chemotherapy
+T34	Drug 614 628	TNF-inhibitors
+*	OR T34 T33 T32
+T35	Scope 590 628	steroids, chemotherapy, TNF-inhibitors
+R8	Subsumes Arg1:T31 Arg2:T35	
+*	OR T28 T31
+T36	Non-representable 650 900	Patients with severe disease whom the clinical team feel their condition necessitates the need for additional scrub typhus treatment beyond the allocated antibiotic treatment assigned at randomization (e.g. IV chloramphenicol and/or PO/NG rifampicin)

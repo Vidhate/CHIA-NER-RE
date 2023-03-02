@@ -1,0 +1,63 @@
+T1	Person 0 4	Male
+T2	Person 7 13	female
+T3	Value 23 43	>= 18 and < 70 years
+T4	Person 47 50	age
+*	OR T2 T1
+R1	Has_value Arg1:T4 Arg2:T3	
+T5	Measurement 61 66	HBeAg
+T6	Value 52 60	Positive
+R2	Has_value Arg1:T5 Arg2:T6	
+T7	Temporal 67 95	before starting NA treatment
+T8	Reference_point 74 95	starting NA treatment
+R3	Has_index Arg1:T7 Arg2:T8	
+R4	Has_temporal Arg1:T5 Arg2:T7	
+T9	Drug 121 131	lamivudine
+T10	Drug 133 141	adefovir
+T11	Drug 143 152	entecavir
+T12	Drug 156 165	tenofovir
+*	OR T12 T11 T10 T9
+T13	Multiplier 110 116	single
+T14	Drug 117 119	NA
+R5	Has_multiplier Arg1:T14 Arg2:T13	
+T15	Procedure 97 104	Treated
+R6	AND Arg1:T15 Arg2:T14	
+T16	Scope 121 165	lamivudine, adefovir, entecavir or tenofovir
+R7	Subsumes Arg1:T14 Arg2:T16	
+T17	Temporal 167 190	for 6 months to 5 years
+R8	Has_temporal Arg1:T15 Arg2:T17	
+T18	Measurement 202 207	HBeAg
+T19	Value 208 222	seroconversion
+T20	Measurement 224 229	HBeAg
+T21	Measurement 243 250	ant-HBe
+T22	Value 230 238	negative
+T23	Value 251 259	negative
+*	OR T21 T23
+*	OR T20 T22
+*	OR T18 T19
+T24	Scope 224 259	HBeAg negative and ant-HBe negative
+R9	Subsumes Arg1:T19 Arg2:T24	
+T25	Value 266 278	undetectable
+T26	Measurement 279 286	HBV DNA
+T27	Procedure 290 305	PCR based assay
+T28	Drug 309 311	NA
+T29	Procedure 312 321	treatment
+R10	AND Arg1:T29 Arg2:T28	
+R11	Has_value Arg1:T26 Arg2:T25	
+R12	AND Arg1:T27 Arg2:T26	
+R13	AND Arg1:T27 Arg2:T29	
+T30	Value 324 332	Negative
+T31	Measurement 342 362	serum pregnancy test
+T32	Measurement 333 338;348 362	urine pregnancy test
+*	OR T31 T32
+T33	Scope 333 362	urine or serum pregnancy test
+R14	Has_value Arg1:T33 Arg2:T30	
+T34	Person 368 373	women
+T35	Condition 377 399	childbearing potential
+T36	Scope 368 399	women of childbearing potential
+A1	Optional T36
+R15	Has_scope Arg1:T36 Arg2:T33	
+T37	Temporal 412 474	within the 24-hour period prior to the first dose of test drug
+T38	Reference_point 447 474	the first dose of test drug
+R16	Has_index Arg1:T37 Arg2:T38	
+R17	Has_temporal Arg1:T33 Arg2:T37	
+T39	Pregnancy_considerations 476 599	Additionally, all females must be using reliable contraception during the study and for 3 months after treatment completion

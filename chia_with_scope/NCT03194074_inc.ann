@@ -1,0 +1,10 @@
+T1	Mood 9 18	scheduled
+T2	Procedure 23 46	laser laryngeal surgery
+T3	Procedure 53 71	general anesthesia
+R1	AND Arg1:T2 Arg2:T3	
+T4	Drug 84 92	Propofol
+T5	Drug 96 106	desflurane
+*	OR T4 T5
+T6	Scope 84 106	Propofol or desflurane
+R2	Has_scope Arg1:T3 Arg2:T6	
+R3	Has_mood Arg1:T2 Arg2:T1	

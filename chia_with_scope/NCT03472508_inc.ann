@@ -1,0 +1,83 @@
+T1	Value 3 13	= 45 years
+T2	Person 14 17	old
+R1	Has_value Arg1:T2 Arg2:T1	
+T3	Temporal 38 46	previous
+T4	Mood 25 34	diagnosis
+*	OR T4 T3
+T5	Condition 60 82	essential hypertension
+T6	Scope 25 46	diagnosis or previous
+R2	Has_scope Arg1:T5 Arg2:T6	
+T7	Drug 118 140	antihypertensive drugs
+T8	Drug 174 196	antihypertensive drugs
+T9	Negation 164 167	not
+T10	Temporal 197 220	within the last 2 weeks
+R3	Has_negation Arg1:T8 Arg2:T9	
+R4	Has_temporal Arg1:T8 Arg2:T10	
+T11	Multiplier 222 237;266 288	two consecutive at least one day apart
+T12	Procedure 299 321	sitting blood pressure
+T13	Measurement 381 411	diastolic blood pressure (DBP)
+T14	Value 412 420	=90 mmHg
+T15	Measurement 424 453	systolic blood pressure (SBP)
+T16	Value 454 463	=140 mmHg
+R5	Has_value Arg1:T13 Arg2:T14	
+R6	Has_value Arg1:T15 Arg2:T16	
+*	OR T13 T15
+T17	Scope 381 463	diastolic blood pressure (DBP) =90 mmHg or systolic blood pressure (SBP) =140 mmHg
+R7	Has_scope Arg1:T12 Arg2:T17	
+R8	Has_multiplier Arg1:T12 Arg2:T11	
+T18	Temporal 101 110	currently
+R9	Has_temporal Arg1:T7 Arg2:T18	
+T19	Scope 164 220	not taken antihypertensive drugs within the last 2 weeks
+A1	Optional T19
+T20	Scope 101 140	currently taking antihypertensive drugs
+R10	Subsumes Arg1:T5 Arg2:T20	
+T21	Scope 222 463	two consecutive examinations were conducted at least one day apart, and both sitting blood pressure (mean value of 3 measurements) met the following criteria: diastolic blood pressure (DBP) =90 mmHg or systolic blood pressure (SBP) =140 mmHg
+T22	Non-representable 464 510	(the second blood pressure was measured at V1)
+R12	Has_scope Arg1:T19 Arg2:T21	
+*	OR T5 T19
+T23	Person 544 549	woman
+T24	Observation 553 569	childbearing age
+T25	Scope 544 569	woman of childbearing age
+A2	Optional T25
+T26	Qualifier 591 599	reliable
+T27	Observation 600 620	contraceptive method
+R11	Has_qualifier Arg1:T27 Arg2:T26	
+T28	Temporal 621 637	during the trial
+R13	Has_temporal Arg1:T27 Arg2:T28	
+T29	Reference_point 628 637	the trial
+R14	Has_index Arg1:T28 Arg2:T29	
+R15	Has_context Arg1:T25 Arg2:T27	
+T30	Mood 575 588	agrees to use
+R16	Has_mood Arg1:T27 Arg2:T30	
+T31	Observation 676 702	signed an informed consent
+T32	Observation 643 667	Voluntarily participates
+T33	Procedure 735 762	gene polymorphism detection
+T34	Observation 795 817	genotype already known
+*	OR T33 T34
+T35	Qualifier 783 794	MTHFR C677T
+R17	Has_qualifier Arg1:T34 Arg2:T35	
+T36	Qualifier 723 734	MTHFR C677T
+R18	Has_qualifier Arg1:T33 Arg2:T36	
+T37	Condition 844 871	good tolerance to enalapril
+T38	Drug 862 871	enalapril
+R19	multi Arg1:T37 Arg2:T38	
+T39	Measurement 881 910	overall medication compliance
+T40	Value 876 880	good
+R20	Has_value Arg1:T39 Arg2:T40	
+T41	Value 912 916	>80%
+R21	Subsumes Arg1:T40 Arg2:T41	
+T42	Temporal 938 948	previously
+T43	Condition 959 973;988 1001	good tolerance to ACEI drugs
+T44	Drug 991 1001	ACEI drugs
+R22	multi Arg1:T43 Arg2:T44	
+T45	Observation 959 963;978 1001	good adherence to ACEI drugs
+R23	multi Arg1:T45 Arg2:T44	
+T46	Observation 1014 1032	medication history
+T47	Scope 959 1001	good tolerance and adherence to ACEI drugs
+R24	Has_temporal Arg1:T47 Arg2:T42	
+R25	Has_temporal Arg1:T47 Arg2:T46	
+T48	Scope 844 934	good tolerance to enalapril and good overall medication compliance (>80%) in run-in period
+*	OR T48 T47
+T49	Observation 1050 1088	continues to participate in this study
+T50	Qualifier 1038 1049	Voluntarily
+R26	Has_qualifier Arg1:T49 Arg2:T50	

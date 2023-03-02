@@ -1,0 +1,9 @@
+T1	Condition 26 41	liver cirrhosis
+T2	Mood 14 22	evidence
+R1	Has_mood Arg1:T1 Arg2:T2	
+T3	Condition 55 58	HCC
+T4	Mood 43 51	Evidence
+R2	Has_mood Arg1:T3 Arg2:T4	
+T5	Condition 78 95	hepatitis B virus
+T6	Condition 97 100	HIV
+*	OR T6 T5

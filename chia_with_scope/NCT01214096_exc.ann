@@ -1,0 +1,160 @@
+T1	Condition 3 22	Atrial fibrillation
+T2	Procedure 46 73	cardiac pacemaker treatment
+T3	Device 46 63	cardiac pacemaker
+R1	AND Arg1:T2 Arg2:T3	
+T4	Procedure 97 118	metal graft treatment
+T5	Device 97 108	metal graft
+R2	AND Arg1:T4 Arg2:T5	
+T6	Condition 124 138	Claustrophobia
+T7	Condition 144 171	Acute myocardial infarction
+T8	Condition 173 189	cardiac ischemia
+T9	Procedure 203 221	6-minute walk test
+T10	Condition 223 250	hypertrophic cardiomyopathy
+T11	Condition 252 277	constrictive pericarditis
+T12	Condition 291 304	valve disease
+T13	Qualifier 279 290	significant
+R3	Has_qualifier Arg1:T12 Arg2:T13	
+T14	Condition 308 332	congenital heart disease
+T15	Condition 334 363	severe pulmonary hypertension
+T16	Qualifier 334 340	severe
+R4	Has_qualifier Arg1:T15 Arg2:T16	
+T17	Qualifier 308 318	congenital
+R5	Has_qualifier Arg1:T14 Arg2:T17	
+*	OR T9 T10 T11 T12 T14 T15
+*	OR T8 T7
+T18	Scope 203 363	6-minute walk test, hypertrophic cardiomyopathy, constrictive pericarditis, significant valve disease or congenital heart disease, severe pulmonary hypertension
+T19	Scope 144 189	Acute myocardial infarction, cardiac ischemia
+R6	Subsumes Arg1:T19 Arg2:T18	
+T20	Condition 369 391	Ischemic heart failure
+T21	Procedure 404 421	revascularization
+T22	Negation 392 399	without
+R7	Has_negation Arg1:T21 Arg2:T22	
+T23	Procedure 439 456	revascularization
+T24	Temporal 457 477	within last 6 months
+R8	Has_temporal Arg1:T23 Arg2:T24	
+*	OR T21 T23
+T25	Scope 392 477	without the revascularization or undergone the revascularization within last 6 months
+R9	Subsumes Arg1:T20 Arg2:T25	
+T26	Procedure 501 516	cardiac surgery
+T27	Condition 520 542	cerebrovascular events
+T28	Temporal 543 573	within the previous six months
+*	OR T27 T26
+T29	Scope 501 542	cardiac surgery or cerebrovascular events
+R10	Has_temporal Arg1:T29 Arg2:T28	
+T30	Procedure 605 628	cardiac transplantation
+T31	Observation 592 596	plan
+R11	Has_mood Arg1:T30 Arg2:T31	
+T32	Condition 653 672	renal insufficiency
+T33	Condition 641 648;659 672	hepatic insufficiency
+T34	Measurement 674 690	serum creatinine
+T35	Value 690 701	>2.0 mg /dl
+R12	Has_value Arg1:T34 Arg2:T35	
+T36	Measurement 703 706	AST
+T37	Measurement 710 713	ALT
+T38	Value 717 771	five times higher than the upper limit of normal range
+*	OR T36 T37
+T39	Scope 703 713	AST or ALT
+R13	Has_value Arg1:T39 Arg2:T38	
+*	OR T34 T39
+*	OR T33 T32
+T40	Scope 641 672	hepatic and renal insufficiency
+T41	Procedure 793 815	mechanical ventilation
+T42	Measurement 831 845	blood pressure
+T43	Value 846 854	< 90mmHg
+T44	Value 859 868	> 160mmHg
+*	OR T44 T43
+T45	Scope 846 868	< 90mmHg, or > 160mmHg
+T46	Condition 875 896	Chronic heart failure
+T47	Condition 914 943	acute hemodynamic disturbance
+T48	Condition 947 967	acute decompensation
+T49	Temporal 968 987	within last 1 month
+*	OR T48 T47
+T50	Scope 914 967	acute hemodynamic disturbance or acute decompensation
+R14	Has_scope Arg1:T46 Arg2:T50	
+R15	Has_temporal Arg1:T46 Arg2:T49	
+T51	Measurement 994 1000	Mobitz
+T52	Value 1001 1015	Type II or III
+T53	Condition 1017 1041	atrial ventricular block
+R16	Has_value Arg1:T51 Arg2:T52	
+R17	AND Arg1:T53 Arg2:T51	
+T54	Qualifier 1042 1048	severe
+T55	Condition 1049 1071	ventricular arrhythmia
+R18	Has_qualifier Arg1:T55 Arg2:T54	
+T56	Observation 1098 1125	premature ventricular beats
+T57	Condition 1150 1173	ventricular tachycardia
+T58	Qualifier 1136 1149	non-sustained
+T59	Multiplier 1127 1135	frequent
+T60	Measurement 1181 1196	Serum potassium
+T61	Value 1196 1206	<3.2mmol/L
+T62	Value 1210 1220	>5.5mmol/L
+*	OR T61 T62
+T63	Scope 1196 1220	<3.2mmol/L, or>5.5mmol/L
+R19	Has_scope Arg1:T60 Arg2:T63	
+R21	Has_qualifier Arg1:T57 Arg2:T58	
+R20	Has_multiplier Arg1:T57 Arg2:T59	
+T64	Multiplier 1089 1097	frequent
+T65	Qualifier 1073 1084	polymorphic
+R22	Has_multiplier Arg1:T56 Arg2:T64	
+R23	Has_qualifier Arg1:T56 Arg2:T65	
+T66	Scope 1073 1173	polymorphic and frequent premature ventricular beats, frequent non-sustained ventricular tachycardia
+R24	Subsumes Arg1:T55 Arg2:T66	
+*	OR T55 T53
+T67	Person 1227 1233	Female
+T68	Condition 1245 1253	pregnant
+T69	Observation 1257 1261	plan
+T70	Condition 1272 1280	pregnant
+R25	Has_mood Arg1:T70 Arg2:T69	
+*	OR T68 T70
+T71	Person 1304 1310	female
+T72	Observation 1326 1335	unmarried
+T73	Observation 1348 1358	bear child
+T74	Negation 1344 1347	not
+R26	Has_negation Arg1:T73 Arg2:T74	
+T75	Value 1394 1412	less than 6 months
+T76	Observation 1378 1393	life expectancy
+R27	Has_value Arg1:T76 Arg2:T75	
+T77	Context_Error 1448 1530	Subject participated in any other clinical trial within the previous three months;
+T78	Condition 1569 1574	tumor
+T79	Observation 1549 1565	previous history
+R28	Has_temporal Arg1:T78 Arg2:T79	
+T80	Condition 1587 1592	tumor
+T81	Temporal 1579 1586	current
+R29	Has_temporal Arg1:T80 Arg2:T81	
+T82	Condition 1618 1639	pre-cancerous disease
+T83	Procedure 1654 1678	pathological examination
+T84	Condition 1688 1712	ductal carcinoma in situ
+T85	Condition 1716 1745	cervical epithelial dysplasia
+*	OR T85 T84
+R30	AND Arg1:T82 Arg2:T83	
+T86	Scope 1688 1745	ductal carcinoma in situ or cervical epithelial dysplasia
+R31	Subsumes Arg1:T82 Arg2:T86	
+*	OR T80 T82 T78
+T87	Procedure 1766 1786	physical examination
+T88	Procedure 1788 1805	X-ray examination
+T89	Procedure 1807 1834	type-B ultrasonic detection
+T90	Procedure 1838 1851	other methods
+*	OR T90 T89 T88 T87
+T91	Scope 1766 1851	physical examination, X-ray examination, type-B ultrasonic detection or other methods
+T92	Procedure 1752 1764	Examinations
+T93	Undefined_semantics 1752 1764	Examinations
+R32	Subsumes Arg1:T92 Arg2:T91	
+T94	Condition 1881 1895	malignant mass
+T95	Condition 1897 1914	gland hyperplasia
+T96	Condition 1918 1925	adenoma
+T97	Condition 1931 1949	endocrine activity
+T98	Qualifier 1926 1949	with endocrine activity
+R33	AND Arg1:T98 Arg2:T97	
+R34	Has_qualifier Arg1:T96 Arg2:T98	
+*	OR T96 T95 T94 T97 T103
+T99	Condition 2002 2018	pheochromocytoma
+T100	Condition 2020 2039	thyroid enlargement
+*	OR T99 T100
+T101	Condition 1954 1963;1974 1992	impact on endocrine function
+T102	Condition 1954 1969	impact on heart
+*	OR T101 T102
+T103	Scope 1954 1992	impact on heart, or endocrine function
+T104	Scope 2002 2039	pheochromocytoma, thyroid enlargement
+R35	Subsumes Arg1:T103 Arg2:T104	
+T105	Scope 1881 2040	malignant mass, gland hyperplasia or adenoma with endocrine activity, or impact on heart, or endocrine function (such as pheochromocytoma, thyroid enlargement)
+R36	Has_scope Arg1:T92 Arg2:T105	
+T106	Post-eligibility 2047 2224	The Investigator deemed for whatever reason that the subject is not likely to complete the study or comply with the study procedures (due to administration or any other reason).

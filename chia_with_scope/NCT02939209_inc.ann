@@ -1,0 +1,14 @@
+T1	Person 0 3	Age
+T2	Value 4 9	18-65
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Procedure 88 107	rotator cuff repair
+T4	Procedure 112 125	acromioplasty
+T5	Qualifier 64 75	day surgery
+T6	Procedure 32 35	ISB
+T7	Procedure 40 58	general anesthesia
+T8	Scope 0 10;11 58	Age 18-65
+ scheduled to receive ISB and general anesthesia
+T9	Scope 88 125	rotator cuff repair and acromioplasty
+R2	Has_qualifier Arg1:T9 Arg2:T5	
+T10	Scope 32 58	ISB and general anesthesia
+R3	Has_scope Arg1:T9 Arg2:T10	

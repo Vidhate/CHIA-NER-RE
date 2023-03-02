@@ -1,0 +1,23 @@
+T1	Negation 6 13	without
+T2	Condition 14 18	PCOS
+T3	Qualifier 37 55	Rotterdam criteria
+R1	Has_qualifier Arg1:T2 Arg2:T3	
+R2	Has_negation Arg1:T2 Arg2:T1	
+T4	Multiplier 70 80	at least 2
+T5	Qualifier 81 94	cryopreserved
+T6	Qualifier 95 107	good quality
+T7	Observation 108 129	cleavage-stage embryo
+R3	Has_qualifier Arg1:T7 Arg2:T6	
+R4	Has_qualifier Arg1:T7 Arg2:T5	
+R5	Has_multiplier Arg1:T7 Arg2:T4	
+T8	Qualifier 131 143	good quality
+T9	Observation 144 166	cleavage-stage embryos
+R6	Has_qualifier Arg1:T9 Arg2:T8	
+T10	Qualifier 175 203	stage-specific cell division
+T11	Qualifier 205 242	have blastomeres of fairly equal size
+T12	Qualifier 248 279	few to no cytoplasmic fragments
+T13	Scope 175 279	stage-specific cell division, have blastomeres of fairly equal size with few to no cytoplasmic fragments
+R7	Has_scope Arg1:T9 Arg2:T13	
+T14	Scope 131 279	good quality cleavage-stage embryos display stage-specific cell division, have blastomeres of fairly equal size with few to no cytoplasmic fragments
+T15	Scope 95 129	good quality cleavage-stage embryo
+R8	Subsumes Arg1:T15 Arg2:T14	

@@ -1,0 +1,33 @@
+T1	Condition 4 20	contraindication
+T2	Drug 24 44	neuraxial anesthesia
+T3	Observation 46 53	history
+T4	Condition 57 75	neurologic disease
+T5	Condition 83 101	multiple sclerosis
+T6	Condition 103 118	spinal stenosis
+T7	Condition 120 127;142 152	central neuropathy
+T8	Condition 131 152	peripheral neuropathy
+*	OR T8 T7 T6 T5
+T9	Scope 83 152	multiple sclerosis, spinal stenosis, central or peripheral neuropathy
+R1	Subsumes Arg1:T4 Arg2:T9	
+R2	Has_temporal Arg1:T4 Arg2:T3	
+T10	Scope 46 152	history of neurologic disease (e.g., multiple sclerosis, spinal stenosis, central or peripheral neuropathy
+R3	AND Arg1:T1 Arg2:T2	
+T11	Scope 4 44	contraindication to neuraxial anesthesia
+R4	Subsumes Arg1:T11 Arg2:T10	
+T12	Qualifier 168 175	chronic
+T13	Temporal 155 167	Pre-existing
+T14	Condition 176 185	back pain
+*	OR T12 T13
+T15	Scope 155 175	Pre-existing/chronic
+R5	Has_scope Arg1:T14 Arg2:T15	
+T16	Drug 187 209	Ester local anesthetic
+T17	Condition 210 217	allergy
+T18	Drug 219 223	PABA
+T19	Condition 224 231	allergy
+R6	AND Arg1:T19 Arg2:T18	
+R7	AND Arg1:T17 Arg2:T16	
+*	OR T17 T19
+T20	Observation 233 240	History
+T21	Drug 244 267	atypical cholinesterase
+T22	Non-representable 269 304	CP is metabolized by cholinesterase
+R8	Has_temporal Arg1:T21 Arg2:T20	

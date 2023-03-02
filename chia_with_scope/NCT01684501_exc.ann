@@ -1,0 +1,34 @@
+T1	Measurement 21 41	SIGAM mobility grade
+T2	Value 6 13	level D
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Multiplier 60 69	1 or more
+T4	Observation 70 75	falls
+R2	Has_multiplier Arg1:T4 Arg2:T3	
+T5	Temporal 76 110	in the last month before the study
+T6	Reference_point 83 110	last month before the study
+R3	Has_index Arg1:T5 Arg2:T6	
+R4	Has_temporal Arg1:T4 Arg2:T5	
+T7	Measurement 119 139	residual limb length
+T8	Value 146 209	does not allow for seven inches clearance of bracket attachment
+R5	Has_value Arg1:T7 Arg2:T8	
+T9	Negation 146 154	does not
+T10	Non-query-able 229 366	the residual limb must be stable in volume (no change in socket or socket padding in last 6 months) and without pain that limits function
+T11	Condition 431 459	impediments that affect gait
+T12	Condition 431 454;461 476	impediments that affect range of motion
+T13	Condition 431 454;481 501	impediments that affect limb muscle activity
+*	OR T13 T12 T11
+T14	Observation 399 414	lower extremity
+T15	Scope 431 501	impediments that affect gait, range of motion, or limb muscle activity
+T16	Negation 423 427	free
+R6	Has_negation Arg1:T15 Arg2:T16	
+R7	Has_context Arg1:T15 Arg2:T14	
+T17	Condition 517 531;577 587	cardiovascular conditions
+T18	Condition 533 542;577 587	pulmonary conditions
+T19	Condition 544 556;577 587	neurological conditions
+T20	Condition 566 587	orthopedic conditions
+*	OR T17 T18 T19 T20
+T21	Scope 517 587	cardiovascular, pulmonary, neurological, and/ or orthopedic conditions
+T22	Qualifier 599 635	interfere with subject participation
+R8	Has_qualifier Arg1:T21 Arg2:T22	
+T23	Undefined_semantics 599 635	interfere with subject participation
+T24	Subjective_judgement 599 635	interfere with subject participation

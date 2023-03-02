@@ -1,0 +1,114 @@
+T1	Person 0 5	Women
+T2	Condition 9 32	child-bearing potential
+T3	Condition 42 71	biologically able to conceive
+T4	Multiplier 87 90	two
+T5	Device 100 130	highly effective contraception
+T6	Condition 142 150	pregnant
+T7	Negation 73 76	not
+R1	Has_negation Arg1:T5 Arg2:T7	
+R2	Has_multiplier Arg1:T5 Arg2:T4	
+T8	Scope 0 71	Women of child-bearing potential, who are biologically able to conceive
+A1	Optional T8
+*	OR T5 T6
+T9	Scope 73 150	not employing two forms of highly effective contraception or who are pregnant
+R3	Has_scope Arg1:T8 Arg2:T9	
+T10	Person 153 158	Women
+T11	Condition 167 181	breast-feeding
+T12	Person 191 196	males
+T13	Condition 183 190	Fertile
+T14	Observation 197 227	unwilling to use contraception
+T15	Non-query-able 183 227	Fertile males unwilling to use contraception
+T16	Post-eligibility 183 227	Fertile males unwilling to use contraception
+T17	Condition 243 259	brain metastases
+T18	Condition 278 294	brain metastases
+T19	Observation 267 274	history
+R4	Has_temporal Arg1:T18 Arg2:T19	
+*	OR T18 T17
+T20	Procedure 324 337	major surgery
+T21	Procedure 345 359	intra-thoracic
+T22	Procedure 345 350;361 371	intra -abdominal
+T23	Procedure 345 350;376 383	intra -pelvic
+*	OR T23 T22 T21
+T24	Scope 345 383	intra-thoracic, -abdominal, or -pelvic
+R5	Subsumes Arg1:T20 Arg2:T24	
+T25	Subjective_judgement 324 337	major surgery
+T26	Value 385 430	</= 4 weeks prior to starting study treatment
+T27	Reference_point 406 430	starting study treatment
+R6	Has_index Arg1:T26 Arg2:T27	
+T28	Undefined_semantics 447 474	recovered from such therapy
+T29	Subjective_judgement 447 474	recovered from such therapy
+R7	Has_value Arg1:T20 Arg2:T26	
+T30	Condition 503 521	pulmonary embolism
+T31	Condition 536 556	deep vein thrombosis
+T32	Qualifier 526 535	untreated
+T33	Temporal 557 581	within the past 6 months
+*	OR T31 T30
+R8	Has_qualifier Arg1:T31 Arg2:T32	
+T34	Observation 492 499	history
+T35	Scope 503 556	pulmonary embolism, or untreated deep vein thrombosis
+R9	Has_temporal Arg1:T35 Arg2:T34	
+R10	Has_temporal Arg1:T35 Arg2:T33	
+T36	Condition 583 627	Impairment of gastrointestinal (GI) function
+T37	Condition 631 641	GI disease
+T38	Qualifier 647 698	may significantly alter the absorption of dovitinib
+T39	Undefined_semantics 647 698	may significantly alter the absorption of dovitinib
+*	OR T37 T36
+T40	Scope 583 641	Impairment of gastrointestinal (GI) function or GI disease
+R11	Has_qualifier Arg1:T40 Arg2:T38	
+T41	Condition 728 745	active malignancy
+T42	Temporal 746 769	within the past 5 years
+T43	Condition 781 804	cervical cancer in situ
+T44	Negation 770 776	except
+R13	Has_temporal Arg1:T41 Arg2:T42	
+T45	Condition 806 838	in situ carcinoma of the bladder
+T46	Condition 842 876	non-melanoma carcinoma of the skin
+*	OR T45 T46 T43
+T47	Scope 781 876	cervical cancer in situ, in situ carcinoma of the bladder or non-melanoma carcinoma of the skin
+R12	Has_negation Arg1:T47 Arg2:T44	
+R14	Has_scope Arg1:T41 Arg2:T47	
+T48	Procedure 936 954	anticancer therapy
+T49	Procedure 965 977	chemotherapy
+T50	Procedure 979 992	immunotherapy
+T51	Procedure 994 1010	hormonal therapy
+T52	Drug 1015 1036	monoclonal antibodies
+T53	Temporal 1037 1081	</= 2 weeks prior to starting the study drug
+T54	Reference_point 1058 1081	starting the study drug
+R15	Has_index Arg1:T53 Arg2:T54	
+T55	Condition 1099 1146	recovered from the side effects of such therapy
+T56	Negation 443 446	not
+T57	Condition 447 474	recovered from such therapy
+R16	Has_negation Arg1:T57 Arg2:T56	
+*	OR T57 T20
+*	OR T49 T50 T51 T52
+T58	Scope 965 1036	chemotherapy, immunotherapy, hormonal therapy and monoclonal antibodies
+R17	Subsumes Arg1:T48 Arg2:T58	
+R18	Has_temporal Arg1:T48 Arg2:T53	
+*	OR T48 T55
+T59	Condition 1148 1157	Cirrhosis
+T60	Condition 1159 1183	chronic active hepatitis
+T61	Condition 1187 1215	chronic persistent hepatitis
+*	OR T61 T60 T59
+T62	Drug 1254 1263	prasugrel
+T63	Drug 1286 1295	isoniazid
+T64	Drug 1297 1306	labetolol
+T65	Drug 1308 1321	trovafloxacin
+T66	Drug 1323 1332	tolcapone
+T67	Drug 1338 1347	felbamate
+*	OR T63 T64 T65 T66 T67
+T68	Negation 1265 1267	No
+T69	Scope 1286 1347	isoniazid, labetolol, trovafloxacin, tolcapone, and felbamate
+R19	Has_negation Arg1:T69 Arg2:T68	
+T70	Negation 1349 1351	No
+T71	Drug 1370 1397	other investigational drugs
+T72	Procedure 1401 1425	antineoplastic therapies
+*	OR T72 T71
+T73	Undefined_semantics 1370 1397	other investigational drugs
+T74	Scope 1370 1425	other investigational drugs or antineoplastic therapies
+R20	Has_negation Arg1:T74 Arg2:T70	
+T75	Condition 1442 1467	impaired cardiac function
+T76	Qualifier 1471 1493	clinically significant
+T77	Condition 1494 1510	cardiac diseases
+T78	Subjective_judgement 1471 1493	clinically significant
+R21	Has_qualifier Arg1:T77 Arg2:T76	
+*	OR T77 T75
+T79	Undefined_semantics 1442 1467	impaired cardiac function

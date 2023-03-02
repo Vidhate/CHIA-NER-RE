@@ -1,0 +1,34 @@
+T1	Condition 13 30	diabetes mellitus
+T2	Qualifier 44 78	World Health Organization criteria
+R1	Has_qualifier Arg1:T1 Arg2:T2	
+T3	Drug 96 103	insulin
+T4	Procedure 81 90	treatment
+T5	Drug 110 133	oral hypoglycemic agent
+T6	Multiplier 135 140	twice
+T7	Measurement 141 168	random glucose measurements
+T8	Value 169 189	major than 200 mg/dl
+T9	Measurement 196 211	fasting glucose
+T10	Value 212 232	major than 140 mg/dl
+R2	Has_value Arg1:T9 Arg2:T10	
+R3	Has_multiplier Arg1:T7 Arg2:T6	
+R4	Has_value Arg1:T7 Arg2:T8	
+*	OR T7 T9 T4
+*	OR T3 T5
+T11	Scope 96 133	insulin or an oral hypoglycemic agent
+R5	Has_scope Arg1:T4 Arg2:T11	
+T12	Scope 81 232	treatment with insulin or an oral hypoglycemic agent, twice random glucose measurements major than 200 mg/dl, or a fasting glucose major than 140 mg/dl
+T13	Scope 13 78	diabetes mellitus according to World Health Organization criteria
+R6	Subsumes Arg1:T13 Arg2:T12	
+T14	Condition 235 240	Ulcer
+T15	Qualifier 256 260	legs
+T16	Qualifier 264 268	feet
+T17	Measurement 270 275	stage
+T18	Value 276 285	III or IV
+R7	Has_value Arg1:T17 Arg2:T18	
+T19	Qualifier 287 315	Wagner Classification System
+R8	Has_qualifier Arg1:T17 Arg2:T19	
+*	OR T15 T16
+T20	Scope 256 268	legs or feet
+R9	Has_scope Arg1:T14 Arg2:T20	
+*	OR T14 T17
+T21	Informed_consent 318 416	The subject agrees to comply with study protocol requirements and all follow up visit requirements

@@ -1,0 +1,47 @@
+T1	Procedure 33 45	chemotherapy
+T2	Condition 50 70	unresectable disease
+R1	AND Arg1:T1 Arg2:T2	
+T3	Qualifier 100 112	uncontrolled
+T4	Qualifier 90 96	active
+T5	Condition 113 122	infection
+T6	Scope 90 112	active or uncontrolled
+R2	Has_scope Arg1:T5 Arg2:T6	
+T7	Procedure 140 153	HIV infection
+R3	Subsumes Arg1:T5 Arg2:T7	
+T8	Condition 177 188	hepatitis B
+T9	Qualifier 170 176	active
+R4	Has_qualifier Arg1:T8 Arg2:T9	
+T10	Scope 170 188	active hepatitis B
+A1	Optional T10
+T11	Drug 207 217	lamivudine
+R5	AND Arg1:T10 Arg2:T11	
+T12	Condition 240 251	hepatitis C
+T13	Qualifier 233 239	active
+R6	Has_qualifier Arg1:T12 Arg2:T13	
+T14	Scope 233 251	active hepatitis C
+A2	Optional T14
+T15	Measurement 272 283	liver tests
+T16	Value 284 291	qualify
+R7	Has_value Arg1:T15 Arg2:T16	
+R8	AND Arg1:T14 Arg2:T15	
+T17	Condition 315 336	psychiatric disorders
+T18	Qualifier 348 370	interfere with consent
+T19	Qualifier 348 362;374 383	interfere with follow-up
+*	OR T18 T19
+R9	Has_qualifier Arg1:T17 Arg2:T19	
+T20	Condition 385 393	Pregnant
+T21	Condition 397 406	lactating
+T22	Person 407 412	women
+*	OR T20 T21
+T23	Condition 431 453	reproductive potential
+A3	Optional T23
+T24	Procedure 508 538	effective contraceptive method
+R10	AND Arg1:T23 Arg2:T24	
+T25	Qualifier 565 571	severe
+T26	Condition 572 590	concurrent disease
+R11	Has_qualifier Arg1:T26 Arg2:T25	
+T27	Non-query-able 592 634	which in the judgment of the investigator,
+T28	Observation 676 697	entry into this study
+T29	Mood 658 675	inappropriate for
+R12	Has_mood Arg1:T28 Arg2:T29	
+R13	Has_context Arg1:T26 Arg2:T28	

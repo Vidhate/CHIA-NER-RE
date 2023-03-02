@@ -1,0 +1,47 @@
+T1	Condition 0 30	Paroxysmal atrial fibrillation
+T2	Condition 71 90	atrial fibrillation
+T3	Qualifier 47 57	persistent
+T4	Qualifier 61 70	permanent
+*	OR T4 T3
+T5	Scope 47 70	persistent or permanent
+R1	Has_scope Arg1:T2 Arg2:T5	
+T6	Device 102 124	pacemaker implantation
+T7	Procedure 136 151	atrial ablation
+T8	Mood 165 179	unable to take
+T9	Drug 180 188	warfarin
+T10	Drug 198 228	oral anti-coagulant medication
+*	OR T9 T10
+T11	Scope 180 228	warfarin or other oral anti-coagulant medication
+R2	Has_mood Arg1:T11 Arg2:T8	
+T12	Condition 257 272	unstable angina
+T13	Temporal 276 289	last one week
+R3	Has_temporal Arg1:T12 Arg2:T13	
+T14	Condition 310 331	myocardial infarction
+T15	Temporal 339 354	last two months
+R4	Has_temporal Arg1:T14 Arg2:T15	
+T16	Procedure 389 410	major cardiac surgery
+T17	Temporal 418 433	last two months
+R5	Has_temporal Arg1:T16 Arg2:T17	
+T18	Competing_trial 436 483	Patient is participating in a conflicting study
+T19	Post-eligibility 486 531	Patient is unable to perform exercise testing
+T20	Post-eligibility 534 611	Patient is mentally incapacitated and cannot consent or comply with follow-up
+T21	Measurement 626 652	New York Heart Association
+T22	Measurement 654 658	NYHA
+T23	Value 660 672	class III/IV
+R6	Subsumes Arg1:T21 Arg2:T22	
+R7	Has_value Arg1:T21 Arg2:T23	
+T24	Condition 673 686	heart failure
+R8	AND Arg1:T24 Arg2:T21	
+T25	Measurement 701 735	left ventricular ejection fraction
+T26	Measurement 737 741	LVEF
+R9	Subsumes Arg1:T25 Arg2:T26	
+T27	Value 743 756	less than 35%
+R10	Has_value Arg1:T25 Arg2:T27	
+T28	Mood 757 773	not secondary to
+T29	Condition 774 785	tachycardia
+R11	Has_mood Arg1:T29 Arg2:T28	
+T30	Condition 788 797	Pregnancy
+T31	Condition 827 851	cardiac rhythm disorders
+T32	Qualifier 821 826	other
+R12	Has_qualifier Arg1:T31 Arg2:T32	
+T33	Procedure 861 889	coronary artery intervention

@@ -1,0 +1,60 @@
+T1	Procedure 16 40	cardiovascular procedure
+T2	Procedure 44 48	CABG
+T3	Temporal 4 15	concomitant
+R1	Has_temporal Arg1:T1 Arg2:T3	
+R2	Has_temporal Arg1:T2 Arg2:T3	
+T4	Procedure 72 87	carotid surgery
+T5	Procedure 62 68;80 87	aortic surgery
+T6	Procedure 55 60;80 87	valve surgery
+*	OR T6 T5 T4
+T7	Scope 55 87	valve, aortic or carotid surgery
+R3	Subsumes Arg1:T1 Arg2:T7	
+T8	Condition 90 138	Acute ST-segment-elevation myocardial infarction
+T9	Condition 140 145	STEMI
+R4	Subsumes Arg1:T8 Arg2:T9	
+T10	Condition 148 156	NSTE-ACS
+T11	Condition 162 179	cardiogenic shock
+T12	Procedure 200 215	salvage surgery
+T13	Mood 180 190	warranting
+R5	Has_mood Arg1:T12 Arg2:T13	
+T14	Temporal 216 253	within 12 hrs from hospital admission
+T15	Reference_point 235 253	hospital admission
+R6	Has_index Arg1:T14 Arg2:T15	
+T16	Scope 148 179	NSTE-ACS with cardiogenic shock
+R7	AND Arg1:T16 Arg2:T12	
+R8	Has_temporal Arg1:T16 Arg2:T14	
+T17	Condition 266 285	atrial fibrillation
+T18	Condition 289 303	muscle disease
+T19	Condition 305 313	myopathy
+R9	Subsumes Arg1:T18 Arg2:T19	
+*	OR T17 T18
+T20	Measurement 331 341	creatinine
+T21	Value 341 372	>2x upper limit of normal (ULN)
+R10	Has_value Arg1:T20 Arg2:T21	
+T22	Procedure 374 382	dialysis
+T23	Procedure 384 401	kidney transplant
+*	OR T22 T23 T20
+T24	Scope 331 401	creatinine>2x upper limit of normal (ULN), dialysis, kidney transplant
+T25	Condition 324 329;414 425	renal dysfunction
+T26	Condition 406 425	hepatic dysfunction
+*	OR T26 T25
+T27	Measurement 427 430	AST
+T28	Measurement 431 434	ALT
+T29	Value 434 441	>2x ULN
+*	OR T27 T28
+R11	Has_value Arg1:T28 Arg2:T29	
+R12	Has_value Arg1:T27 Arg2:T29	
+T30	Procedure 443 459	liver transplant
+T31	Condition 463 471	neoplasm
+*	OR T30 T31 T32
+T32	Scope 427 441	AST/ALT>2x ULN
+T33	Scope 427 471	AST/ALT>2x ULN, liver transplant or neoplasm
+R13	Subsumes Arg1:T26 Arg2:T33	
+R14	Subsumes Arg1:T25 Arg2:T24	
+T34	Mood 474 486	Inability of
+T35	Drug 487 496	oral drug
+T36	Observation 487 503	oral drug intake
+R15	multi Arg1:T36 Arg2:T35	
+T37	Negation 474 483	Inability
+R16	multi Arg1:T34 Arg2:T37	
+R17	Has_mood Arg1:T36 Arg2:T34	

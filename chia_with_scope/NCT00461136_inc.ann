@@ -1,0 +1,82 @@
+T1	Value 33 44	30-80 years
+T3	Condition 72 87	Type 2 diabetes
+T4	Condition 131 151	diabetic nephropathy
+T7	Value 196 209	≤ 2000 mg/day
+T2	Person 45 51	of age
+R1	Has_value Arg1:T2 Arg2:T1	
+T5	Value 179 191	≥ 100 mg/day
+T6	Measurement 153 178	urinary albumin excretion
+R2	Has_value Arg1:T6 Arg2:T5	
+T8	Scope 153 209	urinary albumin excretion ≥ 100 mg/day but ≤ 2000 mg/day
+R4	Subsumes Arg1:T4 Arg2:T8	
+T9	Measurement 213 245	Glomerular filtration rate (GFR)
+T10	Value 246 257	≥ 40 ml/min
+R5	Has_value Arg1:T9 Arg2:T10	
+T11	Qualifier 275 327	Modification of Diet in Renal Disease (MDRD) formula
+R6	Has_qualifier Arg1:T9 Arg2:T11	
+T12	Temporal 329 349	in the last 4 months
+R7	Has_temporal Arg1:T9 Arg2:T12	
+T13	Person 352 358	Female
+A1	Optional T13
+T14	Condition 376 390	postmenopausal
+T15	Procedure 410 432	bilateral oophorectomy
+T16	Procedure 451 472	surgically sterilized
+T17	Procedure 476 491	hysterectomized
+R9	OR Arg1:T16 Arg2:T17	
+T18	Temporal 492 528	at least 6 months prior to screening
+T19	Scope 451 491	surgically sterilized or hysterectomized
+R10	Has_temporal Arg1:T19 Arg2:T18	
+R11	OR Arg1:T15 Arg2:T19	
+R8	OR Arg1:T14 Arg2:T15	
+T20	Scope 376 528	postmenopausal or must have had a bilateral oophorectomy or must have been surgically sterilized or hysterectomized at least 6 months prior to screening
+R12	Has_scope Arg1:T13 Arg2:T20	
+T21	Procedure 612 632	hypertensive therapy
+A2	Optional T21
+T22	Measurement 645 659	blood pressure
+T23	Value 660 674	≥ 135/85 mm Hg
+T24	Value 679 703	lower than 170/105 mm Hg
+T25	Scope 660 703	≥ 135/85 mm Hg but lower than 170/105 mm Hg
+R14	AND Arg1:T21 Arg2:T22	
+R15	Has_scope Arg1:T22 Arg2:T25	
+T26	Drug 756 784	antihypertensive medications
+T27	Qualifier 749 755	stable
+R16	Has_qualifier Arg1:T26 Arg2:T27	
+T28	Temporal 789 823	at least 8 weeks prior to baseline
+R17	Has_temporal Arg1:T26 Arg2:T28	
+T29	Qualifier 835 850	Newly diagnosed
+T30	Condition 851 872	hypertensive patients
+T31	Measurement 885 899	blood pressure
+T32	Value 900 914	≥ 135/85 mm Hg
+T33	Value 919 943	lower than 170/105 mm Hg
+T34	Scope 900 943	≥ 135/85 mm Hg but lower than 170/105 mm Hg
+R19	Has_scope Arg1:T31 Arg2:T34	
+R20	Has_qualifier Arg1:T30 Arg2:T29	
+A3	Optional T29
+A4	Optional T30
+T35	Drug 994 1018	hypoglycemic medications
+T36	Temporal 1023 1056	at least 8 weeks prior to Visit 2
+R21	Has_temporal Arg1:T35 Arg2:T36	
+T37	Qualifier 987 993	stable
+R22	Has_qualifier Arg1:T35 Arg2:T37	
+T38	Non-query-able 1069 1321	Patients must be willing and medically able to discontinue all Angiotensin-converting enzyme inhibitor (ACEI), Angiotensin receptor blocker (ARB), aldosterone receptor antagonist and potassium sparing diuretic medications for the duration of the study.
+T39	Measurement 1323 1344	Oral body temperature
+T40	Value 1362 1374	35.0-37.5 °C
+R23	Has_value Arg1:T39 Arg2:T40	
+R3	Has_value Arg1:T6 Arg2:T7	
+T43	Scope 835 872	Newly diagnosed hypertensive patients
+R13	AND Arg1:T43 Arg2:T31	
+T44	Temporal 944 964	at baseline (Day -1)
+T45	Reference_point 947 964	baseline (Day -1)
+R18	Has_index Arg1:T44 Arg2:T45	
+R24	Has_temporal Arg1:T31 Arg2:T44	
+T46	Reference_point 815 823	baseline
+R25	Has_index Arg1:T28 Arg2:T46	
+T47	Reference_point 1049 1056	Visit 2
+R26	Has_index Arg1:T36 Arg2:T47	
+T41	Observation 1392 1416	written informed consent
+T48	Temporal 1417 1445	prior to study participation
+T49	Reference_point 1426 1445	study participation
+R27	Has_index Arg1:T48 Arg2:T49	
+R28	Has_temporal Arg1:T41 Arg2:T48	
+T42	Observation 1450 1474	Able to communicate well
+T50	Observation 1501 1542	comply with the requirements of the study

@@ -1,0 +1,47 @@
+T1	Person 0 4	Male
+T2	Person 8 14	female
+T3	Value 24 43	= 18 and = 85 years
+T4	Person 47 50	age
+R1	Has_value Arg1:T4 Arg2:T3	
+*	OR T2 T1
+T5	Person 52 57	Women
+T6	Condition 61 84	child bearing potential
+T7	Measurement 107 130	standard pregnancy test
+T8	Value 95 103	negative
+T9	Measurement 132 137	urine
+T10	Measurement 141 146	serum
+*	OR T10 T9
+T11	Scope 132 146	urine or serum
+R2	Subsumes Arg1:T7 Arg2:T11	
+R3	Has_value Arg1:T7 Arg2:T8	
+T12	Scope 52 84	Women of child bearing potential
+A1	Optional T12
+R4	AND Arg1:T12 Arg2:T7	
+T13	Measurement 163 174	body weight
+T14	Value 175 195	= 55 kg and = 140 kg
+R5	Has_value Arg1:T13 Arg2:T14	
+T15	Measurement 200 221	body mass index (BMI)
+T16	Value 222 232	= 18 kg/m2
+R6	Has_value Arg1:T15 Arg2:T16	
+T17	Condition 253 266	severe sepsis
+T18	Condition 269 281	septic shock
+*	OR T18 T17
+T19	Temporal 282 317	at admission on Intensive Care Unit
+R7	Has_temporal Arg1:T18 Arg2:T19	
+R8	Has_temporal Arg1:T17 Arg2:T19	
+T20	Reference_point 285 317	admission on Intensive Care Unit
+R9	Has_index Arg1:T19 Arg2:T20	
+T21	Non-representable 326 367	be enrolled within 90 min after admission
+T22	Drug 517 535	antibiotic therapy
+T23	Temporal 562 584	prior to randomization
+T24	Reference_point 571 584	randomization
+R10	Has_index Arg1:T23 Arg2:T24	
+R11	Has_temporal Arg1:T22 Arg2:T23	
+T25	Condition 603 619	fluid responsive
+T26	Measurement 677 705	mean arterial pressure (MAP)
+T27	Qualifier 706 737	after passive leg raising (PLR)
+R12	Has_qualifier Arg1:T26 Arg2:T27	
+T28	Value 668 673	> 10%
+R13	Has_value Arg1:T26 Arg2:T28	
+R14	Subsumes Arg1:T25 Arg2:T26	
+T29	Post-eligibility 739 836	Signed informed consent by patient, legal representative or authorized person or deferred consent

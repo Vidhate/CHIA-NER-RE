@@ -1,0 +1,29 @@
+T1	Drug 11 24	ascorbic acid
+T2	Condition 0 7	Allergy
+R1	AND Arg1:T2 Arg2:T1	
+T3	Condition 26 32	Asthma
+T4	Condition 34 38	COPD
+T5	Condition 40 47	Allergy
+T6	Drug 51 58	opioids
+R2	AND Arg1:T5 Arg2:T6	
+T7	Condition 80 99	chemical dependence
+T8	Observation 69 76	history
+T9	Temporal 60 68	Previous
+R3	Has_temporal Arg1:T7 Arg2:T8	
+R4	Has_temporal Arg1:T7 Arg2:T9	
+T10	Procedure 107 122	cardiac surgery
+T11	Temporal 101 106	Prior
+R5	Has_temporal Arg1:T10 Arg2:T11	
+T12	Condition 130 143	hyperoxaluria
+T13	Condition 156 169	renal calculi
+T14	Observation 145 152	History
+R6	Has_temporal Arg1:T13 Arg2:T14	
+T15	Condition 182 190	allergic
+T16	Condition 194 210	hypersensitivity
+T17	Drug 223 236	ascorbic acid
+*	OR T15 T16
+T18	Scope 182 210	allergic or hypersensitivity
+R7	AND Arg1:T18 Arg2:T17	
+T19	Multiplier 264 275	1 g or more
+T20	Drug 279 292	ascorbic acid
+R8	Has_multiplier Arg1:T20 Arg2:T19	

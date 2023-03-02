@@ -1,0 +1,81 @@
+T1	Procedure 0 12	immunization
+T2	Drug 18 23	PPV23
+T3	Temporal 24 44	within the last year
+R1	AND Arg1:T1 Arg2:T2	
+T4	Condition 73 99	immunodeficiency condition
+T5	Qualifier 63 72	suspected
+T6	Qualifier 50 59	confirmed
+T7	Condition 111 139;146 155	human immunodeficiency virus infection
+T8	Condition 141 144	HIV
+R2	Subsumes Arg1:T7 Arg2:T8	
+T9	Condition 157 182	haematological malignancy
+T10	Condition 189 216	congenital immunodeficiency
+*	OR T9 T10 T7
+T11	Scope 111 216	human immunodeficiency virus (HIV) infection, haematological malignancy, or a congenital immunodeficiency
+R3	Subsumes Arg1:T4 Arg2:T11	
+T12	Scope 50 72	confirmed or suspected
+R4	Has_scope Arg1:T4 Arg2:T12	
+T13	Condition 229 245	allergic disease
+T14	Condition 229 237;249 258	allergic reactions
+*	OR T13 T14
+T15	Scope 229 258	allergic disease or reactions
+T16	Qualifier 272 315	exacerbated by any component of the vaccine
+T17	Procedure 308 315	vaccine
+R5	multi Arg1:T16 Arg2:T17	
+R6	Has_qualifier Arg1:T15 Arg2:T16	
+T18	Condition 328 344	allergic disease
+T19	Qualifier 358 387	stimulated by the vaccination
+T20	Procedure 376 387	vaccination
+R7	multi Arg1:T19 Arg2:T20	
+R8	Has_qualifier Arg1:T18 Arg2:T19	
+T21	Procedure 411 436	immunosuppressive therapy
+T22	Procedure 460 483	topical corticosteroids
+T23	Negation 447 456	exception
+R9	Has_negation Arg1:T22 Arg2:T23	
+T24	Temporal 485 506;527 541	for more than 14 days of vaccination
+T25	Temporal 511 541	within 6 months of vaccination
+T26	Scope 485 541	for more than 14 days and within 6 months of vaccination
+R10	Has_scope Arg1:T21 Arg2:T26	
+T27	Reference_point 530 541	vaccination
+R11	Has_index Arg1:T25 Arg2:T27	
+R12	Has_index Arg1:T24 Arg2:T27	
+R13	Has_scope Arg1:T22 Arg2:T26	
+T28	Procedure 584 599	immunoglobulins
+T29	Procedure 611 625	blood products
+T30	Temporal 626 649	during the study period
+T31	Temporal 653 704	within the three months preceding the study vaccine
+T32	Reference_point 637 649	study period
+T33	Reference_point 691 704	study vaccine
+R14	Has_index Arg1:T30 Arg2:T32	
+R15	Has_index Arg1:T31 Arg2:T33	
+*	OR T30 T31
+*	OR T28 T29
+T34	Grammar_Error 600 606	and/or
+T35	Scope 584 625	immunoglobulins and/or any blood products
+T36	Scope 626 704	during the study period or within the three months preceding the study vaccine
+R16	Has_scope Arg1:T35 Arg2:T36	
+T37	Procedure 765 772	vaccine
+T38	Procedure 757 761	drug
+T39	Qualifier 723 738	investigational
+T40	Qualifier 742 756	non-registered
+*	OR T39 T40
+*	OR T38 T37
+T41	Scope 757 772	drug or vaccine
+T42	Scope 723 756	investigational or non-registered
+R17	Has_scope Arg1:T41 Arg2:T42	
+T43	Temporal 773 796	during the study period
+T44	Temporal 800 842	within 30 days preceding the study vaccine
+T45	Reference_point 784 796	study period
+T46	Reference_point 829 842	study vaccine
+R18	Has_index Arg1:T43 Arg2:T45	
+R19	Has_index Arg1:T44 Arg2:T46	
+*	OR T43 T44
+T47	Scope 773 842	during the study period or within 30 days preceding the study vaccine
+R20	Has_scope Arg1:T41 Arg2:T47	
+T48	Procedure 864 871	vaccine
+T49	Temporal 872 962	during the period starting one month before the dose of vaccine and ending one month after
+T51	Reference_point 916 935	the dose of vaccine
+T52	Procedure 928 935	vaccine
+R21	Has_index Arg1:T49 Arg2:T51	
+R22	multi Arg1:T51 Arg2:T52	
+T50	Condition 964 973	pregnancy

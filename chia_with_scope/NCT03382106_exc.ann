@@ -1,0 +1,56 @@
+T1	Person 0 5	Women
+T2	Pregnancy_considerations 12 111	Cannot be pregnant or nursing at baseline or plan to become pregnant during the course of the study
+A1	Optional T1
+R1	AND Arg1:T1 Arg2:T2	
+T3	Measurement 113 134	Body Mass Index (BMI)
+T4	Value 135 139	> 32
+R2	Has_value Arg1:T3 Arg2:T4	
+T5	Measurement 141 147	Weight
+T6	Value 148 160	> 220 pounds
+R3	Has_value Arg1:T5 Arg2:T6	
+T7	Condition 162 171	Allergies
+T8	Observation 175 185	shell fish
+T9	Observation 187 194	seafood
+T10	Observation 196 200	eggs
+T11	Drug 204 210	iodine
+*	OR T10 T11 T9 T8
+T12	Scope 175 210	shell fish, seafood, eggs or iodine
+R4	Has_scope Arg1:T7 Arg2:T12	
+T13	Condition 212 225	Heart disease
+T14	Condition 227 241	kidney disease
+T15	Condition 245 253	diabetes
+*	OR T15 T14 T13
+T16	Condition 268 274	asthma
+T17	Device 280 288;295 303	metal in the body
+T18	Device 280 285;292 303	metal on the body
+*	OR T17 T18
+T19	Qualifier 329 361	between the nose and the abdomen
+T20	Scope 280 303	metal in or on the body
+R5	Has_qualifier Arg1:T20 Arg2:T19	
+T21	Condition 367 393	major organ system disease
+T22	Measurement 437 463	glomerular filtration rate
+T23	Value 467 491	60 cc per minute or less
+T24	Drug 494 507	Nitroglycerin
+T25	Drug 517 525	nitrates
+T26	Drug 537 574	phosphodiesterase 5 (PDE5) inhibitors
+R6	Has_value Arg1:T22 Arg2:T23	
+T27	Scope 517 574	nitrates and use of phosphodiesterase 5 (PDE5) inhibitors
+*	OR T27 T24
+T28	Condition 593 609	hypersensitivity
+T29	Drug 613 623	sildenafil
+R7	AND Arg1:T28 Arg2:T29	
+T30	Observation 576 589	Prior history
+R8	Has_temporal Arg1:T28 Arg2:T30	
+T31	Drug 648 682	phosphodiesterase (PDE) inhibitors
+T32	Drug 699 705	Viagra
+T33	Drug 707 713	Cialis
+*	OR T32 T33
+T34	Scope 699 713	Viagra, Cialis
+R9	Subsumes Arg1:T31 Arg2:T34	
+T35	Condition 727 749	Pulmonary Hypertension
+T36	Observation 755 772	used e-cigarettes
+T37	Observation 755 759;777 786	used marijuana
+T38	Temporal 787 795	<1 years
+*	OR T37 T36
+T39	Scope 755 786	used e-cigarettes and marijuana
+R10	Has_temporal Arg1:T39 Arg2:T38	

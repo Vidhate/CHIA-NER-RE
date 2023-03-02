@@ -1,0 +1,28 @@
+T1	Drug 20 29	B-lactams
+T2	Condition 0 16	Hypersensitivity
+R1	AND Arg1:T2 Arg2:T1	
+T3	Temporal 31 42	concomitant
+T4	Condition 43 50	disease
+R2	Has_temporal Arg1:T4 Arg2:T3	
+T5	Drug 78 89	antibiotics
+T6	Procedure 65 72	treated
+R3	AND Arg1:T6 Arg2:T5	
+R4	AND Arg1:T4 Arg2:T6	
+T7	Condition 107 124	Immunocompromised
+T8	Drug 126 137	Antibiotics
+T9	Temporal 138 149	within 72 h
+R5	Has_temporal Arg1:T8 Arg2:T9	
+T10	Condition 162 165	ARF
+T11	Observation 151 158	history
+T12	Condition 166 179	scarlet fever
+T13	Condition 180 188	impetigo
+T14	Condition 189 213	acute glomerulonephritis
+*	OR T13 T14 T12 T10
+T15	Scope 162 213	ARF,scarlet fever,impetigo,acute glomerulonephritis
+R6	Has_temporal Arg1:T15 Arg2:T11	
+T16	Condition 233 236	ARF
+T17	Observation 215 229	Family history
+R7	Has_context Arg1:T16 Arg2:T17	
+T18	Condition 250 261	pharyngitis
+T19	Qualifier 238 249	Complicated
+R8	Has_qualifier Arg1:T18 Arg2:T19	

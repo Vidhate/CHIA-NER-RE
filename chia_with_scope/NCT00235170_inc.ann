@@ -1,0 +1,90 @@
+T1	Measurement 25 56	Canadian Cardiovascular Society
+T2	Value 57 69	1, 2, 3 or 4
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Qualifier 17 23	stable
+R2	Subsumes Arg1:T3 Arg2:T1	
+T4	Qualifier 74 82	unstable
+T5	Measurement 84 99	Braunwald class
+T6	Value 100 102	IB
+R4	Subsumes Arg1:T4 Arg2:T5	
+T7	Condition 130 145	angina pectoris
+*	OR T3 T4
+R5	Has_qualifier Arg1:T7 Arg2:T3	
+T8	Condition 150 158	ischemia
+T9	Condition 177 196	atypical chest pain
+T10	Scope 17 158	stable (Canadian Cardiovascular Society 1, 2, 3 or 4) or unstable (Braunwald class IB, IC, IIB, IIC, IIIB, IIIC) angina pectoris and ischemia
+*	OR T9 T10
+T11	Condition 219 231	asymptomatic
+T12	Condition 262 282	myocardial ischaemia
+T13	Observation 251 261	documented
+R6	AND Arg1:T13 Arg2:T12	
+R7	Has_context Arg1:T11 Arg2:T13	
+T14	Procedure 289 312	treadmill exercise test
+T15	Procedure 314 339	radionuclide scintigraphy
+T16	Procedure 341 364	stress echocardiography
+T17	Procedure 366 377	Holter tape
+*	OR T16 T17 T15 T14
+T18	Scope 289 377	treadmill exercise test, radionuclide scintigraphy, stress echocardiography, Holter tape
+R8	Subsumes Arg1:T13 Arg2:T18	
+T19	Procedure 414 440	coronary revascularization
+T20	Mood 401 413	eligible for
+R9	Has_mood Arg1:T19 Arg2:T20	
+T21	Procedure 442 453	angioplasty
+T22	Procedure 457 461	CABG
+*	OR T21 T22
+T23	Scope 442 461	angioplasty or CABG
+R10	Subsumes Arg1:T19 Arg2:T23	
+T24	Value 468 478	At least 2
+T25	Condition 479 486	lesions
+R11	Has_value Arg1:T25 Arg2:T24	
+T26	Qualifier 488 516	located in different vessels
+T27	Qualifier 488 498;524 545	located in different territories
+T28	Scope 488 545	located in different vessels and in different territories
+R12	Has_scope Arg1:T25 Arg2:T28	
+T29	Procedure 571 589	stent implantation
+T30	Observation 547 567	potentially amenable
+R13	AND Arg1:T30 Arg2:T29	
+R14	Has_context Arg1:T25 Arg2:T30	
+T31	Condition 623 642	Multivessel disease
+T32	Value 648 660	at least one
+T33	Condition 661 688	significant stenosis in LAD
+T34	Procedure 698 721	treatment of the lesion
+R15	AND Arg1:T32 Arg2:T33	
+T35	Qualifier 722 765	in another major epicardial coronary artery
+R16	Has_qualifier Arg1:T34 Arg2:T35	
+T36	Condition 1364 1386	total occluded vessels
+T37	Temporal 1390 1406	unknown duration
+R17	Has_temporal Arg1:T36 Arg2:T37	
+T38	Temporal 1419 1440	longer than one month
+T39	Value 1457 1469	over 1.50 mm
+T40	Measurement 1447 1456	reference
+T41	Scope 1419 1469	longer than one month and a reference over 1.50 mm
+*	OR T37 T41
+T42	Measurement 1593 1601	stenosis
+T43	Value 1605 1638	more than 50% in luminal diameter
+R18	Has_value Arg1:T42 Arg2:T43	
+T44	Condition 1550 1570	Significant stenosis
+R19	Subsumes Arg1:T44 Arg2:T42	
+T45	Measurement 1714 1748	Left ventricular ejection fraction
+T46	Value 1759 1771	at least 30%
+R20	Has_value Arg1:T45 Arg2:T46	
+T47	Value 104 106	IC
+T48	Value 108 111	IIB
+T49	Value 113 116	IIC
+T50	Value 118 122	IIIB
+T51	Value 124 128	IIIC
+*	OR T51 T50 T49 T48 T47 T6
+T52	Scope 100 128	IB, IC, IIB, IIC, IIIB, IIIC
+R3	Has_scope Arg1:T5 Arg2:T52	
+T53	Qualifier 595 602	de novo
+T54	Condition 603 617	native vessels
+R21	Has_qualifier Arg1:T54 Arg2:T53	
+T55	Non-representable 767 1004	A two-vessel disease or a three-vessel disease may be viewed as a combination of a side branch and a main epicardial vessel provided they supply different territories; left anterior descending, left circumflex and right coronary artery);
+T56	Condition 1009 1031	Total occluded vessels
+T57	Multiplier 1033 1036	One
+T58	Condition 1037 1075	total occluded major epicardial vessel
+T59	Condition 1037 1051;1079 1090	total occluded side branch
+*	OR T59 T58
+T60	Scope 1037 1090	total occluded major epicardial vessel or side branch
+R22	Has_multiplier Arg1:T60 Arg2:T57	
+R23	Subsumes Arg1:T56 Arg2:T60	

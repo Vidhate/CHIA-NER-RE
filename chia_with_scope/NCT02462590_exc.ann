@@ -1,0 +1,118 @@
+T1	Procedure 11 34	mechanically ventilated
+T2	Temporal 35 44	>72 hours
+R1	Has_temporal Arg1:T1 Arg2:T2	
+T3	Observation 104 142	risk of iatrogenic probiotic infection
+T4	Condition 205 222	immunocompromised
+T5	Condition 236 239	HIV
+T6	Measurement 245 248	CD4
+T7	Value 240 244;249 257	<200 cells/µL
+R2	Has_value Arg1:T6 Arg2:T7	
+R3	AND Arg1:T5 Arg2:T6	
+T8	Procedure 283 312	immunosuppressive medications
+T9	Qualifier 275 282	chronic
+R4	Has_qualifier Arg1:T8 Arg2:T9	
+T10	Drug 320 332	azathioprine
+T11	Drug 334 346	cyclosporine
+T12	Drug 348 364	cyclophosphamide
+T13	Drug 366 376	tacrolimus
+T14	Drug 378 390	methotrexate
+T15	Drug 392 404	mycofenolate
+T16	Drug 406 414	Anti-IL2
+*	OR T10 T11 T12 T13 T14 T15 T16
+T17	Scope 320 414	azathioprine, cyclosporine, cyclophosphamide, tacrolimus, methotrexate, mycofenolate, Anti-IL2
+R5	Subsumes Arg1:T8 Arg2:T17	
+T18	Procedure 426 441	transplantation
+T19	Procedure 498 510	chemotherapy
+T20	Temporal 518 531	last 3 months
+R6	Has_temporal Arg1:T19 Arg2:T20	
+T21	Condition 533 544	neutropenia
+T22	Measurement 546 571	absolute neutrophil count
+T23	Value 572 578	< 500]
+R7	Has_value Arg1:T22 Arg2:T23	
+R8	AND Arg1:T21 Arg2:T22	
+T24	Scope 205 579	immunocompromised populations (HIV <200 CD4 cells/µL, those receiving chronic immunosuppressive medications (e.g., azathioprine, cyclosporine, cyclophosphamide, tacrolimus, methotrexate, mycofenolate, Anti-IL2), previous transplantation (including stem cell) at any time, malignancy requiring chemotherapy in the last 3 months, neutropenia [absolute neutrophil count < 500])
+R9	Subsumes Arg1:T3 Arg2:T24	
+R10	Subsumes Arg1:T4 Arg2:T5	
+*	OR T4 T8 T18 T19 T21
+T25	Observation 720 751	risk for endovascular infection
+T26	Condition 775 798	rheumatic heart disease
+T27	Condition 800 824	congenital valve disease
+T28	Condition 846 870	congenital heart disease
+T29	Qualifier 826 845	surgically repaired
+R11	Has_qualifier Arg1:T28 Arg2:T29	
+T30	Condition 883 916	cyanotic congenital heart disease
+T31	Qualifier 872 882	unrepaired
+R12	Has_qualifier Arg1:T30 Arg2:T31	
+T32	Procedure 922 941	intracardiac repair
+T33	Device 947 966	prosthetic material
+R13	AND Arg1:T32 Arg2:T33	
+T34	Device 982 1012	bio-prosthetic cardiac valves]
+T35	Device 968 978;997 1011	mechanical cardiac valves
+*	OR T34 T35
+T36	Scope 968 1011	mechanical or bio-prosthetic cardiac valves
+R14	Subsumes Arg1:T33 Arg2:T36	
+T37	Condition 1034 1046	endocarditis
+T38	Device 1058 1078	endovascular devices
+T39	Qualifier 1048 1057	permanent
+R15	Has_qualifier Arg1:T38 Arg2:T39	
+T40	Device 1086 1105	endovascular grafts
+T41	Procedure 1113 1135	aortic aneurysm repair
+T42	Device 1137 1143	stents
+T43	Qualifier 1154 1168	large arteries
+R16	Has_qualifier Arg1:T42 Arg2:T43	
+T44	Device 1208 1234	inferior vena cava filters
+T45	Device 1236 1260	dialysis vascular grafts
+T46	Device 1290 1312	hemodialysis catheters
+T47	Device 1314 1324	pacemakers
+T48	Device 1368 1392	central venous catheters
+T49	Device 1394 1427	central venous dialysis catheters
+T50	Device 1431 1470	peripherally inserted central catheters
+T51	Negation 1483 1486	not
+T52	Negation 1602 1605	not
+T53	Device 1514 1536	coronary artery stents
+T54	Device 1538 1567	coronary artery bypass grafts
+T55	Device 1578 1597	neurovascular coils
+T56	Negation 1681 1684	not
+T57	Condition 1630 1651	mitral valve prolapse
+T58	Condition 1655 1676	bicuspid aortic valve
+*	OR T57 T58
+T59	Scope 1630 1676	mitral valve prolapse or bicuspid aortic valve
+R17	Has_negation Arg1:T59 Arg2:T56	
+*	OR T55 T54 T53
+T60	Scope 1514 1597	coronary artery stents, coronary artery bypass grafts (CABG) or neurovascular coils
+R18	Has_negation Arg1:T60 Arg2:T52	
+*	OR T48 T49 T50
+T61	Device 1472 1477	PICCs
+R19	Subsumes Arg1:T50 Arg2:T61	
+T62	Scope 1368 1478	central venous catheters, central venous dialysis catheters or peripherally inserted central catheters (PICCs)
+R20	Has_negation Arg1:T62 Arg2:T51	
+*	OR T62 T60 T59
+*	OR T47 T46 T38 T33 T30 T28 T27 T26
+T63	Scope 1086 1260	endovascular grafts [e.g., aortic aneurysm repair, stents involving large arteries such as aorta, femorals and carotids], inferior vena cava filters, dialysis vascular grafts
+R21	Subsumes Arg1:T38 Arg2:T63	
+*	OR T41 T42
+*	OR T40 T44 T45
+T64	Scope 753 1741	previously documented rheumatic heart disease, congenital valve disease, surgically repaired congenital heart disease, unrepaired cyanotic congenital heart disease, any intracardiac repair with prosthetic material [mechanical or bio-prosthetic cardiac valves], previous or current endocarditis, permanent endovascular devices (e.g., endovascular grafts [e.g., aortic aneurysm repair, stents involving large arteries such as aorta, femorals and carotids], inferior vena cava filters, dialysis vascular grafts), tunnelled (not short-term) hemodialysis catheters, pacemakers or defibrillators. Patients with temporary central venous catheters, central venous dialysis catheters or peripherally inserted central catheters (PICCs) are not excluded and patients with coronary artery stents, coronary artery bypass grafts (CABG) or neurovascular coils are not excluded; patients with mitral valve prolapse or bicuspid aortic valve are not excluded providing they have no other exclusion criteria
+R22	Subsumes Arg1:T25 Arg2:T64	
+T65	Condition 1788 1806	acute pancreatitis
+T66	Qualifier 1781 1787	severe
+R23	Has_qualifier Arg1:T65 Arg2:T66	
+T67	Negation 1808 1815	without
+T68	Measurement 1831 1843	Ranson score
+R24	Has_negation Arg1:T68 Arg2:T67	
+R25	AND Arg1:T65 Arg2:T68	
+T69	Negation 1917 1920	not
+T70	Condition 1900 1912	pancreatitis
+T71	Qualifier 1883 1887	mild
+T72	Qualifier 1891 1899	moderate
+*	OR T71 T72
+T73	Scope 1883 1899	mild or moderate
+R26	Has_scope Arg1:T70 Arg2:T73	
+R27	Has_negation Arg1:T70 Arg2:T69	
+T74	Device 1970 1991	jejunal feeding tubes
+T75	Device 1959 1966;1978 1991	gastric feeding tubes
+T76	Condition 2047 2063	contraindication
+T77	Procedure 2088 2107	enteral medications
+R28	AND Arg1:T76 Arg2:T77	
+T78	Non-query-able 2110 2175	Intent to withdraw advanced life support as per the ICU physician
+T79	Competing_trial 2178 2259	Previous enrolment in this or current enrolment in a potentially confounding tria

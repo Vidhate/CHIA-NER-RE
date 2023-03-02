@@ -1,0 +1,34 @@
+T1	Person 0 3	Age
+T2	Value 3 7	< 18
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Condition 9 18	Pregnancy
+T4	Condition 20 31	Bradycardia
+T5	Measurement 33 35	HR
+T6	Value 35 41	<55bpm
+R2	Has_value Arg1:T5 Arg2:T6	
+R3	Subsumes Arg1:T4 Arg2:T5	
+T7	Measurement 44 67	Systolic Blood Pressure
+T8	Value 68 77	< 80 mmHg
+R4	Has_value Arg1:T7 Arg2:T8	
+T9	Measurement 80 102	Mean arterial pressure
+T10	Value 103 112	< 50 mmHg
+R5	Has_value Arg1:T9 Arg2:T10	
+T11	Qualifier 113 131	on maximal support
+*	OR T7 T9
+T12	Scope 44 112	Systolic Blood Pressure < 80 mmHg / Mean arterial pressure < 50 mmHg
+R6	Has_qualifier Arg1:T12 Arg2:T11	
+T13	Procedure 124 131	support
+R7	multi Arg1:T11 Arg2:T13	
+T14	Condition 133 138	Death
+T15	Temporal 139 147	imminent
+R8	Has_temporal Arg1:T14 Arg2:T15	
+T16	Non-representable 149 176	Unlikely to survive 90 days
+T17	Condition 178 197	Acute liver failure
+T18	Condition 199 207	Dementia
+T19	Condition 209 225	High-grade block
+T20	Negation 226 243	in the absence of
+T21	Device 258 267	pacemaker
+T22	Qualifier 246 257	functioning
+R9	Has_qualifier Arg1:T21 Arg2:T22	
+R10	Has_negation Arg1:T21 Arg2:T20	
+R11	AND Arg1:T19 Arg2:T21	

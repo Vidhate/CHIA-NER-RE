@@ -1,0 +1,114 @@
+T1	Condition 26 40	CNS metastases
+T2	Condition 44 70	leptomeningeal involvement
+*	OR T1 T2
+T5	Procedure 144 151	treated
+T6	Qualifier 164 179	been stable for
+T7	Temporal 180 220	at least six months prior to study start
+R1	Has_temporal Arg1:T6 Arg2:T7	
+*	OR T5 T6
+T4	Condition 92 108	brain metastases
+T8	Observation 238 248	history of
+T9	Condition 249 265	brain metastases
+R3	AND Arg1:T8 Arg2:T9	
+T10	Procedure 278 299	head CT with contrast
+T11	Scope 238 265	history of brain metastases
+A1	Optional T11
+R4	AND Arg1:T11 Arg2:T10	
+T12	Condition 359 374	bone metastases
+T13	Procedure 432 464	hepatic artery chemoembolization
+T14	Temporal 465 489	within the last 6 months
+T15	Temporal 491 500	one month
+T16	Observation 514 547	other sites of measurable disease
+R5	Has_context Arg1:T15 Arg2:T16	
+*	OR T14 T15
+T17	Scope 465 547	within the last 6 months (one month if there are other sites of measurable disease
+R6	Has_scope Arg1:T13 Arg2:T17	
+T18	Procedure 597 627	radioactive directed therapies
+T19	Drug 676 686	epothilone
+T20	Condition 706 727	peripheral neuropathy
+T21	Condition 731 750	unresolved diarrhea
+T22	Measurement 764 769	Grade
+T23	Value 751 763;770 771	greater than 1
+R7	AND Arg1:T21 Arg2:T22	
+R8	Has_value Arg1:T22 Arg2:T23	
+*	OR T20 T21
+T24	Condition 787 815	severe cardiac insufficiency
+T25	Drug 832 840	Coumadin
+T26	Drug 850 876	warfarin-containing agents
+*	OR T25 T26
+R9	AND Arg1:T24 Arg2:T25	
+T27	Qualifier 899 907	low dose
+T28	Drug 908 916	warfarin
+T29	Multiplier 918 930	1 mg or less
+*	OR T29 T27
+R10	Has_qualifier Arg1:T28 Arg2:T27	
+T30	Device 955 972	in-dwelling lines
+T31	Device 955 966;976 981	in-dwelling ports
+*	OR T30 T31
+T32	Scope 787 931	severe cardiac insufficiency patients taking Coumadin or other warfarin-containing agents with the exception of low dose warfarin (1 mg or less)
+R11	AND Arg1:T32 Arg2:T30	
+T34	Condition 1037 1055	another malignancy
+T35	Temporal 1056 1091	within 5 years prior to study entry
+T36	Scope 832 876	Coumadin or other warfarin-containing agents
+R13	Has_temporal Arg1:T34 Arg2:T35	
+T37	Condition 1118 1142	non-melanoma skin cancer
+T38	Qualifier 1099 1117	curatively treated
+T39	Condition 1144 1159	prostate cancer
+T40	Condition 1164 1187	cervical cancer in situ
+*	OR T37 T39 T40
+T41	Scope 1118 1187	non-melanoma skin cancer, prostate cancer, or cervical cancer in situ
+R14	Has_qualifier Arg1:T41 Arg2:T38	
+T42	Observation 1026 1036	history of
+R16	Has_temporal Arg1:T34 Arg2:T42	
+T43	Condition 1240 1262	uncontrolled infection
+T44	Condition 1273 1281	abcesses
+T45	Condition 1285 1293	fistulae
+T46	Scope 1273 1293	abcesses or fistulae
+*	OR T44 T45
+R17	Subsumes Arg1:T43 Arg2:T46	
+T47	Qualifier 1203 1209	active
+T48	Qualifier 1213 1222	suspected
+*	OR T47 T48
+T49	Qualifier 1223 1228	acute
+T50	Qualifier 1232 1239	chronic
+*	OR T49 T50
+T51	Scope 1203 1239	active or suspected acute or chronic
+R18	Has_scope Arg1:T43 Arg2:T51	
+T52	Condition 1322 1341	psychiatric illness
+T53	Condition 1311 1318;1334 1341	medical illness
+*	OR T53 T52
+T54	Observation 1353 1367	preclude study
+T55	Observation 1371 1387	informed consent
+T56	Observation 1406 1439	noncompliance to medical regimens
+T57	Observation 1443 1452;1470 1504	inability to return for all scheduled visits
+T58	Observation 1456 1503	unwillingness to return for all scheduled visit
+*	OR T57 T58 T56 T54 T55
+T59	Scope 1347 1504	would preclude study or informed consent and/or history of noncompliance to medical regimens or inability or unwillingness to return for all scheduled visits
+R19	Has_scope Arg1:T53 Arg2:T59	
+R2	AND Arg1:T4 Arg2:T5	
+T60	Condition 1506 1510	HIV+
+T61	Measurement 1506 1509	HIV
+T62	Value 1509 1510	+
+R20	Has_value Arg1:T61 Arg2:T62	
+T63	Condition 1521 1529	Pregnant
+T64	Condition 1533 1542	lactating
+R21	multi Arg1:T60 Arg2:T61	
+*	OR T64 T63
+T65	Qualifier 14 25	symptomatic
+R22	Has_qualifier Arg1:T1 Arg2:T65	
+R23	Has_qualifier Arg1:T2 Arg2:T65	
+T3	Negation 877 898	with the exception of
+R12	Has_negation Arg1:T28 Arg2:T3	
+R24	AND Arg1:T36 Arg2:T28	
+T66	Negation 1092 1098	except
+T33	Non-representable 983 1025	Patients taking any experimental therapies
+R15	Has_negation Arg1:T41 Arg2:T66	
+R25	Has_scope Arg1:T34 Arg2:T41	
+T67	Temporal 652 662	previously
+R26	Has_temporal Arg1:T19 Arg2:T67	
+T68	Temporal 573 583	previously
+R27	Has_temporal Arg1:T18 Arg2:T68	
+T69	Multiplier 382 416	only site(s) of measurable disease
+R28	AND Arg1:T69 Arg2:T12	
+T70	Negation 110 116	unless
+R29	Has_negation Arg1:T5 Arg2:T70	

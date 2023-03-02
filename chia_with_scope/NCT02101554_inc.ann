@@ -1,0 +1,25 @@
+T1	Person 0 8	Children
+T2	Condition 38 42	pain
+T3	Qualifier 19 27	moderate
+T4	Qualifier 31 37	severe
+T5	Drug 88 104	opioid analgesic
+T6	Procedure 53 79	around the clock treatment
+R1	AND Arg1:T6 Arg2:T5	
+*	OR T3 T4
+T7	Scope 19 37	moderate to severe
+R2	Has_scope Arg1:T2 Arg2:T7	
+R3	AND Arg1:T2 Arg2:T6	
+T8	Drug 174 188	opioid therapy
+T9	Drug 231 239	morphine
+T10	Multiplier 213 227	>20 mg per day
+T11	Qualifier 190 200	equivalent
+R5	Has_qualifier Arg1:T9 Arg2:T11	
+T12	Drug 231 239	morphine
+R4	Has_multiplier Arg1:T9 Arg2:T10	
+R6	Has_multiplier Arg1:T12 Arg2:T10	
+T13	Temporal 257 316	3 consecutive days immediately prior to first day of dosing
+T14	Reference_point 297 316	first day of dosing
+R7	Has_index Arg1:T13 Arg2:T14	
+T15	Scope 190 239	equivalent or equal to >20 mg per day of morphine
+R8	Has_scope Arg1:T8 Arg2:T15	
+R9	Has_temporal Arg1:T8 Arg2:T13	

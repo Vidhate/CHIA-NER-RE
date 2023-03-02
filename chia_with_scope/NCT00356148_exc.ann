@@ -1,0 +1,34 @@
+T1	Condition 0 24	Ductal carcinoma in situ
+T2	Condition 26 30	DCIS
+T3	Measurement 32 37	stage
+T4	Condition 40 46	cancer
+T5	Value 38 39	0
+R1	AND Arg1:T4 Arg2:T3	
+R2	Has_value Arg1:T3 Arg2:T5	
+T6	Scope 26 46	DCIS; stage 0 cancer
+*	OR T2 T4
+R3	Subsumes Arg1:T1 Arg2:T6	
+T7	Value 62 80	distant metastatic
+T8	Measurement 81 86	stage
+T9	Value 50 58;70 80	Advanced metastatic
+*	OR T9 T7
+T10	Scope 50 80	Advanced or distant metastatic
+R4	Has_scope Arg1:T8 Arg2:T10	
+T11	Procedure 103 122	neoadjuvant therapy
+T12	Drug 150 161	antibiotics
+T13	Temporal 162 183	within prior 3 months
+T14	Observation 125 132	History
+R6	Has_temporal Arg1:T12 Arg2:T13	
+R7	AND Arg1:T14 Arg2:T12	
+T16	Condition 197 213	immunodeficiency
+T17	Observation 186 193	History
+R8	AND Arg1:T17 Arg2:T16	
+T18	Condition 225 241	remote infection
+T15	Condition 255 263	reaction
+T19	Observation 244 251	History
+R5	AND Arg1:T19 Arg2:T15	
+T20	Drug 267 284	study antibiotics
+R9	AND Arg1:T15 Arg2:T20	
+T21	Negation 287 296	Denial of
+T22	Informed_consent 297 321	signing the consent form
+R10	Has_negation Arg1:T22 Arg2:T21	

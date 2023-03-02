@@ -1,0 +1,21 @@
+T1	Condition 12 31	systemic alteration
+T2	Qualifier 5 11	severe
+R1	Has_qualifier Arg1:T1 Arg2:T2	
+T3	Drug 48 59	antibiotics
+T4	Drug 64 83	anti-inflammatories
+T5	Temporal 84 108	in the last three months
+*	OR T4 T3
+T6	Scope 48 83	antibiotics and anti-inflammatories
+R2	Has_temporal Arg1:T6 Arg2:T5	
+T7	Non-representable 111 216	With periodontium with periodontal parameters different from those established in the inclusion criteria.
+T8	Condition 235 274	clinical signs of parafunctional habits
+T9	Observation 277 284	Smoking
+T10	Procedure 318 336	other restorations
+T11	Temporal 337 358	in the last 12 months
+R3	Has_temporal Arg1:T10 Arg2:T11	
+T12	Condition 361 369	Pregnant
+T13	Person 370 375	women
+T14	Person 380 387	infants
+T15	Scope 361 375	Pregnant women
+*	OR T15 T14
+T16	Non-representable 390 530	Periodontal sites that presented bleeding during crevicular fluid collection or sites that prevent proper collection of clinical parameters.

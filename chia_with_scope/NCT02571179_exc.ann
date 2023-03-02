@@ -1,0 +1,23 @@
+T1	Condition 2 9	disease
+T2	Qualifier 21 35;45 53	affect hepatic function
+T3	Qualifier 21 27;39 53	affect renal function
+*	OR T2 T3
+T4	Condition 55 72	contraindications
+T5	Drug 76 93	opioid analgesics
+R1	AND Arg1:T4 Arg2:T5	
+T6	Condition 95 119	fetal growth retardation
+T7	Condition 130 144	fetal asphyxia
+T8	Mood 121 129	signs of
+T9	Procedure 148 164	cardiotocography
+R2	Has_mood Arg1:T7 Arg2:T8	
+R3	AND Arg1:T7 Arg2:T9	
+T10	Condition 166 197	meconium stained amniotic fluid
+T11	Condition 201 224	placental insufficiency
+*	OR T10 T11 T7 T6 T4 T1
+T12	Scope 21 53	affect hepatic or renal function
+R4	Has_scope Arg1:T1 Arg2:T12	
+T13	Drug 264 272	fentanyl
+T14	Negation 246 249	not
+T15	Temporal 273 300	during the previous 14 days
+R5	Has_temporal Arg1:T13 Arg2:T15	
+R6	Has_negation Arg1:T13 Arg2:T14	

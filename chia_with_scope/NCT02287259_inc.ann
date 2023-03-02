@@ -1,0 +1,17 @@
+T1	Condition 0 24	major depressive episode
+T2	Condition 28 50	type2 bipolar disorder
+T3	Condition 54 70	bipolar disorder
+T4	Qualifier 71 74	NOS
+R1	Has_qualifier Arg1:T3 Arg2:T4	
+T5	Measurement 76 81	MADRS
+T6	Value 82 100	more than 20 point
+R2	Has_value Arg1:T5 Arg2:T6	
+*	OR T2 T3
+T7	Scope 76 100	MADRS more than 20 point
+R3	Subsumes Arg1:T1 Arg2:T7	
+T8	Scope 28 74	type2 bipolar disorder or bipolar disorder NOS
+R4	Has_scope Arg1:T1 Arg2:T8	
+T9	Value 103 121	18years to 65years
+T10	Person 116 121	years
+R5	Has_value Arg1:T10 Arg2:T9	
+T11	Observation 136 161	sign the informed consent

@@ -1,0 +1,47 @@
+T1	Person 19 22	age
+T2	Value 26 28;9 14	18 under
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Non-representable 29 189	(Subjects under the age of 18 will not be included in this study due to the continued growth and development of their joints and unstudied effects on children.)
+T4	Value 191 195;207 209	Over 80
+T5	Person 200 203	age
+R2	Has_value Arg1:T5 Arg2:T4	
+T6	Condition 211 232	Multiple pain sources
+T7	Condition 237 264	multifactorial pain sources
+*	OR T6 T7
+T8	Non-representable 265 400	that complicated or confound diagnosing the SI joint as the primary and predominant pain generator that may contribute to low back pain
+T9	Condition 432 448	lumbar diagnosis
+T10	Condition 450 470	lumbar radiculopathy
+T11	Condition 481 510	extra-articular hip pathology
+T12	Condition 472 477;486 510	intra -articular hip pathology
+*	OR T11 T12
+T13	Condition 522 532;570 579	acetabulum pathology
+T14	Condition 537 549;570 579	femoral head pathology
+T16	Condition 551 579	lumbo-sacral joint pathology
+T15	Condition 581 608	intervertebral disk disease
+T17	Condition 610 627	spondylolisthesis
+T18	Condition 628 639	spondylosis
+T19	Condition 640 672	spondylolysis of lumbar vertebra
+*	OR T19 T18 T17 T15 T13 T14
+T20	Scope 472 510	intra or extra-articular hip pathology
+T21	Scope 522 672	acetabulum and femoral head, lumbo-sacral joint pathology, intervertebral disk disease, spondylolisthesis/spondylosis/spondylolysis of lumbar vertebra
+R3	Subsumes Arg1:T20 Arg2:T21	
+*	OR T9 T10 T20
+T22	Scope 211 264	Multiple pain sources and multifactorial pain sources
+T23	Scope 432 672	lumbar diagnosis, lumbar radiculopathy, intra or extra-articular hip pathology to include acetabulum and femoral head, lumbo-sacral joint pathology, intervertebral disk disease, spondylolisthesis/spondylosis/spondylolysis of lumbar vertebra
+R4	Subsumes Arg1:T22 Arg2:T23	
+T24	Condition 675 691	Immunosuppressed
+T25	Condition 692 710	immune compromised
+*	OR T24 T25
+T26	Condition 712 736	Underlying comorbidities
+T27	Qualifier 742 770	contraindicate the procedure
+T28	Condition 742 756	contraindicate
+T29	Procedure 761 770	procedure
+R5	AND Arg1:T28 Arg2:T29	
+R6	Has_qualifier Arg1:T26 Arg2:T27	
+T30	Condition 801 813	polycythemia
+T31	Condition 815 835	coagulation disorder
+T32	Condition 840 850	malignancy
+*	OR T32 T31 T30
+T33	Scope 801 850	polycythemia, coagulation disorder, or malignancy
+T34	Scope 712 770	Underlying comorbidities that contraindicate the procedure
+R7	Subsumes Arg1:T34 Arg2:T33	

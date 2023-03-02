@@ -1,0 +1,11 @@
+T1	Qualifier 20 37	H. pylori related
+T2	Condition 38 55	chronic gastritis
+R1	Has_qualifier Arg1:T2 Arg2:T1	
+T3	Condition 69 82	peptic ulcers
+A1	Optional T3
+T4	Person 91 95	aged
+T5	Value 96 121	greater than 20 years old
+R2	Has_value Arg1:T4 Arg2:T5	
+T6	Procedure 150 169	eradication therapy
+T7	Mood 130 148	willing to receive
+R3	Has_mood Arg1:T6 Arg2:T7	

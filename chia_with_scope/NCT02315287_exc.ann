@@ -1,0 +1,36 @@
+T1	Drug 20 31	sitagliptin
+T2	Drug 35 44	metformin
+T3	Drug 48 65	thiazolidinedione
+*	OR T2 T3 T1
+T4	Condition 0 16	Contraindication
+T5	Scope 20 65	sitagliptin or metformin or thiazolidinedione
+R1	Has_scope Arg1:T4 Arg2:T5	
+T6	Condition 67 75	Pregnant
+T7	Condition 79 85	breast
+*	OR T7 T6
+T8	Condition 101 116	Type 1 diabetes
+T9	Condition 118 138	gestational diabetes
+T10	Condition 143 170	secondary forms of diabetes
+*	OR T9 T10 T8
+T11	Negation 172 175	Not
+T12	Observation 176 187	appropriate
+T13	Drug 192 215	oral antidiabetic agent
+R2	AND Arg1:T12 Arg2:T13	
+R3	Has_negation Arg1:T12 Arg2:T11	
+T14	Drug 217 227	Medication
+T15	Observation 234 257	affect glycemic control
+R4	AND Arg1:T15 Arg2:T14	
+T16	Drug 259 266	Disease
+T17	Qualifier 273 288	affect efficacy
+T18	Qualifier 293 308	safety of drugs
+*	OR T17 T18
+T19	Scope 273 308	affect efficacy and safety of drugs
+R5	Has_scope Arg1:T16 Arg2:T19	
+T20	Condition 314 327	major illness
+T21	Condition 329 342	Liver disease
+T22	Condition 344 357	Renal failure
+T23	Condition 359 372	Heart disease
+T24	Condition 374 380	Cancer
+*	OR T24 T23 T22 T21
+T25	Scope 329 380	Liver disease, Renal failure, Heart disease, Cancer
+R6	Subsumes Arg1:T20 Arg2:T25	

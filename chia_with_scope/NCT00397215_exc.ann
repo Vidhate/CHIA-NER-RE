@@ -1,0 +1,153 @@
+T1	Drug 31 55	MF59-containing vaccines
+T2	Drug 62 67	Fluad
+T3	Drug 72 80	Addigrip
+T4	Drug 85 118	virosome-based influenza vaccines
+T5	Drug 127 137	Inflexal V
+T6	Drug 140 154	InfectoVac Flu
+T7	Drug 159 166	Invivac
+T8	Temporal 168 205	during the 2006-2007 influenza season
+*	OR T6 T7 T5
+T9	Scope 127 167	Inflexal V™, InfectoVac Flu™ or Invivac™
+R1	Subsumes Arg1:T4 Arg2:T9	
+T10	Scope 62 81	Fluad™ or Addigrip™
+*	OR T2 T3
+R2	Subsumes Arg1:T1 Arg2:T10	
+*	OR T1 T4
+T11	Scope 31 167	MF59-containing vaccines, e.g. Fluad™ or Addigrip™ or virosome-based influenza vaccines such as Inflexal V™, InfectoVac Flu™ or Invivac™
+R3	Has_temporal Arg1:T11 Arg2:T8	
+T12	Temporal 244 258;317 349	within 2 weeks prior to enrolment in this study
+T13	Temporal 244 250;289 296;317 349	within 4 weeks prior to enrolment in this study
+T14	Drug 264 284	inactivated vaccines
+A1	Optional T14
+R4	Has_temporal Arg1:T14 Arg2:T12	
+T15	Drug 302 315	live vaccines
+A2	Optional T15
+R5	Has_temporal Arg1:T15 Arg2:T13	
+*	OR T14 T15
+T16	Drug 226 243	licensed vaccines
+T17	Scope 244 349	within 2 weeks (for inactivated vaccines) or 4 weeks (for live vaccines) prior to enrolment in this study
+R6	Has_scope Arg1:T16 Arg2:T17	
+T18	Drug 380 387	vaccine
+T19	Qualifier 392 422	foreseen by the study protocol
+T20	Negation 388 391	not
+*	OR T19 T20
+R7	Has_qualifier Arg1:T18 Arg2:T19	
+T21	Temporal 423 436	up to 30 days
+T22	Drug 454 465	vaccination
+T23	Value 447 453	second
+R8	AND Arg1:T23 Arg2:T22	
+T24	Drug 471 483	H5N1 vaccine
+R9	AND Arg1:T22 Arg2:T24	
+R10	Has_value Arg1:T21 Arg2:T23	
+R11	Has_temporal Arg1:T18 Arg2:T21	
+T25	Temporal 521 538	more than 14 days
+T26	Qualifier 486 493	Chronic
+T27	Drug 543 561	immunosuppressants
+R13	Subsumes Arg1:T26 Arg2:T25	
+T28	Drug 565 593	other immune-modifying drugs
+T29	Temporal 594 617	within six months prior
+T30	Scope 543 593	immunosuppressants or other immune-modifying drugs
+R12	Has_qualifier Arg1:T30 Arg2:T26	
+R14	Has_temporal Arg1:T30 Arg2:T29	
+T31	Condition 696 713;733 742	immunosuppressive condition
+T32	Condition 717 742	immunodeficient condition
+*	OR T32 T31
+T33	Qualifier 673 682	confirmed
+T34	Qualifier 686 695	suspected
+*	OR T33 T34
+T35	Scope 673 695	confirmed or suspected
+T36	Scope 696 742	immunosuppressive or immunodeficient condition
+R15	Has_scope Arg1:T36 Arg2:T35	
+T37	Condition 840 867	chronic alcohol consumption
+T38	Condition 875 885	drug abuse
+*	OR T37 T38
+T39	Observation 829 836	History
+T40	Scope 840 885	chronic alcohol consumption and/or drug abuse
+R16	Has_scope Arg1:T39 Arg2:T40	
+T41	Condition 899 927	hypersensitivity to vaccines
+T42	Observation 888 895	History
+R17	AND Arg1:T42 Arg2:T41	
+T43	Condition 941 957	allergic disease
+T44	Condition 941 949;961 970	allergic reactions
+*	OR T44 T43
+T45	Observation 930 937	History
+T46	Scope 1039 1065	egg and thiomersal allergy
+T47	Condition 1039 1042;1058 1065	egg allergy
+T48	Condition 1047 1065	thiomersal allergy
+T49	Scope 941 970	allergic disease or reactions
+R18	Subsumes Arg1:T49 Arg2:T46	
+R19	Has_scope Arg1:T45 Arg2:T49	
+T51	Condition 1109 1123;1142 1164	cardiovascular functional abnormality
+T52	Condition 1125 1132;1142 1164	hepatic functional abnormality
+T53	Condition 1136 1164	renal functional abnormality
+T50	Condition 1098 1107;1142 1164	pulmonary functional abnormality
+*	OR T50 T51 T52 T53
+T54	Condition 1236 1249	Acute disease
+T55	Temporal 1250 1274	at the time of enrolment
+R20	Has_temporal Arg1:T54 Arg2:T55	
+T56	Condition 1337 1354;1418 1426	chronic pulmonary disorder
+T57	Condition 1337 1344;1356 1370;1418 1426	chronic cardiovascular disorder
+T58	Condition 1337 1344;1372 1377;1418 1426	chronic renal disorder
+T59	Condition 1337 1344;1379 1391;1418 1426	chronic neurological disorder
+T60	Condition 1337 1344;1393 1404;1418 1426	chronic psychiatric disorder
+T61	Condition 1337 1344;1408 1426	chronic metabolic disorder
+*	OR T56 T57 T58 T59 T60 T61
+T62	Drug 1506 1521	immunoglobulins
+T63	Drug 1529 1547	any blood products
+*	OR T62 T63
+T64	Temporal 1548 1603	within the three months preceding the first vaccination
+T65	Scope 1506 1547	immunoglobulins and/or any blood products
+T66	Condition 1821 1830	condition
+T67	Qualifier 1831 1836;1874 1926	which prevents the subject from participation in the study
+R22	Has_qualifier Arg1:T66 Arg2:T67	
+T68	Non-representable 1838 1872	in the opinion of the investigator
+R23	AND Arg1:T67 Arg2:T68	
+T69	Non-representable 1817 1927	Any condition which, in the opinion of the investigator, prevents the subject from participation in the study.
+T70	Qualifier 1637 1652	investigational
+T71	Qualifier 1656 1670	non-registered
+*	OR T70 T71
+T72	Drug 1671 1678	product
+T73	Scope 1637 1670	investigational or non-registered
+R24	Has_scope Arg1:T72 Arg2:T73	
+T74	Drug 1680 1684	drug
+T75	Drug 1688 1695	vaccine
+*	OR T74 T75
+T76	Scope 1680 1695	drug or vaccine
+R25	Subsumes Arg1:T72 Arg2:T76	
+T77	Negation 1697 1707	other than
+T78	Drug 1712 1728	study vaccine(s)
+R26	Has_negation Arg1:T78 Arg2:T77	
+T79	Qualifier 1697 1728	other than the study vaccine(s)
+R27	Has_qualifier Arg1:T72 Arg2:T79	
+R28	multi Arg1:T79 Arg2:T78	
+T80	Temporal 1729 1774	within 30 days prior to the first vaccination
+R29	Has_temporal Arg1:T72 Arg2:T80	
+T81	Reference_point 1753 1774	the first vaccination
+T82	Procedure 1763 1774	vaccination
+T83	Temporal 1757 1762	first
+R30	Has_temporal Arg1:T82 Arg2:T83	
+R31	multi Arg1:T81 Arg2:T82	
+R32	Has_index Arg1:T80 Arg2:T81	
+T84	Mood 1779 1786	planned
+T85	Temporal 1791 1814	during the study period
+T86	Procedure 1787 1790	use
+R33	Has_mood Arg1:T86 Arg2:T84	
+R34	Has_temporal Arg1:T86 Arg2:T85	
+R35	AND Arg1:T72 Arg2:T86	
+T87	Qualifier 1277 1284	Serious
+T88	Condition 1285 1300	chronic disease
+R36	Has_qualifier Arg1:T88 Arg2:T87	
+T89	Scope 1337 1426	chronic pulmonary, cardiovascular, renal, neurological, psychiatric or metabolic disorder
+R37	Subsumes Arg1:T88 Arg2:T89	
+T90	Temporal 1607 1623	during the study
+T91	Reference_point 1582 1603	the first vaccination
+T92	Procedure 1592 1603	vaccination
+T93	Temporal 1586 1591	first
+R38	Has_temporal Arg1:T92 Arg2:T93	
+R39	multi Arg1:T91 Arg2:T92	
+R40	Has_index Arg1:T64 Arg2:T91	
+T94	Scope 1548 1623	within the three months preceding the first vaccination or during the study
+*	OR T64 T90
+R21	Has_scope Arg1:T65 Arg2:T94	
+T95	Reference_point 1614 1623	the study
+R41	Has_index Arg1:T90 Arg2:T95	

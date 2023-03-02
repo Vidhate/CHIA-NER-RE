@@ -1,0 +1,23 @@
+T1	Person 0 3	Age
+T2	Value 4 14	= 18 years
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Procedure 29 44	cholecystectomy
+T4	Qualifier 16 28	Laparoscopic
+R2	Has_qualifier Arg1:T3 Arg2:T4	
+T5	Qualifier 46 54	Emergent
+T6	Qualifier 55 63	elective
+*	OR T5 T6
+T7	Multiplier 65 67	=2
+T8	Condition 68 80	risk factors
+R3	Has_multiplier Arg1:T8 Arg2:T7	
+T9	Condition 82 99	diabetes mellitus
+T10	Person 101 104	age
+T11	Value 105 114	=70 years
+R4	Has_value Arg1:T10 Arg2:T11	
+T12	Measurement 116 119	BMI
+T13	Value 120 123	=30
+R5	Has_value Arg1:T12 Arg2:T13	
+T14	Condition 125 144	fascial enlargement
+*	OR T10 T9 T12 T14
+T15	Scope 82 144	diabetes mellitus, age =70 years, BMI =30, fascial enlargement
+R6	Subsumes Arg1:T8 Arg2:T15	

@@ -1,0 +1,42 @@
+T1	Condition 9 23	rectal tumours
+T2	Qualifier 24 50	below 12cm from anal verge
+R1	Has_qualifier Arg1:T1 Arg2:T2	
+T3	Condition 55 79	locally advanced tumours
+T4	Condition 80 102	invading blood vessels
+T5	Condition 104 110;80 88	nerves invading
+T6	Condition 114 118;80 88	bone invading
+*	OR T5 T6 T4
+T7	Scope 80 118	invading blood vessels, nerves or bone
+R2	Has_scope Arg1:T3 Arg2:T7	
+*	OR T1 T3
+T8	Condition 121 145	Multiple bone metastasis
+T9	Condition 149 182	central nervous system metastasis
+*	OR T8 T9
+T10	Condition 190 208	neoplastic disease
+T11	Qualifier 184 189	Other
+R3	Has_qualifier Arg1:T10 Arg2:T11	
+T12	Temporal 209 232	in the 5 previous years
+T13	Condition 253 278	basal cell skin carcinoma
+T14	Condition 241 249;259 278	squamous cell skin carcinoma
+T15	Condition 282 310	cervical "in situ" carcinoma
+*	OR T13 T14 T15
+R4	Has_temporal Arg1:T10 Arg2:T12	
+T16	Negation 234 240	except
+T17	Scope 241 310	squamous or basal cell skin carcinoma or cervical "in situ" carcinoma
+R5	Has_negation Arg1:T17 Arg2:T16	
+R6	Has_scope Arg1:T10 Arg2:T17	
+T18	Condition 324 337	heart disease
+T19	Qualifier 312 323	Significant
+R7	Has_qualifier Arg1:T18 Arg2:T19	
+T20	Condition 339 371	chronic congestive heart failure
+T21	Condition 373 401	symptomatic coronary disease
+*	OR T20 T21
+T22	Scope 339 401	chronic congestive heart failure, symptomatic coronary disease
+T23	Scope 312 337	Significant heart disease
+R8	Subsumes Arg1:T23 Arg2:T22	
+T24	Condition 406 427	myocardial infarction
+T25	Temporal 428 452	in the previous 6 months
+R9	Has_temporal Arg1:T24 Arg2:T25	
+*	OR T23 T24
+T26	Condition 454 475	Peripheral neuropathy
+T27	Non-query-able 477 518	Patients who do not give informed consent

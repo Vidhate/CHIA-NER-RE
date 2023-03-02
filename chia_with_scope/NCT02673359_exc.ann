@@ -1,0 +1,30 @@
+T1	Person 0 3	Age
+T2	Value 4 8	< 20
+T3	Value 12 22	> 35 years
+*	OR T2 T3
+T4	Scope 4 22	< 20 or > 35 years
+R1	Has_scope Arg1:T1 Arg2:T4	
+T5	Condition 25 56	Congenital uterine malformation
+T6	Condition 59 79	Multifetal pregnancy
+T7	Condition 114 137	chromosomal abnormality
+T8	Condition 94 110	fetal structural
+T9	Qualifier 88 93	major
+*	OR T8 T7
+T10	Scope 94 137	fetal structural or chromosomal abnormality
+R2	Has_qualifier Arg1:T10 Arg2:T9	
+T11	Condition 146 153	allergy
+T12	Condition 157 173	contraindication
+T13	Qualifier 175 183	relative
+T14	Qualifier 187 195	absolute
+*	OR T13 T14
+T15	Procedure 200 220	progesterone therapy
+*	OR T12 T11
+T16	Scope 175 195	relative or absolute
+T17	Scope 146 173	allergy or contraindication
+R3	Has_scope Arg1:T17 Arg2:T16	
+R4	AND Arg1:T17 Arg2:T15	
+T18	Condition 235 251	contraindication
+T19	Procedure 255 272	cervical cerclage
+T20	Condition 275 293	Medical conditions
+T21	Qualifier 294 316	complicating pregnancy
+T22	Condition 319 335	Vaginal bleeding

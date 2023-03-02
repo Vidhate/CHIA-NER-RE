@@ -1,0 +1,52 @@
+T1	Drug 11 21	Glitazones
+T2	Condition 0 7	Allergy
+R1	AND Arg1:T2 Arg2:T1	
+T3	Condition 23 44	Myocardial infarction
+T4	Condition 46 59	Heart failure
+T5	Condition 61 67	Angina
+T6	Condition 80 93	kidney stones
+T7	Observation 69 76	History
+R2	Has_temporal Arg1:T6 Arg2:T7	
+T8	Condition 95 108	Liver disease
+T9	Measurement 119 132	liver enzymes
+T10	Value 110 118	abnormal
+R3	Has_value Arg1:T9 Arg2:T10	
+T11	Scope 110 132	abnormal liver enzymes
+R4	Subsumes Arg1:T8 Arg2:T11	
+T12	Condition 135 141	Anemia
+T13	Measurement 143 153	hemoglobin
+T14	Value 154 161	<8 g/dl
+R5	Has_value Arg1:T13 Arg2:T14	
+T15	Scope 143 161	hemoglobin <8 g/dl
+R6	Subsumes Arg1:T12 Arg2:T15	
+T16	Condition 164 170	Cancer
+T17	Procedure 184 193	treatment
+T18	Temporal 176 183	current
+R7	Has_temporal Arg1:T17 Arg2:T18	
+R8	AND Arg1:T16 Arg2:T17	
+T19	Temporal 195 203	Previous
+T20	Procedure 204 225	organ transplantation
+R9	Has_temporal Arg1:T20 Arg2:T19	
+T21	Procedure 227 252	Immunosuppressant therapy
+T22	Condition 254 292	Human immunodeficiency virus infection
+T23	Condition 294 303	Pregnancy
+T24	Condition 307 316	lactating
+*	OR T23 T24
+T25	Observation 326 337	tobacco use
+T26	Temporal 318 325	Current
+R10	Has_temporal Arg1:T25 Arg2:T26	
+T27	Drug 339 347	Dilantin
+T28	Drug 352 370	oral contraceptive
+T29	Condition 394 410	drug interaction
+T30	Drug 416 426	glitazones
+T31	Mood 384 393	potential
+R11	Has_mood Arg1:T29 Arg2:T31	
+T32	Scope 339 370	Dilantin and oral contraceptive
+*	OR T27 T28
+R12	AND Arg1:T32 Arg2:T29	
+R13	AND Arg1:T29 Arg2:T30	
+T33	Condition 455 467	hypoglycemia
+T34	Observation 444 451	history
+R14	Has_temporal Arg1:T33 Arg2:T34	
+T35	Qualifier 428 443	Self-identified
+R15	Has_qualifier Arg1:T33 Arg2:T35	

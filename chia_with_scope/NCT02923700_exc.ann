@@ -1,0 +1,48 @@
+T1	Person 0 3	age
+T2	Value 4 14	> 80 years
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Measurement 17 40	Kellgren-Lawrence score
+T4	Procedure 44 60	X-ray evaluation
+T5	Value 61 64	> 3
+R2	AND Arg1:T4 Arg2:T3	
+R3	Has_value Arg1:T3 Arg2:T5	
+T6	Condition 67 88	major axial deviation
+T7	Measurement 90 95	varus
+T8	Measurement 102 108	valgus
+T9	Value 96 99	>5°
+T10	Value 109 113	> 5°
+R4	Has_value Arg1:T8 Arg2:T10	
+R5	Has_value Arg1:T7 Arg2:T9	
+T11	Scope 90 113	varus >5° , valgus > 5°
+*	OR T8 T7
+R6	Subsumes Arg1:T6 Arg2:T11	
+T12	Condition 117 135	systemic disorders
+T13	Condition 144 152	diabetes
+T14	Condition 154 174	rheumatoid arthritis
+T15	Condition 176 199	haematological diseases
+T16	Condition 201 213	coagulopathy
+T17	Qualifier 216 222	severe
+T18	Condition 223 246	cardiovascular diseases
+T19	Condition 248 258	infections
+T20	Condition 260 276	immunodepression
+R7	Has_qualifier Arg1:T18 Arg2:T17	
+R8	Subsumes Arg1:T15 Arg2:T16	
+*	OR T15 T18 T20 T19 T14 T13
+T21	Scope 144 276	diabetes, rheumatoid arthritis, haematological diseases (coagulopathy), severe cardiovascular diseases, infections, immunodepression
+R9	Subsumes Arg1:T12 Arg2:T21	
+T22	Drug 304 318	anticoagulants
+T23	Drug 322 336	antiaggregants
+T24	Procedure 291 298	therapy
+*	OR T22 T23
+T25	Scope 304 336	anticoagulants or antiaggregants
+R10	Has_scope Arg1:T24 Arg2:T25	
+T26	Drug 346 352	NSAIDs
+T27	Temporal 353 388	in the 5 days before blood donation
+R11	Has_temporal Arg1:T26 Arg2:T27	
+T28	Measurement 405 407	Hb
+T29	Value 415 424	< 11 g/dl
+R12	Has_value Arg1:T28 Arg2:T29	
+T30	Measurement 429 437	platelet
+T31	Value 445 458	< 150,000/mmc
+R13	Has_value Arg1:T30 Arg2:T31	
+*	OR T30 T28

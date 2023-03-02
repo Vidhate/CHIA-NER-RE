@@ -1,0 +1,11 @@
+T1	Condition 0 23	Axial spondyloarthritis
+T2	Qualifier 25 38	ASAS criteria
+R1	Has_qualifier Arg1:T1 Arg2:T2	
+T3	Procedure 44 54	radiologic
+T4	Condition 55 67	sacroiliitis
+R2	AND Arg1:T4 Arg2:T3	
+T5	Procedure 90 93	MRI
+T6	Procedure 97 102	X-ray
+*	OR T5 T6
+T7	Scope 90 102	MRI or X-ray
+R3	Has_scope Arg1:T4 Arg2:T7	

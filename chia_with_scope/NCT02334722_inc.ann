@@ -1,0 +1,16 @@
+T1	Person 0 5	Adult
+T2	Value 24 33;7 16	and older >18 years
+T3	Person 20 23	age
+R1	Has_value Arg1:T3 Arg2:T2	
+T4	Scope 7 33	>18 years of age and older
+R2	Subsumes Arg1:T1 Arg2:T4	
+T5	Mood 56 75	will have undergone
+T6	Procedure 76 94	surgical resection
+T7	Procedure 98 104	biopsy
+*	OR T6 T7
+T8	Condition 110 136	supratentorial brain tumor
+T9	Informed_consent 141 175	are able to consent for themselves
+T10	Scope 76 104	surgical resection or biopsy
+R3	Has_mood Arg1:T10 Arg2:T5	
+R4	AND Arg1:T10 Arg2:T8	
+T11	Non-representable 178 241	Able to be randomized prior to or up to 48 hours after surgery.

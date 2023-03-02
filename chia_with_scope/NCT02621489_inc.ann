@@ -1,0 +1,16 @@
+T1	Procedure 22 25	PCI
+T2	Procedure 46 49	DES
+R1	AND Arg1:T1 Arg2:T2	
+T3	Condition 58 61	ACS
+R2	AND Arg1:T1 Arg2:T3	
+T4	Condition 103 106	T2D
+T5	Person 210 214	Male
+T6	Person 219 225	female
+*	OR T5 T6
+T7	Person 241 246	years
+T8	Value 235 240	18-80
+R3	Has_value Arg1:T7 Arg2:T8	
+T9	Measurement 249 254	HbA1c
+T10	Value 277 303	47 mmol/mol - 110 mmol/mol
+R4	Has_value Arg1:T9 Arg2:T10	
+T11	Informed_consent 306 334	Signed informed consent form

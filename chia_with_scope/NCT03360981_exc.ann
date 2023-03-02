@@ -1,0 +1,30 @@
+T1	Condition 0 27	acute myocardial infarction
+T2	Condition 29 42	heart failure
+T3	Condition 44 62	neoplastic disease
+T4	Condition 64 80	chronic diseases
+T5	Qualifier 86 121	may affect the inflammatory profile
+T6	Qualifier 127 135	systemic
+T7	Qualifier 140 150	epicardial
+*	OR T6 T7
+T8	Scope 127 150	systemic and epicardial
+R1	Has_qualifier Arg1:T4 Arg2:T5	
+R2	Has_scope Arg1:T4 Arg2:T8	
+T9	Condition 152 158	cancer
+T10	Condition 160 191	chronic intestinal inflammation
+T11	Condition 193 202	hepatitis
+T12	Condition 204 208	AIDS
+*	OR T12 T11 T10 T9
+T13	Scope 152 208	cancer, chronic intestinal inflammation, hepatitis, AIDS
+T14	Scope 64 150	chronic diseases that may affect the inflammatory profile both systemic and epicardial
+R3	Subsumes Arg1:T14 Arg2:T13	
+T15	Observation 211 226	life expectancy
+T16	Value 227 237	< 6 months
+R4	Has_value Arg1:T15 Arg2:T16	
+T17	Procedure 248 252	CABG
+T18	Temporal 239 247	previous
+R5	Has_temporal Arg1:T17 Arg2:T18	
+T19	Procedure 266 297	open heart surgery intervention
+T20	Condition 299 322	acute coronary syndrome
+T21	Qualifier 260 265	other
+R6	Has_qualifier Arg1:T19 Arg2:T21	
+*	OR T17 T19 T20 T15 T14 T3 T2 T1

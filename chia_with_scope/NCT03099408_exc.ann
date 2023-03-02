@@ -1,0 +1,34 @@
+T1	Condition 20 37	vaginal infection
+T2	Qualifier 12 19	another
+T3	Condition 41 44	STD
+*	OR T1 T3
+T4	Scope 20 44	vaginal infection or STD
+R1	Has_qualifier Arg1:T4 Arg2:T2	
+T5	Condition 46 53	Allergy
+T6	Drug 57 70	metronidazole
+R2	AND Arg1:T5 Arg2:T6	
+T7	Condition 72 80	Pregnant
+T8	Condition 84 91	nursing
+*	OR T7 T8
+T9	Drug 108 132	intravaginal antibiotics
+T10	Drug 100 104;121 132	oral antibiotics
+*	OR T9 T10
+T11	Temporal 133 156	within the past 2 weeks
+T12	Scope 100 132	oral or intravaginal antibiotics
+R3	Has_temporal Arg1:T12 Arg2:T11	
+T13	Condition 158 161	HIV
+T14	Qualifier 165 170	other
+T15	Condition 171 186	chronic disease
+R4	Has_qualifier Arg1:T15 Arg2:T14	
+*	OR T15 T13
+T16	Observation 188 225	Inability to keep return appointments
+T17	Condition 227 244	Contraindications
+T18	Drug 249 284	Lactobacillus Vaginal Suppositories
+T19	Negation 291 298	without
+T20	Observation 299 313	sexual history
+R5	Has_negation Arg1:T20 Arg2:T19	
+T21	Scope 291 313	without sexual history
+A1	Optional T21
+R6	AND Arg1:T17 Arg2:T18	
+T22	Scope 227 284	Contraindications for Lactobacillus Vaginal Suppositories
+R7	Subsumes Arg1:T22 Arg2:T21	

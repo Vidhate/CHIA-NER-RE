@@ -1,0 +1,20 @@
+T1	Condition 0 18	Abnormal karyotype
+T2	Procedure 29 35;49 61	pelvic radiotherapy
+T3	Procedure 39 61	abdominal radiotherapy
+*	OR T2 T3
+T4	Temporal 20 28	Previous
+T5	Scope 29 61	pelvic or abdominal radiotherapy
+R1	Has_temporal Arg1:T5 Arg2:T4	
+T6	Procedure 72 91	surgical management
+T7	Condition 95 112	ovarian pathology
+R2	AND Arg1:T6 Arg2:T7	
+T8	Temporal 63 71	Previous
+R3	Has_temporal Arg1:T6 Arg2:T8	
+T9	Condition 131 136;154 164	renal malignancy
+T10	Condition 145 152;154 164	cardiac malignancy
+T11	Condition 138 143;154 164	liver malignancy
+T12	Condition 114 129	Chronic disease
+T13	Undefined_semantics 114 129	Chronic disease
+T14	Scope 131 164	renal, liver, cardiac, malignancy
+*	OR T9 T11 T10
+R4	Subsumes Arg1:T12 Arg2:T14	

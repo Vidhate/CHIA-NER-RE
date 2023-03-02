@@ -1,0 +1,23 @@
+T1	Condition 23 32	pregnancy
+T2	Condition 48 65	contraindications
+T3	Procedure 69 88	regional anesthesia
+T4	Condition 90 97	allergy
+T5	Drug 101 104	LAs
+R1	AND Arg1:T4 Arg2:T5	
+T6	Drug 122 129	opioids
+T7	Multiplier 130 139	regularly
+T8	Condition 147 159	chronic pain
+R2	AND Arg1:T6 Arg2:T8	
+R3	Has_multiplier Arg1:T6 Arg2:T7	
+T9	Drug 168 189	anticoagulation drugs
+T10	Drug 201 221	acetylsalicylic acid
+T11	Drug 225 237	dipyridamole
+T12	Condition 239 261	atrioventricular block
+T13	Condition 263 271	diabetes
+*	OR T10 T11
+T14	Negation 190 200	other than
+T15	Scope 201 237	acetylsalicylic acid or dipyridamole
+R4	Has_negation Arg1:T15 Arg2:T14	
+R5	Has_scope Arg1:T9 Arg2:T15	
+*	OR T12 T13 T9 T6 T4 T2 T1
+R6	AND Arg1:T2 Arg2:T3	

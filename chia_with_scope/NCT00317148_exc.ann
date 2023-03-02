@@ -1,0 +1,34 @@
+T1	Measurement 0 21	Body mass index (BMI)
+T2	Value 25 41	35 kg/m2 or more
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Condition 56 65;80 88	metabolic diseases
+T4	Condition 70 88	endocrine diseases
+*	OR T3 T4
+T5	Condition 104 110	cancer
+T6	Drug 120 128	steroids
+T7	Drug 132 184	drugs that interfere with the metabolism of estrogen
+*	OR T6 T7
+T8	Drug 198 215	systemic estrogen
+T9	Drug 198 206;217 226	systemic progestin
+T10	Drug 231 235	DHEA
+T11	Temporal 236 277	in the eight weeks prior to randomization
+T12	Scope 198 235	systemic estrogen, progestin, or DHEA
+*	OR T9 T8 T10
+R2	Has_temporal Arg1:T12 Arg2:T11	
+T13	Procedure 287 308	alternative therapies
+T14	Drug 312 328	natural products
+T15	Condition 338 361	postmenopausal symptoms
+T16	Temporal 362 402	in the four weeks prior to randomization
+T17	Scope 287 328	alternative therapies or natural products
+*	OR T13 T14
+R3	AND Arg1:T17 Arg2:T15	
+R4	Has_temporal Arg1:T17 Arg2:T16	
+T18	Condition 405 422	Palpable fibroids
+T19	Condition 426 442	uterine prolapse
+*	OR T18 T19
+T20	Measurement 444 449	Grade
+T21	Value 450 456	2 or 3
+R5	Has_value Arg1:T20 Arg2:T21	
+T22	Scope 405 442	Palpable fibroids or uterine prolapse
+R6	AND Arg1:T22 Arg2:T20	
+T23	Condition 459 476	Cigarette smoking

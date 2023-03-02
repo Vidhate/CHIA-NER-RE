@@ -1,0 +1,19 @@
+T1	Condition 0 4	PCOS
+T2	Condition 8 24	polycystic ovary
+T3	Procedure 28 43	ultrasound scan
+*	OR T1 T2
+T4	Scope 0 24	PCOS or polycystic ovary
+R1	Has_scope Arg1:T3 Arg2:T4	
+T5	Qualifier 46 54	Moderate
+T6	Qualifier 58 64	severe
+T7	Condition 65 78	endometriosis
+*	OR T5 T6
+T8	Scope 46 64	Moderate or severe
+R2	Has_scope Arg1:T7 Arg2:T8	
+T9	Condition 81 93	Hydrosalpinx
+T10	Condition 96 117	Uterine abnormalities
+T11	Condition 121 126	myoma
+*	OR T10 T11
+T12	Procedure 138 153	uterine surgery
+T13	Temporal 129 137	Previous
+R3	Has_temporal Arg1:T12 Arg2:T13	

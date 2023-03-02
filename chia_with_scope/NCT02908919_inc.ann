@@ -1,0 +1,6 @@
+T1	Observation 21 31	diagnostic
+T2	Observation 35 46	therapeutic
+T3	Procedure 47 58	colonoscopy
+*	OR T2 T1
+T4	Scope 21 46	diagnostic or therapeutic
+R1	Has_scope Arg1:T3 Arg2:T4	

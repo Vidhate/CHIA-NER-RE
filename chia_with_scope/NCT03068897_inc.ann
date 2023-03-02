@@ -1,0 +1,117 @@
+T1	Visit 11 13	ED
+T2	Condition 40 43	LBP
+T3	Observation 0 7	Present
+R1	AND Arg1:T3 Arg2:T1	
+R2	AND Arg1:T1 Arg2:T2	
+T4	Condition 56 60	pain
+T5	Qualifier 73 141	between the lower border of the scapulae and the upper gluteal folds
+R3	Has_qualifier Arg1:T4 Arg2:T5	
+T6	Scope 0 43	Present to ED primary for management of LBP
+T7	Scope 56 141	pain originating between the lower border of the scapulae and the upper gluteal folds
+R4	Subsumes Arg1:T6 Arg2:T7	
+T8	Condition 143 153	Flank pain
+T9	Condition 163 167	pain
+T10	Qualifier 185 226	tissues lateral to the paraspinal muscles
+T11	Negation 233 236	not
+R5	Has_qualifier Arg1:T9 Arg2:T10	
+R6	Subsumes Arg1:T8 Arg2:T9	
+R7	Has_negation Arg1:T8 Arg2:T11	
+T12	Condition 342 365	urinary tract infection
+T13	Condition 267 275	etiology
+T14	Negation 303 306	non
+T15	Condition 323 333	etiologies
+T16	Qualifier 279 287	low back
+R8	Has_qualifier Arg1:T13 Arg2:T16	
+T17	Condition 367 380	ovarian cysts
+T18	Condition 385 407	influenza like illness
+T19	Negation 416 424	excluded
+*	OR T18 T17 T12
+T20	Scope 303 333	non-musculoskeletal etiologies
+T21	Scope 342 407	urinary tract infection, ovarian cysts, or influenza like illness
+R10	Subsumes Arg1:T20 Arg2:T21	
+R11	Has_negation Arg1:T20 Arg2:T19	
+T22	Condition 575 578	LBP
+T23	Qualifier 544 557	non-radicular
+T24	Qualifier 529 542	non-traumatic
+T25	Qualifier 559 574	musculoskeletal
+R12	Has_qualifier Arg1:T22 Arg2:T25	
+R13	Has_qualifier Arg1:T22 Arg2:T23	
+R14	Has_qualifier Arg1:T22 Arg2:T24	
+T26	Scope 251 287	Musculoskeletal etiology of low back
+T27	Scope 529 578	non-traumatic, non-radicular, musculoskeletal LBP
+R15	Subsumes Arg1:T26 Arg2:T27	
+T28	Non-representable 581 755	Patient is to be discharged home. Patients admitted to the hospital are more likely to be treated with parenteral medication and therefore are not appropriate for this study.
+T29	Person 757 760	Age
+T30	Value 761 766	18-64
+R16	Has_value Arg1:T29 Arg2:T30	
+T31	Person 797 803	adults
+T32	Value 804 825	younger than 65 years
+R17	Has_value Arg1:T31 Arg2:T32	
+T33	Condition 859 866;878 885	adverse effects
+T34	Drug 867 877	medication
+R18	AND Arg1:T33 Arg2:T34	
+T35	Person 893 900	elderly
+T36	Mood 841 855	increased risk
+R19	Has_mood Arg1:T33 Arg2:T36	
+T37	Negation 903 906	Non
+T38	Qualifier 907 916	radicular
+T39	Condition 917 921	pain
+T40	Qualifier 307 322	musculoskeletal
+R9	Has_negation Arg1:T40 Arg2:T14	
+R20	Has_qualifier Arg1:T15 Arg2:T40	
+T41	Qualifier 251 266	Musculoskeletal
+R21	Has_qualifier Arg1:T13 Arg2:T41	
+R22	Has_qualifier Arg1:T39 Arg2:T38	
+R23	Has_negation Arg1:T38 Arg2:T37	
+T42	Negation 940 948	excluded
+T43	Condition 956 960	pain
+T44	Qualifier 970 1016	below the gluteal folds in a radicular pattern
+R24	Has_qualifier Arg1:T43 Arg2:T44	
+R25	Has_negation Arg1:T43 Arg2:T42	
+T45	Condition 1019 1023	Pain
+T46	Temporal 1024 1041	duration <2 weeks
+T47	Temporal 1024 1032;1043 1052	duration 336 hours
+*	OR T46 T47
+T48	Scope 1024 1053	duration <2 weeks (336 hours)
+R26	Has_scope Arg1:T45 Arg2:T48	
+T49	Temporal 1174 1179	acute
+T50	Condition 1180 1193	attack of LBP
+T52	Negation 1205 1211	cannot
+T53	Condition 1195 1204	back pain
+R27	Has_temporal Arg1:T50 Arg2:T49	
+T54	Temporal 1161 1193	Prior to the acute attack of LBP
+T55	Reference_point 1174 1193	acute attack of LBP
+R28	Has_index Arg1:T54 Arg2:T55	
+R29	multi Arg1:T55 Arg2:T50	
+T51	Multiplier 1218 1253	more frequently than once per month
+R30	Has_negation Arg1:T51 Arg2:T52	
+R31	Has_multiplier Arg1:T53 Arg2:T51	
+R32	Has_temporal Arg1:T53 Arg2:T54	
+T56	Condition 1371 1374	LBP
+T57	Qualifier 1357 1370	Non-traumatic
+R33	Has_qualifier Arg1:T56 Arg2:T57	
+T58	Qualifier 1395 1401	direct
+T59	Qualifier 1379 1390	substantial
+T60	Condition 1402 1408	trauma
+*	OR T59 T58
+T61	Scope 1379 1401	substantial and direct
+R34	Has_scope Arg1:T60 Arg2:T61	
+T62	Negation 1376 1378	no
+T63	Qualifier 1416 1420	back
+R35	Has_qualifier Arg1:T60 Arg2:T63	
+T64	Temporal 1421 1446	within the previous month
+R36	Has_temporal Arg1:T60 Arg2:T64	
+T65	Scope 1376 1446	no substantial and direct trauma to the back within the previous month
+T66	Scope 1357 1374	Non-traumatic LBP
+R37	Subsumes Arg1:T66 Arg2:T65	
+T67	Qualifier 1448 1470	Functionally impairing
+T68	Condition 1471 1480	back pain
+T69	Measurement 1513 1551	Roland-Morris Disability Questionnaire
+T70	Temporal 1484 1492	baseline
+T71	Value 1493 1505	score of > 5
+R38	Has_value Arg1:T69 Arg2:T71	
+R39	Has_temporal Arg1:T69 Arg2:T70	
+R40	Has_qualifier Arg1:T68 Arg2:T67	
+T72	Scope 1448 1480	Functionally impairing back pain
+T73	Scope 1484 1551	baseline score of > 5 on the Roland-Morris Disability Questionnaire
+R41	Subsumes Arg1:T72 Arg2:T73	

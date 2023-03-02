@@ -1,0 +1,29 @@
+T1	Qualifier 31 40	high-risk
+T2	Qualifier 57 60	cT3
+T3	Qualifier 10 27	intermediate-risk
+T4	Condition 41 56	prostate cancer
+*	OR T3 T1
+T5	Scope 10 40	intermediate-risk or high-risk
+R1	Has_scope Arg1:T4 Arg2:T5	
+R2	Has_qualifier Arg1:T4 Arg2:T2	
+T6	Measurement 62 75	Gleason score
+T7	Value 76 79	= 7
+T8	Value 81 84	3+4
+T9	Value 92 95	4+3
+*	OR T8 T9
+T10	Scope 81 95	3+4 and/or 4+3
+R3	Subsumes Arg1:T7 Arg2:T10	
+R4	Has_scope Arg1:T6 Arg2:T10	
+T11	Measurement 105 108	PSA
+T12	Value 109 119	= 20 ng/ml
+R5	Has_value Arg1:T11 Arg2:T12	
+T13	Condition 121 127;141 158	intact erectile function
+T14	Temporal 128 140	preoperative
+R6	Has_temporal Arg1:T13 Arg2:T14	
+T15	Measurement 167 171	IIEF
+T16	Value 172 176	= 21
+T17	Observation 178 184	IIEF-6
+R7	Has_value Arg1:T15 Arg2:T16	
+T18	Scope 167 176	IIEF = 21
+R8	Subsumes Arg1:T18 Arg2:T17	
+R9	Has_scope Arg1:T13 Arg2:T18	

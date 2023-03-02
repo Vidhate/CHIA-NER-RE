@@ -1,0 +1,17 @@
+T1	Person 0 5	Women
+T2	Person 9 16	any age
+T3	Value 22 27	early
+T4	Measurement 28 33	stage
+T5	Condition 34 47	breast cancer
+T6	Measurement 49 54	stage
+T7	Value 55 59	I-II
+T9	Scope 49 59	stage I-II
+R3	Has_value Arg1:T4 Arg2:T3	
+T10	Measurement 65 114	American Society of Anesthesiologists (ASA) score
+T11	Value 118 122	I-II
+R4	Has_value Arg1:T6 Arg2:T7	
+R5	Has_value Arg1:T10 Arg2:T11	
+T8	Scope 22 33	early stage
+R1	Subsumes Arg1:T8 Arg2:T9	
+R2	Has_scope Arg1:T5 Arg2:T8	
+R6	AND Arg1:T5 Arg2:T10	

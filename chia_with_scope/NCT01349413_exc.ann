@@ -1,0 +1,36 @@
+T1	Procedure 44 59	upper endoscopy
+T2	Condition 12 29	organic pathology
+T3	Procedure 69 83	investigations
+*	OR T1 T3
+T4	Scope 44 83	upper endoscopy or other investigations
+R1	AND Arg1:T4 Arg2:T2	
+T5	Condition 105 118	hiatus hernia
+T6	Qualifier 97 104	sliding
+R2	Has_qualifier Arg1:T5 Arg2:T6	
+T7	Measurement 133 143;153 177	flap valve disruption of morphology
+T8	Value 144 152	grade IV
+T9	Qualifier 178 207	at gastro-esophageal junction
+R3	Has_value Arg1:T7 Arg2:T8	
+R4	Has_qualifier Arg1:T5 Arg2:T9	
+R5	AND Arg1:T7 Arg2:T5	
+T10	Drug 220 231	medications
+T11	Condition 244 269	gastrointestinal motility
+R6	AND Arg1:T10 Arg2:T11	
+T12	Condition 283 294	acid reflux
+T13	Condition 298 316	heartburn symptoms
+T14	Temporal 320 343	more than twice a month
+*	OR T12 T13
+T15	Scope 283 316	acid reflux or heartburn symptoms
+R7	Has_temporal Arg1:T15 Arg2:T14	
+T16	Procedure 356 371	gastric surgery
+T17	Condition 373 392	H. pylori infection
+T18	Drug 401 404	PPI
+T19	Drug 408 413	NSAID
+T20	Temporal 414 433	in the past 4 weeks
+*	OR T18 T19
+T21	Scope 401 413	PPI or NSAID
+R8	Has_temporal Arg1:T21 Arg2:T20	
+T22	Condition 435 444	Pregnancy
+T23	Condition 452 468	hypersensitivity
+T24	Drug 472 475	PPI
+R9	AND Arg1:T23 Arg2:T24	

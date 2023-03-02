@@ -1,0 +1,102 @@
+T1	Condition 29 41	skin disease
+T2	Qualifier 17 28	significant
+T3	Observation 0 7	History
+R1	Has_qualifier Arg1:T1 Arg2:T2	
+T4	Condition 69 85	allergic illness
+T5	Condition 95 117	dermatologic condition
+*	OR T4 T5
+T6	Condition 46 65	skin manifestations
+T7	Scope 69 117	allergic illness or other dermatologic condition
+R3	Has_scope Arg1:T6 Arg2:T7	
+T8	Condition 153 170	atopic dermatitis
+T9	Qualifier 146 152	severe
+T10	Qualifier 126 142	chronic moderate
+*	OR T9 T10
+T11	Scope 126 152	chronic moderate or severe
+R4	Has_scope Arg1:T8 Arg2:T11	
+T12	Subjective_judgement 177 299	would interfere with the trial assessments or compromise the patient's safety according to the opinion of the Investigator
+T13	Negation 119 125	except
+R2	Has_negation Arg1:T8 Arg2:T13	
+R5	AND Arg1:T6 Arg2:T8	
+*	OR T1 T6
+T14	Condition 327 340	skin diseases
+T15	Condition 349 374	chronic atopic dermatitis
+T16	Negation 342 348	except
+R6	Has_negation Arg1:T15 Arg2:T16	
+T17	Qualifier 381 442	could disturb the study assessment and evaluation of the skin
+T18	Undefined_semantics 381 442	could disturb the study assessment and evaluation of the skin
+R7	Has_qualifier Arg1:T14 Arg2:T17	
+T19	Condition 494 519	chronic atopic dermatitis
+T20	Temporal 520 536	within one month
+R8	Has_temporal Arg1:T19 Arg2:T20	
+T21	Drug 470 489	systemic medication
+T22	Temporal 463 469	active
+R9	Has_temporal Arg1:T21 Arg2:T22	
+R10	AND Arg1:T21 Arg2:T19	
+T23	Condition 619 644	chronic atopic dermatitis
+T24	Temporal 645 661	within two weeks
+R11	Has_temporal Arg1:T23 Arg2:T24	
+T25	Drug 560 578	topical medication
+T26	Temporal 553 559	active
+R12	Has_temporal Arg1:T25 Arg2:T26	
+R13	AND Arg1:T25 Arg2:T23	
+T27	Observation 676 689	sunny holiday
+T28	Procedure 691 707	UV-light therapy
+T29	Observation 711 723	solarium use
+T30	Temporal 724 777	within one month before beginning of study treatments
+T31	Reference_point 748 777	beginning of study treatments
+T32	Observation 782 790	planning
+T33	Temporal 796 812	during the study
+T34	Temporal 816 845	within 7 days after the study
+*	OR T34 T33
+T35	Scope 796 845	during the study or within 7 days after the study
+*	OR T27 T28 T29
+T36	Scope 676 723	sunny holiday, UV-light therapy or solarium use
+R14	Has_temporal Arg1:T36 Arg2:T30	
+R15	Has_mood Arg1:T36 Arg2:T32	
+A1	Optional T32
+R16	Has_scope Arg1:T32 Arg2:T35	
+T37	Condition 847 854	Allergy
+T38	Drug 940 958	Protopic® ointment
+T39	Drug 858 865	cis-UCA
+T40	Drug 894 916	placebo emulsion cream
+*	OR T40 T38 T39
+T41	Scope 858 958	cis-UCA, or any constituents of the placebo emulsion cream or any constituents of Protopic® ointment
+R17	Has_scope Arg1:T37 Arg2:T41	
+T42	Condition 975 994	skin-related cancer
+T43	Observation 960 967	History
+T44	Condition 1010 1035	acquired immunodeficiency
+T45	Condition 1019 1035;996 1006	immunodeficiency Congenital
+T46	Procedure 1047 1083	therapy that cause immunosuppression
+T47	Qualifier 1055 1083	that cause immunosuppression
+T48	Condition 1066 1083	immunosuppression
+R18	AND Arg1:T47 Arg2:T48	
+R19	Has_qualifier Arg1:T46 Arg2:T47	
+T49	Temporal 1039 1046	ongoing
+*	OR T45 T44 T46
+R20	Has_temporal Arg1:T46 Arg2:T49	
+T50	Non-query-able 1085 1149	Earlier participation in a clinical study performed with cis-UCA
+T51	Qualifier 1155 1177	clinically significant
+T52	Procedure 1178 1193	laboratory test
+R21	Has_qualifier Arg1:T52 Arg2:T51	
+T53	Undefined_semantics 1151 1200	Any clinically significant laboratory test result
+T54	Subjective_judgement 1151 1200	Any clinically significant laboratory test result
+T55	Condition 1228 1241	alcohol abuse
+T56	Condition 1220 1224;1236 1241	drug abuse
+*	OR T56 T55
+T57	Observation 1202 1211	Suspected
+T58	Temporal 1212 1219	current
+T59	Scope 1220 1241	drug or alcohol abuse
+R22	Has_context Arg1:T59 Arg2:T57	
+R23	Has_temporal Arg1:T59 Arg2:T58	
+T60	Temporal 1274 1331	during the 4 weeks prior to the first dose administration
+T61	Reference_point 1302 1331	the first dose administration
+R24	Has_index Arg1:T60 Arg2:T61	
+T62	Condition 1266 1273	illness
+T63	Qualifier 1243 1265	Clinically significant
+R25	Has_qualifier Arg1:T62 Arg2:T63	
+R26	Has_temporal Arg1:T62 Arg2:T60	
+T64	Subjective_judgement 1243 1331	Clinically significant illness during the 4 weeks prior to the first dose administration
+T65	Post-eligibility 1333 1495	Any other condition that in the opinion of the Investigator would interfere with the evaluation of the study results or constitute a health hazard for the patient
+T66	Post-eligibility 1497 1559	Unwillingness or doubtful capacity to comply with the protocol
+T67	Post-eligibility 1561 1604	Doubtful availability to complete the study

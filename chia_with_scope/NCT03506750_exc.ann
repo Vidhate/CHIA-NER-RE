@@ -1,0 +1,49 @@
+T1	Condition 9 31	retinal vein occlusion
+T2	Temporal 0 8	previous
+R1	Has_temporal Arg1:T1 Arg2:T2	
+T3	Procedure 38 57	intraocular surgery
+T4	Temporal 58 87	within the previous 12 months
+R2	Has_temporal Arg1:T3 Arg2:T4	
+T5	Condition 90 96	myopia
+T6	Value 100 120	> or = to 8 diopters
+R3	Has_value Arg1:T5 Arg2:T6	
+T7	Condition 140 160	periocular infection
+T8	Condition 130 136;151 160	ocular infection
+*	OR T8 T7
+T9	Scope 130 160	ocular or periocular infection
+T10	Qualifier 123 129	active
+R4	Has_qualifier Arg1:T9 Arg2:T10	
+T11	Competing_trial 162 247	treatment with an investigational agent for any condition 60 days prior to enrollment
+T12	Qualifier 262 268	severe
+T13	Condition 269 284	cardiac disease
+T14	Mood 250 261	evidence of
+R5	Has_qualifier Arg1:T13 Arg2:T12	
+R6	Has_mood Arg1:T13 Arg2:T14	
+T15	Qualifier 287 309	clinically significant
+T16	Condition 310 337	peripheral vascular disease
+R7	Has_qualifier Arg1:T16 Arg2:T15	
+T17	Procedure 339 355	previous surgery
+T18	Procedure 357 367	amputation
+T19	Condition 372 396	symptoms of claudication
+*	OR T17 T18 T19
+T20	Scope 339 396	previous surgery, amputation, or symptoms of claudication
+T21	Scope 287 337	clinically significant peripheral vascular disease
+R8	Subsumes Arg1:T21 Arg2:T20	
+T22	Condition 412 424	hypertension
+T23	Qualifier 399 411	uncontrolled
+R9	Has_qualifier Arg1:T22 Arg2:T23	
+T24	Measurement 434 457	systolic blood pressure
+T25	Qualifier 426 433	treated
+T26	Value 458 468	> 155 mmHg
+T27	Measurement 472 496	diastolic blood pressure
+T28	Value 497 506	> 95 mmHg
+R10	Has_value Arg1:T24 Arg2:T26	
+R11	Has_value Arg1:T27 Arg2:T28	
+*	OR T24 T27
+T29	Scope 434 506	systolic blood pressure > 155 mmHg or diastolic blood pressure > 95 mmHg
+R12	Has_qualifier Arg1:T29 Arg2:T25	
+T30	Scope 399 424	uncontrolled hypertension
+R13	Subsumes Arg1:T30 Arg2:T29	
+T31	Condition 509 515	stroke
+T32	Temporal 516 546	within the preceding 12 months
+R14	Has_temporal Arg1:T31 Arg2:T32	

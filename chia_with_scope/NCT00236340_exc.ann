@@ -1,0 +1,17 @@
+T1	Condition 0 18	Multiple pregnancy
+T2	Value 20 31	more than 3
+T3	Measurement 32 39	fetuses
+R2	Has_value Arg1:T3 Arg2:T2	
+T4	Condition 62 80	placental abruptio
+T5	Observation 42 61	Maternal history of
+R3	AND Arg1:T5 Arg2:T4	
+T7	Condition 93 97	IUGR
+T6	Condition 82 87	Fetus
+R4	AND Arg1:T6 Arg2:T7	
+T8	Condition 99 108	Pregnancy
+T9	Condition 126 139	pre-eclampsia
+T10	Observation 154 175	give informed consent
+T11	Negation 141 153	Unability to
+R5	Has_negation Arg1:T10 Arg2:T11	
+T12	Scope 20 39	more than 3 fetuses
+R1	Subsumes Arg1:T1 Arg2:T12	

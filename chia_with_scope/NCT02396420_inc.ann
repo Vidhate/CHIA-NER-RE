@@ -1,0 +1,51 @@
+T3	Value 62 89	greater than or equal to 40
+T4	Person 57 61	aged
+T5	Value 94 124	less than or equal to 89 years
+T7	Scope 62 124	greater than or equal to 40 and less than or equal to 89 years
+R1	Has_scope Arg1:T4 Arg2:T7	
+T8	Value 161 181	between 90g and 200g
+T9	Measurement 147 160	prostate size
+T10	Procedure 200 203	MRI
+R3	Has_value Arg1:T9 Arg2:T8	
+R4	AND Arg1:T9 Arg2:T10	
+T11	Condition 229 264	lower urinary tract symptoms (LUTS)
+T12	Temporal 269 312	at least 6 months prior to study enrollment
+T13	Reference_point 296 312	study enrollment
+R5	Has_index Arg1:T12 Arg2:T13	
+R6	Has_temporal Arg1:T11 Arg2:T12	
+T14	Measurement 329 339	IPSS score
+T15	Value 343 354	at least 13
+T16	Temporal 355 366	at baseline
+T17	Reference_point 358 366	baseline
+R7	Has_index Arg1:T16 Arg2:T17	
+R8	Has_value Arg1:T14 Arg2:T15	
+R9	Has_temporal Arg1:T14 Arg2:T16	
+T18	Condition 387 418	refractory to medical treatment
+T19	Condition 420 456	contraindicated to medical treatment
+T20	Condition 461 486	refuses medical treatment
+*	OR T18 T19 T20
+T21	Condition 504 530	refuses surgical treatment
+T22	Condition 537 575	contraindicated for surgical treatment
+*	OR T21 T22
+T23	Measurement 631 634	PSA
+T24	Temporal 622 630	baseline
+R10	Has_temporal Arg1:T23 Arg2:T24	
+T25	Value 635 645	< 4.0ng/mL
+R11	Has_value Arg1:T23 Arg2:T25	
+T26	Measurement 688 691	PSA
+T27	Temporal 679 687	baseline
+R12	Has_temporal Arg1:T26 Arg2:T27	
+T28	Value 692 703	>/= 4 ng/mL
+T29	Measurement 719 734	prostate biopsy
+T30	Value 710 718	negative
+R13	Has_value Arg1:T29 Arg2:T30	
+R14	Has_value Arg1:T26 Arg2:T28	
+T31	Multiplier 736 746	minimum 12
+T32	Procedure 747 758	core biopsy
+R15	Has_multiplier Arg1:T32 Arg2:T31	
+T33	Temporal 760 786	within the prior 12 months
+T34	Scope 622 759	baseline PSA < 4.0ng/mL (no prostate biopsy required) OR baseline PSA >/= 4 ng/mL AND a negative prostate biopsy (minimum 12 core biopsy)
+R16	Has_temporal Arg1:T34 Arg2:T33	
+T35	Scope 679 733	baseline PSA >/= 4 ng/mL AND a negative prostate biops
+*	OR T35 T23
+T1	Observation 21 44	signed informed consent

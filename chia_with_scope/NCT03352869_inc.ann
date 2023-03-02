@@ -1,0 +1,19 @@
+T1	Condition 0 10	Overweight
+T2	Condition 15 20	obese
+T3	Condition 21 25	PCOS
+*	OR T2 T1
+T4	Temporal 40 55	newly diagnosed
+T5	Condition 56 59	IGR
+R1	Has_temporal Arg1:T5 Arg2:T4	
+T6	Condition 62 66	PCOS
+T7	Qualifier 86 109	2003 Rotterdam criteria
+R2	Has_qualifier Arg1:T6 Arg2:T7	
+T8	Condition 111 121	Overweight
+T9	Condition 124 131	obesity
+T10	Qualifier 165 172	WHO-WPR
+*	OR T9 T8
+T11	Scope 111 131	Overweight / obesity
+R3	Has_qualifier Arg1:T11 Arg2:T10	
+T12	Condition 174 201	Impaired glucose regulation
+T13	Qualifier 235 263	1998 WHO diagnostic criteria
+R4	Has_qualifier Arg1:T12 Arg2:T13	

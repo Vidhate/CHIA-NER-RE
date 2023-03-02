@@ -1,0 +1,21 @@
+T1	Condition 0 27	acute myocardial infarction
+T2	Condition 32 55	ischemic cardiomyopathy
+T3	Condition 81 102	myocardial infarction
+T4	Temporal 72 80	previous
+R1	Has_temporal Arg1:T3 Arg2:T4	
+T5	Scope 72 102	previous myocardial infarction
+A1	Optional T5
+T6	Condition 107 129	dilated cardiomyopathy
+T7	Condition 137 159	valvular heart disease
+R2	causal Arg1:T6 Arg2:T7	
+T8	Condition 161 187	hypertensive heart disease
+T9	Condition 200 211	myocarditis
+T10	Observation 189 196	history
+R3	Has_temporal Arg1:T9 Arg2:T10	
+T11	Condition 223 243	myocardial infection
+T12	Negation 213 215	no
+T13	Temporal 216 222	active
+R4	Has_temporal Arg1:T11 Arg2:T13	
+R5	Has_negation Arg1:T11 Arg2:T12	
+R6	AND Arg1:T9 Arg2:T11	
+*	OR T8 T6 T9

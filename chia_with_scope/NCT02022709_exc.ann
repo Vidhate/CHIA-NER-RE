@@ -1,0 +1,23 @@
+T1	Non-query-able 0 87	Having significant medical illnesses that would interfere with the conduct of the study
+T2	Non-query-able 89 139	Clinically significant abnormal laboratory finding
+T3	Condition 157 179	psychiatric conditions
+T4	Qualifier 148 156	comorbid
+R1	Has_qualifier Arg1:T3 Arg2:T4	
+T5	Qualifier 223 229	DSM-IV
+R2	Has_qualifier Arg1:T3 Arg2:T5	
+T6	Condition 317 329	OCD symptoms
+T7	Qualifier 338 344	severe
+R3	Has_qualifier Arg1:T6 Arg2:T7	
+T8	Observation 430 446	risk for suicide
+T9	Pregnancy_considerations 448 529	Being pregnant or having the intention to be pregnant before the end of the study
+T10	Drug 583 588	SSRIs
+T11	Drug 592 595	CBT
+*	OR T10 T11
+T12	Condition 562 570	response
+T13	Scope 583 595	SSRIs or CBT
+R4	Has_scope Arg1:T12 Arg2:T13	
+T14	Qualifier 551 561	inadequate
+R5	Has_qualifier Arg1:T12 Arg2:T14	
+T15	Mood 624 633	unable to
+T16	Procedure 646 649	MRI
+R6	Has_mood Arg1:T16 Arg2:T15	

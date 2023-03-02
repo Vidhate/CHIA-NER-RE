@@ -1,0 +1,36 @@
+T1	Condition 0 20	cognitive impairment
+T2	Measurement 22 58	Mini-Mental Status Examination score
+T3	Observation 60 70	illiterate
+T4	Value 71 80	13 points
+T5	Observation 82 92	elementary
+T6	Observation 97 110	middle school
+T7	Value 111 120	18 points
+T8	Observation 126 137	high-school
+T9	Value 138 147	26 points
+*	OR T6 T5
+T10	Scope 82 110	elementary and middle school
+A1	Optional T10
+A2	Optional T8
+A3	Optional T3
+R1	Has_value Arg1:T10 Arg2:T7	
+R2	Has_value Arg1:T3 Arg2:T4	
+R3	Has_value Arg1:T8 Arg2:T9	
+*	OR T10 T3 T8 T11
+T11	Condition 152 190	inability to respond to verbal command
+T12	Scope 60 190	illiterate 13 points; elementary and middle school 18 points; and high-school 26 points; or inability to respond to verbal command
+R4	Has_scope Arg1:T2 Arg2:T12	
+T13	Scope 22 190	Mini-Mental Status Examination score: illiterate 13 points; elementary and middle school 18 points; and high-school 26 points; or inability to respond to verbal command
+R5	Subsumes Arg1:T1 Arg2:T13	
+T14	Condition 194 225	inability to walk independently
+T15	Qualifier 230 249	at least 10 minutes
+R6	Has_qualifier Arg1:T14 Arg2:T15	
+T16	Device 267 282	walking devices
+A4	Optional T16
+R7	AND Arg1:T14 Arg2:T16	
+T17	Condition 285 289	pain
+T18	Condition 293 308	other disorders
+*	OR T17 T18
+T19	Qualifier 309 339	precluding their participation
+T20	Scope 285 308	pain or other disorders
+R8	Has_qualifier Arg1:T20 Arg2:T19	
+T21	Post-eligibility 285 339	pain or other disorders precluding their participation

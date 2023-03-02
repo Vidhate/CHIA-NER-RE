@@ -1,0 +1,25 @@
+T1	Condition 0 4	T1DM
+T2	Temporal 5 27	for at least 12 months
+R1	Has_temporal Arg1:T1 Arg2:T2	
+T3	Measurement 40 52	HbA1c levels
+T4	Multiplier 29 39	persistent
+R2	Has_multiplier Arg1:T3 Arg2:T4	
+T5	Value 53 59	= 7.5%
+T6	Value 61 72	58 mmol/mol
+R3	Subsumes Arg1:T5 Arg2:T6	
+R4	Has_value Arg1:T3 Arg2:T5	
+T7	Procedure 82 109	optimized education therapy
+R5	AND Arg1:T3 Arg2:T7	
+T8	Multiplier 112 121	recurrent
+T9	Qualifier 122 128	severe
+T10	Condition 129 150	hypoglycemic episodes
+T11	Condition 154 178	high glucose variability
+*	OR T10 T11
+T12	Scope 129 178	hypoglycemic episodes or high glucose variability
+R6	Has_qualifier Arg1:T12 Arg2:T9	
+R7	Has_multiplier Arg1:T12 Arg2:T8	
+T13	Mood 180 191	willingness
+T14	Procedure 195 216	wear the insulin pump
+T15	Device 204 216	insulin pump
+R8	multi Arg1:T14 Arg2:T15	
+R9	Has_mood Arg1:T14 Arg2:T13	

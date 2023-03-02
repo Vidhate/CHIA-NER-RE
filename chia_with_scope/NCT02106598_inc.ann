@@ -1,0 +1,113 @@
+T1	Person 12 15	age
+T2	Value 0 8;16 24	18 years or older
+T3	Condition 64 72	melanoma
+T4	Procedure 26 40	Histologically
+T5	Value 41 50	confirmed
+R1	Has_value Arg1:T4 Arg2:T5	
+R2	AND Arg1:T3 Arg2:T4	
+T6	Condition 74 87	breast cancer
+T7	Condition 91 109	gynecologic cancer
+T8	Visit 113 118	MSKCC
+R3	AND Arg1:T6 Arg2:T4	
+R4	AND Arg1:T7 Arg2:T4	
+*	OR T3 T6 T7
+T9	Parsing_Error 120 164	Have one of the following disease histories:
+T10	Condition 225 243	malignant melanoma
+T11	Condition 247 260	breast cancer
+*	OR T10 T11
+T12	Qualifier 196 201	local
+T13	Qualifier 203 211	regional
+T14	Qualifier 213 223	metastatic
+*	OR T14 T13 T12
+T15	Scope 196 223	local, regional, metastatic
+T16	Temporal 166 181	Newly-diagnosed
+T17	Multiplier 185 194	recurrent
+*	OR T17 T16
+T18	Scope 225 260	malignant melanoma or breast cancer
+T19	Scope 166 194	Newly-diagnosed or recurrent
+R5	Has_scope Arg1:T18 Arg2:T19	
+R6	Has_scope Arg1:T18 Arg2:T15	
+T20	Condition 352 357	tumor
+T21	Procedure 327 343	radiographically
+T22	Qualifier 304 312	Residual
+T23	Value 344 351	evident
+R7	Has_value Arg1:T21 Arg2:T23	
+T24	Procedure 313 323	clinically
+R8	Has_qualifier Arg1:T24 Arg2:T22	
+*	OR T21 T24
+T25	Scope 304 351	Residual clinically or radiographically evident
+R9	Has_scope Arg1:T20 Arg2:T25	
+T26	Condition 369 386	primary cutaneous
+T27	Condition 391 408	mucosal melanomas
+T28	Scope 369 408	primary cutaneous and mucosal melanomas
+*	OR T27 T26
+R10	Subsumes Arg1:T25 Arg2:T28	
+T29	Procedure 416 433	radiation therapy
+T30	Procedure 435 447	chemotherapy
+T31	Procedure 452 459	surgery
+T32	Procedure 482 501	flap reconstruction
+T33	Condition 472 501	requiring flap reconstruction
+R11	AND Arg1:T33 Arg2:T32	
+T34	Qualifier 509 529	head and neck region
+R12	Has_qualifier Arg1:T32 Arg2:T34	
+*	OR T31 T30 T29
+T35	Temporal 410 415	Prior
+T36	Procedure 571 588	excisional biopsy
+T37	Temporal 562 570	previous
+R13	Has_temporal Arg1:T36 Arg2:T37	
+T38	Condition 610 628	gynecologic cancer
+T39	Procedure 646 657	SLN mapping
+T40	Procedure 662 679	surgical excision
+T41	Condition 662 692	surgical excision is indicated
+T42	Condition 646 657;680 692	SLN mapping is indicated
+R14	AND Arg1:T42 Arg2:T39	
+R15	AND Arg1:T41 Arg2:T40	
+T43	Measurement 713 729	cardiac function
+T44	Value 697 703	Normal
+T45	Measurement 704 712	baseline
+R16	Has_value Arg1:T43 Arg2:T44	
+R17	AND Arg1:T43 Arg2:T45	
+T46	Procedure 741 765	pre-operative evaluation
+R18	AND Arg1:T43 Arg2:T46	
+T47	Temporal 741 754	pre-operative
+R19	Has_temporal Arg1:T46 Arg2:T47	
+T48	Subjective_judgement 767 809	At the discretion of the operating surgeon
+T49	Measurement 811 814	ANC
+T50	Value 814 823	>1000/mcl
+R20	Has_value Arg1:T49 Arg2:T50	
+T51	Measurement 828 837	platelets
+T52	Value 837 849	>100,000/mcl
+R21	Has_value Arg1:T51 Arg2:T52	
+T53	Subjective_judgement 852 894	At the discretion of the operating surgeon
+T54	Measurement 896 911	Bilirubin level
+T55	Value 915 926	< 2.0 mg/dl
+R22	Has_value Arg1:T54 Arg2:T55	
+T56	Condition 958 975	Gilbert's disease
+T57	Negation 927 944	in the absence of
+R23	Has_negation Arg1:T56 Arg2:T57	
+T58	Observation 947 954	history
+R24	Has_temporal Arg1:T56 Arg2:T58	
+T59	Condition 1021 1029	melanoma
+T60	Condition 1070 1080	malignancy
+T61	Condition 1092 1100	melanoma
+T62	Negation 1081 1091	other than
+R25	Has_negation Arg1:T61 Arg2:T62	
+T63	Condition 1112 1124	skin cancers
+T64	Temporal 1125 1147	in the past five years
+T65	Subjective_judgement 1168 1205	up to the discretion of the physician
+R26	Has_temporal Arg1:T63 Arg2:T64	
+R27	AND Arg1:T60 Arg2:T61	
+*	OR T63 T60
+T66	Grammar_Error 1102 1105	and
+T67	Observation 1059 1066	history
+R28	Has_temporal Arg1:T60 Arg2:T67	
+R29	Has_temporal Arg1:T63 Arg2:T67	
+T68	Post-eligibility 1208 1309	All patients of childbearing and child-creating age must be using an acceptable form of birth control
+T69	Person 1311 1316	Women
+T70	Condition 1325 1339	pre-menopausal
+T71	Scope 1311 1339	Women who are pre-menopausal
+A1	Optional T71
+T72	Measurement 1361 1381	serum pregnancy test
+T73	Value 1352 1360	negative
+R30	Has_value Arg1:T72 Arg2:T73	
+R31	AND Arg1:T71 Arg2:T72	

@@ -1,0 +1,13 @@
+T1	Condition 0 9	Infection
+T2	Qualifier 15 36	Plasmodium falciparum
+T3	Qualifier 40 48	P. vivax
+*	OR T2 T3
+T4	Scope 15 48	Plasmodium falciparum or P. vivax
+R1	Has_scope Arg1:T1 Arg2:T4	
+T5	Person 72 75	Age
+T6	Value 76 86	>12 months
+R2	Has_value Arg1:T5 Arg2:T6	
+T7	Person 88 94	Weight
+T8	Value 95 99	>5kg
+R3	Has_value Arg1:T7 Arg2:T8	
+T9	Non-query-able 101 129	Living in the study clusters

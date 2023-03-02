@@ -1,0 +1,131 @@
+T1	Person 0 3	Men
+T2	Person 8 13	women
+T3	Person 28 33	years
+*	OR T1 T2
+T4	Value 14 27	older than 18
+R1	Has_value Arg1:T3 Arg2:T4	
+T5	Mood 35 44	scheduled
+T6	Procedure 72 90	coronary procedure
+R2	Has_mood Arg1:T6 Arg2:T5	
+T7	Visit 128 181	the National Institute of Cardiology "Ignacio Chavez"
+R3	AND Arg1:T6 Arg2:T10	
+T8	Procedure 239 262	cardiac catheterization
+T9	Condition 223 234	indications
+R4	AND Arg1:T9 Arg2:T8	
+T10	Visit 98 124	department of hemodynamics
+R5	AND Arg1:T10 Arg2:T7	
+T11	Condition 264 277	Thoracic pain
+T12	Qualifier 291 297	Stable
+T13	Condition 298 322	chronic coronary disease
+R6	Has_qualifier Arg1:T13 Arg2:T12	
+T14	Condition 324 351	Acute myocardial infarction
+T15	Condition 357 377	ST segment elevation
+T16	Procedure 408 427	reperfusion therapy
+T17	Qualifier 401 407	timely
+T18	Negation 393 400	without
+R7	Has_qualifier Arg1:T16 Arg2:T17	
+R8	Has_negation Arg1:T16 Arg2:T18	
+T19	Temporal 429 464	with less than 4 weeks of evolution
+T20	Reference_point 455 464	evolution
+R9	Has_index Arg1:T19 Arg2:T20	
+R10	Has_temporal Arg1:T16 Arg2:T19	
+T21	Condition 466 493	Acute myocardial infarction
+T22	Condition 499 519	ST-segment elevation
+R11	AND Arg1:T14 Arg2:T15	
+T23	Procedure 532 552	thrombolytic therapy
+T24	Qualifier 521 531	successful
+R12	Has_qualifier Arg1:T23 Arg2:T24	
+R13	AND Arg1:T14 Arg2:T16	
+R14	AND Arg1:T21 Arg2:T22	
+T25	Mood 560 572	will undergo
+T26	Procedure 573 594	drug-invasive therapy
+R15	AND Arg1:T21 Arg2:T23	
+R16	AND Arg1:T21 Arg2:T26	
+R17	Has_mood Arg1:T26 Arg2:T25	
+T27	Condition 596 623	Acute myocardial infarction
+T28	Negation 624 631	without
+T29	Condition 632 652	ST segment elevation
+R18	AND Arg1:T27 Arg2:T29	
+R19	Has_negation Arg1:T29 Arg2:T28	
+T30	Condition 654 669	Unstable angina
+T31	Condition 675 698	acute coronary syndrome
+T32	Procedure 703 712	intervene
+T33	Qualifier 733 739	artery
+T34	Qualifier 713 732	non-infarct-related
+R20	Has_qualifier Arg1:T33 Arg2:T34	
+R21	Has_qualifier Arg1:T32 Arg2:T33	
+R22	AND Arg1:T31 Arg2:T32	
+T35	Condition 741 748	Disease
+T36	Qualifier 756 767	heart valve
+R23	Has_qualifier Arg1:T35 Arg2:T36	
+T37	Condition 769 780	Myocarditis
+T38	Condition 784 796	pericarditis
+T39	Condition 806 820	cardiomyopathy
+T40	Qualifier 798 805	Dilated
+R24	Has_qualifier Arg1:T39 Arg2:T40	
+T41	Condition 843 866	cardiac transplantation
+T42	Condition 834 839;851 866	renal transplantation
+*	OR T41 T42 T37 T38 T35 T11 T13 T14 T21 T27 T30 T31 T39 T43
+T43	Condition 894 918	Congenital heart disease
+T44	Qualifier 933 961	knowing the coronary anatomy
+T45	Temporal 962 991	prior to surgical correction.
+R25	Has_qualifier Arg1:T43 Arg2:T44	
+R26	Has_temporal Arg1:T43 Arg2:T45	
+T46	Reference_point 971 990	surgical correction
+R27	Has_index Arg1:T45 Arg2:T46	
+T47	Procedure 1005 1014	procedure
+T48	Qualifier 1048 1058	diagnostic
+T49	Procedure 1069 1089	coronary angiography
+T50	Qualifier 1090 1094	only
+T51	Procedure 1096 1116	left catheterization
+T52	Procedure 1118 1122;1133 1148	left catheterization
+T53	Procedure 1127 1148	right catheterization
+T54	Scope 1118 1148	left and right catheterization
+R28	Has_qualifier Arg1:T49 Arg2:T50	
+T55	Procedure 1069 1089	coronary angiography
+T56	Procedure 1069 1089	coronary angiography
+R29	AND Arg1:T56 Arg2:T51	
+R30	Has_scope Arg1:T55 Arg2:T54	
+*	OR T55 T56 T49
+T57	Scope 1069 1148	coronary angiography only, left catheterization, left and right catheterization
+R31	Has_qualifier Arg1:T57 Arg2:T48	
+T58	Qualifier 1155 1166	therapeutic
+T59	Scope 264 990	Thoracic pain under study. Stable chronic coronary disease. Acute myocardial infarction with ST segment elevation, not perfused (without timely reperfusion therapy) with less than 4 weeks of evolution. Acute myocardial infarction with ST-segment elevation, successful thrombolytic therapy, which will undergo drug-invasive therapy. Acute myocardial infarction without ST segment elevation. Unstable angina. Any acute coronary syndrome, to intervene non-infarct-related artery. Disease of any heart valve. Myocarditis or pericarditis. Dilated cardiomyopathy. Patients in renal or cardiac transplantation protocol for any etiology. Congenital heart disease that requires knowing the coronary anatomy prior to surgical correction
+R32	Subsumes Arg1:T9 Arg2:T59	
+T60	Procedure 1177 1211	percutaneous coronary intervention
+T61	Procedure 1213 1216	PCI
+T62	Procedure 1235 1250	stent placement
+A1	Optional T62
+R33	Subsumes Arg1:T60 Arg2:T61	
+R34	Has_qualifier Arg1:T60 Arg2:T58	
+R35	AND Arg1:T60 Arg2:T62	
+*	OR T57 T60
+T63	Scope 1048 1250	diagnostic purposes (coronary angiography only, left catheterization, left and right catheterization). For therapeutic purposes: percutaneous coronary intervention (PCI), with or without stent placement
+R36	Subsumes Arg1:T47 Arg2:T63	
+T64	Procedure 1262 1268	access
+T65	Qualifier 1255 1261	priori
+R37	Has_qualifier Arg1:T64 Arg2:T65	
+T66	Qualifier 1286 1304	left radial artery
+T67	Qualifier 1277 1282;1291 1304	right radial artery
+*	OR T66 T67
+T68	Scope 1277 1304	right or left radial artery
+R38	Has_scope Arg1:T64 Arg2:T68	
+T69	Condition 1323 1328	pulse
+T70	Qualifier 1307 1322	Radial arterial
+R39	Has_qualifier Arg1:T69 Arg2:T70	
+T71	Measurement 1357 1366	palpation
+T72	Value 1347 1353	absent
+T73	Value 1336 1343	present
+*	OR T72 T73
+T74	Scope 1336 1353	present or absent
+R40	Has_scope Arg1:T71 Arg2:T74	
+R41	AND Arg1:T69 Arg2:T71	
+T75	Measurement 1369 1383;1395 1399	Modified Allen test
+T76	Measurement 1387 1399	Barbeau test
+*	OR T76 T75
+T77	Value 1410 1418	positive
+T78	Scope 1369 1399	Modified Allen or Barbeau test
+R42	Has_value Arg1:T78 Arg2:T77	
+T79	Condition 1432 1454	collateral palmar flow
+T80	Qualifier 1420 1428	presence
+R43	Has_qualifier Arg1:T79 Arg2:T80	

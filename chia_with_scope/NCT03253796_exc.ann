@@ -1,0 +1,206 @@
+T1	Qualifier 4 13	bilateral
+T2	Condition 14 26	sacroiliitis
+T3	Qualifier 27 34	Grade 2
+T4	Qualifier 38 48	unilateral
+T5	Condition 49 61	sacroiliitis
+T6	Qualifier 62 69	Grade 3
+T7	Qualifier 73 80	Grade 4
+*	OR T6 T7
+T8	Scope 62 80	Grade 3 or Grade 4
+R1	Has_scope Arg1:T5 Arg2:T8	
+R2	Has_qualifier Arg1:T5 Arg2:T4	
+R3	Has_qualifier Arg1:T2 Arg2:T3	
+*	OR T2 T5
+R4	Has_qualifier Arg1:T2 Arg2:T1	
+T9	Condition 87 94	nursing
+T10	Condition 98 106	pregnant
+T11	Person 107 113	female
+*	OR T10 T9
+T12	Condition 136 144	pregnant
+T13	Temporal 145 193	within 6 months after receiving trial medication
+R5	Has_temporal Arg1:T12 Arg2:T13	
+T14	Mood 118 135	intends to become
+R6	Has_mood Arg1:T12 Arg2:T14	
+T15	Procedure 206 217	donate eggs
+T16	Procedure 206 212;243 248	donate sperm
+T17	Person 219 225	female
+T18	Person 250 254	male
+T19	Temporal 269 301	while receiving trial medication
+T20	Temporal 305 343	within 6 months after trial medication
+T21	Reference_point 327 343	trial medication
+T22	Reference_point 285 301	trial medication
+R7	Has_index Arg1:T19 Arg2:T22	
+R8	Has_index Arg1:T20 Arg2:T21	
+*	OR T19 T20
+A1	Optional T17
+A2	Optional T18
+R9	AND Arg1:T17 Arg2:T15	
+R10	AND Arg1:T18 Arg2:T16	
+*	OR T17 T18
+T23	Scope 206 268	donate eggs (female participants) or sperm (male participants)
+T24	Scope 269 343	while receiving trial medication or within 6 months after trial medication
+R11	Has_scope Arg1:T23 Arg2:T24	
+T25	Post-eligibility 345 476	Has any clinically significant condition or situation that would interfere with the trial evaluations or participation in the trial
+T26	Drug 500 515	cytotoxic drugs
+T27	Drug 527 539	chlorambucil
+T28	Drug 541 557	cyclophosphamide
+T29	Drug 559 575	nitrogen mustard
+T30	Drug 586 603	alkylating agents
+*	OR T29 T30 T28 T27
+T31	Scope 527 603	chlorambucil, cyclophosphamide, nitrogen mustard, or other alkylating agents
+R12	Subsumes Arg1:T26 Arg2:T31	
+T32	Drug 607 645	Disease-modifying anti-rheumatic drugs
+T33	Temporal 647 663	30 days off drug
+R13	Has_temporal Arg1:T32 Arg2:T33	
+T34	Drug 668 685	Live vaccinations
+T35	Temporal 687 704	3 months off drug
+R14	Has_temporal Arg1:T34 Arg2:T35	
+T36	Drug 709 736	Investigational medications
+T37	Temporal 738 745;762 770	30 days off drug
+T38	Temporal 749 770	5 half-lives off drug
+*	OR T38 T37
+T39	Scope 738 770	30 days or 5 half-lives off drug
+R15	Has_scope Arg1:T36 Arg2:T39	
+T40	Drug 796 837	Bacille Calmette-Guerin (BCG) vaccination
+T41	Temporal 839 857	12 months off drug
+R16	Has_temporal Arg1:T40 Arg2:T41	
+T42	Condition 877 899	inflammatory condition
+T43	Condition 911 930	psoriatic arthritis
+T44	Condition 939 951	Lyme disease
+T45	Qualifier 932 938	active
+R17	Has_qualifier Arg1:T44 Arg2:T45	
+T46	Condition 953 981	systemic lupus erythematosus
+T47	Condition 983 1003	infectious arthritis
+T48	Condition 1005 1015	vasculitis
+T49	Condition 1017 1037	parvovirus infection
+T50	Condition 1039 1059	rheumatoid arthritis
+T51	Condition 1061 1075	active uveitis
+T52	Condition 1080 1090	active IBD
+*	OR T51 T52 T50 T49 T48 T47 T46 T44 T43
+T53	Scope 911 1090	psoriatic arthritis, active Lyme disease, systemic lupus erythematosus, infectious arthritis, vasculitis, parvovirus infection, rheumatoid arthritis, active uveitis, or active IBD
+R18	Subsumes Arg1:T42 Arg2:T53	
+T54	Qualifier 1119 1125	active
+T55	Qualifier 1109 1115	latent
+*	OR T55 T54
+T56	Condition 1126 1149	granulomatous infection
+T57	Temporal 1150 1168	prior to Screening
+T58	Reference_point 1159 1168	Screening
+R19	Has_index Arg1:T57 Arg2:T58	
+T59	Scope 1109 1125	latent or active
+R20	Has_scope Arg1:T56 Arg2:T59	
+R21	Has_temporal Arg1:T56 Arg2:T57	
+T60	Condition 1176 1214	nontuberculous mycobacterial infection
+T61	Condition 1218 1241	opportunistic infection
+T62	Temporal 1242 1276	within 6 months prior to Screening
+*	OR T61 T60
+T63	Scope 1176 1241	nontuberculous mycobacterial infection or opportunistic infection
+R22	Has_temporal Arg1:T63 Arg2:T62	
+T64	Condition 1298 1306	infected
+T65	Device 1307 1323	joint prosthesis
+R23	AND Arg1:T64 Arg2:T65	
+T66	Observation 1284 1291	history
+R24	Has_temporal Arg1:T64 Arg2:T66	
+T67	Drug 1341 1352	antibiotics
+T68	Mood 1359 1368	suspected
+T69	Condition 1369 1378	infection
+T70	Device 1384 1400	joint prosthesis
+R25	AND Arg1:T69 Arg2:T70	
+R26	Has_mood Arg1:T69 Arg2:T68	
+R27	AND Arg1:T67 Arg2:T69	
+*	OR T64 T69
+T71	Condition 1461 1478	serious infection
+T72	Procedure 1489 1501	hospitalized
+T73	Condition 1509 1518	infection
+R28	AND Arg1:T72 Arg2:T73	
+T74	Drug 1545 1559	IV antibiotics
+T75	Condition 1567 1576	infection
+T76	Temporal 1577 1610	within 2 months prior to Baseline
+R29	Has_temporal Arg1:T74 Arg2:T76	
+R30	AND Arg1:T74 Arg2:T75	
+*	OR T72 T74 T71
+T77	Qualifier 1653 1662	recurrent
+T78	Qualifier 1642 1649	chronic
+T79	Temporal 1633 1640	ongoing
+T80	Observation 1618 1625	history
+*	OR T77 T78
+*	OR T79 T80
+T81	Scope 1618 1640	history of, or ongoing
+T82	Scope 1642 1662	chronic or recurrent
+T83	Condition 1663 1681	infectious disease
+R31	Has_scope Arg1:T83 Arg2:T82	
+R32	Has_scope Arg1:T83 Arg2:T81	
+T84	Condition 1712 1746	human immunodeficiency virus (HIV)
+T85	Condition 1750 1790	seropositive for hepatitis C virus (HCV)
+*	OR T84 T85
+T86	Procedure 1802 1813	chest x-ray
+T87	Temporal 1814 1848	within 2 months prior to Screening
+T88	Condition 1863 1874	abnormality
+T89	Mood 1875 1885	suggestive
+T90	Temporal 1891 1898	current
+T91	Qualifier 1899 1905	active
+T92	Condition 1906 1915	infection
+T93	Condition 1919 1929	malignancy
+*	OR T92 T93
+T94	Scope 1906 1929	infection or malignancy
+R33	Has_qualifier Arg1:T94 Arg2:T91	
+R34	Has_temporal Arg1:T94 Arg2:T90	
+R35	Has_mood Arg1:T94 Arg2:T89	
+R36	Has_scope Arg1:T88 Arg2:T94	
+R37	Has_temporal Arg1:T86 Arg2:T87	
+R38	AND Arg1:T86 Arg2:T88	
+T95	Condition 1948 1975	lymphoproliferative disease
+T96	Condition 1987 1997	malignancy
+T97	Temporal 1998 2029	within 5 years before screening
+R39	Has_temporal Arg1:T96 Arg2:T97	
+T98	Reference_point 2020 2029	screening
+R40	Has_index Arg1:T97 Arg2:T98	
+T99	Reference_point 1839 1848	Screening
+R41	Has_index Arg1:T87 Arg2:T99	
+T100	Condition 2046 2054;2070 2092	squamous carcinomas of the skin
+T101	Condition 2059 2092	basal cell carcinomas of the skin
+*	OR T100 T101 T102
+T102	Condition 2097 2114	carcinoma in situ
+T103	Qualifier 2118 2124	cervix
+R42	Has_qualifier Arg1:T102 Arg2:T103	
+T104	Qualifier 2139 2155	surgically cured
+T105	Procedure 2139 2149	surgically
+R43	multi Arg1:T104 Arg2:T105	
+R44	Has_qualifier Arg1:T102 Arg2:T104	
+T106	Negation 2031 2041	exceptions
+T107	Scope 2046 2155	squamous and basal cell carcinomas of the skin and carcinoma in situ of cervix that has been surgically cured
+R45	Has_negation Arg1:T107 Arg2:T106	
+R46	Has_scope Arg1:T96 Arg2:T107	
+T108	Condition 2181 2203	demyelinating diseases
+T109	Observation 2164 2171	history
+R47	Has_temporal Arg1:T108 Arg2:T109	
+T110	Condition 2212 2230	multiple sclerosis
+T111	Condition 2234 2248	optic neuritis
+*	OR T110 T111
+T112	Scope 2212 2248	multiple sclerosis or optic neuritis
+R48	Subsumes Arg1:T108 Arg2:T112	
+T113	Condition 2281 2305	congestive heart failure
+T114	Temporal 2270 2280	concurrent
+T115	Observation 2256 2263	history
+*	OR T114 T115
+T116	Scope 2256 2280	history of or concurrent
+R49	Has_scope Arg1:T113 Arg2:T116	
+T117	Procedure 2326 2344	transplanted organ
+T118	Procedure 2370 2388	corneal transplant
+T119	Temporal 2399 2428	>= 3 months prior to baseline
+R50	Has_temporal Arg1:T118 Arg2:T119	
+T120	Negation 2355 2367	exception of
+R51	Has_negation Arg1:T118 Arg2:T120	
+R52	AND Arg1:T117 Arg2:T118	
+T121	Condition 2476 2491	medical illness
+T122	Qualifier 2464 2475	significant
+R53	Has_qualifier Arg1:T121 Arg2:T122	
+T123	Observation 2504 2528	interfere with the trial
+T124	Mood 2533 2540	require
+T125	Procedure 2541 2550	treatment
+T126	Observation 2562 2586	interfere with the trial
+R54	Has_mood Arg1:T125 Arg2:T124	
+R55	Has_context Arg1:T125 Arg2:T126	
+*	OR T123 T125
+T127	Scope 2504 2586	interfere with the trial, or require treatment that might interfere with the trial
+R56	Has_scope Arg1:T121 Arg2:T127	
+T128	Intoxication_considerations 2588 2716	Is a user of recreational or illicit drugs or has or had a substance abuse (drug or alcohol) problem within the previous 2 years

@@ -1,0 +1,33 @@
+T1	Person 0 5	Males
+T2	Person 10 17	females
+*	OR T1 T2
+T3	Grammar_Error 6 9	and
+T4	Qualifier 42 47;84 89	Fabry naïve
+T5	Procedure 97 100	ERT
+T6	Procedure 52 63	GLA enzymes
+T7	Procedure 71 82	DNA testing
+*	OR T6 T7
+T8	Scope 52 82	GLA enzymes and/or DNA testing
+R1	Has_scope Arg1:T4 Arg2:T8	
+T9	Condition 23 40	confirmed disease
+T10	Context_Error 23 40	confirmed disease
+T11	Condition 102 124	Mitochondrial diseases
+T12	Procedure 126 150	electron transport chain
+T13	Procedure 158 169	DNA testing
+*	OR T12 T13
+T14	Scope 126 169	electron transport chain and/or DNA testing
+R2	Has_scope Arg1:T11 Arg2:T14	
+T15	Condition 174 200	connective tissue diseases
+T16	Procedure 227 238	DNA testing
+A1	Optional T16
+T17	Observation 202 219	clinical criteria
+*	OR T17 T16
+T18	Scope 202 238	clinical criteria and/or DNA testing
+R3	Has_scope Arg1:T15 Arg2:T18	
+T19	Context_Error 42 47;84 89	Fabry naïve
+*	OR T15 T11 T20
+T20	Scope 42 100	Fabry (by GLA enzymes and/or DNA testing) naïve and on ERT
+T21	Scope 42 254	Fabry (by GLA enzymes and/or DNA testing) naïve and on ERT, Mitochondrial diseases (electron transport chain and/or DNA testing) or connective tissue diseases (clinical criteria and/or DNA testing when available)
+R4	Subsumes Arg1:T9 Arg2:T21	
+T22	Post-eligibility 256 353	Consenting adults (18 years and older) who agrees and consents to skin biopsy and QSART procedure
+T23	Non-query-able 256 353	Consenting adults (18 years and older) who agrees and consents to skin biopsy and QSART procedure

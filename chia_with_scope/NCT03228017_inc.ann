@@ -1,0 +1,15 @@
+T1	Qualifier 27 35	moderate
+T2	Qualifier 39 45	severe
+T3	Condition 46 63	psoriatic disease
+*	OR T2 T1
+T4	Scope 27 45	moderate to severe
+R1	Has_scope Arg1:T3 Arg2:T4	
+T5	Observation 16 23	history
+R2	Has_temporal Arg1:T3 Arg2:T5	
+T6	Condition 74 81	Healthy
+T7	Condition 105 122	psoriatic disease
+T8	Condition 126 148	cardiovascular disease
+*	OR T8 T7
+T9	Negation 91 98	without
+T10	Scope 105 148	psoriatic disease or cardiovascular disease
+R3	Has_negation Arg1:T10 Arg2:T9	

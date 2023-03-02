@@ -1,0 +1,42 @@
+T1	Condition 8 15	allergy
+T2	Drug 19 28	Celecoxib
+T3	Drug 30 37	aspirin
+T4	Drug 49 54	NSAID
+T5	Qualifier 41 48	another
+R1	Has_qualifier Arg1:T4 Arg2:T5	
+*	OR T2 T3 T4
+T6	Scope 19 54	Celecoxib, aspirin or another NSAID
+R2	Has_scope Arg1:T1 Arg2:T6	
+T7	Temporal 57 63	Active
+T8	Condition 64 81	peptic ulceration
+T9	Condition 85 110	gastrointestinal bleeding
+*	OR T8 T9
+T10	Scope 64 110	peptic ulceration or gastrointestinal bleeding
+R3	Has_temporal Arg1:T10 Arg2:T7	
+T11	Condition 113 139	Inflammatory bowel disease
+T12	Condition 142 166	Congestive heart failure
+T13	Measurement 168 172	NYHA
+T14	Value 173 178	II-IV
+R4	Has_value Arg1:T13 Arg2:T14	
+T15	Scope 168 178	NYHA II-IV
+R5	Has_scope Arg1:T12 Arg2:T15	
+T16	Condition 194 216	ischemic heart disease
+T17	Condition 218 245	peripheral arterial disease
+T18	Condition 253 276	cerebrovascular disease
+*	OR T17 T18 T16
+T19	Condition 290 308	neurologic deficit
+T20	Observation 279 286	History
+R6	Has_temporal Arg1:T19 Arg2:T20	
+T21	Condition 328 344	renal impairment
+T22	Condition 317 324;334 344	hepatic impairment
+*	OR T21 T22
+T23	Condition 347 356	Pregnancy
+T24	Observation 359 373	Breast-feeding
+T25	Procedure 381 393	hysterectomy
+T26	Temporal 376 380	Post
+R7	Has_temporal Arg1:T25 Arg2:T26	
+T27	Condition 396 414	Bleeding disorders
+T28	Condition 417 427	Drug abuse
+T29	Condition 430 438;451 460	Cervical infection
+T30	Condition 443 460	vaginal infection
+*	OR T30 T29

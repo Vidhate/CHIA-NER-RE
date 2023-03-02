@@ -1,0 +1,30 @@
+T1	Condition 0 14	Ovarian cancer
+T2	Condition 16 35	adrenal gland tumor
+T3	Condition 37 55	endometrial cancer
+T4	Condition 57 72	cervical cancer
+T5	Condition 74 87	breast cancer
+*	OR T4 T5 T3 T2 T1
+T6	Condition 89 119	Congenital adrenal hyperplasia
+T7	Measurement 121 139	17-OH-progesterone
+T8	Value 139 152	> 2.5 ng / mL
+R1	Has_value Arg1:T7 Arg2:T8	
+T9	Scope 121 152	17-OH-progesterone> 2.5 ng / mL
+R2	Subsumes Arg1:T6 Arg2:T9	
+T10	Qualifier 155 175	Clinically diagnosed
+T11	Condition 176 193	Cushing's disease
+T12	Condition 195 205	acromegaly
+T13	Condition 207 216	gigantism
+*	OR T12 T13 T11
+T14	Scope 176 216	Cushing's disease, acromegaly, gigantism
+R3	Has_qualifier Arg1:T14 Arg2:T10	
+T15	Condition 218 224;231 239	Type I diabetes
+T16	Condition 218 222;228 239	Type II diabetes
+*	OR T15 T16
+T17	Condition 241 261	Unexplained bleeding
+T18	Qualifier 271 284	genital tract
+R4	Has_qualifier Arg1:T17 Arg2:T18	
+T19	Procedure 286 303	Hormone treatment
+T20	Drug 286 293	Hormone
+R5	multi Arg1:T19 Arg2:T20	
+T21	Temporal 304 328	within the last 2 months
+R6	Has_temporal Arg1:T19 Arg2:T21	

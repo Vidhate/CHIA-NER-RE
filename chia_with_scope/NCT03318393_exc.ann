@@ -1,0 +1,33 @@
+T1	Drug 33 40	heparin
+T2	Condition 49 65	thrombocytopenia
+T3	Temporal 66 82	prior to consent
+T4	Reference_point 75 82	consent
+R1	Has_index Arg1:T3 Arg2:T4	
+R2	Has_temporal Arg1:T2 Arg2:T3	
+T5	Qualifier 33 48	heparin induced
+R3	multi Arg1:T5 Arg2:T1	
+R4	Has_qualifier Arg1:T2 Arg2:T5	
+T6	Mood 23 32	suspected
+T7	Mood 14 19	known
+*	OR T7 T6
+T8	Scope 14 32	known or suspected
+R5	Has_scope Arg1:T2 Arg2:T8	
+T9	Condition 98 113	hepatic failure
+T10	Condition 125 137	coagulopathy
+T11	Measurement 152 165	transaminases
+T12	Value 143 151;166 201	elevated more than three times normal values
+R6	Has_value Arg1:T11 Arg2:T12	
+R7	Subsumes Arg1:T9 Arg2:T10	
+R8	AND Arg1:T10 Arg2:T11	
+T13	Temporal 247 262	within 48 hours
+T14	Procedure 225 246	decannulate from ECMO
+R9	Has_temporal Arg1:T14 Arg2:T13	
+T15	Condition 283 291	pregnant
+T16	Person 292 297	women
+T17	Mood 273 282	suspected
+T18	Mood 264 269	Known
+*	OR T18 T17
+T19	Scope 264 282	Known or suspected
+R10	Has_scope Arg1:T15 Arg2:T19	
+T20	Competing_trial 299 332	Previous enrollment in this study
+T21	Non-query-able 334 388	Primary language spoken that is not English or Spanish

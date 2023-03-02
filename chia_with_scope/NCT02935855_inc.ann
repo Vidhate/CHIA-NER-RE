@@ -1,0 +1,12 @@
+T1	Condition 13 32	atrial fibrillation
+T2	Qualifier 0 12	non-valvular
+R1	Has_qualifier Arg1:T1 Arg2:T2	
+T3	Condition 37 45	diabetic
+T4	Negation 34 37	non
+R2	Has_negation Arg1:T3 Arg2:T4	
+T5	Condition 69 77	diabetic
+T6	Qualifier 56 62	type 1
+T7	Qualifier 56 60;67 68	type 2
+*	OR T7 T6
+T8	Scope 56 68	type 1 and 2
+R3	Has_scope Arg1:T5 Arg2:T8	

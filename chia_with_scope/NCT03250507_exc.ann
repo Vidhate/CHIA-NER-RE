@@ -1,0 +1,28 @@
+T1	Condition 15 37	chronic pain condition
+T2	Qualifier 39 44	major
+T3	Condition 45 77	unexpected surgical complication
+R1	Has_qualifier Arg1:T3 Arg2:T2	
+T4	Multiplier 90 99	prolonged
+T5	Procedure 100 110	intubation
+T6	Qualifier 79 89	unexpected
+R2	Has_multiplier Arg1:T5 Arg2:T4	
+R3	Has_qualifier Arg1:T5 Arg2:T6	
+T7	Observation 112 127	patient refusal
+T8	Drug 129 145	local anesthetic
+T9	Condition 146 153	allergy
+R4	AND Arg1:T9 Arg2:T8	
+T10	Condition 159 175	contraindication
+T11	Drug 179 198	regional anesthesia
+R5	AND Arg1:T10 Arg2:T11	
+T12	Multiplier 200 214	greater than 2
+T13	Multiplier 240 254	greater than 1
+T14	Procedure 293 302	TAP block
+T15	Person 227 235	resident
+T16	Person 272 288	anesthesiologist
+A1	Optional T15
+A2	Optional T16
+R6	Has_multiplier Arg1:T15 Arg2:T12	
+R7	Has_multiplier Arg1:T16 Arg2:T13	
+T17	Scope 200 288	greater than 2 attempts by resident and greater than 1 attempt by staff anesthesiologist
+R8	Has_scope Arg1:T14 Arg2:T17	
+*	OR T1 T3 T5 T7 T9 T10 T14

@@ -1,0 +1,37 @@
+T1	Condition 0 24	Congestive heart failure
+T2	Condition 26 48	Ischemic heart disease
+T3	Condition 50 61	Hypotension
+T4	Measurement 63 86	Systolic blood pressure
+T5	Value 87 96	<100 mmHg
+R1	Has_value Arg1:T4 Arg2:T5	
+T6	Scope 63 96	Systolic blood pressure <100 mmHg
+R2	Subsumes Arg1:T3 Arg2:T6	
+T7	Qualifier 114 121	class I
+T8	Qualifier 114 119;125 128	class III
+*	OR T8 T7
+T9	Drug 129 149	antiarrhythmic drugs
+T10	Scope 114 128	class I or III
+R3	Has_scope Arg1:T9 Arg2:T10	
+T11	Qualifier 151 157	Severe
+T12	Condition 169 182	renal failure
+T13	Condition 158 165;175 182	hepatic failure
+*	OR T13 T12
+T15	Scope 158 182	hepatic or renal failure
+R5	Has_qualifier Arg1:T15 Arg2:T11	
+T16	Condition 184 193	Pregnancy
+T17	Condition 197 206	lactation
+*	OR T17 T16
+T18	Condition 208 224	Hypersensitivity
+T19	Condition 228 242	contradictions
+T20	Drug 246 257	study drugs
+*	OR T18 T19
+T21	Scope 208 242	Hypersensitivity or contradictions
+R6	AND Arg1:T21 Arg2:T20	
+T23	Condition 302 316	Thyrotoxicosis
+T24	Condition 259 300	Atrio-ventricular conduction disturbances
+T25	Condition 318 339	Life limiting disease
+T26	Condition 343 358	substance abuse
+T27	Qualifier 365 389	may affect participation
+*	OR T25 T26
+T28	Scope 318 358	Life limiting disease or substance abuse
+R7	Has_qualifier Arg1:T28 Arg2:T27	

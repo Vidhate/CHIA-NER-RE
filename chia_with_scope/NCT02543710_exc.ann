@@ -1,0 +1,25 @@
+T1	Negation 18 21	not
+T2	Procedure 26 44	surgical treatment
+T3	Condition 55 73	endometrial cancer
+R1	AND Arg1:T3 Arg2:T2	
+R2	Has_negation Arg1:T2 Arg2:T1	
+T4	Condition 118 143	epithelial ovarian cancer
+T5	Condition 103 114;129 143	endometrial ovarian cancer
+*	OR T5 T4
+T6	Negation 84 87	not
+T7	Scope 103 143	endometrial or epithelial ovarian cancer
+R3	Has_negation Arg1:T7 Arg2:T6	
+T8	Negation 161 164	not
+T9	Observation 165 196	agree to the proposed treatment
+R4	Has_negation Arg1:T9 Arg2:T8	
+T10	Visit 242 266	non-participating centre
+T11	Procedure 227 236	treatment
+R5	AND Arg1:T11 Arg2:T10	
+T12	Observation 306 327	give informed consent
+T13	Negation 281 287	cannot
+T14	Negation 291 305	do not want to
+*	OR T13 T14
+T15	Scope 281 305	cannot or do not want to
+R6	Has_scope Arg1:T12 Arg2:T15	
+T16	Observation 339 356	language barriers
+*	OR T12 T16

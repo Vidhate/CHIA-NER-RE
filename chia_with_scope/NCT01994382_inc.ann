@@ -1,0 +1,153 @@
+T1	Condition 77 80	CLL
+T2	Condition 81 84	SLL
+*	OR T2 T1 T3
+T3	Condition 88 115	B-cell Non-Hodgkin lymphoma
+T4	Condition 117 122	DLBCL
+T5	Condition 124 126	FL
+T6	Condition 128 131	MCL
+T7	Condition 133 136	MZL
+T8	Condition 138 164	lymphoplasmacytic lymphoma
+T9	Scope 117 164	DLBCL, FL, MCL, MZL, lymphoplasmacytic lymphoma
+T10	Scope 77 115	CLL/SLL or B-cell Non-Hodgkin lymphoma
+R1	Subsumes Arg1:T10 Arg2:T9	
+T11	Value 25 39	at least 18yrs
+T12	Person 43 46	age
+R2	Has_value Arg1:T12 Arg2:T11	
+T13	Procedure 52 66	histologically
+T14	Value 67 76	confirmed
+R3	Has_value Arg1:T13 Arg2:T14	
+R4	AND Arg1:T10 Arg2:T13	
+T15	Parsing_Error 168 186	Phase 2a Inclusion
+T16	Procedure 188 200	Histological
+T17	Condition 211 213	FL
+T18	Measurement 214 219	Grade
+T19	Value 220 224	1-3A
+R5	Has_value Arg1:T18 Arg2:T19	
+R6	AND Arg1:T17 Arg2:T18	
+T20	Condition 225 229	iNHL
+*	OR T20 T17
+T21	Condition 248 266	refractory disease
+T22	Condition 236 244;259 266	relapsed disease
+*	OR T21 T22
+T23	Condition 268 272	iNHL
+T24	Condition 282 285	LPL
+T25	Condition 286 288	WM
+T26	Condition 290 293	MZL
+*	OR T26 T25 T24
+T27	Scope 282 293	LPL/WM, MZL
+R7	Subsumes Arg1:T23 Arg2:T27	
+T28	Scope 236 266	relapsed or refractory disease
+R8	Subsumes Arg1:T28 Arg2:T23	
+T29	Condition 296 300	aNHL
+T30	Condition 313 318	DLBCL
+T31	Condition 320 322	FL
+T32	Measurement 323 328	Grade
+T33	Value 329 331	3B
+R9	Has_value Arg1:T32 Arg2:T33	
+T34	Condition 333 336	MCL
+T35	Condition 342 357	transformed NHL
+T36	Condition 363 379	relapsed disease
+T37	Condition 381 384	CLL
+T38	Condition 385 388	SLL
+T39	Condition 390 394	PTCL
+T40	Condition 399 403	CTCL
+T41	Condition 410 412	MF
+T42	Condition 413 415	SS
+*	OR T41 T42
+T43	Scope 410 415	MF/SS
+R10	Has_scope Arg1:T40 Arg2:T43	
+R11	AND Arg1:T35 Arg2:T36	
+*	OR T34 T35 T32 T31 T30
+T44	Scope 313 379	DLBCL, FL Grade 3B, MCL, and transformed NHL with relapsed disease
+R12	Subsumes Arg1:T29 Arg2:T44	
+*	OR T29 T23 T37 T38 T39 T40
+T45	Drug 467 482	BCL2 inhibitors
+T46	Drug 456 459;472 482	BCR inhibitors
+*	OR T46 T45
+T47	Condition 488 498	intolerant
+T48	Scope 456 482	BCR and/or BCL2 inhibitors
+R13	Has_scope Arg1:T47 Arg2:T48	
+T49	Condition 506 514	relapsed
+T50	Condition 515 533	refractory disease
+*	OR T49 T50
+T51	Temporal 534 544	afterwards
+T52	Scope 506 533	relapsed/refractory disease
+R14	Has_temporal Arg1:T52 Arg2:T51	
+*	OR T52 T47
+T53	Temporal 547 552	Prior
+T54	Procedure 553 562	treatment
+*	OR T54 T53
+T55	Condition 567 586	lymphoid malignancy
+T56	Condition 604 622	refractory disease
+T57	Condition 591 602;615 622	progressive disease
+*	OR T56 T57
+T58	Drug 662 680	antibody conjugate
+T59	Procedure 682 704	cytotoxic chemotherapy
+T60	Drug 709 712	TKI
+*	OR T60 T59 T58
+T61	Multiplier 624 641	≥ 1 prior regimen
+T62	Multiplier 643 655	min 2 cycles
+T63	Scope 662 712	antibody conjugate, cytotoxic chemotherapy, or TKI
+R15	Has_multiplier Arg1:T63 Arg2:T61	
+R16	Has_multiplier Arg1:T61 Arg2:T62	
+T64	Condition 739 758	Measureable disease
+T65	Multiplier 771 781	≥ 1 lesion
+T66	Measurement 782 807	≥ 1.5 cm single dimension
+T67	Value 782 790	≥ 1.5 cm
+R17	Has_value Arg1:T66 Arg2:T67	
+T68	Procedure 812 814	CT
+T69	Procedure 816 822	CT/PET
+T70	Condition 837 849	mass lesions
+T71	Condition 828 833;842 849	nodal lesions
+*	OR T70 T71
+*	OR T69 T68
+T72	Condition 864 887	circulating tumor cells
+T73	Condition 896 927	Waldenström's macroglobulinemia
+T74	Measurement 940 945	IgM l
+T75	Value 946 954	> 2X ULN
+R18	Has_value Arg1:T74 Arg2:T75	
+T76	Condition 960 964	CTCL
+T77	Measurement 966 971	mSWAT
+T78	Value 972 975	> 0
+R19	Has_value Arg1:T77 Arg2:T78	
+R20	AND Arg1:T76 Arg2:T77	
+A1	Optional T76
+A2	Optional T73
+R21	AND Arg1:T73 Arg2:T74	
+*	OR T76 T73 T72
+T79	Scope 828 849	nodal or mass lesions
+T80	Scope 812 822	CT, CT/PET
+R22	Has_scope Arg1:T66 Arg2:T80	
+R23	Has_scope Arg1:T80 Arg2:T79	
+T81	Scope 771 975	≥ 1 lesion ≥ 1.5 cm single dimension via CT, CT/PET with nodal or mass lesions; Quantifiable circulating tumor cells; or for Waldenström's macroglobulinemia presence of IgM l > 2X ULN; For CTCL: mSWAT > 0
+R24	Subsumes Arg1:T64 Arg2:T81	
+T82	Non-query-able 977 1014	Ability to provide diagnostic reports
+T83	Parsing_Error 1016 1033	General Inclusion
+T84	Measurement 1035 1045	ECOG Score
+T85	Value 1049 1055	0 or 1
+R25	Has_value Arg1:T84 Arg2:T85	
+T86	Measurement 1058 1073	Hematologic ANC
+T87	Value 1074 1083	> 1000/uL
+R26	Has_value Arg1:T86 Arg2:T87	
+T88	Measurement 1088 1096	platelet
+T89	Value 1097 1108	> 75,000/uL
+R27	Has_value Arg1:T88 Arg2:T89	
+T90	Measurement 1111 1127	Serum creatinine
+T91	Value 1131 1140	< 1.5 ULN
+R28	Has_value Arg1:T90 Arg2:T91	
+T92	Measurement 1144 1159	calculated CrCl
+T93	Value 1163 1174	> 50 mL/min
+R29	Has_value Arg1:T92 Arg2:T93	
+*	OR T90 T92
+T94	Measurement 1176 1185	Bilirubin
+T95	Value 1186 1197	< 20.0mg/dL
+T96	Condition 1202 1210	Gilberts
+A3	Optional T96
+T97	Value 1216 1227	< 2.5 mg/dL
+*	OR T95 T96
+R30	Has_value Arg1:T96 Arg2:T97	
+T98	Scope 1186 1228	< 20.0mg/dL (if Gilberts then < 2.5 mg/dL)
+R31	Has_scope Arg1:T94 Arg2:T98	
+T99	Measurement 1233 1240	AST/AST
+T100	Value 1241 1250	< 2.5 ULN
+R32	Has_value Arg1:T99 Arg2:T100	

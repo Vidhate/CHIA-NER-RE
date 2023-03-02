@@ -1,0 +1,17 @@
+T1	Condition 0 17	multiple injuries
+T2	Condition 19 29	polytrauma
+R1	Subsumes Arg1:T1 Arg2:T2	
+T3	Condition 50 66	adverse reaction
+T4	Condition 76 83	allergy
+*	OR T3 T4
+T5	Procedure 87 105	local anaesthetics
+T6	Drug 109 116	opioids
+T7	Drug 120 131	paracetamol
+*	OR T5 T6 T7
+T8	Scope 87 131	local anaesthetics or opioids or paracetamol
+T9	Scope 50 83	adverse reaction or known allergy
+R2	Has_scope Arg1:T9 Arg2:T8	
+T10	Condition 133 147	skin infection
+T11	Qualifier 164 178	injection site
+R3	Has_qualifier Arg1:T10 Arg2:T11	
+T12	Condition 180 189	delirious

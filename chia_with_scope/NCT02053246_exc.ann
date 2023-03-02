@@ -1,0 +1,56 @@
+T1	Condition 16 29	heart failure
+T2	Condition 41 62	diastolic dysfunction
+T3	Negation 30 40	other than
+R1	Has_negation Arg1:T2 Arg2:T3	
+R2	AND Arg1:T1 Arg2:T2	
+T4	Condition 72 98	restrictive cardiomyopathy
+T5	Condition 102 129	infiltrative cardiomyopathy
+*	OR T4 T5
+T6	Scope 72 129	restrictive cardiomyopathy or infiltrative cardiomyopathy
+T7	Scope 16 62	heart failure other than diastolic dysfunction
+R3	Subsumes Arg1:T7 Arg2:T6	
+T8	Person 131 136	Women
+T9	Condition 145 153	pregnant
+T10	Condition 157 164	nursing
+*	OR T9 T10
+T11	Condition 166 181	Liver cirrhosis
+T12	Condition 184 208	Primary valvular disease
+T13	Condition 210 233	Acute coronary syndrome
+T14	Condition 235 247	Causes of PH
+T15	Negation 248 258	other than
+T16	Condition 267 280	heart failure
+R4	Has_negation Arg1:T16 Arg2:T15	
+R5	AND Arg1:T14 Arg2:T16	
+T17	Condition 291 316	chronic thromboembolic PH
+T18	Condition 318 337	sickle-cell disease
+T19	Condition 342 353	sarcoidosis
+*	OR T19 T18 T17
+T20	Scope 291 353	chronic thromboembolic PH, sickle-cell disease, or sarcoidosis
+R6	Has_scope Arg1:T16 Arg2:T20	
+T21	Condition 362 373	bradycardia
+T22	Qualifier 355 361	Severe
+R7	Has_qualifier Arg1:T21 Arg2:T22	
+T23	Qualifier 377 400	greater than 1st degree
+T24	Condition 401 412	heart block
+R8	Has_qualifier Arg1:T24 Arg2:T23	
+*	OR T21 T24
+T25	Condition 428 441	heart failure
+T26	Qualifier 414 427	Decompensated
+R9	Has_qualifier Arg1:T25 Arg2:T26	
+T27	Drug 460 489	third generation beta-blocker
+T28	Drug 491 500	nebivolol
+T29	Drug 502 512	carvedilol
+T30	Drug 517 526	labetalol
+*	OR T30 T29 T28
+T31	Scope 491 526	nebivolol, carvedilol, or labetalol
+R10	Subsumes Arg1:T27 Arg2:T31	
+T32	Multiplier 531 540	high dose
+T33	Drug 544 561	any beta-blockers
+T34	Multiplier 563 588	greater than 100 mg daily
+T35	Drug 592 602	metoprolol
+R11	Has_multiplier Arg1:T35 Arg2:T34	
+R12	Has_multiplier Arg1:T33 Arg2:T32	
+T36	Scope 563 602	greater than 100 mg daily of metoprolol
+T37	Scope 531 561	high dose of any beta-blockers
+R13	Subsumes Arg1:T37 Arg2:T36	
+*	OR T37 T27

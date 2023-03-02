@@ -1,0 +1,46 @@
+T1	Condition 0 26	Relative contraindications
+T2	Procedure 30 41	ECT therapy
+R1	AND Arg1:T1 Arg2:T2	
+T3	Temporal 43 49	recent
+T4	Condition 50 52	MI
+T5	Condition 56 59	CVA
+*	OR T4 T5
+T6	Scope 50 59	MI or CVA
+R2	Has_temporal Arg1:T6 Arg2:T3	
+T7	Value 61 70	increased
+T8	Measurement 71 92	intracranial pressure
+R3	Has_value Arg1:T8 Arg2:T7	
+T9	Condition 94 118	intracranial mass lesion
+T10	Condition 120 141	intracranial aneurysm
+T11	Condition 143 151	epilepsy
+T12	Condition 159 177	cardiac arrhythmia
+T13	Condition 179 195	pheochromocytoma
+T14	Condition 197 206	pregnancy
+*	OR T14 T13 T12 T11 T10 T9 T8 T6
+T15	Scope 43 206	recent MI or CVA, increased intracranial pressure, intracranial mass lesion, intracranial aneurysm, epilepsy, known cardiac arrhythmia, pheochromocytoma, pregnancy
+T16	Scope 0 41	Relative contraindications to ECT therapy
+R4	Subsumes Arg1:T16 Arg2:T15	
+T17	Condition 209 226	Contraindications
+T18	Drug 230 239	etomidate
+R5	AND Arg1:T17 Arg2:T18	
+T19	Condition 241 247	sepsis
+T20	Qualifier 249 256	primary
+T21	Qualifier 260 269	secondary
+T22	Condition 270 291	adrenal insufficiency
+T23	Condition 293 302	porphyria
+*	OR T21 T20
+T24	Qualifier 305 310	DSM-V
+T25	Observation 326 342	lifetime history
+T26	Condition 346 373	psychotic spectrum disorder
+R6	Has_temporal Arg1:T26 Arg2:T25	
+R7	Has_qualifier Arg1:T26 Arg2:T24	
+T27	Condition 375 379;391 401	Drug dependence
+T28	Condition 383 401	alcohol dependence
+T29	Temporal 412 436	within the past 3 months
+T30	Condition 375 379;406 411	Drug abuse
+T31	Condition 383 390;406 411	alcohol abuse
+*	OR T30 T31 T28 T27
+T32	Scope 375 411	Drug or alcohol dependence, or abuse
+R8	Has_temporal Arg1:T32 Arg2:T29	
+T33	Condition 438 458	soy-bean oil allergy
+*	OR T33 T32

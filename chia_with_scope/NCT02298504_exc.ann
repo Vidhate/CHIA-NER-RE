@@ -1,0 +1,16 @@
+T1	Condition 32 53	irriversible pulpitis
+T2	Condition 57 70	pulp necrosis
+T3	Condition 74 96	acute dental infection
+T4	Qualifier 0 5	Teeth
+R1	Has_qualifier Arg1:T1 Arg2:T4	
+R2	Has_qualifier Arg1:T2 Arg2:T4	
+*	OR T2 T3 T1
+T5	Condition 112 128	systemic illness
+T6	Condition 134 149	contraindicated
+T7	Procedure 150 170	vital pulp treatment
+T8	Condition 178 197	sickle cell disease
+R3	AND Arg1:T6 Arg2:T7	
+R4	AND Arg1:T5 Arg2:T6	
+T9	Scope 112 170	systemic illness that contraindicated vital pulp treatment
+R5	Subsumes Arg1:T9 Arg2:T8	
+T10	Observation 199 228	Teeth that are not restorable

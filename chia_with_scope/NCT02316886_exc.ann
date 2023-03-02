@@ -1,0 +1,58 @@
+T1	Device 83 90	Stented
+T2	Condition 91 97	lesion
+R1	AND Arg1:T2 Arg2:T1	
+T3	Procedure 44 48	CABG
+T4	Procedure 49 80	Coronary artery bypass grafting
+R2	Subsumes Arg1:T3 Arg2:T4	
+T5	Device 99 111	Bypass graft
+T6	Condition 112 118	lesion
+R3	AND Arg1:T6 Arg2:T5	
+T7	Multiplier 142 165	more than or equal to 3
+T8	Condition 166 180	target lesions
+R4	Has_multiplier Arg1:T8 Arg2:T7	
+T9	Multiplier 182 183	2
+T10	Condition 184 198	target lesions
+T11	Qualifier 199 229	in the same coronary territory
+R5	Has_qualifier Arg1:T10 Arg2:T11	
+R6	Has_multiplier Arg1:T10 Arg2:T9	
+T12	Qualifier 231 248	Heavily calcified
+T13	Qualifier 252 261	angulated
+T14	Condition 262 268	lesion
+*	OR T13 T12
+T15	Scope 231 261	Heavily calcified or angulated
+R7	Has_scope Arg1:T14 Arg2:T15	
+T16	Condition 270 288	Bifurcation lesion
+T17	Multiplier 299 300	2
+T18	Procedure 301 319	stenting technique
+R8	Has_multiplier Arg1:T18 Arg2:T17	
+R9	AND Arg1:T16 Arg2:T18	
+T19	Condition 321 337	Contraindication
+T20	Mood 344 367	planned discontinuation
+T21	Procedure 371 396	dual antiplatelet therapy
+T22	Temporal 397 410	within 1 year
+*	OR T20 T19
+T23	Scope 321 367	Contraindication to or planned discontinuation
+R10	Has_scope Arg1:T21 Arg2:T23	
+R11	Has_temporal Arg1:T21 Arg2:T22	
+T24	Observation 412 427	Life expectancy
+T25	Value 428 445	less than 2 years
+R12	Has_value Arg1:T24 Arg2:T25	
+T26	Procedure 455 470	cardiac surgery
+T27	Mood 474 481	planned
+T28	Mood 447 454	Planned
+T29	Qualifier 482 487	major
+T30	Procedure 488 507	non cardiac surgery
+R13	Has_mood Arg1:T26 Arg2:T28	
+R14	Has_qualifier Arg1:T30 Arg2:T29	
+R15	Has_mood Arg1:T30 Arg2:T27	
+*	OR T30 T26
+T31	Person 509 514	Woman
+T32	Observation 523 536	breastfeeding
+T33	Condition 538 546	pregnant
+T34	Mood 550 568	planning to become
+T35	Condition 569 577	pregnant
+R16	Has_mood Arg1:T35 Arg2:T34	
+*	OR T32 T33 T35
+T36	Temporal 578 608	during the course of the study
+T37	Scope 523 577	breastfeeding, pregnant or planning to become pregnant
+R17	Has_temporal Arg1:T37 Arg2:T36	

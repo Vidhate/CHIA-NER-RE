@@ -1,0 +1,31 @@
+T1	Measurement 0 17	Total lesion area
+T2	Value 21 27	>12 DA
+T3	Value 31 40	>30.5 mm2
+*	OR T2 T3
+T4	Scope 21 40	>12 DA or >30.5 mm2
+R1	Has_scope Arg1:T1 Arg2:T4	
+T5	Measurement 59 85	subretinal hemorrhage area
+T6	Value 99 124	=50% of total lesion area
+R2	Has_value Arg1:T5 Arg2:T6	
+T7	Measurement 143 147;160 164	scar area
+T8	Measurement 151 164	fibrosis area
+*	OR T8 T7
+T9	Scope 143 164	scar or fibrosis area
+T10	Value 178 203	=50% of total lesion area
+R3	Has_value Arg1:T9 Arg2:T10	
+T11	Condition 222 230	RPE tear
+T12	Temporal 232 237	Prior
+T13	Procedure 238 247	treatment
+T14	Procedure 272 290	vitrectomy surgery
+T15	Procedure 292 310	submacular surgery
+T16	Procedure 321 342	surgical intervention
+T17	Qualifier 315 320	other
+T18	Condition 347 350	AMD
+R4	Has_qualifier Arg1:T16 Arg2:T17	
+*	OR T15 T16 T14
+T19	Scope 272 342	vitrectomy surgery, submacular surgery, or other surgical intervention
+R5	AND Arg1:T19 Arg2:T18	
+T20	Condition 356 364	pregnant
+T21	Condition 368 377	lactating
+*	OR T21 T20
+T22	Person 378 383	woman

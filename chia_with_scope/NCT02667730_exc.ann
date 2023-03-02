@@ -1,0 +1,26 @@
+T1	Condition 13 27	ankle fracture
+T2	Condition 31 47	ligament rupture
+*	OR T1 T2
+T3	Observation 61 99	release from the Canadian Armed Forces
+T4	Temporal 100 115	within one year
+R1	Has_temporal Arg1:T3 Arg2:T4	
+T5	Observation 129 160	restrictions on military duties
+T6	Drug 218 231	acetaminophen
+T7	Drug 235 243	naproxen
+T8	Drug 247 256	celecoxib
+*	OR T7 T8 T6
+T9	Condition 198 214	adverse reaction
+T10	Scope 218 256	acetaminophen or naproxen or celecoxib
+T11	Condition 172 183	intolerance
+*	OR T11 T9
+T12	Scope 172 214	intolerance or documented adverse reaction
+R2	Has_scope Arg1:T12 Arg2:T10	
+T13	Condition 289 304	kidney problems
+T14	Condition 280 285;296 304	liver problems
+*	OR T13 T14
+T15	Observation 269 276	history
+T16	Scope 280 304	liver or kidney problems
+R3	Has_temporal Arg1:T16 Arg2:T15	
+T17	Condition 306 314	pregnant
+T18	Observation 318 331	breastfeeding
+*	OR T17 T18

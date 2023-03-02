@@ -1,0 +1,79 @@
+T1	Condition 15 20	naive
+T2	Drug 0 14	Antiretroviral
+R1	AND Arg1:T1 Arg2:T2	
+T3	Drug 29 36	Kaletra
+T4	Measurement 72 82	viral load
+T5	Value 61 71	suppressed
+R2	Has_value Arg1:T4 Arg2:T5	
+T6	Drug 95 100	NNRTI
+T7	Drug 104 113	integrase
+T8	Negation 133 140	without
+T9	Temporal 141 146	prior
+T10	Drug 165 167	PI
+T11	Value 168 189	for more than 2 weeks
+R3	Has_value Arg1:T10 Arg2:T11	
+R4	Has_temporal Arg1:T10 Arg2:T9	
+R5	Has_negation Arg1:T10 Arg2:T8	
+*	OR T6 T7
+T12	Procedure 48 55	regimen
+R6	AND Arg1:T12 Arg2:T3	
+T13	Procedure 125 132	regimen
+T14	Scope 95 113	NNRTI or integrase
+R7	Has_scope Arg1:T13 Arg2:T14	
+T15	Drug 201 206	NNRTI
+T16	Drug 210 219	integrase
+T17	Procedure 231 238	regimen
+*	OR T16 T15
+T18	Scope 201 219	NNRTI or integrase
+R8	Has_scope Arg1:T17 Arg2:T18	
+T19	Drug 262 264	PI
+T20	Temporal 244 249	prior
+R9	Has_temporal Arg1:T19 Arg2:T20	
+T21	Temporal 265 285	greater than 2 weeks
+R10	Has_temporal Arg1:T19 Arg2:T21	
+T22	Drug 407 409	PI
+T23	Procedure 421 429	regimens
+R11	AND Arg1:T23 Arg2:T22	
+T24	Measurement 446 456	viral load
+T25	Value 435 445	suppressed
+R12	Has_value Arg1:T24 Arg2:T25	
+T26	Value 755 772	at least 18 years
+T27	Person 776 779	age
+R13	Has_value Arg1:T27 Arg2:T26	
+T28	Non-query-able 784 813	able to give informed consent
+T29	Post-eligibility 784 813	able to give informed consent
+T30	Condition 831 833	TB
+T31	Qualifier 837 878	criteria per Brazilian Ministry of Health
+R14	Has_qualifier Arg1:T30 Arg2:T31	
+T32	Condition 887 909	good clinical response
+T33	Condition 913 915	TB
+R15	AND Arg1:T32 Arg2:T33	
+T34	Condition 929 941	tuberculosis
+T35	Procedure 929 949	tuberculosis therapy
+T36	Drug 961 969	rifampin
+T37	Temporal 970 1004	for the 2 weeks prior to screening
+T38	Reference_point 995 1004	screening
+R16	Has_index Arg1:T37 Arg2:T38	
+R17	AND Arg1:T35 Arg2:T36	
+R18	Has_temporal Arg1:T35 Arg2:T37	
+T39	Drug 1031 1050	protease inhibitors
+T40	Negation 1005 1011	except
+T41	Temporal 1051 1077	at time of diagnosis of TB
+T42	Reference_point 1054 1077	time of diagnosis of TB
+R19	Has_index Arg1:T41 Arg2:T42	
+R20	Has_temporal Arg1:T39 Arg2:T41	
+R21	Has_negation Arg1:T39 Arg2:T40	
+R22	AND Arg1:T35 Arg2:T39	
+T43	Measurement 1196 1199	HIV
+T44	Value 1200 1208	positive
+R23	Has_value Arg1:T43 Arg2:T44	
+T45	Condition 1196 1208	HIV positive
+T46	Measurement 1264 1278	CD4 cell count
+T47	Value 1279 1304	greater than 50 cells/mm3
+T48	Procedure 1318 1321	ART
+T49	Negation 1307 1310	not
+R24	Has_negation Arg1:T48 Arg2:T49	
+R25	Has_value Arg1:T46 Arg2:T47	
+T50	Scope 1307 1321	not taking ART
+A1	Optional T50
+R26	AND Arg1:T50 Arg2:T46	

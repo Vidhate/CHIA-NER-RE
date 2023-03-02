@@ -1,0 +1,260 @@
+T1	Condition 0 17	Spondylolisthesis
+T2	Measurement 18 23	Grade
+T3	Value 24 36	II or higher
+R1	Has_value Arg1:T2 Arg2:T3	
+R2	AND Arg1:T1 Arg2:T2	
+T4	Qualifier 63 72	bilateral
+T5	Procedure 73 84	facetectomy
+T6	Qualifier 56 59	uni
+*	OR T6 T4
+T7	Condition 98 107	back pain
+T8	Condition 103 107;94 97	pain leg
+*	OR T8 T7
+T9	Scope 56 72	uni or bilateral
+R3	Has_scope Arg1:T5 Arg2:T9	
+T10	Scope 94 107	leg/back pain
+R4	Has_scope Arg1:T5 Arg2:T10	
+T11	Condition 130 152	non-radicular leg pain
+T12	Condition 122 126;148 152	back pain
+T13	Qualifier 156 172	unknown etiology
+*	OR T12 T11
+T14	Scope 122 152	back or non-radicular leg pain
+R5	Has_qualifier Arg1:T14 Arg2:T13	
+T15	Procedure 181 188	surgery
+T16	Qualifier 196 214	index lumbar level
+T17	Temporal 175 180	Prior
+R6	Has_temporal Arg1:T15 Arg2:T17	
+R7	Has_qualifier Arg1:T15 Arg2:T16	
+T18	Procedure 237 247	spine DEXA
+T19	Measurement 269 274	SCORE
+T20	Value 278 281	= 6
+R8	Has_value Arg1:T19 Arg2:T20	
+T21	Measurement 290 297	T Score
+T22	Value 298 312	less than -2.0
+T23	Qualifier 320 331	index level
+R9	Has_value Arg1:T21 Arg2:T22	
+R10	Subsumes Arg1:T18 Arg2:T19	
+T24	Mood 225 234	requiring
+R11	Has_mood Arg1:T18 Arg2:T24	
+R12	Has_qualifier Arg1:T21 Arg2:T23	
+T25	Condition 353 363	herniation
+T26	Qualifier 367 372	L5/S1
+R13	Has_qualifier Arg1:T25 Arg2:T26	
+T27	Measurement 378 393	average T score
+T28	Qualifier 397 402	L1-L4
+R14	Has_qualifier Arg1:T27 Arg2:T28	
+T29	Non-representable 403 416	shall be used
+R15	AND Arg1:T27 Arg2:T29	
+T30	Scope 353 372	herniation at L5/S1
+A1	Optional T30
+R16	AND Arg1:T30 Arg2:T27	
+R17	AND Arg1:T18 Arg2:T21	
+T31	Condition 431 470	clinically compromised vertebral bodies
+T32	Qualifier 478 492	index level(s)
+T33	Condition 541 561	infectious pathology
+T34	Condition 527 536;552 561	metabolic pathology
+T35	Condition 515 525;552 561	neoplastic pathology
+T36	Condition 504 513;552 561	traumatic pathology
+*	OR T34 T35 T33 T36
+T37	Scope 504 561	traumatic, neoplastic, metabolic, or infectious pathology
+R18	Has_qualifier Arg1:T31 Arg2:T32	
+R19	Has_scope Arg1:T31 Arg2:T37	
+T38	Condition 597 622	fractures of the vertebra
+T39	Multiplier 626 634	multiple
+T40	Condition 635 660	fractures of the vertebra
+T41	Condition 635 651;664 667	fractures of the hip
+*	OR T41 T40
+T42	Scope 635 667	fractures of the vertebra or hip
+R20	Has_multiplier Arg1:T42 Arg2:T39	
+T43	Qualifier 586 596	pathologic
+R21	Has_qualifier Arg1:T38 Arg2:T43	
+*	OR T38 T42
+T44	Condition 682 691	scoliosis
+T45	Qualifier 695 724	greater than ten (10) degrees
+R22	Has_qualifier Arg1:T44 Arg2:T45	
+T46	Qualifier 731 738	angular
+T47	Qualifier 743 753	rotational
+*	OR T46 T47
+T48	Scope 731 753	angular and rotational
+R23	Has_scope Arg1:T44 Arg2:T48	
+T49	Condition 761 778	metabolic disease
+T50	Observation 805 820	been stabilized
+T51	Temporal 821 846	for at least three months
+T52	Condition 854 869	Paget's disease
+T53	Condition 871 883	osteomalacia
+T54	Condition 885 908	osteogenesis imperfecta
+T55	Condition 910 917	thyroid
+T56	Condition 925 951	parathyroid gland disorder
+*	OR T55 T56 T52 T53 T54
+T57	Scope 854 951	Paget's disease, osteomalacia, osteogenesis imperfecta, thyroid and/or parathyroid gland disorder
+T58	Negation 801 804	not
+R24	Has_negation Arg1:T50 Arg2:T58	
+T59	Condition 779 791	bone disease
+*	OR T49 T59
+T60	Scope 761 791	metabolic disease bone disease
+R25	Has_context Arg1:T60 Arg2:T50	
+R26	Has_temporal Arg1:T50 Arg2:T51	
+R27	Subsumes Arg1:T60 Arg2:T57	
+T61	Condition 983 992	infection
+T62	Qualifier 976 982	active
+T63	Qualifier 1000 1008	systemic
+T64	Qualifier 1012 1017	local
+*	OR T63 T64
+T65	Scope 1000 1017	systemic or local
+R28	Has_scope Arg1:T61 Arg2:T65	
+R29	Has_qualifier Arg1:T61 Arg2:T62	
+T66	Condition 1032 1053	cauda equina syndrome
+T67	Condition 1057 1073;1082 1093	neurogenic bowel dysfunction
+T68	Condition 1057 1067;1074 1093	neurogenic bladder dysfunction
+*	OR T67 T68 T66
+T69	Qualifier 1108 1114	severe
+T70	Condition 1115 1137	arterial insufficiency
+T71	Qualifier 1145 1149	legs
+R30	Has_qualifier Arg1:T70 Arg2:T71	
+R31	Has_qualifier Arg1:T70 Arg2:T69	
+T72	Condition 1200 1239	diminution or absence of dorsalis pedis
+T73	Condition 1200 1224;1243 1268	diminution or absence of posterior tibialis pulses
+*	OR T73 T72
+T74	Procedure 1316 1335	arterial ultrasound
+T75	Procedure 1353 1377	vascular plethysmography
+R32	Subsumes Arg1:T74 Arg2:T75	
+T76	Measurement 1386 1412	absolute arterial pressure
+T77	Value 1416 1432	below 50mm of Hg
+T78	Qualifier 1440 1444;1454 1459	calf level
+T79	Qualifier 1448 1459	ankle level
+*	OR T79 T78
+T80	Scope 1440 1459	calf or ankle level
+R33	Has_value Arg1:T76 Arg2:T77	
+R34	Has_scope Arg1:T76 Arg2:T80	
+T81	Procedure 1297 1306	palpation
+T82	Observation 1273 1283	diminished
+T83	Observation 1287 1293	absent
+*	OR T83 T82
+T84	Scope 1273 1293	diminished or absent
+R35	Has_scope Arg1:T81 Arg2:T84	
+T85	Condition 1506 1533	peripheral vascular disease
+T86	Scope 1273 1306	diminished or absent by palpation
+A2	Optional T86
+R36	AND Arg1:T86 Arg2:T74	
+T87	Procedure 1151 1184	Screening on physical examination
+T88	Scope 1200 1268	diminution or absence of dorsalis pedis or posterior tibialis pulses
+A3	Optional T88
+R37	AND Arg1:T88 Arg2:T87	
+R38	Has_scope Arg1:T87 Arg2:T86	
+T89	Negation 1487 1495	excluded
+T90	Scope 1386 1459	absolute arterial pressure is below 50mm of Hg at the calf or ankle level
+A4	Optional T90
+R39	Has_negation Arg1:T90 Arg2:T89	
+*	OR T86 T90 T85
+T91	Qualifier 1549 1560	significant
+T92	Condition 1561 1582	peripheral neuropathy
+R40	Has_qualifier Arg1:T92 Arg2:T91	
+T93	Qualifier 1628 1635	Type II
+T94	Qualifier 1618 1624	Type I
+T95	Condition 1636 1644	diabetes
+*	OR T94 T93
+T96	Scope 1618 1635	Type I or Type II
+R41	Has_scope Arg1:T95 Arg2:T96	
+T97	Condition 1656 1684	systemic metabolic condition
+T98	Qualifier 1648 1655	similar
+R42	Has_qualifier Arg1:T97 Arg2:T98	
+*	OR T95 T97
+T99	Condition 1693 1712	decreased sensation
+T100	Qualifier 1718 1731;1768 1780	stocking-like distribution
+T101	Qualifier 1735 1748;1768 1780	non-radicular distribution
+T102	Qualifier 1753 1780	non-dermatomal distribution
+*	OR T100 T101 T102
+T103	Qualifier 1788 1805	lower extremities
+T104	Scope 1718 1780	stocking-like or non-radicular and non-dermatomal distribution
+R43	Has_scope Arg1:T99 Arg2:T104	
+R44	Has_qualifier Arg1:T99 Arg2:T103	
+T105	Qualifier 1820 1837	insulin-dependent
+T106	Condition 1838 1855	diabetes mellitus
+R45	Has_qualifier Arg1:T106 Arg2:T105	
+T107	Condition 1869 1883	morbidly obese
+T108	Measurement 1898 1913	body mass index
+T109	Value 1914 1917	>40
+R46	Has_value Arg1:T108 Arg2:T109	
+T110	Measurement 1922 1928	weighs
+T111	Value 1929 1969	more than 100 lbs over ideal body weight
+R47	Has_value Arg1:T110 Arg2:T111	
+*	OR T108 T110
+T112	Scope 1898 1969	body mass index >40, or weighs more than 100 lbs over ideal body weight
+R48	Subsumes Arg1:T107 Arg2:T112	
+T113	Condition 2012 2021	hepatitis
+T114	Condition 2023 2027	AIDS
+T115	Condition 2032 2035	HIV
+*	OR T114 T115 T113
+T116	Scope 2012 2035	hepatitis, AIDS, or HIV
+T117	Qualifier 2005 2011	active
+R49	Has_qualifier Arg1:T116 Arg2:T117	
+T118	Condition 2070 2090	rheumatoid arthritis
+T119	Qualifier 2094 2099	other
+T120	Condition 2100 2118	autoimmune disease
+R50	Has_qualifier Arg1:T120 Arg2:T119	
+*	OR T118 T120
+T121	Drug 2152 2160	titanium
+T122	Drug 2162 2174	polyethylene
+T123	Drug 2178 2187	polyester
+*	OR T122 T123 T121
+T124	Condition 2141 2148	allergy
+T125	Scope 2152 2187	titanium, polyethylene or polyester
+R51	Has_scope Arg1:T124 Arg2:T125	
+T126	Condition 2211 2219	pregnant
+T127	Mood 2223 2245	interested in becoming
+T128	Condition 2246 2254	pregnant
+R52	Has_mood Arg1:T128 Arg2:T127	
+*	OR T126 T128
+T129	Temporal 2255 2280	in the next two (2) years
+T130	Scope 2211 2254	pregnant or interested in becoming pregnant
+R53	Has_temporal Arg1:T130 Arg2:T129	
+T131	Condition 2302 2314	tuberculosis
+T132	Condition 2326 2338	tuberculosis
+T133	Temporal 2339 2366	in the past three (3) years
+*	OR T132 T133 T131
+T134	Condition 2454 2464	malignancy
+T135	Condition 2473 2497	non-melanoma skin cancer
+T136	Qualifier 2445 2453	invasive
+R54	Has_qualifier Arg1:T134 Arg2:T136	
+T137	Condition 2523 2551	treated with curative intent
+T138	Negation 2572 2574	no
+T139	Condition 2575 2610	signs or symptoms of the malignancy
+T140	Temporal 2611 2637	for at least two (2) years
+R55	Has_temporal Arg1:T139 Arg2:T140	
+R56	Has_negation Arg1:T139 Arg2:T138	
+T141	Scope 2523 2637	treated with curative intent and there have been no signs or symptoms of the malignancy for at least two (2) years
+T142	Negation 2466 2472	except
+R57	Has_negation Arg1:T135 Arg2:T142	
+R58	AND Arg1:T134 Arg2:T135	
+*	OR T134 T141
+T143	Condition 2394 2411	active malignancy
+T144	Observation 2383 2390	history
+R59	Has_temporal Arg1:T143 Arg2:T144	
+T145	Scope 2445 2637	invasive malignancy (except non-melanoma skin cancer), unless he/she has been treated with curative intent and there have been no signs or symptoms of the malignancy for at least two (2) years
+T146	Scope 2383 2411	history of active malignancy
+R60	Subsumes Arg1:T146 Arg2:T141	
+T147	Condition 2651 2677	immunologically suppressed
+T148	Drug 2688 2696	steroids
+T149	Multiplier 2697 2705	>1 month
+T150	Temporal 2706 2724	over the past year
+R61	Has_multiplier Arg1:T148 Arg2:T149	
+R62	Has_temporal Arg1:T148 Arg2:T150	
+*	OR T147 T148
+T151	Drug 2744 2758	anticoagulants
+T152	Drug 2771 2778	aspirin
+T153	Negation 2760 2770	other than
+R63	Has_negation Arg1:T152 Arg2:T153	
+R64	AND Arg1:T151 Arg2:T152	
+T154	Non-representable 2780 2845	unless the patient can be taken off the anticoagulant for surgery
+T155	Condition 2879 2897	alcohol dependency
+T156	Condition 2870 2878;2887 2897	chemical dependency
+T157	Condition 2913 2937	psychosocial disturbance
+T158	Qualifier 2901 2912	significant
+R65	Has_qualifier Arg1:T157 Arg2:T158	
+*	OR T156 T155 T157
+T159	Observation 2954 2969	life expectancy
+T160	Value 2973 2998	less than three (3) years
+R66	Has_value Arg1:T159 Arg2:T160	
+T161	Competing_trial 3001 3065	Subject is currently involved in another investigational study.
+T162	Competing_trial 3001 3064	Subject is currently involved in another investigational study.
+T163	Observation 3077 3089	incarcerated

@@ -1,0 +1,26 @@
+T1	Person 0 5	Women
+T2	Person 16 19	age
+T3	Value 23 25;6 11	18 under
+R1	Has_value Arg1:T2 Arg2:T3	
+T4	Condition 48 62	axillary nodes
+T5	Qualifier 39 47	positive
+R2	Has_qualifier Arg1:T4 Arg2:T5	
+T6	Procedure 64 83	Neoadjuvant therapy
+T7	Condition 96 109	breast cancer
+R3	AND Arg1:T6 Arg2:T7	
+T8	Person 121 126	Women
+T9	Procedure 141 146	SLNBx
+T10	Procedure 150 174	axillary node dissection
+*	OR T9 T10
+T11	Qualifier 132 140	previous
+T12	Scope 141 174	SLNBx or axillary node dissection
+R4	Has_qualifier Arg1:T12 Arg2:T11	
+T13	Pregnancy_considerations 176 190	Pregnant women
+T14	Procedure 212 221	radiation
+T15	Qualifier 222 241	above the diaphragm
+R5	Has_qualifier Arg1:T14 Arg2:T15	
+T16	Qualifier 247 261	below the neck
+R6	Has_qualifier Arg1:T14 Arg2:T16	
+T17	Qualifier 203 211	previous
+R7	Has_qualifier Arg1:T14 Arg2:T17	
+T18	Person 192 197	Women

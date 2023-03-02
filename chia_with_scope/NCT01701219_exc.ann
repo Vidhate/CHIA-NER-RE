@@ -1,0 +1,83 @@
+T1	Observation 19 27	Cohort A
+T2	Non-query-able 19 27	Cohort A
+T3	Procedure 38 45	therapy
+T4	Undefined_semantics 38 45	therapy
+T5	Temporal 29 37	previous
+R1	Has_temporal Arg1:T3 Arg2:T5	
+T6	Temporal 46 68	for more than 48 hours
+R2	Has_temporal Arg1:T3 Arg2:T6	
+T7	Drug 78 131	parenteral antibiotic with activity against S. aureus
+T8	Qualifier 100 131	with activity against S. aureus
+T9	Observation 122 131	S. aureus
+T10	Temporal 132 181	within 72 hours of positive blood culture results
+T11	Reference_point 151 181	positive blood culture results
+T12	Procedure 160 173	blood culture
+T13	Value 151 159;174 181	positive results
+R3	Has_value Arg1:T12 Arg2:T13	
+R4	Has_index Arg1:T10 Arg2:T11	
+T14	Observation 203 211	Cohort B
+T15	Non-query-able 203 211	Cohort B
+A1	Optional T1
+T16	Scope 29 182	previous therapy for more than 48 hours with any parenteral antibiotic with activity against S. aureus within 72 hours of positive blood culture results.
+R5	Has_scope Arg1:T1 Arg2:T16	
+T17	Temporal 213 221	previous
+T18	Procedure 222 229	therapy
+T19	Undefined_semantics 222 229	therapy
+R6	Has_temporal Arg1:T18 Arg2:T17	
+T20	Temporal 230 252	for more than 48 hours
+R7	Has_temporal Arg1:T18 Arg2:T20	
+T21	Drug 262 310	parenteral antibiotic with activity against MRSA
+T22	Qualifier 78 88	parenteral
+T23	Qualifier 262 272	parenteral
+T24	Qualifier 284 310	with activity against MRSA
+T25	Observation 306 310	MRSA
+T26	Drug 319 329	vancomycin
+T27	Negation 312 318	except
+R8	Has_negation Arg1:T26 Arg2:T27	
+T28	Drug 337 347	daptomycin
+R9	Has_negation Arg1:T28 Arg2:T27	
+T29	Temporal 349 398	within 72 hours of positive blood culture results
+T30	Reference_point 368 398	positive blood culture results
+T31	Value 368 376;391 398	positive results
+T32	Procedure 377 390	blood culture
+R10	Has_value Arg1:T32 Arg2:T31	
+T33	Scope 312 347	except vancomycin and/or daptomycin
+R11	Has_temporal Arg1:T33 Arg2:T29	
+T34	Condition 447 467	S. aureus bacteremia
+T35	Observation 447 456	S. aureus
+T36	Qualifier 447 456	S. aureus
+T37	Temporal 468 483	within 3 months
+R12	Has_temporal Arg1:T34 Arg2:T37	
+T38	Condition 495 518	left-sided endocarditis
+T39	Qualifier 495 505	left-sided
+T40	Device 522 544	prosthetic heart valve
+*	OR T38 T40
+T41	Condition 550 563	Osteomyelitis
+T42	Condition 567 593	prosthetic joint infection
+T43	Temporal 601 610	new onset
+T44	Qualifier 611 633	nonhardware-associated
+T45	Condition 634 657	vertebral osteomyelitis
+R13	Has_qualifier Arg1:T45 Arg2:T44	
+R14	Has_temporal Arg1:T45 Arg2:T43	
+*	OR T41 T42
+T46	Negation 594 600	except
+R15	Has_negation Arg1:T45 Arg2:T46	
+T47	Condition 678 694	hypersensitivity
+T48	Condition 698 715	allergic reaction
+T49	Drug 723 751	β-lactam antibacterial agent
+*	OR T47 T48
+T50	Scope 678 715	hypersensitivity or allergic reaction
+R16	AND Arg1:T50 Arg2:T49	
+T51	Observation 663 670	History
+R17	Has_temporal Arg1:T50 Arg2:T51	
+T52	Condition 781 788;818 828	hepatic impairment
+T53	Condition 806 828	immunologic impairment
+T54	Condition 790 801;818 828	hematologic impairment
+*	OR T52 T54 T53
+T55	Condition 834 842	Pregnant
+T56	Condition 846 853	nursing
+T57	Person 854 861	females
+*	OR T56 T55
+A2	Optional T14
+T58	Scope 213 421	previous therapy for more than 48 hours with any parenteral antibiotic with activity against MRSA, except vancomycin and/or daptomycin, within 72 hours of positive blood culture results confirming persistence
+R18	Has_scope Arg1:T14 Arg2:T58	

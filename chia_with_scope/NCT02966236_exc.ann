@@ -1,0 +1,23 @@
+T1	Condition 0 23	Coronary artery disease
+T2	Device 26 31	stent
+*	OR T1 T2
+T3	Qualifier 33 39	Severe
+T4	Qualifier 40 47	chronic
+T5	Condition 48 61	renal failure
+R1	Has_qualifier Arg1:T5 Arg2:T4	
+R2	Has_qualifier Arg1:T5 Arg2:T3	
+T6	Qualifier 63 73	Congenital
+T7	Qualifier 77 85	acquired
+T8	Condition 86 99	thrombophilia
+T9	Condition 100 116	thrombosis event
+*	OR T7 T6
+*	OR T8 T9
+T10	Scope 86 116	thrombophilia/thrombosis event
+T11	Scope 63 85	Congenital or acquired
+R3	Has_scope Arg1:T10 Arg2:T11	
+T12	Condition 137 144	allergy
+T13	Mood 118 123	Known
+T14	Mood 127 136	suspected
+*	OR T14 T13
+T15	Scope 118 136	Known or suspected
+R4	Has_scope Arg1:T12 Arg2:T15	

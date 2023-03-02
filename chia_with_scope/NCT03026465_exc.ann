@@ -1,0 +1,37 @@
+T1	Condition 0 13	Target lesion
+T2	Qualifier 29 43	left main stem
+R1	Has_qualifier Arg1:T1 Arg2:T2	
+T3	Condition 45 50	STEMI
+T4	Condition 52 62	Restenosis
+T5	Condition 64 81	Cardiogenic shock
+T6	Condition 83 95	Malignancies
+T7	Condition 105 124	comorbid conditions
+T8	Qualifier 99 104	other
+R2	Has_qualifier Arg1:T7 Arg2:T8	
+T9	Observation 130 145	life expectancy
+T10	Value 146 165	less than 12 months
+T11	Observation 188 210	protocol noncompliance
+T12	Mood 174 177	may
+R3	Has_mood Arg1:T11 Arg2:T12	
+R4	Has_value Arg1:T9 Arg2:T10	
+*	OR T9 T11
+T13	Scope 130 210	life expectancy less than 12 months or that may result in protocol noncompliance
+*	OR T6 T7
+T14	Scope 83 124	Malignancies or other comorbid conditions
+R5	Has_scope Arg1:T14 Arg2:T13	
+T15	Condition 218 225	allergy
+T16	Drug 233 250	study medications
+T17	Drug 252 260	probucol
+T18	Drug 262 271	sirolimus
+T19	Drug 273 284	zotarolimus
+*	OR T17 T18 T19
+T20	Scope 252 284	probucol, sirolimus, zotarolimus
+R6	Subsumes Arg1:T16 Arg2:T20	
+R7	AND Arg1:T15 Arg2:T16	
+T21	Condition 287 296	Pregnancy
+T22	Temporal 298 305	present
+T23	Mood 307 316	suspected
+T24	Mood 321 328	planned
+*	OR T23 T24 T22
+T25	Scope 298 328	present, suspected, or planned
+R8	Has_scope Arg1:T21 Arg2:T25	

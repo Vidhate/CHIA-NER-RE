@@ -1,0 +1,12 @@
+T1	Qualifier 14 23	bilateral
+T2	Mood 0 13	Scheduled for
+T3	Procedure 24 50	varus rotational osteotomy
+T4	Procedure 52 55	VRO
+R1	Subsumes Arg1:T3 Arg2:T4	
+T5	Procedure 100 118	osseous procedures
+T6	Procedure 108 118;84 95	procedures soft tissue
+T7	Scope 84 118	soft tissue and osseous procedures
+A1	Optional T7
+R2	Has_scope Arg1:T3 Arg2:T7	
+R3	Has_qualifier Arg1:T3 Arg2:T1	
+R4	Has_mood Arg1:T3 Arg2:T2	

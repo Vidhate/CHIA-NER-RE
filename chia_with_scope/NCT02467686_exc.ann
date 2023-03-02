@@ -1,0 +1,16 @@
+T1	Negation 10 13	not
+T2	Condition 19 32	breast cancer
+R1	Has_negation Arg1:T2 Arg2:T1	
+T3	Drug 45 54	tamoxifen
+T4	Drug 58 77	aromatase inhibitor
+T5	Negation 37 40	not
+*	OR T3 T4
+T6	Scope 45 77	tamoxifen or aromatase inhibitor
+R2	Has_negation Arg1:T6 Arg2:T5	
+T7	Negation 79 82	not
+T8	Condition 86 95	menopause
+T9	Negation 100 103	not
+T10	Condition 109 120	hot flashes
+R3	Has_negation Arg1:T10 Arg2:T9	
+R4	Has_negation Arg1:T8 Arg2:T7	
+*	OR T8 T10

@@ -1,0 +1,91 @@
+T1	Observation 16 24;35 42	personal history
+T2	Observation 28 42	family history
+*	OR T2 T1
+T3	Condition 46 73	medullary thyroid carcinoma
+T4	Condition 91 135	Multiple Endocrine Neoplasia syndrome type 2
+*	OR T3 T4
+T5	Scope 16 42	personal or family history
+T6	Scope 46 135	medullary thyroid carcinoma or patients with Multiple Endocrine Neoplasia syndrome type 2
+R1	Has_scope Arg1:T6 Arg2:T5	
+T7	Condition 167 192	hypersensitivity reaction
+T8	Drug 196 207	liraglutide
+R2	AND Arg1:T7 Arg2:T8	
+T9	Temporal 153 158	prior
+T10	Qualifier 159 166	serious
+R3	Has_qualifier Arg1:T7 Arg2:T10	
+R4	Has_temporal Arg1:T7 Arg2:T9	
+T11	Drug 237 248	liraglutide
+T12	Condition 215 233	contra-indications
+R5	AND Arg1:T12 Arg2:T11	
+T13	Qualifier 209 214	Other
+R6	Has_qualifier Arg1:T12 Arg2:T13	
+T14	Condition 353 368	Type 1 diabetes
+T15	Qualifier 384 396	ADA criteria
+R7	Has_qualifier Arg1:T14 Arg2:T15	
+T16	Drug 419 425	GLP-1A
+T17	Qualifier 413 418	other
+T18	Drug 427 456;498 508	dipeptidyl peptidase 4 (DPP4) inhibitors
+T19	Drug 460 508	Sodium Glucose transporters 2 (SGLT2) inhibitors
+T20	Drug 510 535	thiazolidinediones (TZDs)
+T21	Drug 537 548	pramlintide
+T22	Drug 559 575	prandial insulin
+*	OR T21 T22 T20 T18 T19 T16
+R8	Has_qualifier Arg1:T16 Arg2:T17	
+T23	Condition 592 604	unstable CAD
+T24	Condition 653 669	new onset angina
+T25	Condition 671 682	rest angina
+T26	Condition 684 702;716 722	rapidly increasing angina
+T27	Condition 706 722	crescendo angina
+*	OR T26 T27 T25 T24
+T28	Scope 653 722	new onset angina, rest angina, rapidly increasing or crescendo angina
+R9	Subsumes Arg1:T23 Arg2:T28	
+T29	Condition 735 756	diabetic ketoacidosis
+T30	Procedure 758 766;780 795	pancreas transplantation
+T31	Procedure 770 795	beta-cell transplantation
+T32	Condition 800 808	diabetes
+T33	Procedure 822 834	pancreatitis
+T34	Procedure 838 852	pancreatectomy
+*	OR T33 T34
+T35	Scope 822 852	pancreatitis or pancreatectomy
+T36	Qualifier 809 821	secondary to
+R10	Has_scope Arg1:T36 Arg2:T35	
+R11	Has_qualifier Arg1:T32 Arg2:T36	
+T37	Qualifier 854 859	acute
+T38	Qualifier 863 870	chronic
+T39	Condition 871 889	infective diseases
+T40	Condition 891 897	cancer
+T41	Procedure 901 913	chemotherapy
+T42	Condition 946 960	liver diseases
+T43	Condition 937 942;952 960	renal diseases
+T44	Condition 926 935;952 960	pulmonary diseases
+T45	Condition 966 976	drug abuse
+*	OR T40 T41 T45 T43 T44 T42 T39 T32 T30 T31 T29
+*	OR T37 T38
+T46	Scope 854 870	acute or chronic
+R12	Has_scope Arg1:T39 Arg2:T46	
+T47	Observation 724 731	History
+T48	Scope 735 976	diabetic ketoacidosis, pancreas or beta-cell transplantation, or diabetes secondary to pancreatitis or pancreatectomy; acute or chronic infective diseases, cancer or chemotherapy, history of pulmonary, renal or liver diseases, and drug abuse
+R13	Has_temporal Arg1:T48 Arg2:T47	
+T49	Qualifier 992 999	chronic
+T50	Qualifier 1004 1009	acute
+*	OR T50 T49
+T51	Condition 1010 1033	inflammatory conditions
+T52	Condition 1042 1048	sepsis
+T53	Condition 1050 1070	rheumatoid arthritis
+T54	Condition 1072 1090	ectopic dermatitis
+T55	Condition 1092 1098	asthma
+T56	Condition 1100 1118	ulcerative colitis
+*	OR T55 T56 T54 T53 T52
+T57	Scope 1042 1118	sepsis, rheumatoid arthritis, ectopic dermatitis, asthma, ulcerative colitis
+R14	Subsumes Arg1:T51 Arg2:T57	
+T58	Scope 992 1009	chronic and acute
+R15	Has_scope Arg1:T51 Arg2:T58	
+T59	Temporal 1121 1128	Current
+T60	Drug 1136 1160	systemic corticosteroids
+T61	Temporal 1161 1193	in the 3 months prior this study
+R16	Has_temporal Arg1:T60 Arg2:T59	
+R17	Has_temporal Arg1:T60 Arg2:T61	
+T62	Condition 1196 1204	Pregnant
+T63	Condition 1208 1228	breast-feeding women
+*	OR T63 T62
+T64	Pregnancy_considerations 1230 1351	Females of childbearing potential who are not using adequate contraceptive methods (as required by local law or practice)

@@ -1,0 +1,21 @@
+T1	Measurement 0 21	Endometrial thickness
+T2	Value 22 28	= 7 mm
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Temporal 29 46	after stimulation
+T4	Procedure 35 46	stimulation
+T5	Reference_point 35 46	stimulation
+R2	multi Arg1:T5 Arg2:T4	
+R3	AND Arg1:T3 Arg2:T4	
+R4	Has_temporal Arg1:T1 Arg2:T3	
+T6	Value 48 53	18-45
+T7	Person 54 59	years
+R5	Has_value Arg1:T7 Arg2:T6	
+T8	Procedure 61 64;70 83	IVF fertilisation
+T9	Procedure 65 83	ICSI fertilisation
+*	OR T9 T8
+T10	Measurement 85 88	BMI
+T11	Value 89 105	> 18,5 <30 kg/m2
+R6	Has_value Arg1:T10 Arg2:T11	
+T12	Measurement 107 119	cycle length
+T13	Value 120 130	25-34 days
+R7	Has_value Arg1:T12 Arg2:T13	

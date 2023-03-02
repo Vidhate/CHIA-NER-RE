@@ -1,0 +1,14 @@
+T1	Procedure 19 37	pericardiocentesis
+T2	Temporal 38 49	during RFCA
+T3	Reference_point 45 49	RFCA
+T4	Procedure 45 49	RFCA
+R1	multi Arg1:T3 Arg2:T4	
+R2	Has_index Arg1:T2 Arg2:T3	
+T5	Qualifier 54 64	paroxysmal
+T6	Qualifier 68 78	persistent
+T7	Condition 79 98	atrial fibrillation
+*	OR T5 T6
+T8	Scope 54 78	paroxysmal or persistent
+R3	Has_scope Arg1:T7 Arg2:T8	
+R4	Has_temporal Arg1:T1 Arg2:T2	
+R5	AND Arg1:T1 Arg2:T7	

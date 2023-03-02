@@ -1,0 +1,36 @@
+T1	Condition 10 17	healthy
+T2	Condition 19 33	postmenopausal
+T3	Person 34 39	woman
+T4	Condition 64 75	hot flushes
+T5	Temporal 104 122	At least 12 months
+T6	Condition 126 148	spontaneous amenorrhea
+R1	Has_temporal Arg1:T6 Arg2:T5	
+T7	Temporal 150 167	At least 6 months
+T8	Condition 171 193	spontaneous amenorrhea
+R2	Has_temporal Arg1:T8 Arg2:T7	
+T9	Measurement 199 246	serum follicle-stimulating hormone (FSH) levels
+T10	Value 247 258	> 40 mIU/mL
+R3	Has_value Arg1:T9 Arg2:T10	
+T11	Temporal 260 289	At least 6 weeks postsurgical
+T12	Procedure 290 312	bilateral oophorectomy
+T13	Procedure 290 312;322 342	bilateral oophorectomy without hysterectomy
+T14	Procedure 290 312;314 318;330 342	bilateral oophorectomy with hysterectomy
+T15	Scope 314 342	with or without hysterectomy
+*	OR T13 T14
+R4	Subsumes Arg1:T12 Arg2:T15	
+T16	Scope 290 343	bilateral oophorectomy (with or without hysterectomy)
+R5	Has_temporal Arg1:T16 Arg2:T11	
+T17	Condition 345 360	Hysterectomized
+T18	Procedure 369 391	bilateral oophorectomy
+T19	Negation 361 368	without
+R6	Has_negation Arg1:T18 Arg2:T19	
+T20	Measurement 401 417	serum FSH levels
+T21	Value 418 428	>40 mIU/mL
+R7	Has_value Arg1:T20 Arg2:T21	
+T22	Scope 150 258	At least 6 months of spontaneous amenorrhea with serum follicle-stimulating hormone (FSH) levels > 40 mIU/mL
+T23	Scope 260 343	At least 6 weeks postsurgical bilateral oophorectomy (with or without hysterectomy)
+T24	Scope 345 428	Hysterectomized without bilateral oophorectomy and with serum FSH levels >40 mIU/mL
+*	OR T16 T24
+T25	Line 104 148	At least 12 months of spontaneous amenorrhea
+T26	Scope 150 258	At least 6 months of spontaneous amenorrhea with serum follicle-stimulating hormone (FSH) levels > 40 mIU/mL
+T27	Multiplier 78 102	Meets 1 of the following

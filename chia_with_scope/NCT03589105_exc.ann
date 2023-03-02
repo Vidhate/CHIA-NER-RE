@@ -1,0 +1,128 @@
+T1	Condition 21 35	progressive MS
+T2	Qualifier 13 20	primary
+R1	Has_qualifier Arg1:T1 Arg2:T2	
+T3	Procedure 62 65	MRI
+T4	Mood 37 58	Inability to complete
+R2	Has_mood Arg1:T3 Arg2:T4	
+T5	Condition 67 84	contraindications
+T6	Procedure 89 92	MRI
+R3	AND Arg1:T5 Arg2:T6	
+T7	Measurement 127 133	weight
+T8	Value 134 141	=140 kg
+R4	Has_value Arg1:T7 Arg2:T8	
+T9	Device 143 152	pacemaker
+T10	Device 154 171	cochlear implants
+T11	Device 185 214	foreign substances in the eye
+T12	Device 216 243	intracranial vascular clips
+T13	Procedure 245 252	surgery
+T14	Temporal 253 291	within 6 weeks of entry into the study
+T15	Reference_point 271 291	entry into the study
+R5	Has_index Arg1:T14 Arg2:T15	
+T16	Device 293 307	coronary stent
+T17	Procedure 308 317	implanted
+T18	Temporal 318 370	within 8 weeks prior to the time of the intended MRI
+T19	Reference_point 342 370	the time of the intended MRI
+T20	Procedure 367 370	MRI
+T21	Mood 358 366	intended
+R6	Has_mood Arg1:T20 Arg2:T21	
+R7	multi Arg1:T19 Arg2:T20	
+R8	Has_index Arg1:T18 Arg2:T19	
+R9	Has_temporal Arg1:T17 Arg2:T18	
+R10	AND Arg1:T17 Arg2:T16	
+R11	Has_temporal Arg1:T13 Arg2:T14	
+*	OR T10 T9 T13 T17 T12 T11 T7
+T22	Scope 127 370	weight =140 kg, pacemaker, cochlear implants, presence of foreign substances in the eye, intracranial vascular clips, surgery within 6 weeks of entry into the study, coronary stent implanted within 8 weeks prior to the time of the intended MRI
+T23	Scope 67 92	contraindications for MRI
+R12	Subsumes Arg1:T23 Arg2:T22	
+T24	Scope 67 370	contraindications for MRI include but are not restricted to weight =140 kg, pacemaker, cochlear implants, presence of foreign substances in the eye, intracranial vascular clips, surgery within 6 weeks of entry into the study, coronary stent implanted within 8 weeks prior to the time of the intended MRI
+T25	Scope 37 65	Inability to complete an MRI
+R13	Subsumes Arg1:T25 Arg2:T22	
+T26	Condition 390 401	intolerance
+T27	Drug 379 389	Gadolinium
+R14	AND Arg1:T26 Arg2:T27	
+T28	Condition 414 448	ischemic cerebrovascular disorders
+T29	Condition 456 462	stroke
+T30	Condition 464 489	transient ischemic attack
+*	OR T29 T30
+T31	Condition 494 521	ischemia of the spinal cord
+T32	Scope 456 489	stroke, transient ischemic attack
+R15	Subsumes Arg1:T28 Arg2:T32	
+*	OR T28 T31
+T33	Condition 552 580;596 601	central nervous system (CNS) tumor
+T34	Condition 584 601	spinal cord tumor
+T35	Condition 609 619	meningioma
+T36	Condition 621 627	glioma
+*	OR T35 T36
+*	OR T34 T33
+T37	Scope 609 627	meningioma, glioma
+T38	Scope 552 600	central nervous system (CNS) or spinal cord tumo
+R16	Subsumes Arg1:T38 Arg2:T37	
+T39	Condition 689 699	myelopathy
+T40	Condition 669 685	metabolic causes
+T41	Condition 717 739	vitamin B12 deficiency
+T42	Qualifier 707 716	untreated
+R18	Has_qualifier Arg1:T41 Arg2:T42	
+R17	AND Arg1:T40 Arg2:T39	
+T43	Scope 669 699	metabolic causes of myelopathy
+T44	Scope 707 739	untreated vitamin B12 deficiency
+R19	Subsumes Arg1:T43 Arg2:T44	
+T45	Condition 771 788	infectious causes
+T46	Condition 792 802	myelopathy
+R20	AND Arg1:T45 Arg2:T46	
+T47	Condition 810 818	syphilis
+T48	Condition 820 832	Lyme disease
+T49	Condition 834 871	human T-lymphotropic virus 1 (HTLV-1)
+T50	Condition 873 897	herpes zoster myelopathy
+*	OR T47 T48 T49 T50
+T51	Scope 810 897	syphilis, Lyme disease, human T-lymphotropic virus 1 (HTLV-1), herpes zoster myelopathy
+T52	Scope 771 802	infectious causes of myelopathy
+R21	Subsumes Arg1:T52 Arg2:T51	
+T53	Condition 933 970	progressive CNS degenerative disorder
+T54	Qualifier 911 932	genetically inherited
+R22	Has_qualifier Arg1:T53 Arg2:T54	
+T55	Condition 978 1000	hereditary paraparesis
+T56	Condition 1009 1031	mitochondrial myopathy
+T57	Condition 1033 1047	encephalopathy
+T58	Condition 1049 1064	lactic acidosis
+T59	Condition 1066 1072	stroke
+T60	Condition 1002 1007;1074 1082	MELAS syndrome
+T61	Scope 1009 1072	mitochondrial myopathy, encephalopathy, lactic acidosis, stroke
+R23	Subsumes Arg1:T60 Arg2:T61	
+*	OR T55 T60
+T62	Scope 978 1082	hereditary paraparesis; MELAS [mitochondrial myopathy, encephalopathy, lactic acidosis, stroke] syndrome
+T63	Scope 911 970	genetically inherited progressive CNS degenerative disorder
+R24	Subsumes Arg1:T63 Arg2:T62	
+T64	Condition 1085 1105	Neuromyelitis optica
+T65	Observation 1107 1114	History
+T66	Condition 1136 1165	systemic autoimmune disorders
+T67	Condition 1186 1216	progressive neurologic disease
+T68	Mood 1166 1185	potentially causing
+R25	Has_mood Arg1:T67 Arg2:T68	
+R26	AND Arg1:T66 Arg2:T67	
+T69	Condition 1224 1229	lupus
+T70	Condition 1231 1266	anti-phospholipid antibody syndrome
+T71	Condition 1268 1286	Sjogren's syndrome
+T72	Condition 1288 1304	Behçet's disease
+T73	Condition 1306 1317	sarcoidosis
+*	OR T70 T69 T72 T73 T71
+T74	Scope 1224 1317	lupus, anti-phospholipid antibody syndrome, Sjogren's syndrome, Behçet's disease, sarcoidosis
+T75	Scope 1136 1216	systemic autoimmune disorders potentially causing progressive neurologic disease
+R27	Subsumes Arg1:T75 Arg2:T74	
+R28	Has_temporal Arg1:T75 Arg2:T65	
+T76	Qualifier 1331 1337	severe
+T77	Qualifier 1339 1361	clinically significant
+T78	Condition 1371 1389	spinal cord trauma
+T79	Condition 1362 1367;1383 1389	brain trauma
+*	OR T78 T79
+T80	Scope 1362 1389	brain or spinal cord trauma
+R29	Has_qualifier Arg1:T80 Arg2:T77	
+R30	Has_qualifier Arg1:T80 Arg2:T76	
+T81	Condition 1397 1415	cerebral contusion
+T82	Condition 1417 1440	spinal cord compression
+*	OR T81 T82
+T83	Scope 1397 1440	cerebral contusion, spinal cord compression
+T84	Scope 1331 1389	severe, clinically significant brain or spinal cord trauma
+R31	Subsumes Arg1:T84 Arg2:T83	
+T85	Observation 1443 1462	Vulnerable patients
+T86	Qualifier 1487 1567	Articles L. 1121-5 to L. 1121-8 and L. 1122-1-2 of the French Public Health Code
+R32	Has_qualifier Arg1:T85 Arg2:T86	

@@ -1,0 +1,96 @@
+T1	Measurement 0 3	BMI
+T2	Value 4 22	<35 and > 60 kg/m2
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Condition 24 41	Inability to walk
+T4	Condition 56 77	wheelchair dependence
+T5	Condition 43 52	bed-bound
+*	OR T5 T4
+T6	Scope 43 77	bed-bound or wheelchair dependence
+R2	Subsumes Arg1:T3 Arg2:T6	
+T7	Procedure 80 104	open abdominal surgeries
+T8	Procedure 112 131	simple appendectomy
+T9	Procedure 136 160	common OB/GYN procedures
+T10	Qualifier 168 174	pelvis
+R3	Has_qualifier Arg1:T9 Arg2:T10	
+T11	Procedure 176 188	hysterectomy
+T12	Procedure 190 199	C-section
+T13	Procedure 205 217	oophorectomy
+T14	Procedure 219 233	tubal ligation
+*	OR T11 T12 T13 T14
+T15	Scope 176 233	hysterectomy, C-section, and oophorectomy, tubal ligation
+T16	Scope 136 174	common OB/GYN procedures in the pelvis
+R4	Subsumes Arg1:T16 Arg2:T15	
+T17	Negation 105 111	except
+*	OR T8 T16
+T18	Scope 112 234	simple appendectomy and common OB/GYN procedures in the pelvis (hysterectomy, C-section, and oophorectomy, tubal ligation)
+R5	Has_negation Arg1:T18 Arg2:T17	
+R6	Has_scope Arg1:T7 Arg2:T18	
+T19	Procedure 236 254;270 279	laparoscopic bowel resection
+T20	Procedure 258 279	solid organ resection
+T21	Procedure 287 315	laparoscopic cholecystectomy
+*	OR T20 T19
+T22	Negation 280 286	except
+T23	Scope 236 279	laparoscopic bowel or solid organ resection
+R7	Has_negation Arg1:T21 Arg2:T22	
+R8	AND Arg1:T23 Arg2:T21	
+T24	Condition 317 331	ventral hernia
+T25	Procedure 332 348	repair with mesh
+R9	AND Arg1:T25 Arg2:T24	
+T26	Temporal 350 362	Preoperative
+T28	Condition 386 398	chronic pain
+T29	Drug 371 377	opiate
+T27	Multiplier 363 370	chronic
+R10	Has_multiplier Arg1:T29 Arg2:T27	
+R11	AND Arg1:T29 Arg2:T28	
+R12	Has_temporal Arg1:T29 Arg2:T26	
+T30	Drug 410 416	opiate
+T31	Multiplier 423 464	at least 60 mg/day of morphine equivalent
+T32	Multiplier 465 479	for = 3 months
+R13	Has_multiplier Arg1:T30 Arg2:T31	
+R14	Has_multiplier Arg1:T30 Arg2:T32	
+T33	Temporal 546 599	in the one year period prior to the bariatric surgery
+T34	Reference_point 578 599	the bariatric surgery
+T35	Procedure 582 599	bariatric surgery
+R15	multi Arg1:T34 Arg2:T35	
+R16	AND Arg1:T33 Arg2:T35	
+R17	Has_temporal Arg1:T30 Arg2:T33	
+T36	Scope 410 479	opiate usage at least 60 mg/day of morphine equivalent for = 3 months
+T37	Scope 363 398	chronic opiate use for chronic pain
+R18	Subsumes Arg1:T37 Arg2:T36	
+T38	Measurement 605 654	American Society of Anesthesiologists (ASA) score
+T39	Value 655 658	> 3
+R19	Has_value Arg1:T38 Arg2:T39	
+T40	Condition 671 687	hypersensitivity
+T41	Condition 691 707	adverse reaction
+T42	Drug 711 722	bupivacaine
+T43	Drug 726 735	narcotics
+*	OR T42 T43
+*	OR T40 T41
+T44	Scope 671 707	hypersensitivity or adverse reaction
+T45	Scope 711 735	bupivacaine or narcotics
+R20	Has_scope Arg1:T44 Arg2:T45	
+T46	Non-query-able 737 763	Inability to speak English
+T47	Condition 765 779	ventral hernia
+T48	Procedure 780 786	repair
+R21	AND Arg1:T48 Arg2:T47	
+T49	Procedure 788 803	Cholecystectomy
+T50	Condition 805 818	hiatal hernia
+T51	Procedure 819 825	repair
+T52	Procedure 831 852	posterior cruroplasty
+R22	AND Arg1:T51 Arg2:T50	
+R23	AND Arg1:T51 Arg2:T52	
+T53	Condition 864 882	lysis of adhesions
+T54	Qualifier 854 863	extensive
+R24	Has_qualifier Arg1:T53 Arg2:T54	
+T55	Non-representable 884 955	other procedures that mandate addition of "trocar(s)" or "feeding tube"
+T56	Drug 969 975	trocar
+T57	Observation 982 1003	conversion of surgery
+T58	Procedure 1007 1020	hand-assisted
+T59	Procedure 1024 1028	open
+*	OR T58 T59
+T60	Procedure 996 1003	surgery
+R25	multi Arg1:T57 Arg2:T60	
+T61	Mood 957 968	Addition of
+R26	Has_mood Arg1:T56 Arg2:T61	
+*	OR T56 T57
+R27	AND Arg1:T57 Arg2:T58	

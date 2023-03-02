@@ -1,0 +1,30 @@
+T1	Observation 12 19	alcohol
+T2	Observation 23 28	drugs
+*	OR T1 T2
+T3	Temporal 40 50	last month
+T4	Scope 12 28	alcohol or drugs
+R1	Has_temporal Arg1:T4 Arg2:T3	
+T5	Condition 102 109;79 90	illness psychiatric
+T6	Condition 94 109	somatic illness
+*	OR T6 T5
+T7	Qualifier 53 62	Untreated
+T8	Qualifier 63 69	severe
+T9	Qualifier 70 78	comorbid
+T10	Scope 53 78	Untreated severe comorbid
+T11	Scope 79 109	psychiatric or somatic illness
+R2	Has_scope Arg1:T11 Arg2:T10	
+T12	Measurement 112 125	Bloodpressure
+T13	Value 126 142	150/95 or higher
+R3	Has_value Arg1:T12 Arg2:T13	
+T14	Measurement 155 160	pulse
+T15	Value 145 154	Irregular
+R4	Has_value Arg1:T14 Arg2:T15	
+T16	Measurement 165 170	pulse
+T17	Value 171 184	100 or higher
+R5	Has_value Arg1:T16 Arg2:T17	
+*	OR T14 T16
+T18	Non-query-able 187 241	No counter indications according to the Medikinet pill
+T19	Non-query-able 244 322	Concurrent clinical diagnosis that significantly could affect test performance
+T20	Drug 352 361	medicines
+T21	Condition 366 370	ADHD
+R6	AND Arg1:T20 Arg2:T21	

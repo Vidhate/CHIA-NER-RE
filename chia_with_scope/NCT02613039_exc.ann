@@ -1,0 +1,35 @@
+T1	Non-query-able 0 40	Participation in another clinical trial.
+T2	Mood 51 60	suspected
+T3	Mood 42 47	Known
+*	OR T2 T3
+T4	Condition 77 87	malignancy
+T5	Condition 91 106	chronic illness
+*	OR T5 T4
+T6	Scope 77 106	malignancy or chronic illness
+T7	Observation 65 75	history of
+T8	Scope 42 76	Known or suspected (or history of)
+R1	Has_scope Arg1:T6 Arg2:T8	
+T9	Condition 128 142	mental disease
+T10	Condition 117 124;135 142	organic disease
+*	OR T9 T10
+T11	Qualifier 143 170	diagnosed by a psychiatrist
+T12	Scope 117 142	organic or mental disease
+R2	Has_qualifier Arg1:T12 Arg2:T11	
+T13	Condition 178 194	major depression
+T14	Procedure 205 212	treated
+T15	Temporal 195 204	currently
+R3	Has_temporal Arg1:T14 Arg2:T15	
+T16	Drug 218 243	antidepressant medication
+R4	AND Arg1:T14 Arg2:T16	
+R5	AND Arg1:T13 Arg2:T14	
+T17	Scope 117 170	organic or mental disease diagnosed by a psychiatrist
+R6	Subsumes Arg1:T17 Arg2:T13	
+T18	Mood 245 254	suspected
+T19	Observation 275 290	medical history
+T20	Procedure 298 318	clinical examination
+*	OR T20 T19
+T21	Scope 275 318	medical history and/or clinical examination
+R7	Has_scope Arg1:T18 Arg2:T21	
+R8	Has_mood Arg1:T13 Arg2:T18	
+T22	Post-eligibility 321 376	Conditions that may affect the compliance to the study.
+T23	Post-eligibility 378 518	Contraindications to therapy with the study drug or hypersensitivity to the study drug (active ingredient or excipients of the formulation).

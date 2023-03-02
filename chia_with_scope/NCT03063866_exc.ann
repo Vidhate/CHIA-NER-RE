@@ -1,0 +1,18 @@
+T1	Condition 24 35	hematemesis
+T2	Condition 0 18	Emergent condition
+R1	Subsumes Arg1:T2 Arg2:T1	
+T3	Qualifier 64 70	severe
+T4	Qualifier 52 60	moderate
+*	OR T4 T3
+T5	Condition 71 93	hepatic encephalopathy
+T6	Scope 52 70	moderate to severe
+R2	Has_scope Arg1:T5 Arg2:T6	
+T7	Condition 110 134	hepatopulmonary syndrome
+T8	Condition 170 186	hypersensitivity
+T9	Mood 160 169	suspected
+T10	Mood 151 156	known
+*	OR T9 T10
+T11	Scope 151 169	known or suspected
+R3	Has_scope Arg1:T8 Arg2:T11	
+T12	Drug 194 209	used medication
+R4	AND Arg1:T8 Arg2:T12	

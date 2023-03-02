@@ -1,0 +1,4 @@
+T1	Procedure 8 25	kidney transplant
+T2	Qualifier 0 7	Primary
+R1	Has_qualifier Arg1:T1 Arg2:T2	
+T3	Person 38 44	adults

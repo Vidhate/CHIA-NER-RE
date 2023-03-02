@@ -1,0 +1,24 @@
+T1	Measurement 0 3	ASA
+T2	Value 4 12	I and II
+T3	Person 13 18	women
+R1	Has_value Arg1:T1 Arg2:T2	
+T4	Person 30 33	old
+T5	Value 20 29	18-45 yrs
+R2	Has_value Arg1:T4 Arg2:T5	
+T6	Condition 35 54	Singleton pregnancy
+T7	Procedure 56 73	Cervical cerclage
+T8	Qualifier 74 77;85 94	1st trimester
+T9	Qualifier 81 94	2nd trimester
+T10	Condition 98 107	pregnancy
+T11	Procedure 124 141	spinal anesthesia
+R3	AND Arg1:T7 Arg2:T11	
+*	OR T8 T9
+T12	Scope 74 94	1st or 2nd trimester
+R4	Has_scope Arg1:T10 Arg2:T12	
+R5	AND Arg1:T7 Arg2:T10	
+T13	Measurement 143 149	Height
+T14	Value 150 162	150 - 180 cm
+R6	Has_value Arg1:T13 Arg2:T14	
+T15	Measurement 164 167	BMI
+T16	Value 168 178	= 40 kg/m2
+R7	Has_value Arg1:T15 Arg2:T16	

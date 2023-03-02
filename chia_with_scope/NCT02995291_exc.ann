@@ -1,0 +1,15 @@
+T1	Condition 0 18	contra-indications
+T2	Procedure 23 47	regular dental treatment
+R1	AND Arg1:T1 Arg2:T2	
+T3	Observation 49 64	medical history
+T4	Condition 70 85	contraindicates
+T5	Drug 97 108	epinephrine
+R2	AND Arg1:T4 Arg2:T5	
+R3	Has_temporal Arg1:T4 Arg2:T3	
+T6	Drug 131 137	opioid
+T7	Drug 144 165	opioid like analgesic
+T8	Temporal 166 181	within 24 hours
+*	OR T6 T7
+T9	Scope 131 165	opioid or an opioid like analgesic
+R4	Has_temporal Arg1:T9 Arg2:T8	
+T10	Condition 183 191	pregnant

@@ -1,0 +1,63 @@
+T1	Condition 20 43	coronary artery disease
+T2	Condition 45 62	diabetes mellitus
+T3	Condition 64 81	contraindications
+T4	Procedure 85 125	cardiac magnetic resonance imaging (CMR)
+R1	AND Arg1:T3 Arg2:T4	
+T5	Measurement 127 133	weight
+T6	Value 134 142	>350 lbs
+R2	Has_value Arg1:T5 Arg2:T6	
+T7	Observation 144 177	inability to lie flat for imaging
+T8	Condition 179 185	anemia
+T9	Condition 187 204	contraindications
+T10	Drug 208 219	regadenoson
+T11	Drug 223 236	aminophylline
+*	OR T10 T11
+T12	Scope 208 236	regadenoson or aminophylline
+R3	Has_scope Arg1:T9 Arg2:T12	
+*	OR T1 T2 T3 T5 T7 T8 T9
+T13	Condition 238 245	HEALTHY
+A1	Optional T13
+T14	Condition 253 275	cardiovascular disease
+T15	Condition 277 297	cardiac risk factors
+T16	Drug 308 327	cardiac medications
+*	OR T15 T16 T14
+T17	Scope 253 327	cardiovascular disease, cardiac risk factors or use of cardiac medications
+R4	Has_scope Arg1:T13 Arg2:T17	
+T18	Condition 329 341	HYPERTENSIVE
+A2	Optional T18
+T19	Condition 349 371	cardiovascular disease
+T20	Condition 349 363;375 387	cardiovascular risk factors
+*	OR T20 T19
+T21	Condition 349 363;375 387;394 411	cardiovascular risk factors from hypertension
+T22	Negation 388 398	aside from
+R5	Has_negation Arg1:T21 Arg2:T22	
+T23	Drug 422 441	cardiac medications
+T24	Scope 349 411	cardiovascular disease or risk factors aside from hypertension
+*	OR T24 T23
+T25	Scope 349 441	cardiovascular disease or risk factors aside from hypertension or use of cardiac medications
+R6	Has_scope Arg1:T18 Arg2:T25	
+T26	Condition 443 448	HFpEF
+A3	Optional T26
+T27	Observation 450 466	prior history of
+T28	Measurement 467 471	LVEF
+T29	Value 472 481	below 50%
+R7	Has_value Arg1:T28 Arg2:T29	
+R8	Has_temporal Arg1:T28 Arg2:T27	
+T30	Qualifier 483 488	acute
+T31	Condition 489 505	decompensated HF
+R9	Has_qualifier Arg1:T31 Arg2:T30	
+T32	Qualifier 507 515	moderate
+T33	Qualifier 519 526	greater
+*	OR T32 T33
+T34	Condition 527 543	valvular disease
+T35	Scope 507 526	moderate or greater
+R10	Has_scope Arg1:T34 Arg2:T35	
+T36	Qualifier 545 556	significant
+T37	Condition 557 576	cardiac arrhythmias
+R11	Has_qualifier Arg1:T37 Arg2:T36	
+T38	Condition 578 597	pericardial disease
+T39	Condition 599 623	congenital heart disease
+T40	Condition 625 655	primary pulmonary hypertension
+*	OR T40 T39 T38 T37 T34 T31 T28
+T41	Scope 450 655	prior history of LVEF below 50%, acute decompensated HF, moderate or greater valvular disease, significant cardiac arrhythmias, pericardial disease, congenital heart disease, primary pulmonary hypertension
+R12	Has_scope Arg1:T26 Arg2:T41	

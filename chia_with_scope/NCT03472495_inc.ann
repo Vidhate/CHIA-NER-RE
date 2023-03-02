@@ -1,0 +1,15 @@
+T1	Value 0 16	>/= 18 years old
+T2	Person 13 16	old
+R1	Has_value Arg1:T2 Arg2:T1	
+T3	Condition 18 37	Atrial fibrillation
+T4	Condition 18 24;41 48	Atrial flutter
+*	OR T4 T3
+T5	Procedure 52 69	electrocardiogram
+T6	Scope 18 48	Atrial fibrillation or flutter
+R2	Has_scope Arg1:T5 Arg2:T6	
+T7	Measurement 71 81	Heart rate
+T8	Value 82 96	>110 beats/min
+R3	Has_value Arg1:T7 Arg2:T8	
+T9	Measurement 98 121	Systolic blood pressure
+T10	Value 122 133	>/= 90 mmHg
+R4	Has_value Arg1:T9 Arg2:T10	

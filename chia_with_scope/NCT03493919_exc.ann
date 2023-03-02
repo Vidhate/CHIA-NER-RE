@@ -1,0 +1,205 @@
+T1	Qualifier 25 37	uncontrolled
+T2	Qualifier 13 21	unstable
+T3	Qualifier 0 11	Progressive
+T4	Condition 38 57	clinical conditions
+*	OR T1 T2 T3
+T5	Scope 0 37	Progressive, unstable or uncontrolled
+R1	Has_scope Arg1:T4 Arg2:T5	
+T6	Condition 60 76	Hypersensitivity
+T7	Condition 88 95	allergy
+T8	Drug 104 125	component of vaccines
+*	OR T6 T7
+T9	Drug 127 145	medicinal products
+T10	Device 149 166	medical equipment
+T11	Qualifier 167 202	whose use is foreseen in this study
+*	OR T9 T10 T8
+T12	Scope 104 166	component of vaccines, medicinal products or medical equipment
+R2	Has_qualifier Arg1:T12 Arg2:T11	
+T13	Scope 60 95	Hypersensitivity, including allergy
+R3	Has_scope Arg1:T13 Arg2:T12	
+T14	Condition 240 256	contraindication
+T15	Procedure 260 285	intramuscular vaccination
+T16	Procedure 290 301	blood draws
+*	OR T15 T16
+T17	Scope 260 301	intramuscular vaccination and blood draws
+R4	Has_scope Arg1:T14 Arg2:T17	
+T18	Non-representable 304 324	Clinical conditions.
+T19	Qualifier 326 349	Systemic administration
+T20	Drug 353 368	corticosteroids
+T21	Qualifier 370 372	PO
+T22	Qualifier 373 375	IV
+T23	Qualifier 376 378	IM
+*	OR T21 T22 T23
+T24	Scope 370 378	PO/IV/IM
+R5	Subsumes Arg1:T19 Arg2:T24	
+R6	Has_qualifier Arg1:T20 Arg2:T19	
+T25	Temporal 380 420	within 90 days prior to informed consent
+T26	Reference_point 404 420	informed consent
+R7	Has_index Arg1:T25 Arg2:T26	
+R8	Has_temporal Arg1:T19 Arg2:T25	
+T27	Drug 460 483	immunomodulating agents
+T28	Drug 441 455;477 483	antineoplastic agents
+*	OR T27 T28 T29
+T29	Procedure 487 499	radiotherapy
+T30	Temporal 500 540	within 90 days prior to informed consent
+T31	Reference_point 524 540	informed consent
+R9	Has_index Arg1:T30 Arg2:T31	
+T32	Scope 441 499	antineoplastic and immunomodulating agents or radiotherapy
+R10	Has_temporal Arg1:T32 Arg2:T30	
+T33	Drug 552 567	immunoglobulins
+T34	Drug 575 589	blood products
+T35	Temporal 590 631	within 180 days prior to informed consent
+T36	Reference_point 615 631	informed consent
+R11	Has_index Arg1:T35 Arg2:T36	
+*	OR T34 T33
+T37	Scope 552 589	immunoglobulins or any blood products
+R12	Has_temporal Arg1:T37 Arg2:T35	
+T38	Qualifier 646 661	investigational
+T39	Qualifier 665 679	non-registered
+T40	Drug 680 697	medicinal product
+T41	Temporal 698 738	within 30 days prior to informed consent
+T42	Reference_point 722 738	informed consent
+R13	Has_index Arg1:T41 Arg2:T42	
+*	OR T39 T38
+T43	Scope 646 679	investigational or non-registered
+R14	Has_scope Arg1:T40 Arg2:T43	
+R15	Has_temporal Arg1:T40 Arg2:T41	
+T44	Non-representable 741 888	Any other clinical condition that, in the opinion of the investigator, might pose additional risk to the subject due to participation in the study.
+T45	Drug 905 930	meningococcal vaccination
+T46	Observation 894 901	history
+T47	Condition 934 947;963 971	meningococcal diseases
+T48	Condition 952 971	gonorrhoea diseases
+*	OR T48 T47 T45
+T49	Scope 905 971	meningococcal vaccination or meningococcal and gonorrhoea diseases
+R16	Has_temporal Arg1:T49 Arg2:T46	
+T50	Procedure 1012 1026	blood donation
+T51	Non-representable 974 1011	Enrolment in any activity requiring a
+T52	Multiplier 1027 1045	greater than 50 mL
+R17	Has_multiplier Arg1:T50 Arg2:T52	
+T53	Temporal 1046 1109	during the period starting 30 days before the first study visit
+T54	Reference_point 1073 1109	30 days before the first study visit
+R18	Has_index Arg1:T53 Arg2:T54	
+T55	Temporal 1143 1179	for the duration of the study period
+T56	Reference_point 1163 1179	the study period
+R20	Has_index Arg1:T55 Arg2:T56	
+*	OR T53 T55
+T57	Scope 1046 1179	during the period starting 30 days before the first study visit (Day -83, Day -60 or Day -30) or for the duration of the study period
+R19	Has_scope Arg1:T50 Arg2:T57	
+T58	Drug 1212 1234	immune-modifying drugs
+T59	Temporal 1235 1270	at any time during the study period
+T60	Reference_point 1254 1270	the study period
+R21	Has_index Arg1:T59 Arg2:T60	
+R22	Has_temporal Arg1:T58 Arg2:T59	
+T61	Qualifier 1200 1211	long-acting
+R23	Has_qualifier Arg1:T58 Arg2:T61	
+T62	Condition 1286 1301	blood disorders
+T63	Observation 1320 1327	history
+T64	Observation 1331 1368	difficulty in providing blood samples
+R24	Has_temporal Arg1:T64 Arg2:T63	
+T65	Drug 1374 1384	antibiotic
+T66	Temporal 1392 1424	7 days prior to blood collection
+T67	Reference_point 1408 1424	blood collection
+R25	Has_index Arg1:T66 Arg2:T67	
+R26	Has_temporal Arg1:T65 Arg2:T66	
+T68	Procedure 1440 1447;1459 1464	donated blood
+T69	Value 1448 1455	>450 mL
+T70	Temporal 1465 1516	within 60 days prior to any blood collection visits
+T71	Reference_point 1489 1516	any blood collection visits
+R27	Has_index Arg1:T70 Arg2:T71	
+R28	Has_value Arg1:T68 Arg2:T69	
+R29	Has_temporal Arg1:T68 Arg2:T70	
+T72	Measurement 1578 1598	lost red blood cells
+T73	Value 1537 1544	>200 mL
+R30	Has_value Arg1:T72 Arg2:T73	
+T74	Multiplier 1554 1560	single
+T75	Procedure 1561 1570	apheresis
+R31	Has_multiplier Arg1:T75 Arg2:T74	
+R32	AND Arg1:T75 Arg2:T72	
+T76	Procedure 1632 1641	apheresis
+T77	Multiplier 1602 1624	more than one occasion
+T78	Temporal 1642 1669	within the previous 60 days
+T79	Reference_point 1649 1669	the previous 60 days
+R33	Has_index Arg1:T78 Arg2:T79	
+R34	Has_multiplier Arg1:T76 Arg2:T77	
+R35	Has_temporal Arg1:T76 Arg2:T78	
+*	OR T75 T76
+T80	Temporal 1672 1684	Concurrently
+T81	Observation 1685 1701;1710 1724	participating in clinical study
+R36	Has_temporal Arg1:T81 Arg2:T80	
+T82	Temporal 1726 1761	at any time during the study period
+R37	Has_temporal Arg1:T81 Arg2:T82	
+T83	Reference_point 1745 1761	the study period
+R38	Has_index Arg1:T82 Arg2:T83	
+T84	Drug 1859 1866	vaccine
+T85	Drug 1867 1874	product
+*	OR T84 T85
+T86	Scope 1859 1874	vaccine/product
+T87	Qualifier 1818 1833	investigational
+T88	Qualifier 1839 1858	non-investigational
+*	OR T87 T88
+T89	Scope 1818 1858	investigational or a non-investigational
+R39	Has_scope Arg1:T86 Arg2:T89	
+R40	Has_scope Arg1:T81 Arg2:T86	
+T90	Temporal 1876 1883	Ongoing
+T91	Condition 1884 1891	anaemia
+R41	Has_temporal Arg1:T91 Arg2:T90	
+T92	Measurement 1908 1919	haemoglobin
+T93	Value 1927 1992	below the lower limit of the laboratory-specified reference range
+R42	Has_value Arg1:T92 Arg2:T93	
+R43	AND Arg1:T91 Arg2:T92	
+T94	Procedure 2001 2020	finger prick method
+T95	Condition 2037 2044	anaemia
+R44	AND Arg1:T94 Arg2:T95	
+*	OR T91 T94
+T96	Non-representable 2096 2273	and the subject will be referred for appropriate medical management. The subject may participate in this study following therapy and evidence that the anaemia has been resolved.
+T97	Condition 2290 2298	reaction
+T98	Condition 2302 2318	hypersensitivity
+T99	Qualifier 2319 2376	likely to be exacerbated by any component of the vaccines
+T100	Drug 2351 2376	component of the vaccines
+R45	multi Arg1:T99 Arg2:T100	
+*	OR T97 T98
+T101	Scope 2290 2318	reaction or hypersensitivity
+R46	Has_qualifier Arg1:T101 Arg2:T99	
+T102	Condition 2379 2387	Pregnant
+T103	Observation 2391 2400	lactating
+T104	Person 2401 2407	female
+*	OR T102 T103
+T105	Person 2410 2416	Female
+T106	Observation 2417 2444	planning to become pregnant
+T107	Mood 2448 2471	planning to discontinue
+T108	Observation 2472 2497	contraceptive precautions
+R47	Has_mood Arg1:T108 Arg2:T107	
+*	OR T106 T108
+T109	Mood 2417 2428	planning to
+T110	Observation 2429 2444	become pregnant
+R48	multi Arg1:T106 Arg2:T110	
+R49	Has_mood Arg1:T110 Arg2:T109	
+T111	Qualifier 2504 2513	confirmed
+T112	Mood 2517 2526	suspected
+T113	Condition 2527 2544;2565 2574	immunosuppressive condition
+T114	Condition 2548 2574	immunodeficiency condition
+*	OR T114 T113
+T115	Observation 2584 2599	medical history
+T116	Procedure 2604 2624	physical examination
+*	OR T115 T116
+T117	Scope 2584 2624	medical history and physical examination
+T118	Scope 2527 2574	immunosuppressive or immunodeficiency condition
+*	OR T111 T112
+T119	Scope 2504 2526	confirmed or suspected
+R50	Has_scope Arg1:T118 Arg2:T119	
+R51	Has_scope Arg1:T118 Arg2:T117	
+T120	Observation 2626 2640	Family history
+T121	Condition 2658 2685	hereditary immunodeficiency
+T122	Condition 2644 2654;2669 2685	congenital immunodeficiency
+*	OR T121 T122
+T123	Scope 2644 2685	congenital or hereditary immunodeficiency
+R52	Has_context Arg1:T123 Arg2:T120	
+T124	Qualifier 2688 2695	Serious
+T125	Condition 2696 2711	chronic illness
+R53	Has_qualifier Arg1:T125 Arg2:T124	
+T126	Condition 2725 2752	chronic alcohol consumption
+T127	Condition 2760 2770	drug abuse
+*	OR T126 T127
+T128	Observation 2714 2721	History
+T129	Scope 2725 2770	chronic alcohol consumption and/or drug abuse
+R54	Has_temporal Arg1:T129 Arg2:T128	

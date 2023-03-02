@@ -1,0 +1,15 @@
+T1	Procedure 15 31	throat surgeries
+T2	Procedure 33 46	tonsillectomy
+T3	Procedure 48 66	adenotonsillectomy
+T4	Procedure 68 85	uvulopalatoplasty
+T5	Procedure 87 112	uvulopalatopharyngoplasty
+T6	Scope 33 112	tonsillectomy, adenotonsillectomy, uvulopalatoplasty, uvulopalatopharyngoplasty
+R1	Subsumes Arg1:T1 Arg2:T6	
+T7	Condition 128 149	acute throat diseases
+T8	Undefined_semantics 128 149	acute throat diseases
+T9	Condition 151 162	pharyngitis
+T10	Condition 164 175	tonsillitis
+T11	Condition 177 196	pharyngotonsillitis
+*	OR T11 T10 T9
+T12	Scope 151 196	pharyngitis, tonsillitis, pharyngotonsillitis
+R2	Subsumes Arg1:T7 Arg2:T12	

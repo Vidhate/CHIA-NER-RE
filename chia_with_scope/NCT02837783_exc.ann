@@ -1,0 +1,27 @@
+T1	Condition 32 45	watery stools
+T2	Condition 23 28;39 45	loose stools
+*	OR T2 T1
+T3	Observation 12 22	history of
+T4	Scope 23 45	loose or watery stools
+R1	Has_temporal Arg1:T4 Arg2:T3	
+T5	Condition 64 95	clinically significant findings
+T6	Qualifier 100 111	unexplained
+T7	Condition 112 149	clinically significant alarm symptoms
+R2	Has_qualifier Arg1:T7 Arg2:T6	
+T8	Condition 200 217	medical condition
+T9	Qualifier 223 255	may contribute to abdominal pain
+T10	Condition 241 255	abdominal pain
+R3	multi Arg1:T9 Arg2:T10	
+R4	Has_qualifier Arg1:T8 Arg2:T9	
+T11	Qualifier 273 290	protocol-excluded
+T12	Qualifier 294 316	clinically significant
+T13	Observation 328 344	surgical history
+T14	Observation 317 324;337 344	medical history
+*	OR T14 T13
+T15	Scope 317 344	medical or surgical history
+*	OR T12 T11
+T16	Scope 273 316	protocol-excluded or clinically significant
+R5	Has_scope Arg1:T15 Arg2:T16	
+T17	Qualifier 350 386	could confound the study assessments
+R6	Has_qualifier Arg1:T15 Arg2:T17	
+T18	Post-eligibility 257 386	Patient has any protocol-excluded or clinically significant medical or surgical history that could confound the study assessments

@@ -1,0 +1,126 @@
+T1	Condition 10 32	thromboembolic disease
+T2	Condition 45 67	thromboembolic disease
+T3	Observation 34 41	history
+R1	Has_temporal Arg1:T2 Arg2:T3	
+T4	Temporal 3 9	Active
+R2	Has_temporal Arg1:T1 Arg2:T4	
+T5	Condition 79 91	retinal vein
+T6	Condition 95 111	artery occlusion
+*	OR T6 T5
+T7	Scope 79 111	retinal vein or artery occlusion
+R3	Subsumes Arg1:T2 Arg2:T7	
+T8	Condition 120 143	inherited thrombophilia
+T9	Observation 148 162	family history
+T10	Condition 166 176	thrombosis
+T11	Observation 177 203	in a first degree relative
+R4	Has_context Arg1:T10 Arg2:T9	
+R5	Has_context Arg1:T9 Arg2:T11	
+*	OR T8 T10 T2 T1
+T12	Condition 240 259	psychiatric illness
+T13	Condition 229 236;252 259	medical illness
+T14	Qualifier 222 228	severe
+T15	Scope 229 259	medical or psychiatric illness
+R6	Has_qualifier Arg1:T15 Arg2:T14	
+T16	Undefined_semantics 222 228	severe
+T17	Qualifier 266 343	in the opinion of the Investigator, would affect subject safety or compliance
+T18	Non-query-able 266 343	in the opinion of the Investigator, would affect subject safety or compliance
+R7	Has_qualifier Arg1:T15 Arg2:T17	
+T19	Condition 376 393	bleeding disorder
+T20	Condition 414 432	bleeding disorders
+T21	Condition 441 470	type 1 von Willebrand disease
+T22	Condition 472 502	mild platelet function defects
+T23	Condition 511 532;544 551	platelet storage pool defects
+T24	Condition 511 519;536 551	platelet release defects
+*	OR T23 T24
+T25	Scope 511 551	platelet storage pool or release defects
+R8	Subsumes Arg1:T22 Arg2:T25	
+T26	Condition 587 609	Ehlers Danlos syndrome
+T27	Grammar_Error 610 626	WILL be eligible
+T28	Condition 571 579	bleeding
+R9	AND Arg1:T28 Arg2:T26	
+T29	Qualifier 369 375	severe
+R10	Has_qualifier Arg1:T19 Arg2:T29	
+T30	Undefined_semantics 369 375	severe
+T31	Qualifier 409 413	mild
+T32	Undefined_semantics 409 413	mild
+R11	Has_qualifier Arg1:T20 Arg2:T31	
+T33	Scope 441 551	type 1 von Willebrand disease, mild platelet function defects such as platelet storage pool or release defects
+*	OR T22 T21
+T34	Scope 409 432	mild bleeding disorders
+R12	Subsumes Arg1:T34 Arg2:T33	
+*	OR T34 T19
+T35	Condition 660 669	Pregnancy
+T36	Temporal 670 694	within the past 6 months
+T37	Condition 702 716	breast-feeding
+R13	Has_temporal Arg1:T35 Arg2:T36	
+R14	Has_temporal Arg1:T37 Arg2:T36	
+*	OR T37 T35
+T38	Procedure 728 750	hormonal contraception
+T39	Drug 752 760	estrogen
+T40	Drug 765 774	progestin
+T41	Scope 752 774	estrogen and progestin
+R15	Subsumes Arg1:T38 Arg2:T41	
+T42	Temporal 776 806	within 3 months of study entry
+T43	Reference_point 795 806	study entry
+R16	Has_index Arg1:T42 Arg2:T43	
+T44	Observation 811 827	anticipated need
+T45	Procedure 840 882	estrogen-containing hormonal contraception
+T46	Drug 840 848	estrogen
+T47	Qualifier 840 859	estrogen-containing
+R17	Has_qualifier Arg1:T45 Arg2:T47	
+R18	AND Arg1:T47 Arg2:T46	
+T48	Temporal 883 906	during the study period
+T49	Reference_point 890 906	the study period
+R19	Has_index Arg1:T48 Arg2:T49	
+R20	Has_context Arg1:T45 Arg2:T44	
+R21	Has_temporal Arg1:T45 Arg2:T48	
+T50	Drug 918 935	systemic steroids
+T51	Temporal 936 965	within 1 month of study entry
+T52	Reference_point 954 965	study entry
+R22	Has_index Arg1:T51 Arg2:T52	
+R23	Has_temporal Arg1:T50 Arg2:T51	
+T53	Condition 981 1004	subarachnoid hemorrhage
+T54	Observation 970 977	History
+R24	Has_temporal Arg1:T53 Arg2:T54	
+T55	Condition 1020 1031	Hepatitis B
+T56	Condition 1020 1029;1033 1034	Hepatitis C
+T57	Condition 1039 1042	HIV
+T58	Observation 1009 1016	History
+T59	Scope 1020 1042	Hepatitis B, C, or HIV
+*	OR T56 T57 T55
+R25	Has_temporal Arg1:T59 Arg2:T58	
+T60	Measurement 1056 1066	creatinine
+T61	Temporal 1047 1055	Baseline
+T62	Value 1067 1111	>20% above the upper limit of normal for age
+T63	Person 1108 1111	age
+R26	Has_value Arg1:T60 Arg2:T62	
+R27	Has_temporal Arg1:T60 Arg2:T61	
+T64	Condition 1124 1130	anemia
+T65	Qualifier 1117 1123	Severe
+T66	Measurement 1132 1142	hemoglobin
+T67	Value 1143 1150	<8 g/dL
+R28	Has_value Arg1:T66 Arg2:T67	
+R29	Subsumes Arg1:T65 Arg2:T66	
+R30	Has_qualifier Arg1:T64 Arg2:T65	
+T68	Measurement 1157 1180	Systolic blood pressure
+T69	Value 1181 1184	<85
+T70	Measurement 1188 1212	diastolic blood pressure
+T71	Value 1213 1216	<55
+R31	Has_value Arg1:T70 Arg2:T71	
+R32	Has_value Arg1:T68 Arg2:T69	
+*	OR T70 T68
+T72	Measurement 1222 1232	Heart rate
+T73	Value 1233 1236	<50
+T74	Temporal 1237 1257	at time of screening
+T75	Reference_point 1240 1257	time of screening
+R33	Has_value Arg1:T72 Arg2:T73	
+R34	Has_temporal Arg1:T72 Arg2:T74	
+T76	Device 1270 1286	intranasal DDAVP
+T77	Temporal 1287 1300	during menses
+T78	Reference_point 1294 1300	menses
+R35	Has_index Arg1:T74 Arg2:T75	
+R36	Has_index Arg1:T77 Arg2:T78	
+R37	Has_temporal Arg1:T76 Arg2:T77	
+T79	Grammar_Error 1301 1318	will be permitted
+T80	Grammar_Error 1263 1726	Use of intranasal DDAVP during menses will be permitted, but only if the patient has a history of using DDAVP consistently for ≥3 menstrual cycles prior to study enrollment, so that change in menstrual blood loss due to addition of Lysteda can be assessed. Use of one-time DDAVP during a DDAVP/Stimate challenge is also permitted during the study period, as is use of DDAVP in the event of severe epistaxis, trauma, or surgical procedures during the study period.
+T81	Not_a_criteria 1263 1725	Use of intranasal DDAVP during menses will be permitted, but only if the patient has a history of using DDAVP consistently for ≥3 menstrual cycles prior to study enrollment, so that change in menstrual blood loss due to addition of Lysteda can be assessed. Use of one-time DDAVP during a DDAVP/Stimate challenge is also permitted during the study period, as is use of DDAVP in the event of severe epistaxis, trauma, or surgical procedures during the study period

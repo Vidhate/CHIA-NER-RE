@@ -1,0 +1,109 @@
+T1	Condition 22 36	adenocarcinoma
+T2	Condition 6 11	tumor
+T3	Condition 38 77	Central nervous system (CNS) metastases
+T4	Procedure 87 96	radiation
+T5	Condition 101 115	CNS metastases
+R2	AND Arg1:T4 Arg2:T5	
+*	OR T3 T4
+T6	Condition 117 143	Gastric outlet obstruction
+T7	Condition 147 169	intestinal obstruction
+*	OR T6 T7
+T8	Condition 183 208	gastrointestinal bleeding
+T9	Observation 171 182	Evidence of
+R3	AND Arg1:T9 Arg2:T8	
+T10	Condition 226 238	bony lesions
+T11	Value 242 250	the sole
+T12	Qualifier 251 268	evaluable disease
+R4	Has_qualifier Arg1:T11 Arg2:T12	
+R5	Has_value Arg1:T10 Arg2:T11	
+T13	Observation 290 300	history of
+T14	Condition 301 309	neoplasm
+T15	Condition 321 335	stomach cancer
+R7	AND Arg1:T13 Arg2:T14	
+T16	Condition 367 391	non-melanoma skin cancer
+T17	Condition 395 432	in situ carcinoma of the cervix uteri
+*	OR T16 T17
+T18	Procedure 359 366	treated
+T19	Qualifier 348 358	curatively
+R8	Has_qualifier Arg1:T18 Arg2:T19	
+T20	Scope 367 432	non-melanoma skin cancer or in situ carcinoma of the cervix uteri
+R9	Has_scope Arg1:T18 Arg2:T20	
+T21	Condition 434 442	Pregnant
+T22	Condition 446 455	lactating
+T23	Person 456 461	women
+*	OR T21 T22 T66
+T24	Condition 472 494	childbearing potential
+T25	Person 463 468	women
+T26	Procedure 518 531	contraception
+T27	Negation 495 508	not employing
+R10	Has_negation Arg1:T26 Arg2:T27	
+T28	Condition 539 554	serious illness
+T29	Condition 558 576	medical conditions
+*	OR T28 T29
+T30	Condition 578 602	Unstable cardiac disease
+T31	Procedure 611 620	treatment
+T32	Condition 622 643	myocardial infarction
+T33	Temporal 644 680	within 6 months prior to study entry
+R11	Has_temporal Arg1:T32 Arg2:T33	
+*	OR T30 T32
+T34	Condition 705 715;731 740	neurologic disorders
+T35	Condition 719 740	psychiatric disorders
+*	OR T34 T35
+T36	Condition 751 759	dementia
+T37	Condition 763 771	seizures
+*	OR T36 T37
+T38	Scope 751 771	dementia or seizures
+T39	Scope 705 740	neurologic or psychiatric disorders
+R12	Subsumes Arg1:T39 Arg2:T38	
+T40	Observation 682 689	History
+T41	Condition 793 802	infection
+T42	Qualifier 780 792	uncontrolled
+R13	Has_qualifier Arg1:T41 Arg2:T42	
+T43	Temporal 773 779	Active
+R14	Has_temporal Arg1:T41 Arg2:T43	
+T44	Condition 810 817;829 847	serious medical conditions
+T45	Observation 871 908	ability of the patient to participate
+R15	AND Arg1:T45 Arg2:T44	
+T46	Drug 963 980	experimental drug
+T47	Temporal 923 934	Concomitant
+R16	Has_temporal Arg1:T46 Arg2:T47	
+T48	Procedure 1017 1029	chemotherapy
+T49	Procedure 1031 1047	hormonal therapy
+T50	Procedure 1052 1065	immunotherapy
+*	OR T50 T49 T48
+T51	Temporal 1005 1016	concomitant
+T52	Scope 1017 1065	chemotherapy, hormonal therapy, or immunotherapy
+R17	Has_temporal Arg1:T52 Arg2:T51	
+*	OR T52 T46
+T53	Drug 1084 1094	medication
+T54	Drug 1079 1083	drug
+*	OR T54 T53
+T55	Temporal 1067 1078	concomitant
+T56	Scope 1079 1094	drug medication
+R18	Has_temporal Arg1:T56 Arg2:T55	
+T57	Drug 1153 1161	Warfarin
+T58	Drug 1163 1176	phenprocoumon
+T59	Measurement 1187 1204	bleeding tendency
+T60	Measurement 1218 1250	blood concentration of phenytoin
+T61	Value 1209 1217	Increase
+R19	Has_value Arg1:T60 Arg2:T61	
+T62	Drug 1256 1266	sorivudine
+T63	Drug 1335 1346	allopurinol
+T64	Value 1178 1186	increase
+R20	Has_value Arg1:T59 Arg2:T64	
+T65	Drug 1314 1330	fluoropyrimidine
+T66	Scope 472 531	childbearing potential not employing adequate contraception
+*	OR T57 T58
+*	OR T65 T63 T62
+T67	Non-representable 1178 1204	increase bleeding tendency
+T68	Non-representable 1209 1250	Increase blood concentration of phenytoin
+T69	Non-representable 1096 1148	The following drugs cause drug interaction with S-1.
+T70	Negation 310 320	other than
+R6	Has_negation Arg1:T15 Arg2:T70	
+R21	AND Arg1:T14 Arg2:T15	
+T71	Negation 337 347	except for
+R22	AND Arg1:T14 Arg2:T18	
+T72	Negation 0 5	Other
+R1	Has_negation Arg1:T1 Arg2:T72	
+R23	AND Arg1:T2 Arg2:T1	
+R24	Has_negation Arg1:T18 Arg2:T71	

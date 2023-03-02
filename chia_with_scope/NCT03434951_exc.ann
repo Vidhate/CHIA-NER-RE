@@ -1,0 +1,45 @@
+T1	Procedure 0 14	rearthroplasty
+T2	Measurement 16 19	ASA
+T3	Value 20 24	IV-V
+R1	Has_value Arg1:T2 Arg2:T3	
+T4	Observation 26 51	inadequate spoken finnish
+T5	Procedure 56 80	reliable pain assessment
+R2	AND Arg1:T4 Arg2:T5	
+T6	Condition 82 90	Dementia
+T7	Condition 104 122	impaired cognition
+*	OR T6 T7
+T8	Condition 124 140	contraindication
+T9	Drug 149 159;173 196	medication used in survey protocol
+T10	Drug 163 196	substance used in survey protocol
+*	OR T9 T10
+T11	Scope 149 196	medication or substance used in survey protocol
+R3	Has_scope Arg1:T8 Arg2:T11	
+T12	Measurement 198 204	weight
+T13	Value 205 210	<50kg
+T14	Measurement 214 217	BMI
+T15	Value 218 227	=35 kg/m2
+R4	Has_value Arg1:T14 Arg2:T15	
+R5	Has_value Arg1:T12 Arg2:T13	
+*	OR T12 T14
+T16	Temporal 229 241	preoperative
+T17	Measurement 242 246	SpO2
+T18	Value 247 260	less than 93%
+R6	Has_value Arg1:T17 Arg2:T18	
+R7	Has_temporal Arg1:T17 Arg2:T16	
+T19	Mood 262 280	clinical suspicion
+T20	Observation 286 320	subject can not use PCA adequately
+R8	Has_mood Arg1:T20 Arg2:T19	
+T21	Observation 322 329	history
+T22	Condition 333 348	substance abuse
+T23	Temporal 352 359	current
+T24	Condition 360 384	excessive use of alcohol
+R9	Has_temporal Arg1:T24 Arg2:T23	
+R10	Has_temporal Arg1:T22 Arg2:T21	
+*	OR T22 T24
+T25	Temporal 386 398	preoperative
+T26	Drug 413 423	pregabalin
+T27	Drug 425 435	gabapentin
+T28	Drug 439 453	strong opiates
+*	OR T28 T27 T26
+T29	Scope 413 453	pregabalin, gabapentin or strong opiates
+R11	Has_temporal Arg1:T29 Arg2:T25	

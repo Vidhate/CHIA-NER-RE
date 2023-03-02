@@ -1,0 +1,25 @@
+T1	Condition 0 15	Post menopausal
+T2	Person 16 21	women
+T3	Observation 29 36	history
+T4	Qualifier 40 57	estrogen positive
+T5	Condition 58 71	breast cancer
+T6	Drug 90 110	aromatase inhibitors
+T7	Temporal 111 133	for at least one month
+R1	Has_temporal Arg1:T6 Arg2:T7	
+R2	Has_qualifier Arg1:T5 Arg2:T4	
+R3	Has_temporal Arg1:T5 Arg2:T3	
+T8	Condition 179 189	arthralgia
+T9	Qualifier 170 178	moderate
+T10	Qualifier 162 166	mild
+*	OR T9 T10
+T11	Scope 162 178	mild to moderate
+R4	Has_scope Arg1:T8 Arg2:T11	
+T12	Post-eligibility 192 240	Ability to understand and sign informed consent.
+T13	Value 269 272	low
+T14	Value 276 284	moderate
+T15	Measurement 285 311	risk for moderate exercise
+*	OR T14 T13
+T16	Scope 269 284	low to moderate
+R5	Has_scope Arg1:T15 Arg2:T16	
+T17	Measurement 326 341	ACSM guidelines
+R6	Subsumes Arg1:T15 Arg2:T17	

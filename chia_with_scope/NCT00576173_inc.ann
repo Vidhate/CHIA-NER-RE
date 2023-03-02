@@ -1,0 +1,19 @@
+T1	Procedure 16 30	histologically
+T2	Procedure 32 46	radiologically
+T3	Procedure 50 66	haematologically
+*	OR T1 T2 T3
+T4	Value 67 76	confirmed
+T5	Condition 77 87	malignancy
+T6	Condition 94 98	pain
+R1	AND Arg1:T5 Arg2:T6	
+T7	Scope 16 66	histologically, radiologically or haematologically
+R2	Has_value Arg1:T7 Arg2:T4	
+T8	Drug 211 223	weak opioids
+T9	Drug 227 241	strong opioids
+*	OR T8 T9
+T10	Temporal 246 292	at least 72 hours prior to the start the study
+T11	Scope 211 241	weak opioids or strong opioids
+R3	Has_temporal Arg1:T11 Arg2:T10	
+T12	Measurement 380 405	VAS (Visual analog scale)
+T13	Value 406 412	>=40mm
+R4	Has_value Arg1:T12 Arg2:T13	

@@ -1,0 +1,37 @@
+T1	Person 0 3	Age
+T2	Value 4 17	over 18 years
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Condition 33 46	rectal cancer
+T4	Qualifier 47 52	stage
+T5	Measurement 54 56	cT
+T6	Measurement 63 65	cN
+T7	Measurement 70 72	cM
+T8	Value 56 61	1-2-3
+T9	Value 65 68	0-1
+T10	Value 72 73	0
+R2	Has_value Arg1:T7 Arg2:T10	
+R3	Has_value Arg1:T6 Arg2:T9	
+R4	Has_value Arg1:T5 Arg2:T8	
+*	OR T5 T6 T7
+T11	Scope 54 73	cT1-2-3, cN0-1, cM0
+R5	Has_scope Arg1:T4 Arg2:T11	
+R6	Has_qualifier Arg1:T3 Arg2:T4	
+T12	Qualifier 82 122	equal or below 10 cm from the anal verge
+T13	Mood 124 134	candidates
+T14	Procedure 144 166	low anterior resection
+T15	Procedure 144 156;171 182	low anterior anastomosis
+*	OR T15 T14
+T16	Scope 144 182	low anterior resection and anastomosis
+R7	Has_mood Arg1:T16 Arg2:T13	
+T17	Temporal 200 212	preoperative
+T18	Procedure 213 231	chemo-radiotherapy
+A1	Optional T18
+R8	Has_temporal Arg1:T18 Arg2:T17	
+T19	Condition 76 81	Tumor
+R9	Has_qualifier Arg1:T19 Arg2:T12	
+T20	Condition 234 248	Adenocarcinoma
+T21	Qualifier 252 283	low or moderate differentiation
+R10	Has_qualifier Arg1:T20 Arg2:T21	
+T22	Measurement 285 288	ASA
+T23	Value 289 299	I, II, III
+R11	Has_value Arg1:T22 Arg2:T23	

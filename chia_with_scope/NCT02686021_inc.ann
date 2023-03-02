@@ -1,0 +1,19 @@
+T1	Mood 0 7	planned
+T2	Qualifier 8 18	sequential
+T3	Qualifier 19 29	both-sided
+T4	Procedure 30 58	lower third molar extraction
+T5	Qualifier 60 71	split-mouth
+R1	Has_qualifier Arg1:T4 Arg2:T3	
+R2	Has_qualifier Arg1:T4 Arg2:T2	
+R3	Has_qualifier Arg1:T4 Arg2:T5	
+T6	Procedure 78 87	osteotomy
+R4	AND Arg1:T4 Arg2:T6	
+T7	Procedure 105 127	upper molar extraction
+T8	Procedure 131 147	local anesthesia
+R5	AND Arg1:T7 Arg2:T8	
+T9	Scope 105 147	upper molar extraction in local anesthesia
+A1	Optional T9
+R6	Has_scope Arg1:T4 Arg2:T9	
+R7	Has_mood Arg1:T4 Arg2:T1	
+T10	Observation 150 178	able to understand the study
+T11	Non-representable 179 196	and the NRS scale

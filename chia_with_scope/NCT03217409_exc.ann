@@ -1,0 +1,27 @@
+T1	Condition 14 30	hypersensitivity
+T2	Drug 43 49	Statin
+T3	Drug 54 63	Ezetimibe
+*	OR T2 T3
+T4	Scope 43 63	Statin and Ezetimibe
+R1	Has_scope Arg1:T1 Arg2:T4	
+T5	Qualifier 79 85	severe
+T6	Condition 86 100	kidney disease
+R2	Has_qualifier Arg1:T6 Arg2:T5	
+T7	Condition 116 128	HIV positive
+T8	Temporal 136 152	at the screening
+R3	Has_temporal Arg1:T7 Arg2:T8	
+T9	Condition 154 162	Pregnant
+T10	Condition 166 180	breast-feeding
+*	OR T10 T9
+T11	Procedure 246 249	LDL
+T12	Drug 251 262	Fenofibrate
+T13	Drug 216 226	medication
+T14	Condition 227 236	affecting
+R4	AND Arg1:T14 Arg2:T11	
+R5	AND Arg1:T13 Arg2:T14	
+T15	Drug 264 282	Omega 3 fatty aicd
+*	OR T12 T15
+T16	Scope 251 282	Fenofibrate, Omega 3 fatty aicd
+R6	Subsumes Arg1:T13 Arg2:T16	
+T17	Drug 290 297	Insulin
+T18	Non-representable 316 340	Other exclusions applied

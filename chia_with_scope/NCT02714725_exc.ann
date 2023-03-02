@@ -1,0 +1,13 @@
+T1	Post-eligibility 0 15	Patient refusal
+T2	Procedure 18 37	Emergency surgeries
+T3	Procedure 39 53	Redo surgeries
+T4	Condition 55 64	Pregnancy
+T5	Condition 66 76	Vasculitis
+T6	Condition 78 90	Inflammation
+T7	Condition 94 103	infection
+T8	Qualifier 111 121	study site
+*	OR T7 T6
+T9	Scope 78 103	Inflammation or infection
+R1	Has_qualifier Arg1:T9 Arg2:T8	
+T10	Condition 134 142	allergic
+T11	Non-query-able 123 172	History of allergic reaction to study medications

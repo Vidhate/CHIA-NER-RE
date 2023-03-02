@@ -1,0 +1,47 @@
+T1	Condition 17 33	systemic illness
+T2	Qualifier 11 16	major
+R1	Has_qualifier Arg1:T1 Arg2:T2	
+T3	Condition 58 70	hypertension
+T4	Qualifier 45 57	uncontrolled
+T5	Condition 72 80	diabetes
+T6	Condition 82 110	chronic renal insufficiency,
+T7	Condition 111 130	autoimmune diseases
+T8	Condition 134 146	malignancies
+*	OR T8 T7 T6 T5 T3
+R2	Has_qualifier Arg1:T3 Arg2:T4	
+T9	Scope 45 146	uncontrolled hypertension, diabetes, chronic renal insufficiency, autoimmune diseases or malignancies
+R3	Subsumes Arg1:T1 Arg2:T9	
+T10	Condition 159 181	neurological disorders
+T11	Condition 228 234	stroke
+T12	Condition 238 259	peripheral neuropathy
+T13	Condition 194 210	affect sensation
+R4	AND Arg1:T10 Arg2:T13	
+*	OR T11 T12
+T14	Scope 228 259	stroke or peripheral neuropathy
+R5	Subsumes Arg1:T10 Arg2:T14	
+T15	Condition 272 287	substance abuse
+T16	Negation 289 295	except
+T17	Drug 296 307	painkillers
+R6	Has_negation Arg1:T17 Arg2:T16	
+T18	Qualifier 310 315	heavy
+T19	Person 316 323	smokers
+R7	Has_qualifier Arg1:T19 Arg2:T18	
+T20	Observation 354 364	cigarettes
+T21	Multiplier 332 353	daily consumption >20
+R8	Has_multiplier Arg1:T20 Arg2:T21	
+T22	Pregnancy_considerations 367 389	pregnancy or lactation
+T23	Condition 395 411	contraindication
+T24	Procedure 416 442	magnetic resonance imaging
+T25	Procedure 444 447	MRI
+R9	Subsumes Arg1:T24 Arg2:T25	
+R10	AND Arg1:T23 Arg2:T24	
+T26	Condition 466 475	infection
+T27	Condition 479 491	inflammation
+*	OR T27 T26
+T28	Temporal 509 542	at least 1 month before the study
+T29	Reference_point 537 542	study
+R11	Has_index Arg1:T28 Arg2:T29	
+T30	Scope 466 491	infection or inflammation
+R12	Has_temporal Arg1:T30 Arg2:T28	
+T31	Qualifier 458 465	obvious
+R13	Has_qualifier Arg1:T30 Arg2:T31	

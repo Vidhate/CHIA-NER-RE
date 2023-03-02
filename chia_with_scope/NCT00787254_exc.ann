@@ -1,0 +1,60 @@
+T1	Qualifier 0 24	Endoscopically confirmed
+T2	Procedure 0 14	Endoscopically
+R1	multi Arg1:T1 Arg2:T2	
+T3	Qualifier 67 91	Endoscopically confirmed
+T4	Procedure 67 81	Endoscopically
+R2	multi Arg1:T3 Arg2:T4	
+T5	Condition 99 132	upper gastrointestinal hemorrhage
+T6	Temporal 92 98	active
+R3	Has_temporal Arg1:T5 Arg2:T6	
+T7	Temporal 133 141	on Day 1
+T8	Reference_point 136 141	Day 1
+R4	multi Arg1:T7 Arg2:T8	
+T9	Condition 25 32	gastric
+T10	Condition 40 55	duodenal ulcers
+T11	Temporal 56 64	on Day 1
+T12	Reference_point 59 64	Day 1
+R5	multi Arg1:T11 Arg2:T12	
+*	OR T10 T9
+T13	Scope 25 55	gastric and/or duodenal ulcers
+R6	Has_qualifier Arg1:T13 Arg2:T1	
+R7	Has_temporal Arg1:T13 Arg2:T11	
+R8	Has_qualifier Arg1:T5 Arg2:T3	
+R9	Has_temporal Arg1:T5 Arg2:T7	
+T14	Qualifier 171 186	aspirin-induced
+T15	Drug 171 178	aspirin
+R10	multi Arg1:T14 Arg2:T15	
+T16	Condition 187 193	asthma
+R11	Has_qualifier Arg1:T16 Arg2:T14	
+T17	Condition 197 223	hypersensitivity to NSAIDs
+T18	Drug 217 223	NSAIDs
+R12	multi Arg1:T17 Arg2:T18	
+*	OR T16 T17
+T19	Observation 155 167	past history
+T20	Temporal 144 151	Current
+*	OR T19 T20
+T21	Scope 144 167	Current or past history
+T22	Scope 187 223	asthma or hypersensitivity to NSAIDs
+R13	Has_scope Arg1:T22 Arg2:T21	
+T23	Qualifier 250 282	affecting gastric acid secretion
+T24	Procedure 242 249	surgery
+T25	Mood 234 241	planned
+T26	Temporal 226 230	Past
+R14	Has_qualifier Arg1:T24 Arg2:T23	
+T27	Scope 226 241	Past or planned
+R15	Has_scope Arg1:T24 Arg2:T27	
+T28	Condition 319 333	renal disorder
+T29	Condition 308 315;325 333	hepatic disorder
+*	OR T28 T29
+T30	Qualifier 285 307	Clinically significant
+T31	Subjective_judgement 285 307	Clinically significant
+T32	Scope 308 333	hepatic or renal disorder
+R16	Has_qualifier Arg1:T32 Arg2:T30	
+T33	Condition 344 363	cardiac dysfunction
+T34	Condition 365 377	hypertension
+T35	Condition 382 404	hematological disorder
+*	OR T35 T34 T33
+T36	Qualifier 336 343	Serious
+T37	Subjective_judgement 336 343	Serious
+T38	Scope 344 404	cardiac dysfunction, hypertension, or hematological disorder
+R17	Has_qualifier Arg1:T38 Arg2:T36	

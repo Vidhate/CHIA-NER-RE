@@ -1,0 +1,53 @@
+T1	Observation 8 15	history
+T2	Condition 19 46	chronic psychiatric disease
+R1	Has_temporal Arg1:T2 Arg2:T1	
+T3	Condition 83 108	female sexual dysfunction
+T4	Condition 48 66	Medical conditions
+T5	Qualifier 67 108	associated with female sexual dysfunction
+R2	multi Arg1:T5 Arg2:T3	
+R3	Has_qualifier Arg1:T4 Arg2:T5	
+T6	Condition 110 132	cardiovascular disease
+T7	Qualifier 134 146	uncontrolled
+T8	Qualifier 147 154	chronic
+T9	Condition 155 157	HT
+T10	Condition 159 171	hypertension
+R4	Subsumes Arg1:T9 Arg2:T10	
+T11	Condition 174 176	DM
+T12	Condition 178 195	diabetes mellitus
+R5	Subsumes Arg1:T11 Arg2:T12	
+T13	Procedure 209 228	gynecologic surgery
+T14	Condition 230 257	female gynecological cancer
+T15	Condition 260 266	breast
+T16	Condition 268 275	ovarian
+T17	Condition 277 284	uterine
+T18	Condition 286 294	cervical
+*	OR T15 T16 T17 T18
+T19	Scope 260 294	breast, ovarian, uterine, cervical
+R6	Subsumes Arg1:T14 Arg2:T19	
+R7	Has_qualifier Arg1:T9 Arg2:T8	
+R8	Has_qualifier Arg1:T9 Arg2:T7	
+*	OR T9 T11 T13 T14 T6
+T20	Observation 198 205	History
+R9	Has_temporal Arg1:T13 Arg2:T20	
+T21	Condition 325 350	female sexual dysfunction
+T22	Drug 297 308	Medications
+T23	Qualifier 309 350	associated with female sexual dysfunction
+T24	Scope 110 295	cardiovascular disease, uncontrolled chronic HT (hypertension) ,DM (diabetes mellitus), History of gynecologic surgery, female gynecological cancer ( breast, ovarian, uterine, cervical)
+T25	Scope 48 108	Medical conditions associated with female sexual dysfunction
+R10	Subsumes Arg1:T25 Arg2:T24	
+R11	Has_qualifier Arg1:T22 Arg2:T23	
+T26	Drug 352 367	Antidepressants
+T27	Drug 368 375	opiates
+T28	Drug 377 390	beta blockers
+T29	Drug 392 406	Antiepileptics
+*	OR T26 T27 T28 T29 T33
+T30	Drug 409 419	gabapentin
+T31	Drug 421 431	topiramate
+T32	Drug 432 441	phenytoin
+T33	Drug 443 458	benzodiazepines
+*	OR T30 T31 T32
+T34	Scope 409 441	gabapentin, topiramate,phenytoin
+R12	Subsumes Arg1:T29 Arg2:T34	
+T35	Scope 352 458	Antidepressants opiates, beta blockers, Antiepileptics ( gabapentin, topiramate,phenytoin) benzodiazepines
+T36	Scope 297 350	Medications associated with female sexual dysfunction
+R13	Subsumes Arg1:T36 Arg2:T35	

@@ -1,0 +1,36 @@
+T1	Observation 19 27	Patients
+A1	Optional T1
+T2	Observation 387 395	controls
+A2	Optional T2
+T3	Condition 67 80	schizophrenia
+T4	Condition 84 108	schizoaffective disorder
+*	OR T3 T4
+T5	Qualifier 122 182	ICD-10 (International Classification of Diseases version 10)
+T6	Qualifier 186 243	DSM-IV/V (Diagnostic and Statistical Manual version 4 /5)
+*	OR T5 T6
+T7	Scope 122 243	ICD-10 (International Classification of Diseases version 10) or DSM-IV/V (Diagnostic and Statistical Manual version 4 /5)
+T8	Scope 67 108	schizophrenia or schizoaffective disorder
+R1	Has_scope Arg1:T8 Arg2:T7	
+T9	Person 245 248	Age
+T10	Value 249 260	18-45 years
+R2	Has_value Arg1:T9 Arg2:T10	
+T11	Negation 262 267	Never
+T12	Drug 281 304	antipsychotic compounds
+T13	Drug 308 347	central nervous system (CNS) stimulants
+T14	Observation 349 366	Legally competent
+R3	Has_negation Arg1:T12 Arg2:T11	
+R4	Has_negation Arg1:T13 Arg2:T11	
+T15	Scope 67 366	schizophrenia or schizoaffective disorder according to ICD-10 (International Classification of Diseases version 10) or DSM-IV/V (Diagnostic and Statistical Manual version 4 /5), Age 18-45 years, Never treated with antipsychotic compounds or central nervous system (CNS) stimulants, Legally competent
+R5	Has_scope Arg1:T1 Arg2:T15	
+T16	Non-representable 397 474	Matching patients on age (+/- 2 years), sex and parental socioeconomic status
+T17	Person 476 479	Age
+T18	Value 480 491	18-45 years
+T19	Negation 493 495	No
+T20	Condition 496 507;520 527	psychiatric disease
+T21	Condition 511 527	physical disease
+*	OR T21 T20
+R6	Has_negation Arg1:T20 Arg2:T19	
+R7	Has_negation Arg1:T21 Arg2:T19	
+R8	Has_value Arg1:T17 Arg2:T18	
+T22	Scope 397 527	Matching patients on age (+/- 2 years), sex and parental socioeconomic status, Age 18-45 years, No psychiatric or physical disease
+R9	Has_scope Arg1:T2 Arg2:T22	

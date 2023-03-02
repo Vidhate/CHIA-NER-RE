@@ -1,0 +1,9 @@
+T1	Drug 0 9	Methadone
+T2	Condition 21 38	cocaine-dependent
+T3	Multiplier 60 74	1g to 2g a day
+T4	Multiplier 76 95	1 to 3 times a week
+T5	Qualifier 0 20	Methadone-maintained
+R3	multi Arg1:T5 Arg2:T1	
+R4	Has_qualifier Arg1:T2 Arg2:T5	
+T6	Scope 60 95	1g to 2g a day; 1 to 3 times a week
+R1	Has_scope Arg1:T1 Arg2:T6	

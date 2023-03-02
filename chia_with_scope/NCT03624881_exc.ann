@@ -1,0 +1,184 @@
+T1	Procedure 21 38	catheter ablation
+T2	Procedure 30 38;9 17	ablation surgical
+*	OR T1 T2
+T3	Condition 43 62	atrial fibrillation
+T4	Scope 9 38	surgical or catheter ablation
+R1	AND Arg1:T4 Arg2:T3	
+T5	Procedure 73 88	cardiac surgery
+T6	Temporal 0 8	Previous
+T7	Temporal 64 72	Previous
+R2	Has_temporal Arg1:T4 Arg2:T6	
+R3	Has_temporal Arg1:T5 Arg2:T7	
+T8	Procedure 100 104	CABG
+T9	Temporal 106 141	within the past 6 months (180 days)
+R4	Subsumes Arg1:T5 Arg2:T8	
+R5	Has_temporal Arg1:T5 Arg2:T9	
+T10	Procedure 143 159;169 191	Valvular cardiac percutaneous procedure
+T11	Procedure 143 168;182 191	Valvular cardiac surgical procedure
+*	OR T10 T11
+T12	Procedure 199 213	ventriculotomy
+T13	Procedure 215 224	atriotomy
+T14	Procedure 230 242	valve repair
+T15	Procedure 230 235;246 257	valve replacement
+T16	Device 276 292	prosthetic valve
+*	OR T12 T13 T15 T14 T16
+T17	Scope 199 292	ventriculotomy, atriotomy, and valve repair or replacement and presence of a prosthetic valve
+T18	Scope 143 191	Valvular cardiac surgical/percutaneous procedure
+R6	Subsumes Arg1:T18 Arg2:T17	
+T19	Device 299 315	carotid stenting
+T20	Procedure 319 333	endarterectomy
+*	OR T19 T20
+T21	Condition 346 357	LA thrombus
+T22	Procedure 361 368	imaging
+R7	AND Arg1:T22 Arg2:T21	
+T23	Measurement 370 377	LA size
+T24	Value 378 385	> 50 mm
+T25	Qualifier 387 413	parasternal long axis view
+R8	Has_qualifier Arg1:T23 Arg2:T25	
+R9	Has_value Arg1:T23 Arg2:T24	
+T26	Measurement 416 420	LVEF
+T27	Value 421 426	< 40%
+R10	Has_value Arg1:T26 Arg2:T27	
+T28	Condition 428 444	Contraindication
+T29	Drug 448 463	anticoagulation
+R11	AND Arg1:T28 Arg2:T29	
+T30	Drug 465 472	heparin
+T31	Drug 476 484	warfarin
+*	OR T30 T31
+T32	Scope 465 484	heparin or warfarin
+T33	Scope 428 463	Contraindication to anticoagulation
+R12	Subsumes Arg1:T33 Arg2:T32	
+T34	Observation 487 494	History
+T35	Condition 498 512	blood clotting
+T36	Condition 516 538	bleeding abnormalities
+*	OR T35 T36
+T37	Scope 498 538	blood clotting or bleeding abnormalities
+R13	Has_temporal Arg1:T37 Arg2:T34	
+T38	Condition 544 546	MI
+T39	Procedure 540 543	PCI
+T40	Temporal 547 571	within the past 2 months
+T41	Temporal 547 562;573 580	within the past 60 days
+*	OR T41 T40
+T42	Scope 547 581	within the past 2 months (60 days)
+T43	Scope 540 546	PCI/MI
+R14	Subsumes Arg1:T43 Arg2:T42	
+T44	Condition 594 614	thromboembolic event
+T45	Condition 626 629	TIA
+R15	Subsumes Arg1:T44 Arg2:T45	
+T46	Temporal 631 656	within the past 12 months
+T47	Temporal 631 646;658 666	within the past 365 days
+*	OR T46 T47
+T48	Scope 631 667	within the past 12 months (365 days)
+T49	Scope 594 630	thromboembolic event (including TIA)
+R16	Has_scope Arg1:T49 Arg2:T48	
+T50	Condition 669 692	Rheumatic Heart Disease
+T51	Qualifier 694 706	Uncontrolled
+T52	Condition 707 720	heart failure
+T53	Measurement 724 743	NYHA function class
+T54	Value 744 747	III
+T55	Value 751 753	IV
+*	OR T54 T55
+T56	Scope 744 753	III or IV
+R17	Has_scope Arg1:T53 Arg2:T56	
+R18	Has_qualifier Arg1:T52 Arg2:T51	
+T57	Scope 724 753	NYHA function class III or IV
+R19	Has_scope Arg1:T52 Arg2:T57	
+T58	Condition 762 782	mitral regurgitation
+T59	Qualifier 755 761	Severe
+R20	Has_qualifier Arg1:T58 Arg2:T59	
+T62	Measurement 784 802	Regurgitant volume
+T63	Value 803 815	= 60 mL/beat
+R21	Has_value Arg1:T62 Arg2:T63	
+T60	Measurement 817 837	Regurgitant fraction
+T61	Value 838 843	= 50%
+R22	Has_value Arg1:T60 Arg2:T61	
+T64	Measurement 852 886	Effective regurgitant orifice area
+T65	Value 887 896	= 0.40cm2
+R23	Has_value Arg1:T64 Arg2:T65	
+*	OR T60 T64 T62
+T66	Scope 784 896	Regurgitant volume = 60 mL/beat, Regurgitant fraction = 50%, and/or Effective regurgitant orifice area = 0.40cm2
+T67	Scope 755 782	Severe mitral regurgitation
+R24	Has_scope Arg1:T67 Arg2:T66	
+T68	Procedure 908 931	cardiac transplantation
+T69	Procedure 941 956	cardiac surgery
+T70	Temporal 957 982	within the next 12 months
+T71	Temporal 957 972;984 992	within the next 365 days
+R25	Subsumes Arg1:T70 Arg2:T71	
+*	OR T68 T69
+T72	Scope 908 956	cardiac transplantation or other cardiac surgery
+R26	Has_temporal Arg1:T72 Arg2:T70	
+T73	Condition 995 1010	Unstable angina
+T74	Condition 1012 1025	Acute illness
+T75	Condition 1036 1054	systemic infection
+T76	Qualifier 1029 1035	active
+T77	Condition 1058 1064	sepsis
+T78	Condition 1066 1068	AF
+T79	Condition 1082 1103	electrolyte imbalance
+T80	Qualifier 1069 1078	secondary
+R27	AND Arg1:T80 Arg2:T79	
+R28	Has_qualifier Arg1:T78 Arg2:T80	
+T81	Condition 1105 1120	thyroid disease
+T82	Condition 1139 1156	non-cardiac cause
+T83	Qualifier 1125 1135	reversible
+R29	Has_qualifier Arg1:T82 Arg2:T83	
+*	OR T78 T81 T82
+T84	Device 1171 1190	implanted ICD/CRT-D
+T85	Condition 1205 1222	pulmonary disease
+T86	Qualifier 1193 1204	Significant
+R30	Has_qualifier Arg1:T85 Arg2:T86	
+T87	Condition 1231 1260	restrictive pulmonary disease
+T88	Condition 1278 1315	chronic obstructive pulmonary disease
+T89	Condition 1262 1274;1298 1315	constrictive pulmonary disease
+*	OR T88 T89 T87
+T90	Scope 1231 1315	restrictive pulmonary disease, constrictive or chronic obstructive pulmonary disease
+T91	Scope 1193 1222	Significant pulmonary disease
+R31	Subsumes Arg1:T91 Arg2:T90	
+T92	Qualifier 1320 1329	any other
+T93	Condition 1330 1337;1353 1365	disease of the lungs
+T94	Condition 1341 1365	malfunction of the lungs
+*	OR T93 T94 T96
+T95	Scope 1330 1387	disease or malfunction of the lungs or respiratory system
+R32	Has_qualifier Arg1:T95 Arg2:T92	
+T96	Condition 1330 1337;1353 1359;1369 1387	disease of the respiratory system
+T97	Condition 1402 1418	chronic symptoms
+R33	AND Arg1:T95 Arg2:T97	
+*	OR T91 T95
+T98	Condition 1421 1452	Gastroesophageal Reflux Disease
+T99	Condition 1454 1458	GERD
+T100	Procedure 1477 1501	significant intervention
+T101	Drug 1516 1530	OTC medication
+T102	Negation 1502 1505	not
+R34	Has_negation Arg1:T101 Arg2:T102	
+R35	AND Arg1:T100 Arg2:T101	
+R36	Subsumes Arg1:T98 Arg2:T99	
+T103	Condition 1545 1563	congenital anomaly
+T104	Qualifier 1533 1544	Significant
+T105	Condition 1567 1582	medical problem
+T106	Non-representable 1533 1662	Significant congenital anomaly or medical problem that in the opinion of the investigator would preclude enrollment in this study
+T107	Person 1665 1670	Women
+T108	Condition 1679 1687	pregnant
+T109	Procedure 1705 1719	pregnancy test
+T110	Condition 1723 1737	pre-menopausal
+A1	Optional T110
+R37	AND Arg1:T110 Arg2:T109	
+R38	AND Arg1:T108 Arg2:T110	
+T111	Competing_trial 1740 1835	Concurrent enrollment in an investigational study evaluating another device, biologic, or drug.
+T112	Condition 1849 1870	intracardiac thrombus
+T113	Condition 1872 1878	myxoma
+T114	Condition 1880 1885	tumor
+T115	Condition 1887 1905	interatrial baffle
+T116	Device 1909 1914	patch
+T117	Qualifier 1918 1923	other
+T118	Condition 1924 1935	abnormality
+R39	Has_qualifier Arg1:T118 Arg2:T117	
+T119	Procedure 1951 1966	vascular access
+T120	Procedure 1971 1999	manipulation of the catheter
+T121	Condition 1941 1950	precludes
+*	OR T119 T120
+T122	Scope 1951 1999	vascular access, or manipulation of the catheter
+R40	Has_scope Arg1:T121 Arg2:T122	
+R41	AND Arg1:T118 Arg2:T121	
+*	OR T112 T113 T114 T115 T116 T118
+T123	Observation 2002 2017	Life expectancy
+T124	Value 2018 2037	less than 12 months
+R42	Has_value Arg1:T123 Arg2:T124	

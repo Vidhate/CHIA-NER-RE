@@ -1,0 +1,50 @@
+T1	Measurement 0 22	Fasting plasma glucose
+T2	Value 23 31	> 7,0 mM
+T3	Measurement 33 38	HbA1c
+T4	Value 39 52	> 48 mmol/mol
+T5	Temporal 53 72	3 months after RYGB
+R1	Has_value Arg1:T1 Arg2:T2	
+R2	Has_value Arg1:T3 Arg2:T4	
+*	OR T1 T3
+T6	Scope 0 52	Fasting plasma glucose > 7,0 mM, HbA1c > 48 mmol/mol
+R3	Has_temporal Arg1:T6 Arg2:T5	
+T7	Qualifier 74 86	Dysregulated
+T8	Condition 87 103	thyroid diseases
+T9	Procedure 112 133	antithyroid treatment
+R4	Has_qualifier Arg1:T8 Arg2:T7	
+*	OR T8 T9
+T10	Condition 136 163	Late diabetic complications
+T11	Condition 167 178	retinopathy
+T12	Condition 180 199	renal insufficiency
+T13	Condition 201 211	neuropathy
+T14	Temporal 215 223	previous
+T15	Condition 224 236	pancreatitis
+R5	Has_temporal Arg1:T15 Arg2:T14	
+*	OR T13 T15 T12 T11
+T16	Scope 167 236	retinopathy, renal insufficiency, neuropathy or previous pancreatitis
+R6	Subsumes Arg1:T10 Arg2:T16	
+T17	Condition 239 252	Complications
+T18	Procedure 256 260	RYGB
+R7	AND Arg1:T17 Arg2:T18	
+T19	Condition 273 295	reactive hypoglycaemia
+T20	Qualifier 297 303	severe
+T21	Condition 304 311	dumping
+T22	Condition 313 321	vomiting
+T23	Condition 323 331	diarrhea
+T24	Qualifier 333 339	severe
+T25	Condition 340 354	abdominal pain
+T26	Temporal 355 372	after food intake
+T27	Reference_point 361 372	food intake
+R8	Has_index Arg1:T26 Arg2:T27	
+R9	Has_temporal Arg1:T25 Arg2:T26	
+R10	Has_qualifier Arg1:T25 Arg2:T24	
+*	OR T23 T22 T25
+T28	Scope 313 372	vomiting, diarrhea, severe abdominal pain after food intake
+R11	Has_qualifier Arg1:T21 Arg2:T20	
+T29	Scope 297 311	severe dumping
+R12	Subsumes Arg1:T29 Arg2:T28	
+*	OR T19 T29
+T30	Scope 273 373	reactive hypoglycaemia, severe dumping (vomiting, diarrhea, severe abdominal pain after food intake)
+T31	Scope 239 260	Complications to RYGB
+R13	Subsumes Arg1:T31 Arg2:T30	
+T32	Procedure 375 390	Cholecystectomy

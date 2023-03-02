@@ -1,0 +1,88 @@
+T1	Qualifier 0 13	Decompensated
+T2	Condition 14 27	heart failure
+T3	Condition 31 54	hemodynamic instability
+*	OR T3 T2
+R1	Has_qualifier Arg1:T2 Arg2:T1	
+T4	Temporal 56 61	Prior
+T5	Condition 62 88	coronary revascularization
+T6	Procedure 90 93	PCI
+T7	Procedure 97 101	CABG
+*	OR T7 T6
+T8	Condition 106 127	myocardial infarction
+T9	Measurement 165 171;184 190	CPK-MB levels
+T10	Measurement 175 190	troponin levels
+*	OR T10 T9
+T11	Scope 165 190	CPK-MB or troponin levels
+T12	Value 156 164	elevated
+T13	Temporal 145 155	previously
+R2	Has_temporal Arg1:T11 Arg2:T13	
+R3	Has_value Arg1:T11 Arg2:T12	
+T14	Scope 145 190	previously elevated CPK-MB or troponin levels
+R4	Subsumes Arg1:T8 Arg2:T14	
+T15	Scope 90 101	PCI or CABG
+R5	Subsumes Arg1:T5 Arg2:T15	
+*	OR T5 T8
+R6	Has_temporal Arg1:T5 Arg2:T4	
+R7	Has_temporal Arg1:T8 Arg2:T4	
+T16	Condition 193 212	Accelerating angina
+T17	Condition 216 231	unstable angina
+*	OR T16 T17
+T18	Condition 233 265	Inability to physically tolerate
+T19	Procedure 266 269	MRI
+T20	Device 273 290	implanted objects
+T21	Qualifier 300 316	MRI incompatible
+R8	Has_qualifier Arg1:T20 Arg2:T21	
+*	OR T19 T20
+T22	Scope 266 316	MRI or implanted objects that are MRI incompatible
+R9	Has_scope Arg1:T18 Arg2:T22	
+T23	Informed_consent 318 401	Inability to provide written informed consent obtained at time of study enrollment.
+T24	Qualifier 403 409	Severe
+T25	Condition 410 424	claustrophobia
+R10	Has_qualifier Arg1:T25 Arg2:T24	
+T26	Condition 450 472	sinus node dysfunction
+T27	Condition 435 446	heart block
+T28	Qualifier 426 434	Advanced
+*	OR T27 T26
+T29	Scope 435 472	heart block or sinus node dysfunction
+R11	Has_qualifier Arg1:T29 Arg2:T28	
+T30	Condition 474 490	Hypersensitivity
+T31	Condition 494 502	allergic
+*	OR T31 T30
+T32	Drug 515 526	regadenoson
+T33	Drug 530 539	adenosine
+*	OR T32 T33
+T34	Scope 515 539	regadenoson or adenosine
+T35	Scope 474 502	Hypersensitivity or allergic
+R12	Has_scope Arg1:T35 Arg2:T34	
+T36	Condition 541 552	Hypotension
+T37	Qualifier 554 560	Active
+T38	Condition 561 573	bronchospasm
+T39	Observation 577 584	history
+T40	Procedure 588 603	hospitalization
+T41	Condition 611 623	bronchospasm
+R13	AND Arg1:T40 Arg2:T41	
+R14	Has_temporal Arg1:T40 Arg2:T39	
+R15	Has_qualifier Arg1:T38 Arg2:T37	
+*	OR T38 T40
+T42	Observation 625 632	History
+T43	Condition 636 644	seizures
+R16	Has_temporal Arg1:T43 Arg2:T42	
+T44	Temporal 646 652	Recent
+T45	Condition 653 677	cerebrovascular accident
+R17	Has_temporal Arg1:T45 Arg2:T44	
+T46	Drug 686 698	dipyridamole
+T47	Temporal 699 721	within the last 5 days
+R18	Has_temporal Arg1:T46 Arg2:T47	
+T48	Condition 723 739	Contraindication
+T49	Drug 743 756	aminophylline
+R19	AND Arg1:T48 Arg2:T49	
+T50	Qualifier 758 764	Severe
+T51	Condition 765 784	renal insufficiency
+T52	Measurement 790 826	estimated glomerular filtration rate
+T53	Value 827 846	<30 ml/min/ 1.73 m2
+R20	Has_value Arg1:T52 Arg2:T53	
+R21	Has_qualifier Arg1:T51 Arg2:T50	
+R22	AND Arg1:T51 Arg2:T52	
+T54	Condition 848 856	Pregnant
+T55	Condition 860 867	nursing
+*	OR T54 T55

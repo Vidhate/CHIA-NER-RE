@@ -1,0 +1,13 @@
+T1	Procedure 59 69;9 29	transplant second single kidney
+T2	Procedure 0 5;16 29;59 69	First single kidney transplant
+*	OR T2 T1
+T3	Qualifier 31 40;51 57	cadaveric donors
+T4	Qualifier 44 57	living donors
+*	OR T3 T4
+T5	Scope 31 57	cadaveric or living donors
+R1	Has_scope Arg1:T2 Arg2:T5	
+R2	Has_scope Arg1:T1 Arg2:T5	
+T6	Mood 83 97	Considered for
+T7	Procedure 100 135	standard immunosuppressive protocol
+R3	Has_mood Arg1:T7 Arg2:T6	
+T8	Post-eligibility 138 234	Must be capable of giving written informed connect for participation in the study for 24 months.

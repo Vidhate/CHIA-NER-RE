@@ -1,0 +1,33 @@
+T1	Condition 0 16	Contraindication
+T2	Drug 21 27	IR-MPH
+R1	AND Arg1:T1 Arg2:T2	
+T3	Temporal 33 40	Current
+T4	Procedure 41 60	stimulant treatment
+R2	Has_temporal Arg1:T4 Arg2:T3	
+T5	Mood 62 70	Evidence
+T6	Qualifier 76 98	clinically significant
+T7	Condition 99 119	neurological disease
+T8	Qualifier 125 147	might affect cognition
+T9	Condition 155 163	delirium
+T10	Condition 165 173	dementia
+T11	Condition 175 183	epilepsy
+T12	Condition 185 196	head trauma
+T13	Condition 202 220	multiple sclerosis
+*	OR T12 T13 T11 T10 T9
+T14	Scope 155 220	delirium, dementia, epilepsy, head trauma, and multiple sclerosis
+R3	Has_qualifier Arg1:T7 Arg2:T8	
+R4	Has_qualifier Arg1:T7 Arg2:T6	
+T15	Scope 76 147	clinically significant neurological disease that might affect cognition
+R5	Has_scope Arg1:T15 Arg2:T14	
+R6	Has_mood Arg1:T15 Arg2:T5	
+T16	Temporal 223 230	Current
+T17	Temporal 234 238	past
+T18	Observation 239 246	history
+T19	Condition 250 259	psychosis
+*	OR T17 T16
+R7	Has_temporal Arg1:T19 Arg2:T18	
+T20	Scope 223 238	Current or past
+R8	Has_scope Arg1:T19 Arg2:T20	
+T21	Measurement 261 298	Estimated intelligence quotient score
+T22	Value 299 312	lower than 70
+R9	Has_value Arg1:T21 Arg2:T22	

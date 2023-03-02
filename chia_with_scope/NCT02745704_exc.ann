@@ -1,0 +1,31 @@
+T1	Condition 14 29	liver cirrhosis
+T2	Condition 31 55	Hepatocellular Carcinoma
+T3	Condition 65 77	malignancies
+*	OR T1 T2 T3
+T4	Non-representable 80 130	Patients with other factors causing liver diseases
+T5	Pregnancy_considerations 133 161	Pregnant and lactating women
+T6	Condition 190 203	HIV infection
+T7	Qualifier 178 189	concomitant
+R1	Has_qualifier Arg1:T6 Arg2:T7	
+T8	Condition 207 245	congenital immune deficiency diseases.
+*	OR T6 T8
+T9	Condition 261 269	diabetes
+T10	Condition 271 290	autoimmune diseases
+*	OR T9 T10
+T11	Condition 317 335	organ dysfunctions
+T12	Qualifier 352 359	serious
+T13	Condition 360 373	complications
+R2	Has_qualifier Arg1:T13 Arg2:T12	
+T14	Condition 381 390	infection
+T15	Condition 392 414	hepatic encephalopathy
+T16	Condition 416 436	hepatorenal syndrome
+T17	Condition 438 463	gastrointestinal bleeding
+*	OR T17 T16 T15 T14
+T18	Scope 381 463	infection, hepatic encephalopathy, hepatorenal syndrome, gastrointestinal bleeding
+R3	Subsumes Arg1:T13 Arg2:T18	
+T19	Procedure 488 502;523 530	antineoplastic therapy
+T20	Procedure 506 530	immunomodulatory therapy
+T21	Temporal 538 552	past 12 months
+T22	Scope 488 530	antineoplastic or immunomodulatory therapy
+R4	Has_temporal Arg1:T22 Arg2:T21	
+T23	Post-eligibility 555 619	Patients who can't come back to clinic for follow-up on schedule

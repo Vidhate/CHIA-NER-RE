@@ -1,0 +1,31 @@
+T1	Condition 0 9	Pregnancy
+T2	Condition 11 23	coagulopathy
+T3	Condition 25 32	allergy
+T4	Drug 36 47	bupivacaine
+T5	Condition 49 62	renal failure
+T6	Condition 64 85	hepatic insufficiency
+T7	Condition 94 117	inappropriate candidate
+T8	Procedure 122 135	usual therapy
+R1	AND Arg1:T3 Arg2:T4	
+R2	AND Arg1:T7 Arg2:T8	
+T9	Mood 154 171	unable to receive
+T10	Procedure 182 219	preoperative interscalene nerve block
+R3	Has_mood Arg1:T10 Arg2:T9	
+T12	Temporal 221 232	preexisting
+T13	Condition 233 245	nerve injury
+T14	Qualifier 249 264	side of surgery
+T15	Condition 266 288	refusal of nerve block
+T16	Condition 290 299	infection
+T17	Qualifier 303 322	site of nerve block
+R4	Has_qualifier Arg1:T16 Arg2:T17	
+R5	Has_qualifier Arg1:T13 Arg2:T14	
+R6	Has_temporal Arg1:T13 Arg2:T12	
+*	OR T15 T16
+T18	Scope 221 322	preexisting nerve injury on side of surgery, refusal of nerve block, infection at site of nerve block
+T11	Scope 154 219	unable to receive the usual preoperative interscalene nerve block
+R7	Has_scope Arg1:T11 Arg2:T18	
+A1	Optional T11
+*	OR T1 T2 T3 T5 T6 T7
+T19	Scope 94 135	inappropriate candidate for usual therapy
+T20	Scope 154 322	unable to receive the usual preoperative interscalene nerve block: preexisting nerve injury on side of surgery, refusal of nerve block, infection at site of nerve block
+R8	Subsumes Arg1:T19 Arg2:T18	

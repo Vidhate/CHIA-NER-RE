@@ -1,0 +1,15 @@
+T1	Drug 10 20	antibiotic
+T2	Drug 28 37	probiotic
+*	OR T1 T2
+T3	Temporal 39 63	8 weeks before the study
+T4	Reference_point 54 63	the study
+R1	Has_index Arg1:T3 Arg2:T4	
+T5	Scope 10 37	antibiotic and/or probiotic
+R2	Has_temporal Arg1:T5 Arg2:T3	
+T6	Condition 65 106	Chronic gastrointestinal system disorders
+T7	Condition 108 128	Congenital anomalies
+T8	Condition 130 146	Chronic diseases
+T9	Procedure 148 160	Chemotherapy
+T10	Procedure 165 177	radiotherapy
+*	OR T9 T10
+T11	Condition 179 188	Pregnancy

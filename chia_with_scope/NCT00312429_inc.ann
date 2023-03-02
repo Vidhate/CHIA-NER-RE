@@ -1,0 +1,42 @@
+T1	Condition 79 102	high risk blood disease
+T2	Condition 106 112	cancer
+*	OR T1 T2
+T3	Measurement 140 165	Estimated life expectancy
+T4	Value 169 207	at least 6 weeks following study entry
+R1	Has_value Arg1:T3 Arg2:T4	
+T5	Measurement 209 263	Cancer and Leukemia Group B (CALGB) performance status
+T8	Value 264 287	less than or equal to 2
+T9	Measurement 289 311	White blood cell count
+T10	Measurement 313 321	platelet
+T11	Measurement 323 333	hematocrit
+T12	Measurement 335 347	tuberculosis
+T13	Measurement 349 381	aspartate aminotransferase (AST)
+R2	Has_value Arg1:T5 Arg2:T8	
+T6	Measurement 383 413	alanine aminotransferase (ALT)
+T7	Measurement 415 435	alkaline phosphatase
+T14	Measurement 437 447	creatinine
+T15	Measurement 453 469	HIV test results
+T16	Qualifier 470 499	reviewed by transplant center
+T17	Scope 289 469	White blood cell count, platelet, hematocrit, tuberculosis, aspartate aminotransferase (AST), alanine aminotransferase (ALT), alkaline phosphatase, creatinine, and HIV test results
+R3	Has_qualifier Arg1:T17 Arg2:T16	
+T18	Procedure 501 534	Multiple gated acquisition (MUGA)
+T19	Procedure 536 550	echocardiogram
+T20	Procedure 552 563	cardiac MRI
+T21	Procedure 572 602	pulmonary function tests (PFT)
+*	OR T18 T19 T20 T21
+T22	Qualifier 617 646	reviewed by transplant center
+T23	Scope 501 602	Multiple gated acquisition (MUGA), echocardiogram, cardiac MRI, and/or pulmonary function tests (PFT)
+R4	Has_qualifier Arg1:T23 Arg2:T22	
+T24	Person 970 976	female
+A1	Optional T24
+T25	Procedure 993 1006	contraception
+R5	AND Arg1:T24 Arg2:T25	
+T26	Temporal 1007 1027	throughout the study
+R6	Has_temporal Arg1:T25 Arg2:T26	
+T27	Measurement 909 945	umbilical cord blood units available
+T28	Value 888 905	Sufficient number
+R7	Has_value Arg1:T27 Arg2:T28	
+T29	Qualifier 946 965	for transplantation
+T30	Procedure 950 965	transplantation
+R8	multi Arg1:T29 Arg2:T30	
+R9	Has_qualifier Arg1:T27 Arg2:T29	

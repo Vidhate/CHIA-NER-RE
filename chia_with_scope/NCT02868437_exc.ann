@@ -1,0 +1,12 @@
+T1	Procedure 11 20	curettage
+T2	Observation 0 7	History
+T3	Procedure 30 50	intrauterine surgery
+R2	Subsumes Arg1:T3 Arg2:T1	
+T4	Scope 11 50	curettage or other intrauterine surgery
+R1	Has_temporal Arg1:T4 Arg2:T2	
+T5	Condition 63 89	post-abortion complication
+T6	Condition 63 76;93 102	post-abortion infection
+*	OR T5 T6
+T7	Scope 63 102	post-abortion complication or infection
+T8	Observation 52 59	History
+R3	Has_temporal Arg1:T7 Arg2:T8	

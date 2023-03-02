@@ -1,0 +1,103 @@
+T1	Temporal 0 12	simultaneous
+T2	Qualifier 13 23	both sided
+T3	Procedure 55 71	molar extraction
+T4	Qualifier 38 54	only upper third
+*	OR T2 T4
+T5	Scope 13 54	both sided extraction or only upper third
+R1	Has_scope Arg1:T3 Arg2:T5	
+R2	Has_temporal Arg1:T3 Arg2:T1	
+T6	Procedure 73 91	general anesthesia
+T7	Condition 111 138	abnormal coagulation status
+T8	Qualifier 102 110	presumed
+T9	Qualifier 93 98	known
+*	OR T9 T8
+T10	Scope 93 110	known or presumed
+R3	Has_scope Arg1:T7 Arg2:T10	
+T11	Qualifier 140 145	known
+T12	Qualifier 149 157	presumed
+*	OR T11 T12
+T13	Scope 140 157	known or presumed
+T14	Condition 167 184	renal dysfunction
+T15	Condition 158 163;173 184	liver dysfunction
+*	OR T14 T15
+T16	Scope 158 184	liver or renal dysfunction
+R4	Has_scope Arg1:T16 Arg2:T13	
+T17	Condition 186 202	contraindication
+T18	Drug 211 221	metamizole
+R5	AND Arg1:T17 Arg2:T18	
+T19	Qualifier 222 227	known
+T20	Qualifier 231 240	suspected
+*	OR T19 T20
+T21	Scope 222 240	known or suspected
+T22	Qualifier 242 247	known
+T23	Qualifier 251 260	suspected
+T24	Condition 261 268	allergy
+T25	Drug 277 285	novalgin
+T26	Drug 295 306	pyrazolones
+T27	Qualifier 289 294	other
+R6	Has_qualifier Arg1:T26 Arg2:T27	
+T28	Condition 308 329	anaphylactic reaction
+T29	Drug 338 344	NSAIDS
+T30	Measurement 356 376	bone marrow function
+T31	Value 346 355	decreased
+T32	Measurement 380 392	hematopoesis
+*	OR T32 T30
+T33	Scope 356 392	bone marrow function or hematopoesis
+R7	Has_value Arg1:T33 Arg2:T31	
+T34	Condition 394 411	hepatic porphyria
+T35	Condition 413 457	glucose-6-phosphate dehydrogenase deficiency
+T36	Condition 463 472	pregnancy
+T37	Observation 473 486	breastfeeding
+*	OR T36 T37 T35 T34 T33
+R8	AND Arg1:T28 Arg2:T29	
+*	OR T25 T26
+T38	Scope 277 306	novalgin or other pyrazolones
+R9	Has_scope Arg1:T24 Arg2:T38	
+*	OR T23 T22
+T39	Scope 242 260	known or suspected
+R10	Has_scope Arg1:T24 Arg2:T39	
+*	OR T24 T28
+T40	Scope 242 486	known or suspected allergy against novalgin or other pyrazolones, anaphylactic reaction against NSAIDS, decreased bone marrow function or hematopoesis, hepatic porphyria, glucose-6-phosphate dehydrogenase deficiency, and pregnancy/breastfeeding
+R11	Has_scope Arg1:T17 Arg2:T21	
+T41	Scope 186 240	contraindication against metamizole known or suspected
+R12	Subsumes Arg1:T41 Arg2:T40	
+T42	Condition 489 505	contraindication
+T43	Drug 514 523	ibuprofen
+R13	AND Arg1:T42 Arg2:T43	
+T44	Qualifier 525 530	known
+T45	Qualifier 534 543	suspected
+*	OR T44 T45
+T46	Condition 544 551	allergy
+T47	Drug 560 569	ibuprofen
+T48	Scope 525 543	known or suspected
+R14	Has_scope Arg1:T46 Arg2:T48	
+R15	AND Arg1:T46 Arg2:T47	
+T49	Condition 571 592	anaphylactic reaction
+T50	Drug 601 645	Nonsteroidal anti-inflammatory drugs (NSAID)
+R16	AND Arg1:T49 Arg2:T50	
+T51	Temporal 647 653	active
+T52	Qualifier 657 666	recurrent
+T53	Qualifier 667 674	stomach
+T54	Condition 697 705	bleeding
+T55	Qualifier 678 686	duodenal
+T56	Condition 687 693	ulcera
+*	OR T56 T54
+*	OR T55 T53
+T57	Scope 687 705	ulcera or bleeding
+T58	Scope 667 686	stomach or duodenal
+*	OR T52 T51
+T59	Scope 647 666	active or recurrent
+R17	Has_scope Arg1:T57 Arg2:T58	
+R18	Has_scope Arg1:T57 Arg2:T59	
+T60	Condition 707 719;729 742	severe liver insufficiency
+T61	Condition 707 713;723 742	severe renal insufficiency
+T62	Condition 744 771	inflammatory bowel syndrome
+T63	Condition 777 786	pregnancy
+T64	Observation 787 800	breastfeeding
+*	OR T63 T64 T61 T60 T49 T46 T57 T62
+T65	Scope 525 800	known or suspected allergy against ibuprofen, anaphylactic reaction against Nonsteroidal anti-inflammatory drugs (NSAID), active or recurrent stomach or duodenal ulcera or bleeding, severe liver or renal insufficiency, inflammatory bowel syndrome, and pregnancy/breastfeeding
+T66	Scope 489 523	contraindication against ibuprofen
+R19	Subsumes Arg1:T66 Arg2:T65	
+T67	Condition 803 812	pregnancy
+T68	Observation 817 831	breast feeding
+*	OR T67 T68

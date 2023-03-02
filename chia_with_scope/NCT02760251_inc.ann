@@ -1,0 +1,31 @@
+T1	Post-eligibility 0 71	Informed consent as documented by signature (see informed consent form)
+T2	Condition 73 84	Primary ITP
+T3	Measurement 102 126	definition of Rodeghiero
+T4	Measurement 145 159	platelet count
+T5	Value 163 172	<30x109/l
+R1	Has_value Arg1:T4 Arg2:T5	
+T6	Scope 102 172	definition of Rodeghiero et al. (52) and a platelet count of <30x109/l
+R2	AND Arg1:T6 Arg2:T2	
+T7	Person 174 177	Age
+T8	Value 185 196	18-45 years
+R3	Has_value Arg1:T7 Arg2:T8	
+T9	Observation 198 216	Previously treated
+T10	Procedure 258 276	first-line therapy
+T11	Qualifier 232 239	failure
+T12	Qualifier 243 254	intolerance
+R4	Has_qualifier Arg1:T10 Arg2:T12	
+R5	Has_qualifier Arg1:T10 Arg2:T11	
+T13	Condition 281 288	relapse
+T14	Temporal 289 313	after first-line therapy
+T15	Reference_point 295 313	first-line therapy
+T16	Procedure 295 313	first-line therapy
+R6	multi Arg1:T15 Arg2:T16	
+R7	Has_index Arg1:T14 Arg2:T15	
+R8	Has_temporal Arg1:T13 Arg2:T14	
+*	OR T10 T13
+T17	Drug 320 335	corticosteroids
+T18	Drug 337 363	intravenous immunoglobulin
+T19	Drug 375 397	anti-D immunoglobulins
+*	OR T17 T18 T19
+T20	Drug 365 369	IVIG
+R9	Subsumes Arg1:T18 Arg2:T20	

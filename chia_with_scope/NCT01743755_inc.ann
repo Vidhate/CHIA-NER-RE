@@ -1,0 +1,35 @@
+T1	Person 3 8	years
+T2	Value 0 2;9 17	18 or older
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Procedure 19 35	Chest radiograph
+T4	Condition 48 57	opacities
+T5	Qualifier 44 47	new
+R2	Has_qualifier Arg1:T4 Arg2:T5	
+R3	AND Arg1:T3 Arg2:T4	
+T6	Condition 60 65	Cough
+T7	Condition 81 87	sputum
+T8	Measurement 89 93	Temp
+T9	Value 94 102	>38,0 °C
+T10	Value 106 114	<36,0 °C
+*	OR T9 T10
+T11	Scope 94 114	>38,0 °C or <36,0 °C
+R4	Has_scope Arg1:T8 Arg2:T11	
+T12	Observation 116 137	Audible abnormalities
+T13	Procedure 141 158	chest examination
+T14	Condition 175 184	pneumonia
+R5	Has_context Arg1:T13 Arg2:T12	
+R6	AND Arg1:T14 Arg2:T13	
+T15	Condition 186 198	Leukocytosis
+T16	Multiplier 200 217	>10.000 cells/mm3
+T17	Condition 245 255	leucopenia
+T18	Multiplier 257 272	<4000 cells/mm3
+T19	Multiplier 220 234;236 240	leftward shift >10%
+T20	Scope 200 241	>10.000 cells/mm3), leftward shift (>10%)
+R7	Has_scope Arg1:T15 Arg2:T20	
+R8	Has_multiplier Arg1:T17 Arg2:T18	
+*	OR T15 T17
+T21	Measurement 275 293	C-reactive protein
+T22	Value 294 303	> 15 mg/l
+T23	Value 305 353	three fold higher than the upper limit of normal
+R9	Subsumes Arg1:T22 Arg2:T23	
+R10	Has_value Arg1:T21 Arg2:T22	

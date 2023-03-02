@@ -1,0 +1,219 @@
+T1	Pregnancy_considerations 0 47	Pregnancy: Women who are pregnant or lactating.
+T2	Condition 49 55	Asthma
+T3	Condition 94 100	asthma
+T4	Temporal 73 80	current
+R1	Has_temporal Arg1:T3 Arg2:T4	
+R2	Has_temporal Arg1:T2 Arg2:T4	
+T5	Temporal 119 124	prior
+T6	Observation 125 132	history
+T7	Condition 136 142	asthma
+R3	Has_temporal Arg1:T7 Arg2:T6	
+R4	Has_temporal Arg1:T7 Arg2:T5	
+T8	Condition 197 201	COPD
+T9	Condition 205 235	alpha 1-antitrypsin deficiency
+T10	Condition 315 319	COPD
+T11	Condition 257 287	alpha-1 antitrypsin deficiency
+R5	AND Arg1:T10 Arg2:T11	
+R6	Subsumes Arg1:T9 Arg2:T10	
+T12	Condition 372 384	tuberculosis
+T13	Condition 322 349	Other respiratory disorders
+T14	Undefined_semantics 322 349	Other respiratory disorders
+T15	Condition 386 397	lung cancer
+T16	Condition 399 413	bronchiectasis
+T17	Condition 415 426	sarcoidosis
+T18	Condition 428 446	pulmonary fibrosis
+T19	Condition 448 470	pulmonary hypertension
+T20	Condition 472 498	interstitial lung diseases
+T21	Condition 508 533	active pulmonary diseases
+*	OR T12 T15 T16 T17 T18 T19 T20 T21
+T22	Scope 372 533	tuberculosis, lung cancer, bronchiectasis, sarcoidosis, pulmonary fibrosis, pulmonary hypertension, interstitial lung diseases or other active pulmonary diseases
+R7	Subsumes Arg1:T13 Arg2:T22	
+T23	Procedure 536 550	Lung resection
+T24	Procedure 554 569	transplantation
+*	OR T24 T23
+T25	Procedure 585 614	lung volume reduction surgery
+T26	Temporal 615 654	within the 12 months prior to Screening
+T27	Reference_point 645 654	Screening
+R8	Has_index Arg1:T26 Arg2:T27	
+T28	Procedure 671 686	lung transplant
+T29	Condition 658 686	having had a lung transplant
+R9	AND Arg1:T29 Arg2:T28	
+T30	Condition 580 614	with lung volume reduction surgery
+R10	AND Arg1:T30 Arg2:T25	
+*	OR T30 T29
+T31	Scope 580 686	with lung volume reduction surgery within the 12 months prior to Screening or having had a lung transplant
+T32	Scope 536 569	Lung resection or transplantation
+R11	Subsumes Arg1:T32 Arg2:T31	
+T33	Condition 707 724	COPD exacerbation
+T34	Qualifier 691 699	moderate
+T35	Qualifier 700 706	severe
+*	OR T35 T34
+T36	Scope 691 706	moderate/severe
+T38	Temporal 747 780	at least 14 days prior to Visit 1
+T37	Observation 738 746	resolved
+T39	Negation 734 737	not
+R12	Has_negation Arg1:T37 Arg2:T39	
+R13	Has_temporal Arg1:T37 Arg2:T38	
+R14	Has_context Arg1:T33 Arg2:T37	
+R15	Has_scope Arg1:T33 Arg2:T36	
+T40	Temporal 785 849	at least 30 days following the last dose of oral corticosteroids
+T41	Reference_point 812 849	the last dose of oral corticosteroids
+R16	Has_index Arg1:T40 Arg2:T41	
+R17	Has_temporal Arg1:T37 Arg2:T40	
+T42	Condition 883 896	heart failure
+T43	Qualifier 876 882	severe
+R18	Has_qualifier Arg1:T42 Arg2:T43	
+T44	Measurement 898 924	New York Heart Association
+T45	Value 925 933	class IV
+R19	Has_value Arg1:T44 Arg2:T45	
+R20	Subsumes Arg1:T43 Arg2:T44	
+T46	Measurement 988 1005	ejection fraction
+T47	Value 1009 1013	<30%
+R21	Has_value Arg1:T46 Arg2:T47	
+T48	Device 1033 1077	implantable cardioverter defibrillator (ICD)
+*	OR T46 T48
+T49	Observation 1146 1161	life expectancy
+T50	Value 1162 1170	<3 years
+R22	Has_value Arg1:T49 Arg2:T50	
+T51	Condition 1114 1140	life-threatening condition
+T52	Condition 1183 1199	vascular disease
+T53	Condition 1203 1207	COPD
+*	OR T52 T53
+T54	Subjective_judgement 1209 1265	that might prevent the subject from completing the study
+R23	Has_context Arg1:T51 Arg2:T49	
+T55	Negation 1172 1182	other than
+T56	Scope 1183 1207	vascular disease or COPD
+R24	Has_negation Arg1:T56 Arg2:T55	
+R25	Has_scope Arg1:T51 Arg2:T56	
+T57	Condition 1268 1299	End stage chronic renal disease
+T58	Procedure 1333 1358	renal replacement therapy
+T59	Procedure 1360 1372	hemodialysis
+T60	Qualifier 1376 1386	peritoneal
+*	OR T59 T60
+T61	Scope 1360 1386	hemodialysis or peritoneal
+R26	Has_scope Arg1:T58 Arg2:T61	
+R27	Subsumes Arg1:T57 Arg2:T58	
+T62	Condition 1390 1394;1400 1407	Drug allergy
+T63	Condition 1395 1407	food allergy
+*	OR T62 T63
+T64	Condition 1436 1452	hypersensitivity
+T65	Drug 1491 1504	beta-agonists
+T66	Drug 1506 1520	corticosteroid
+T67	Drug 1467 1484	study medications
+T68	Undefined_semantics 1467 1484	study medications
+*	OR T65 T66
+T69	Scope 1491 1520	beta-agonists, corticosteroid
+R28	Subsumes Arg1:T67 Arg2:T69	
+T70	Drug 1525 1560	components of the inhalation powder
+T71	Drug 1567 1574	lactose
+T72	Drug 1576 1594	magnesium stearate
+*	OR T71 T72
+T73	Scope 1567 1594	lactose, magnesium stearate
+R29	Subsumes Arg1:T70 Arg2:T73	
+*	OR T67 T70
+T74	Scope 1467 1595	study medications (e.g. beta-agonists, corticosteroid) or components of the inhalation powder (e.g. lactose, magnesium stearate)
+R30	Has_scope Arg1:T64 Arg2:T74	
+T75	Condition 1644 1664	milk protein allergy
+T76	Qualifier 1637 1643	severe
+R31	Has_qualifier Arg1:T75 Arg2:T76	
+T77	Observation 1626 1633	history
+T78	Subjective_judgement 1671 1775	in the opinion of the study physician, contraindicates the subject's participation will also be excluded
+R32	Has_temporal Arg1:T75 Arg2:T77	
+T79	Drug 1783 1796	alcohol abuse
+T80	Drug 1778 1782;1791 1796	Drug abuse
+*	OR T79 T80
+T81	Observation 1833 1840	history
+T82	Drug 1855 1865	drug abuse
+T83	Drug 1844 1851;1860 1865	alcohol abuse
+*	OR T82 T83
+T84	Temporal 1866 1889	within the last 2 years
+T85	Scope 1844 1865	alcohol or drug abuse
+R33	Has_temporal Arg1:T85 Arg2:T81	
+R34	Has_temporal Arg1:T85 Arg2:T84	
+T86	Procedure 1942 1973	long-term oxygen therapy (LTOT)
+T87	Procedure 1977 2001	nocturnal oxygen therapy
+T88	Multiplier 2015 2042	greater than 12 hours a day
+*	OR T87 T86
+T89	Scope 1942 2001	long-term oxygen therapy (LTOT) or nocturnal oxygen therapy
+R35	Has_multiplier Arg1:T89 Arg2:T88	
+T90	Grammar_Error 2044 2105	Oxygen prn use (i.e. <=12 hours per day) is not exclusionary.
+T91	Post-eligibility 2107 2375	Questionable validity of consent: Subjects with a history of psychiatric disease, intellectual deficiency, poor motivation or other conditions that will limit the validity of informed consent to participate in the study or the potential compliance to study procedures.
+T92	Post-eligibility 2377 2611	Affiliation with investigator site: Study investigators, sub-investigators, study coordinators, employees of a participating investigator or immediate family members of the aforementioned are excluded from participating in this study.
+T93	Parsing_Error 2613 2771	Additional medication: Use of the following medications within the following time intervals prior to Visit 1 or during the study (unless otherwise specified):
+T94	Drug 2918 2958	Inhaled Long acting beta-agonists (LABA)
+T95	Temporal 2959 2967	48 hours
+T96	Reference_point 2836 2845	Screening
+T97	Drug 2968 2997	ICS/LABA combination products
+T98	Temporal 2998 3006	48 hours
+R36	Has_temporal Arg1:T94 Arg2:T95	
+R37	Has_temporal Arg1:T97 Arg2:T98	
+T99	Drug 3007 3030	Inhaled corticosteroids
+T100	Temporal 3031 3039	48 hours
+R38	Has_temporal Arg1:T99 Arg2:T100	
+T101	Drug 3040 3050	Tiotropium
+T102	Temporal 3051 3057	1 week
+T103	Drug 3102 3117	corticosteroids
+T104	Qualifier 3058 3066	Systemic
+T105	Qualifier 3068 3072	Oral
+T106	Qualifier 3074 3084	parenteral
+T107	Qualifier 3086 3101	intra-articular
+*	OR T104 T105 T106 T107
+T108	Scope 3058 3101	Systemic, Oral, parenteral, intra-articular
+R39	Has_scope Arg1:T103 Arg2:T108	
+T109	Temporal 3118 3125	30 days
+R40	Has_temporal Arg1:T103 Arg2:T109	
+T110	Drug 3145 3160	corticosteroids
+T111	Qualifier 3127 3131	oral
+T112	Qualifier 3136 3144	systemic
+*	OR T112 T111
+T113	Scope 3127 3144	oral and systemic
+R41	Has_scope Arg1:T110 Arg2:T113	
+T114	Condition 3182 3200	COPD exacerbations
+T115	Procedure 3176 3200	treat COPD exacerbations
+R42	AND Arg1:T115 Arg2:T114	
+T116	Temporal 3201 3217	during the study
+T117	Reference_point 3208 3217	the study
+R43	Has_index Arg1:T116 Arg2:T117	
+R44	Has_temporal Arg1:T115 Arg2:T116	
+T118	Not_a_criteria 3127 3217	oral and systemic corticosteroids may be used to treat COPD exacerbations during the study
+T119	Drug 3219 3256	Cytochrome P450 3A4 strong inhibitors
+T120	Drug 3432 3444	Itraconazole
+T121	Drug 3447 3461	Clarithromycin
+T122	Drug 3463 3476	Telithromycin
+T123	Drug 3478 3488	Amiodarone
+T124	Drug 3494 3504	Nefazodone
+T125	Temporal 3505 3512	6 weeks
+T126	Drug 3513 3523	Grapefruit
+T127	Grammar_Error 3513 3548	Grapefruit is allowed up to Visit 1
+T128	Drug 3664 3684	investigational drug
+T129	Undefined_semantics 3664 3684	investigational drug
+T130	Temporal 3685 3692	30 days
+T131	Temporal 3696 3708	5 half lives
+*	OR T131 T130
+T132	Scope 3685 3708	30 days or 5 half lives
+R45	Has_scope Arg1:T128 Arg2:T132	
+*	OR T121 T122 T123 T124 T143 T133
+T133	Drug 3286 3301	antiretrovirals
+T134	Drug 3303 3322	protease inhibitors
+T135	Drug 3329 3338	Indinavir
+T136	Drug 3340 3350	Nelfinavir
+T137	Drug 3352 3361	Ritonavir
+T138	Drug 3363 3373	Saquinavir
+*	OR T138 T137 T136 T135
+T139	Scope 3329 3373	Indinavir, Nelfinavir, Ritonavir, Saquinavir
+R46	Subsumes Arg1:T134 Arg2:T139	
+R47	Subsumes Arg1:T133 Arg2:T134	
+T140	Drug 3376 3385;3399 3411	Imidazole anti-fungals
+T141	Drug 3390 3411	Triazole anti-fungals
+T142	Drug 3418 3430	Ketaconazole
+T143	Scope 3376 3411	Imidazole and Triazole anti-fungals
+T144	Scope 3418 3444	Ketaconazole, Itraconazole
+*	OR T142 T120
+R48	Subsumes Arg1:T143 Arg2:T144	
+T145	Scope 3286 3504	antiretrovirals (protease inhibitors) (e.g.Indinavir, Nelfinavir, Ritonavir, Saquinavir); Imidazole and Triazole anti-fungals (e.g. Ketaconazole, Itraconazole); Clarithromycin, Telithromycin, Amiodarone, and Nefazodone
+R49	Subsumes Arg1:T119 Arg2:T145	
+R50	Has_temporal Arg1:T119 Arg2:T125	
+T146	Negation 2784 2786	No
+T147	Reference_point 2863 2888	any time during the study
+*	OR T147 T96
+*	OR T94 T97 T99 T101 T103 T110 T119

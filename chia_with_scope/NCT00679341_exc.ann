@@ -1,0 +1,248 @@
+T1	Procedure 15 27	chemotherapy
+T2	Condition 32 35	MBC
+R1	causal Arg1:T1 Arg2:T2	
+T3	Observation 0 7	History
+T4	Value 53 63	< 6 months
+T5	Procedure 87 109	cytotoxic chemotherapy
+T6	Qualifier 117 129;142 149	neo-adjuvant setting
+T7	Qualifier 133 149	adjuvant setting
+T8	Condition 168 188	metastatic diagnosis
+T9	Drug 191 202	Trastuzumab
+T10	Temporal 203 235	≤ 21 days prior to randomization
+T11	Reference_point 222 235	randomization
+R2	multi Arg1:T10 Arg2:T11	
+R3	Has_temporal Arg1:T9 Arg2:T10	
+T12	Procedure 238 253	Hormone therapy
+T13	Temporal 254 285	< 7 days prior to randomization
+T14	Reference_point 272 285	randomization
+R4	Has_index Arg1:T13 Arg2:T14	
+T15	Condition 296 317	peripheral neuropathy
+T16	Qualifier 321 330	Grade ≥ 3
+T17	Measurement 321 326	Grade
+T18	Value 327 330	≥ 3
+R5	Has_value Arg1:T17 Arg2:T18	
+R6	multi Arg1:T16 Arg2:T17	
+R7	Has_qualifier Arg1:T15 Arg2:T16	
+T19	Temporal 288 295	Current
+R8	Has_temporal Arg1:T15 Arg2:T19	
+T20	Temporal 361 384	within the last 5 years
+T21	Condition 419 450	carcinoma in situ of the cervix
+T22	Qualifier 397 418	appropriately treated
+T23	Procedure 411 418	treated
+R9	multi Arg1:T22 Arg2:T23	
+R10	Has_qualifier Arg1:T21 Arg2:T22	
+T24	Condition 452 479	non-melanoma skin carcinoma
+T25	Condition 489 503	uterine cancer
+T26	Measurement 481 486	Stage
+T27	Value 487 488	I
+R11	Has_value Arg1:T26 Arg2:T27	
+R12	AND Arg1:T25 Arg2:T26	
+T28	Condition 350 360	malignancy
+T29	Qualifier 344 349	other
+R13	Has_qualifier Arg1:T28 Arg2:T29	
+R14	Has_temporal Arg1:T28 Arg2:T20	
+T30	Negation 386 396	except for
+*	OR T21 T24 T25
+T31	Non-representable 505 574	or other cancers with a similar outcome as those previously mentioned
+T32	Scope 397 503	appropriately treated carcinoma in situ of the cervix, non-melanoma skin carcinoma, Stage I uterine cancer
+R15	Has_negation Arg1:T32 Arg2:T30	
+T33	Procedure 586 598	radiotherapy
+T34	Temporal 577 585	Previous
+R16	Has_temporal Arg1:T33 Arg2:T34	
+T35	Condition 665 678	breast cancer
+T36	Qualifier 654 664	metastatic
+T37	Qualifier 634 650	locally advanced
+T38	Qualifier 620 632	unresectable
+*	OR T36 T37 T38
+T39	Scope 620 664	unresectable, locally advanced or metastatic
+R17	Has_scope Arg1:T35 Arg2:T39	
+T40	Value 697 710	more than 25%
+T41	Measurement 714 733;743 753	marrow-bearing bone irradiated
+R18	Has_value Arg1:T41 Arg2:T40	
+T42	Non-representable 577 865	Previous radiotherapy for the treatment of unresectable, locally advanced or metastatic breast cancer is not allowed if more than 25% of marrow-bearing bone has been irradiated or the last fraction of radiotherapy has been administered within approximately 3 weeks prior to randomization.
+T43	Condition 867 883	Brain metastases
+T44	Qualifier 893 902	untreated
+T45	Qualifier 904 915	symptomatic
+T46	Qualifier 920 935	require therapy
+T47	Procedure 963 972	radiation
+T48	Procedure 974 981	surgery
+T49	Procedure 986 1019	other therapy to control symptoms
+*	OR T49 T48 T47
+T50	Condition 1025 1041	brain metastases
+T51	Temporal 1042 1080	within 2 months prior to randomization
+T52	Reference_point 1067 1080	randomization
+R19	multi Arg1:T51 Arg2:T52	
+R20	Has_temporal Arg1:T50 Arg2:T51	
+T53	Scope 963 1019	radiation, surgery, or other therapy to control symptoms
+R21	causal Arg1:T53 Arg2:T50	
+*	OR T45 T46 T44
+T54	Scope 893 935	untreated, symptomatic, or require therapy
+R22	Has_scope Arg1:T43 Arg2:T54	
+*	OR T43 T53
+T55	Drug 1140 1154	anthracyclines
+T56	Drug 1156 1167	Doxorubicin
+T57	Drug 1171 1192	liposomal doxorubicin
+T58	Multiplier 1193 1205	> 500 mg/m^2
+T59	Drug 1207 1217	epirubicin
+T60	Multiplier 1218 1230	> 900 mg/m^2
+T61	Drug 1232 1244	mitoxantrone
+T62	Multiplier 1245 1256	> 120mg/m^2
+T63	Drug 1261 1271	idarubicin
+T64	Multiplier 1272 1283	> 90 mg/m^2
+R23	Has_multiplier Arg1:T63 Arg2:T64	
+R24	Has_multiplier Arg1:T61 Arg2:T62	
+R25	Has_multiplier Arg1:T59 Arg2:T60	
+*	OR T56 T57
+T65	Scope 1156 1192	Doxorubicin or liposomal doxorubicin
+R26	Has_multiplier Arg1:T65 Arg2:T58	
+T66	Scope 1156 1283	Doxorubicin or liposomal doxorubicin > 500 mg/m^2; epirubicin > 900 mg/m^2; mitoxantrone > 120mg/m^2 and idarubicin > 90 mg/m^2
+T67	Scope 1094 1154	exposure to the following cumulative doses of anthracyclines
+R27	Subsumes Arg1:T67 Arg2:T66	
+T68	Condition 1294 1309	unstable angina
+T69	Temporal 1286 1293	Current
+R28	Has_temporal Arg1:T68 Arg2:T69	
+T70	Condition 1335 1359	congestive heart failure
+T71	Qualifier 1323 1334	symptomatic
+R29	Has_qualifier Arg1:T70 Arg2:T71	
+T72	Condition 1364 1386	ventricular arrhythmia
+T73	Qualifier 1387 1406	requiring treatment
+T74	Procedure 1397 1406	treatment
+R30	multi Arg1:T73 Arg2:T74	
+R31	Has_qualifier Arg1:T72 Arg2:T73	
+*	OR T72 T70
+T75	Condition 1420 1441	myocardial infarction
+T76	Temporal 1442 1480	within 6 months prior to randomization
+T77	Reference_point 1467 1480	randomization
+R32	Has_index Arg1:T76 Arg2:T77	
+R33	Has_temporal Arg1:T75 Arg2:T76	
+T78	Measurement 1483 1524	Left ventricular ejection fraction (LVEF)
+T79	Value 1525 1534	below 50%
+R34	Has_value Arg1:T78 Arg2:T79	
+T80	Temporal 1535 1586	within approximately 28 days prior to randomization
+T81	Reference_point 1573 1586	randomization
+R35	Has_index Arg1:T80 Arg2:T81	
+R36	Has_temporal Arg1:T78 Arg2:T80	
+T82	Condition 1630 1660	congestive heart failure (CHF)
+T83	Qualifier 1618 1629	symptomatic
+R37	Has_qualifier Arg1:T82 Arg2:T83	
+T84	Measurement 1610 1614	LVEF
+T85	Value 1600 1609	decreased
+R38	Has_value Arg1:T84 Arg2:T85	
+T86	Drug 1684 1695	trastuzumab
+T87	Qualifier 1675 1683	adjuvant
+T88	Temporal 1666 1674	previous
+R39	Has_qualifier Arg1:T86 Arg2:T87	
+R40	Has_temporal Arg1:T86 Arg2:T88	
+T89	Scope 1618 1705	symptomatic congestive heart failure (CHF) with previous adjuvant trastuzumab treatment
+*	OR T84 T89
+T90	Observation 1589 1596	History
+R41	Has_temporal Arg1:T84 Arg2:T90	
+R42	Has_temporal Arg1:T89 Arg2:T90	
+T91	Measurement 1708 1726	Cardiac troponin I
+T92	Value 1727 1738	≥ 0.2 ng/mL
+R43	Has_value Arg1:T91 Arg2:T92	
+T93	Temporal 1739 1770	within 28 days of randomization
+T94	Reference_point 1757 1770	randomization
+R44	Has_index Arg1:T93 Arg2:T94	
+R45	Has_temporal Arg1:T91 Arg2:T93	
+T95	Condition 1780 1787	dyspnea
+T96	Qualifier 1773 1779	Severe
+R46	Has_qualifier Arg1:T95 Arg2:T96	
+T97	Condition 1824 1843	advanced malignancy
+T98	Procedure 1865 1890	continuous oxygen therapy
+T99	Temporal 1857 1864	current
+R47	Has_temporal Arg1:T98 Arg2:T99	
+T100	Condition 1807 1820	complications
+R48	causal Arg1:T100 Arg2:T97	
+T101	Qualifier 1847 1890	requiring current continuous oxygen therapy
+R49	multi Arg1:T101 Arg2:T98	
+*	OR T100 T101
+T102	Scope 1807 1890	complications of advanced malignancy or requiring current continuous oxygen therapy
+R50	causal Arg1:T95 Arg2:T102	
+T107	Condition 2285 2294	lactation
+T108	Condition 2272 2281	pregnancy
+T109	Temporal 2264 2271	Current
+*	OR T107 T108
+T110	Scope 2272 2294	pregnancy or lactation
+R51	Has_temporal Arg1:T110 Arg2:T109	
+T113	Condition 2431 2465	human immunodeficiency virus (HIV)
+T114	Temporal 2402 2409	Current
+R52	Has_temporal Arg1:T113 Arg2:T114	
+T115	Condition 2474 2485;2505 2510	hepatitis B virus
+T116	Condition 2493 2510	hepatitis C virus
+*	OR T115 T116 T113
+T117	Condition 2524 2535	intolerance
+T118	Condition 2557 2574	infusion reaction
+T119	Measurement 2547 2552	Grade
+T120	Value 2553 2556	3-4
+R53	Has_value Arg1:T119 Arg2:T120	
+R54	AND Arg1:T118 Arg2:T119	
+T121	Condition 2579 2595	hypersensitivity
+T122	Drug 2599 2610	trastuzumab
+T123	Drug 2612 2627	murine proteins
+T124	Drug 2632 2641	docetaxel
+*	OR T123 T124 T122
+T125	Scope 2599 2641	trastuzumab, murine proteins, or docetaxel
+R55	Has_scope Arg1:T121 Arg2:T125	
+T103	Qualifier 1901 1907	severe
+T104	Qualifier 1909 1921	uncontrolled
+T105	Condition 1922 1938	systemic disease
+T106	Qualifier 1944 1966	clinically significant
+T129	Condition 1983 1992;2007 2014	pulmonary disease
+T130	Condition 1997 2014	metabolic disease
+T128	Condition 1967 1981;2007 2014	cardiovascular disease
+T131	Condition 2016 2039	wound healing disorders
+T132	Condition 2041 2047	ulcers
+T133	Condition 2052 2066	bone fractures
+*	OR T132 T133 T131 T134
+*	OR T129 T128 T130
+T134	Scope 1967 2014	cardiovascular, pulmonary, or metabolic disease
+R56	Has_qualifier Arg1:T134 Arg2:T106	
+T135	Scope 1944 2066	clinically significant cardiovascular, pulmonary, or metabolic disease; wound healing disorders; ulcers; or bone fractures
+R57	Has_qualifier Arg1:T105 Arg2:T104	
+R58	Has_qualifier Arg1:T105 Arg2:T103	
+R59	AND Arg1:T135 Arg2:T105	
+T111	Procedure 2322 2347	investigational treatment
+T112	Temporal 2348 2399	within approximately 28 days prior to randomization
+R60	Has_temporal Arg1:T111 Arg2:T112	
+T136	Reference_point 2386 2399	randomization
+R61	Has_index Arg1:T112 Arg2:T136	
+T126	Condition 2650 2666	hypersensitivity
+T137	Drug 2681 2692	study drugs
+T138	Drug 2727 2761	drugs formulated in polysorbate 80
+*	OR T137 T138
+T139	Scope 2681 2761	study drugs, including the excipients, or any drugs formulated in polysorbate 80
+R62	Has_scope Arg1:T126 Arg2:T139	
+T127	Observation 2809 2866	unwilling to comply with the requirements of the protocol
+T140	Observation 2799 2805;2819 2866	unable to comply with the requirements of the protocol
+*	OR T140 T127
+T141	Qualifier 2070 2075	Major
+T142	Procedure 2076 2094	surgical procedure
+T143	Qualifier 2098 2109	significant
+T144	Condition 2110 2126	traumatic injury
+R63	Has_qualifier Arg1:T144 Arg2:T143	
+R64	Has_qualifier Arg1:T142 Arg2:T141	
+*	OR T144 T142
+T145	Temporal 2127 2178	within approximately 28 days prior to randomization
+T146	Reference_point 2165 2178	randomization
+R65	Has_index Arg1:T145 Arg2:T146	
+T147	Scope 2070 2126	Major surgical procedure or significant traumatic injury
+R66	Has_temporal Arg1:T147 Arg2:T145	
+T148	Mood 2182 2206	anticipation of the need
+T149	Procedure 2211 2224	major surgery
+R67	Has_mood Arg1:T149 Arg2:T148	
+T150	Temporal 2225 2261	during the course of study treatment
+T151	Reference_point 2246 2261	study treatment
+R68	Has_index Arg1:T150 Arg2:T151	
+T152	Procedure 2252 2261	treatment
+R69	multi Arg1:T151 Arg2:T152	
+R70	Has_temporal Arg1:T149 Arg2:T150	
+*	OR T149 T147
+T153	Observation 2297 2307	History of
+R71	Has_temporal Arg1:T111 Arg2:T153	
+T154	Observation 2513 2523	History of
+T155	Scope 2547 2574	Grade 3-4 infusion reaction
+R73	Subsumes Arg1:T117 Arg2:T155	
+*	OR T117 T121
+T156	Scope 2524 2641	intolerance (including Grade 3-4 infusion reaction) or hypersensitivity to trastuzumab, murine proteins, or docetaxel
+R72	Has_temporal Arg1:T156 Arg2:T154	

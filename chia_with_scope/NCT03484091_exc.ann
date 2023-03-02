@@ -1,0 +1,43 @@
+T1	Qualifier 0 6	Severe
+T2	Condition 7 16	deformity
+R1	Has_qualifier Arg1:T2 Arg2:T1	
+T3	Condition 18 23	varus
+T4	Measurement 27 54	values from mechanical axis
+T5	Value 55 74	more than 5 degrees
+R2	Has_value Arg1:T4 Arg2:T5	
+*	OR T3 T4
+T6	Scope 18 74	varus or values from mechanical axis more than 5 degrees
+R3	Subsumes Arg1:T2 Arg2:T6	
+T7	Condition 76 83	Allergy
+T8	Drug 87 102	hyaluronic acid
+R4	AND Arg1:T7 Arg2:T8	
+T9	Condition 104 108	Pain
+T10	Qualifier 112 115	hip
+T11	Qualifier 119 124	ankle
+*	OR T10 T11
+T12	Scope 112 124	hip or ankle
+R5	Has_scope Arg1:T9 Arg2:T12	
+T13	Temporal 126 140;157 175	Post-traumatic of lower extremity
+T14	Temporal 144 175	post surgery of lower extremity
+*	OR T13 T14
+T15	Condition 182 199	infection of knee
+T16	Temporal 177 181	Post
+R6	Has_temporal Arg1:T15 Arg2:T16	
+T17	Drug 210 225	hyaluronic acid
+T18	Procedure 210 235	hyaluronic acid injection
+R7	multi Arg1:T18 Arg2:T17	
+T19	Temporal 236 251	within 6 months
+R8	Has_temporal Arg1:T18 Arg2:T19	
+T20	Temporal 201 209	Previous
+R9	Has_temporal Arg1:T18 Arg2:T20	
+T21	Condition 253 262	Pregnancy
+T22	Condition 266 275	lactation
+*	OR T21 T22
+T23	Condition 288 308	Rheumatoid arthritis
+T24	Condition 310 316	stroke
+T25	Condition 318 328	malignancy
+T26	Condition 330 346	venous occlusion
+*	OR T26 T25 T24 T23
+T27	Scope 288 346	Rheumatoid arthritis, stroke, malignancy, venous occlusion
+T28	Qualifier 277 287	Underlying
+R10	Has_qualifier Arg1:T27 Arg2:T28	

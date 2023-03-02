@@ -1,0 +1,6 @@
+T1	Drug 14 26	azathioprine
+T2	Drug 30 39	biologics
+T3	Procedure 40 47	therapy
+*	OR T2 T1
+T4	Scope 14 39	azathioprine or biologics
+R1	Has_scope Arg1:T3 Arg2:T4	

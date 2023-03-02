@@ -1,0 +1,23 @@
+T1	Value 8 20	18 and older
+T2	Person 0 6	Adults
+T3	Person 8 20	18 and older
+R1	Has_value Arg1:T3 Arg2:T1	
+R2	multi Arg1:T3 Arg2:T1	
+R3	Subsumes Arg1:T2 Arg2:T3	
+T4	Condition 53 55	SA
+T5	Condition 73 79	asthma
+T6	Qualifier 59 63	mild
+T7	Qualifier 64 72	moderate
+*	OR T7 T6
+T8	Scope 59 72	mild-moderate
+R4	Has_scope Arg1:T5 Arg2:T8	
+T9	Observation 84 116	followed by an asthma specialist
+T10	Temporal 117 138	for at least 6 months
+R5	Has_temporal Arg1:T9 Arg2:T10	
+T11	Post-eligibility 141 242	Must agree to have regular clinic visits (minimum 3-4 per year for SA, 1-2 for mild-moderate asthma).
+T12	Condition 254 269	good compliance
+T13	Drug 275 286	medications
+T14	Condition 301 307	asthma
+T15	Condition 312 316	COPD
+*	OR T15 T14
+R6	AND Arg1:T12 Arg2:T13	

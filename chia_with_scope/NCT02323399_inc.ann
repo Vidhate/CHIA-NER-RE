@@ -1,0 +1,51 @@
+T1	Person 10 13	age
+T2	Value 17 41	between =12 and 16 years
+T3	Context_Error 25 26	=
+T4	Grammar_Error 43 52	inclusive
+R1	Has_value Arg1:T1 Arg2:T2	
+T5	Procedure 81 90	procedure
+T6	Observation 65 90	scheduled for a procedure
+R2	multi Arg1:T6 Arg2:T5	
+T7	Procedure 116 136	neuraxial anesthesia
+T8	Procedure 105 112;130 131	general t
+*	OR T7 T8
+T9	Scope 105 136	general or neuraxial anesthesia
+R3	Has_scope Arg1:T5 Arg2:T9	
+T10	Procedure 189 202	physical exam
+T11	Value 167 188	clinically acceptable
+T12	Value 157 163	normal
+*	OR T12 T11
+T13	Scope 157 188	normal or clinically acceptable
+R4	Has_scope Arg1:T10 Arg2:T13	
+T14	Condition 229 237	diabetes
+T15	Qualifier 218 228	controlled
+T16	Temporal 238 252	prior to entry
+T17	Reference_point 247 252	entry
+R5	Has_index Arg1:T16 Arg2:T17	
+T18	Condition 265 269;279 288;296 310	mean diastolic blood pressure
+T19	Condition 265 269;270 278;296 310	mean systolic blood pressure
+T20	Value 316 323	78 mmHg
+T21	Value 312 315;319 323	128 mmHg
+R6	Has_value Arg1:T18 Arg2:T20	
+R7	Has_value Arg1:T19 Arg2:T21	
+T22	Qualifier 325 332	sitting
+T23	Temporal 334 357	after 5 minutes of rest
+T24	Reference_point 353 357	rest
+R8	Has_index Arg1:T23 Arg2:T24	
+T25	Scope 265 332	mean systolic/diastolic office blood pressure =128/78 mmHg (sitting
+R9	Has_qualifier Arg1:T25 Arg2:T22	
+R10	Has_temporal Arg1:T25 Arg2:T23	
+R11	Has_qualifier Arg1:T14 Arg2:T15	
+R12	Has_temporal Arg1:T14 Arg2:T16	
+T26	Measurement 389 409	serum pregnancy test
+T27	Measurement 380 385;395 409	urine pregnancy test
+*	OR T26 T27
+T28	Measurement 411 439	Human Chorionic Gonadotropin
+T29	Value 449 457	negative
+T30	Temporal 458 470	at Screening
+T31	Temporal 475 480	Day 1
+T32	Scope 380 440	urine or serum pregnancy test (Human Chorionic Gonadotropin)
+R13	Has_value Arg1:T32 Arg2:T29	
+T33	Scope 458 480	at Screening and Day 1
+R14	Has_scope Arg1:T32 Arg2:T33	
+T34	Post-eligibility 482 565	Subject's parent or legal guardian gives informed consent and subject gives assent.

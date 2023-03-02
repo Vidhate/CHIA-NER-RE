@@ -1,0 +1,40 @@
+T1	Condition 14 18	T2DM
+T2	Condition 23 26	CAS
+T6	Condition 68 72	T2DM
+T7	Qualifier 101 113	WHO criteria
+R1	Has_qualifier Arg1:T6 Arg2:T7	
+T8	Condition 121 124	CAD
+T9	Condition 163 169	Angina
+T10	Measurement 184 207	exercise tolerance test
+T11	Value 175 183	positive
+R2	Has_value Arg1:T10 Arg2:T11	
+T12	Qualifier 223 238	Q wave positive
+T13	Condition 239 260	myocardial infarction
+T14	Qualifier 209 215;230 238	enzyme positive
+*	OR T14 T12
+T15	Scope 209 238	enzyme and/or Q wave positive
+R3	Has_scope Arg1:T13 Arg2:T15	
+T16	Condition 262 283	angiographic evidence
+T17	Value 286 290	>50%
+T18	Measurement 291 313	stenosis of one vessel
+R4	Has_value Arg1:T18 Arg2:T17	
+T19	Person 370 374	Aged
+T20	Value 375 392	between 18 and 75
+R5	Has_value Arg1:T19 Arg2:T20	
+T21	Observation 403 449	written consent for participation in the trial
+T22	Temporal 450 504	prior to any study-specific procedures or requirements
+T23	Reference_point 459 504	any study-specific procedures or requirements
+R6	Has_index Arg1:T22 Arg2:T23	
+R7	Has_temporal Arg1:T21 Arg2:T22	
+T24	Scope 286 313	>50% stenosis of one vessel
+R8	Subsumes Arg1:T16 Arg2:T24	
+*	OR T16 T13 T25 T28
+T25	Scope 163 207	Angina plus positive exercise tolerance test
+T26	Qualifier 332 340	surgical
+T27	Qualifier 316 328	percutaneous
+*	OR T27 T26
+T28	Procedure 341 367	coronary revascularisation
+T29	Scope 316 340	percutaneous or surgical
+R9	Has_scope Arg1:T28 Arg2:T29	
+T30	Scope 163 367	Angina plus positive exercise tolerance test, enzyme and/or Q wave positive myocardial infarction, angiographic evidence ( >50% stenosis of one vessel), percutaneous or surgical coronary revascularisation
+R10	Subsumes Arg1:T8 Arg2:T30	

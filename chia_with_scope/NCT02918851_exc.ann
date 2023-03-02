@@ -1,0 +1,68 @@
+T1	Condition 92 100	diabetes
+T2	Condition 102 114	hypertension
+T3	Condition 116 131	cardiac disease
+T4	Condition 133 139	asthma
+T5	Condition 141 173	chronic obstructive lung disease
+*	OR T5 T4 T3 T2 T1
+T6	Scope 92 173	diabetes, hypertension, cardiac disease, asthma, chronic obstructive lung disease
+T7	Condition 33 48	medical illness
+R1	Subsumes Arg1:T7 Arg2:T6	
+T8	Qualifier 16 21	acute
+T9	Qualifier 25 32	chronic
+*	OR T9 T8
+T10	Scope 16 32	acute or chronic
+R2	Has_scope Arg1:T7 Arg2:T10	
+T11	Observation 208 215;228 231	tobacco use
+T12	Observation 219 231	nicotine use
+*	OR T12 T11
+T13	Scope 208 231	tobacco or nicotine use
+T14	Temporal 194 206	last 60 days
+R3	Has_temporal Arg1:T13 Arg2:T14	
+T15	Condition 244 261	sickle cell trait
+T16	Condition 244 255;265 272	sickle cell disease
+T17	Condition 298 334	hereditary hematological abnormality
+T18	Condition 286 294;309 334	acquired hematological abnormality
+*	OR T17 T18 T15 T16
+T19	Condition 347 355	fainting
+T20	Procedure 401 411	phlebotomy
+T21	Condition 377 393	adverse reaction
+T22	Observation 415 432	donation of blood
+*	OR T20 T22
+T23	Scope 401 432	phlebotomy or donation of blood
+R4	Has_scope Arg1:T21 Arg2:T23	
+*	OR T19 T21
+T24	Measurement 450 453	QTc
+T25	Procedure 492 509	electrocardiogram
+T26	Value 521 528	>470 ms
+R5	Has_value Arg1:T24 Arg2:T26	
+R6	AND Arg1:T25 Arg2:T24	
+T27	Condition 549 561;573 578	illicit drug abuse
+T28	Condition 565 578	alcohol abuse
+T29	Condition 599 602;632 641	HIV infection
+T30	Condition 604 615;632 641	Hepatitis B infection
+T31	Condition 620 641	Hepatitis C infection
+*	OR T31 T30 T29
+*	OR T28 T27
+T32	Condition 654 667	thrombophilia
+T33	Drug 671 692	anticoagulant therapy
+*	OR T32 T33
+T34	Condition 694 703	Pregnancy
+T35	Measurement 724 727	BMI
+T36	Condition 705 712	Obesity
+T37	Value 727 730	>30
+R7	AND Arg1:T36 Arg2:T35	
+R8	Has_value Arg1:T35 Arg2:T37	
+T38	Observation 750 764	blood donation
+T39	Non-query-able 767 947	) Single whole blood unit donation within the past 8 weeks; b) Double RBC donation by apheresis within the past 16 weeks; or c) Plasma donation by apheresis within the past 4 weeks
+T40	Observation 960 968	RBC mass
+T41	Qualifier 949 959	Inadequate
+R9	Has_qualifier Arg1:T40 Arg2:T41	
+T42	Measurement 978 981	TBV
+T43	Value 982 990	<4500 ml
+T44	Measurement 1012 1014	Hb
+T45	Value 1015 1023	<14 g/dL
+R10	Has_value Arg1:T42 Arg2:T43	
+R11	Has_value Arg1:T44 Arg2:T45	
+*	OR T42 T44
+T46	Scope 978 1023	TBV <4500 ml (above) or screening Hb <14 g/dL
+R12	Has_scope Arg1:T40 Arg2:T46	

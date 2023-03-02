@@ -1,0 +1,132 @@
+T1	Condition 33 37	COPD
+T2	Measurement 51 127	American Thoracic Society (ATS)/ European Respiratory Society (ERS) criteria
+R1	AND Arg1:T1 Arg2:T2	
+T3	Value 160 170	>=40 years
+T4	Person 155 159	aged
+R2	Has_value Arg1:T4 Arg2:T3	
+T5	Person 130 134	Male
+T6	Person 138 144	female
+*	OR T5 T6
+T7	Person 172 179	Females
+A1	Optional T7
+T8	Condition 195 218	Child Bearing Potential
+T9	Negation 191 194	Non
+R3	Has_negation Arg1:T8 Arg2:T9	
+R4	AND Arg1:T7 Arg2:T8	
+T10	Condition 242 265	Child Bearing Potential
+T11	Negation 238 241	Non
+R5	Has_negation Arg1:T10 Arg2:T11	
+T12	Person 283 290	Females
+T13	Condition 322 341	functioning ovaries
+T14	Condition 376 390	tubal ligation
+T15	Condition 394 406	hysterectomy
+T17	Condition 427 442	post-menopausal
+T16	Person 411 418	females
+*	OR T14 T15
+T18	Scope 283 406	Females, regardless of their age, with functioning ovaries and who have a current documented tubal ligation or hysterectomy
+T19	Scope 411 442	females who are post-menopausal
+*	OR T18 T19
+T20	Scope 283 442	Females, regardless of their age, with functioning ovaries and who have a current documented tubal ligation or hysterectomy, or females who are post-menopausal
+T21	Scope 238 265	Non Child Bearing Potential
+R6	Subsumes Arg1:T21 Arg2:T20	
+T22	Condition 460 464	COPD
+T23	Value 465 480	stage III or IV
+T24	Measurement 494 507	GOLD criteria
+R7	Has_value Arg1:T24 Arg2:T23	
+R8	AND Arg1:T22 Arg2:T24	
+T25	Measurement 540 593	Forced Expiratory Volume, measured at 1 second (FEV1)
+T26	Value 594 618	<50% of predicted normal
+R9	Has_value Arg1:T25 Arg2:T26	
+T27	Temporal 520 539	post-bronchodilator
+R10	Has_temporal Arg1:T25 Arg2:T27	
+T28	Temporal 634 654	post- bronchodilator
+T29	Measurement 655 698	FEV1/Inspiratory Vital Capacity (IVC) ratio
+T30	Value 699 703	<70%
+R11	Has_value Arg1:T29 Arg2:T30	
+R12	Has_temporal Arg1:T29 Arg2:T28	
+T31	Multiplier 723 733	at least 2
+T32	Qualifier 746 752	severe
+T33	Qualifier 734 742	moderate
+*	OR T33 T32
+T34	Condition 753 771	COPD exacerbations
+T35	Scope 734 752	moderate or severe
+R13	Has_scope Arg1:T34 Arg2:T35	
+R14	Has_multiplier Arg1:T34 Arg2:T31	
+T36	Drug 815 835	oral corticosteroids
+T37	Drug 860 880	oral corticosteroids
+T38	Qualifier 839 856	increasing dosage
+R15	Has_qualifier Arg1:T37 Arg2:T38	
+T39	Drug 888 899	antibiotics
+T40	Visit 903 918	hospitalization
+*	OR T39 T40 T37 T36
+T41	Temporal 920 958	within the 12 months preceding Visit 1
+T42	Scope 815 918	oral corticosteroids or increasing dosage of oral corticosteroids and/or antibiotics or hospitalization
+R16	Has_scope Arg1:T34 Arg2:T42	
+R17	Has_temporal Arg1:T34 Arg2:T41	
+T43	Drug 973 988	COPD medication
+T44	Temporal 989 1020	within 4 weeks prior to Visit 1
+R18	Has_temporal Arg1:T43 Arg2:T44	
+T45	Qualifier 966 972	stable
+R19	Has_qualifier Arg1:T43 Arg2:T45	
+T46	Condition 1099 1106	smokers
+T47	Measurement 1114 1129	smoking history
+T48	Value 1142 1155	10 pack years
+R20	Has_value Arg1:T47 Arg2:T48	
+T49	Scope 1157 1321	number of pack years = [number of cigarettes per day / 20] x number of years smoked, e.g., 20 cigarettes per day for 10 years, or 10 cigarettes per day for 20 years
+R21	Subsumes Arg1:T48 Arg2:T49	
+T52	Temporal 1085 1092	Current
+T53	Negation 1096 1098	ex
+*	OR T52 T53
+T54	Scope 1085 1098	Current or ex
+R22	Has_scope Arg1:T46 Arg2:T54	
+T55	Observation 1339 1354	managed at home
+T56	Visit 1347 1354	at home
+T57	Procedure 1339 1346	managed
+R23	AND Arg1:T57 Arg2:T56	
+R24	multi Arg1:T55 Arg2:T57	
+T58	Observation 1356 1367	outpatients
+T59	Visit 1356 1367	outpatients
+R25	multi Arg1:T58 Arg2:T59	
+R26	Subsumes Arg1:T55 Arg2:T58	
+T51	Condition 1374 1384	ambulatory
+T60	Observation 1389 1417	able to travel to the clinic
+T61	Observation 1823 1847	written informed consent
+T62	Temporal 1860 1882	prior to participation
+R27	Has_temporal Arg1:T61 Arg2:T62	
+T50	Observation 1885 1937	Able to comply with the requirements of the protocol
+T63	Observation 1945 1971	available for study visits
+T64	Visit 1959 1971	study visits
+R28	multi Arg1:T63 Arg2:T64	
+T65	Temporal 1972 1985	over 52 weeks
+R29	Has_temporal Arg1:T63 Arg2:T65	
+T66	Drug 1461 1476	COPD medication
+T67	Drug 1492 1500	vaccines
+T68	Drug 1502 1538	inhaled short-acting beta-2-agonists
+T69	Drug 1550 1562	short-acting
+T70	Drug 1566 1594	long-acting anticholinergics
+T71	Drug 1596 1606	tiotropium
+R30	Subsumes Arg1:T70 Arg2:T71	
+T72	Drug 1609 1633	systemic beta-2-agonists
+T73	Drug 1635 1647	theophylline
+T74	Drug 1649 1659	mucolytics
+T75	Drug 1661 1673	antioxidants
+T76	Drug 1675 1690	beta-1-agonists
+T78	Condition 1696 1721	cardiovascular indication
+T77	Condition 1724 1748	non-invasive ventilation
+R31	AND Arg1:T76 Arg2:T78	
+R32	Subsumes Arg1:T77 Arg2:T76	
+T79	Multiplier 1750 1759	long term
+T80	Procedure 1760 1774	oxygen therapy
+T81	Drug 1760 1766	oxygen
+R33	multi Arg1:T80 Arg2:T81	
+T82	Condition 1788 1801	Cor Pulmonale
+A3	Optional T82
+*	OR T66 T67 T68 T69 T70 T72 T73 T74 T75
+T83	Scope 1461 1673	COPD medication. This includes vaccines, inhaled short-acting beta-2-agonists as needed, short-acting or long-acting anticholinergics (tiotropium), systemic beta-2-agonists, theophylline, mucolytics, antioxidants
+A2	Optional T83
+A4	Optional T77
+A5	Optional T76
+A6	Optional T78
+R34	Has_multiplier Arg1:T80 Arg2:T79	
+A7	Optional T80
+*	OR T80 T82 T77

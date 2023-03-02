@@ -1,0 +1,10 @@
+T1	Condition 0 13	Heart failure
+T2	Condition 24 37	kidney injury
+T3	Condition 24 30;38 45	kidney failure
+*	OR T3 T2
+T4	Mood 15 23	Signs of
+T5	Scope 24 45	kidney injury/failure
+R1	Has_mood Arg1:T5 Arg2:T4	
+T6	Qualifier 47 53	Severe
+T7	Condition 54 63	allergies
+R2	Has_qualifier Arg1:T7 Arg2:T6	

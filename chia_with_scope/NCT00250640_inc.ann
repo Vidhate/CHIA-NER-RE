@@ -1,0 +1,25 @@
+T1	Drug 34 42	Ventavis
+T2	Condition 107 137	primary pulmonary hypertension
+T3	Condition 144 186	Idiopathic Pulmonary Arterial Hypertension
+T4	Condition 190 230	Familial Pulmonary Arterial Hypertension
+*	OR T3 T4
+T5	Scope 144 230	Idiopathic Pulmonary Arterial Hypertension or Familial Pulmonary Arterial Hypertension
+R1	Subsumes Arg1:T2 Arg2:T5	
+T6	Measurement 250 271	NYHA functional class
+T7	Value 272 275	III
+R2	Has_value Arg1:T6 Arg2:T7	
+R3	AND Arg1:T2 Arg2:T6	
+T8	Procedure 322 345	treatment with Ventavis
+T9	Condition 377 407	primary pulmonary hypertension
+T10	Procedure 362 372	treatments
+T11	Qualifier 373 407	for primary pulmonary hypertension
+R4	AND Arg1:T11 Arg2:T9	
+R5	Has_qualifier Arg1:T10 Arg2:T11	
+*	OR T8 T10
+T12	Temporal 408 449	within 6 weeks of date of study inclusion
+T13	Negation 313 315	No
+T14	Scope 322 407	treatment with Ventavis or other active treatments for primary pulmonary hypertension
+R6	Has_negation Arg1:T14 Arg2:T13	
+R7	Has_temporal Arg1:T14 Arg2:T12	
+T15	Multiplier 57 66	long-term
+R8	Has_multiplier Arg1:T1 Arg2:T15	

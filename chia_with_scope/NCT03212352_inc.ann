@@ -1,0 +1,50 @@
+T1	Measurement 2 19	crown-rump length
+T2	Value 20 25	= 6mm
+T3	Negation 30 32	no
+T4	Observation 33 49	cardiac activity
+R1	Has_negation Arg1:T4 Arg2:T3	
+R2	Has_value Arg1:T1 Arg2:T2	
+T5	Measurement 56 73	crown-rump length
+T6	Value 74 78	<6mm
+T7	Negation 83 85	no
+T8	Observation 86 98	fetal growth
+R3	Has_negation Arg1:T8 Arg2:T7	
+R4	Has_value Arg1:T5 Arg2:T6	
+T9	Temporal 99 122	at least one week later
+T10	Scope 56 98	crown-rump length <6mm and no fetal growth
+T11	Temporal 127 160	At least one week after diagnosis
+T12	Reference_point 151 160	diagnosis
+R5	Has_index Arg1:T11 Arg2:T12	
+*	OR T9 T11
+T13	Condition 166 177	discrepancy
+T14	Temporal 181 253	at least one week between crown-rump length and calendar gestational age
+R6	Has_temporal Arg1:T13 Arg2:T14	
+T15	Reference_point 207 224	crown-rump length
+T16	Reference_point 229 253	calendar gestational age
+R7	Has_index Arg1:T14 Arg2:T15	
+R8	Has_index Arg1:T14 Arg2:T16	
+T17	Scope 99 126;127 160	at least one week later OR
+ At least one week after diagnosis
+R9	Has_temporal Arg1:T10 Arg2:T9	
+R10	Has_temporal Arg1:T10 Arg2:T11	
+*	OR T10 T13
+T18	Condition 255 278	Intra-uterine pregnancy
+T19	Person 280 285	Women
+T20	Person 286 290	aged
+T21	Value 291 305	above 16 years
+R11	Has_value Arg1:T20 Arg2:T21	
+T22	Condition 307 325	Hemodynamic stable
+T23	Negation 335 337	No
+T24	Negation 358 360	No
+T25	Negation 391 393	No
+T26	Condition 338 356	signs of infection
+T27	Condition 361 389	signs of incomplete abortion
+R12	Has_negation Arg1:T26 Arg2:T23	
+R13	Has_negation Arg1:T27 Arg2:T24	
+T28	Drug 416 428	mifepristone
+T29	Drug 432 443	misoprostol
+*	OR T29 T28
+T30	Mood 394 415	contraindications for
+T31	Scope 416 443	mifepristone or misoprostol
+R14	Has_mood Arg1:T31 Arg2:T30	
+R15	Has_negation Arg1:T30 Arg2:T25	

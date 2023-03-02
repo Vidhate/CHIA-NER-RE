@@ -1,0 +1,169 @@
+T1	Drug 24 35	gemcitabine
+T2	Drug 37 48	carboplatin
+T3	Drug 86 94	Iniparib
+T4	Temporal 3 8	Prior
+*	OR T1 T2 T3
+T5	Scope 24 94	gemcitabine, carboplatin (except in the adjuvant setting), or Iniparib
+R1	Has_temporal Arg1:T5 Arg2:T4	
+T6	Condition 127 135	neoplasm
+T7	Condition 198 222	non-melanoma skin cancer
+T8	Procedure 190 197	treated
+T9	Qualifier 190 197	treated
+R2	multi Arg1:T9 Arg2:T8	
+R3	Has_qualifier Arg1:T7 Arg2:T9	
+T10	Condition 226 243	carcinoma in-situ
+T11	Condition 277 284	cancers
+T12	Qualifier 268 276	invasive
+R4	Has_qualifier Arg1:T11 Arg2:T12	
+T13	Qualifier 285 305	treated definitively
+T14	Procedure 285 292	treated
+R5	multi Arg1:T13 Arg2:T14	
+R6	Has_qualifier Arg1:T11 Arg2:T13	
+*	OR T7 T10 T11
+T15	Negation 168 189	with the exception of
+T16	Temporal 329 348	>5 years previously
+T17	Observation 356 379	evidence of recurrences
+T18	Negation 353 355	no
+R7	Has_negation Arg1:T17 Arg2:T18	
+T19	Observation 116 123	history
+T20	Temporal 108 115	current
+T21	Temporal 100 104	Past
+*	OR T20 T21
+T22	Scope 100 115	Past or current
+R8	Has_temporal Arg1:T6 Arg2:T19	
+T23	Qualifier 136 166	other than the entry diagnosis
+T24	Condition 151 166	entry diagnosis
+R9	multi Arg1:T23 Arg2:T24	
+R10	Has_qualifier Arg1:T6 Arg2:T23	
+T25	Scope 190 379	treated non-melanoma skin cancer or carcinoma in-situ of any primary site, or invasive cancers treated definitively, with treatment ending >5 years previously and no evidence of recurrences
+R11	Has_temporal Arg1:T14 Arg2:T16	
+R12	Has_negation Arg1:T25 Arg2:T15	
+T26	Condition 398 413	cardiac disease
+T27	Observation 387 394	history
+R13	Has_temporal Arg1:T26 Arg2:T27	
+T28	Parsing_Error 415 428	as defined by
+T29	Condition 431 453	Malignant hypertension
+T30	Condition 455 470	Unstable angina
+T31	Condition 472 496	Congestive heart failure
+T32	Condition 498 519	Myocardial infarction
+T33	Temporal 520 548	within the previous 6 months
+R14	Has_temporal Arg1:T32 Arg2:T33	
+T34	Condition 589 608	cardiac arrhythmias
+T35	Qualifier 575 587	uncontrolled
+T36	Qualifier 563 571	unstable
+T37	Qualifier 550 561	Symptomatic
+*	OR T35 T36 T37
+T38	Scope 550 587	Symptomatic, unstable or uncontrolled
+R15	Has_scope Arg1:T34 Arg2:T38	
+T39	Condition 652 671	atrial fibrillation
+T40	Grammar_Error 672 684	are eligible
+T41	Negation 672 684	are eligible
+R16	Has_negation Arg1:T39 Arg2:T41	
+T42	Qualifier 636 651	rate-controlled
+T43	Qualifier 628 634	stable
+R17	Has_qualifier Arg1:T39 Arg2:T42	
+R18	Has_qualifier Arg1:T39 Arg2:T43	
+T44	Condition 718 734	brain metastases
+T45	Temporal 711 717	Active
+R19	Has_temporal Arg1:T44 Arg2:T45	
+T46	Condition 758 774	brain metastases
+T47	Procedure 750 757	treated
+T48	Qualifier 750 757	treated
+R20	multi Arg1:T48 Arg2:T47	
+R21	Has_qualifier Arg1:T46 Arg2:T48	
+T49	Negation 775 787	are eligible
+T50	Grammar_Error 775 787	are eligible
+T51	Procedure 796 813	radiation therapy
+T52	Temporal 828 865	at least 2 weeks prior to study entry
+T53	Reference_point 854 865	study entry
+R23	Has_index Arg1:T52 Arg2:T53	
+T54	Condition 895 914	disease progression
+T55	Procedure 871 885	follow-up scan
+T56	Negation 892 894	no
+R24	Has_negation Arg1:T54 Arg2:T56	
+R25	AND Arg1:T55 Arg2:T54	
+T57	Drug 949 957	steroids
+T58	Negation 937 940	not
+T59	Mood 941 948	require
+R26	Has_mood Arg1:T57 Arg2:T59	
+R27	Has_negation Arg1:T57 Arg2:T58	
+R28	Has_temporal Arg1:T51 Arg2:T52	
+T60	Scope 796 957	radiation therapy was completed at least 2 weeks prior to study entry; (2) follow-up scan shows no disease progression; and (3) patient does not require steroids
+T61	Scope 750 774	treated brain metastases
+A1	Optional T61
+R22	Has_scope Arg1:T61 Arg2:T60	
+T62	Scope 750 957	treated brain metastases are eligible, if (1) radiation therapy was completed at least 2 weeks prior to study entry; (2) follow-up scan shows no disease progression; and (3) patient does not require steroids
+R29	Has_negation Arg1:T62 Arg2:T49	
+T63	Condition 977 985	pregnant
+T64	Person 963 968	Women
+T65	Condition 989 998	lactating
+*	OR T65 T63
+T66	Pregnancy_considerations 963 998	Women who are pregnant or lactating
+T67	Condition 1024 1033	infection
+T68	Value 1035 1044	> Grade 2
+T69	Qualifier 1035 1044	> Grade 2
+R30	multi Arg1:T69 Arg2:T68	
+R31	Has_qualifier Arg1:T67 Arg2:T69	
+T70	Qualifier 1008 1015	serious
+T71	Temporal 1017 1023	active
+R32	Has_temporal Arg1:T67 Arg2:T71	
+R33	Has_qualifier Arg1:T67 Arg2:T70	
+T72	Condition 1097 1114	medical condition
+T73	Qualifier 1078 1085	serious
+T74	Subjective_judgement 1008 1015	serious
+T75	Subjective_judgement 1078 1085	serious
+R34	Has_qualifier Arg1:T72 Arg2:T73	
+T76	Post-eligibility 1076 1190	A serious underlying medical condition that would impair the ability of the patient to receive protocol treatment.
+T77	Condition 1126 1189	impair the ability of the patient to receive protocol treatment
+T78	Mood 1120 1125	would
+R35	Has_mood Arg1:T77 Arg2:T78	
+R36	AND Arg1:T72 Arg2:T77	
+T79	Procedure 1203 1221	surgical procedure
+T80	Qualifier 1197 1202	major
+T81	Subjective_judgement 1197 1202	major
+R37	Has_qualifier Arg1:T79 Arg2:T80	
+T82	Qualifier 1226 1237	significant
+T83	Subjective_judgement 1226 1237	significant
+T84	Condition 1238 1254	traumatic injury
+T85	Temporal 1255 1286	≤28 days of beginning treatment
+T86	Reference_point 1267 1286	beginning treatment
+R38	multi Arg1:T85 Arg2:T86	
+R39	Has_qualifier Arg1:T84 Arg2:T82	
+R40	Has_temporal Arg1:T84 Arg2:T85	
+T87	Procedure 1320 1333	major surgery
+T88	Mood 1311 1319	need for
+R41	Has_mood Arg1:T87 Arg2:T88	
+T89	Temporal 1334 1364	during the course of the study
+T90	Reference_point 1341 1364	the course of the study
+R42	multi Arg1:T89 Arg2:T90	
+R43	Has_temporal Arg1:T87 Arg2:T89	
+*	OR T87 T84 T79
+T91	Qualifier 1370 1382	Uncontrolled
+T92	Temporal 1386 1398	intercurrent
+T93	Condition 1399 1406	illness
+T94	Qualifier 1423 1480	in the opinion of the investigator may increase the risks
+T95	Subjective_judgement 1423 1480	in the opinion of the investigator may increase the risks
+R44	Has_qualifier Arg1:T93 Arg2:T94	
+*	OR T92 T91
+T96	Scope 1370 1398	Uncontrolled or intercurrent
+R45	Has_scope Arg1:T93 Arg2:T96	
+T97	Post-eligibility 1367 1629	9. Uncontrolled or intercurrent illness including, that in the opinion of the investigator may increase the risks associated with study participation or administration of the investigational products, or that may interfere with the interpretation of the results.
+T98	Condition 1661 1682	psychiatric condition
+T99	Condition 1686 1708	laboratory abnormality
+T100	Procedure 1686 1696	laboratory
+R46	multi Arg1:T99 Arg2:T100	
+*	OR T99 T98
+T101	Post-eligibility 1635 1926	History of any medical or psychiatric condition or laboratory abnormality that, in the opinion of the investigator, may increase the risks associated with the study participation or administration of the investigational products, or that may interfere with the interpretation of the results.
+T102	Condition 1959 1975	hypersensitivity
+T103	Condition 1951 1958	allergy
+*	OR T102 T103
+T104	Mood 1932 1937	Known
+T105	Mood 1941 1950	suspected
+*	OR T105 T104
+T106	Scope 1932 1950	Known or suspected
+T107	Drug 1983 2022	agent given in the course of this trial
+T108	Scope 1951 1975	allergy/hypersensitivity
+R47	AND Arg1:T108 Arg2:T107	
+R48	Has_scope Arg1:T108 Arg2:T106	
+T109	Post-eligibility 1932 2022	Known or suspected allergy/hypersensitivity to any agent given in the course of this trial
+T110	Not_a_criteria 2025 2161	The above information is not intended to contain all considerations relevant to a patient's potential participation in a clinical trial.

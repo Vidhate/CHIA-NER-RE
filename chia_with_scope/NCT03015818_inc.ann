@@ -1,0 +1,27 @@
+T1	Person 0 3	age
+T2	Value 4 8	> 18
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Informed_consent 10 34	written informed consent
+T4	Condition 36 39	SVD
+T5	Procedure 51 67	echocardiography
+T6	Condition 74 119	alteration of bioprosthesis leaflets function
+T7	Measurement 127 154	mean transvalvular gradient
+T8	Value 155 164	> 20 mmHg
+T9	Measurement 169 185	maximal velocity
+T10	Value 186 193	= 3 m/s
+T11	Measurement 198 220	effective orifice area
+T12	Value 221 229	=1.2 cm²
+T13	Condition 241 261	aortic regurgitation
+T14	Value 262 278;285 291	more or equal to 2 on 4
+T15	Measurement 279 284	grade
+R2	Has_value Arg1:T15 Arg2:T14	
+R3	Has_value Arg1:T7 Arg2:T8	
+R4	Has_value Arg1:T9 Arg2:T10	
+R5	Has_value Arg1:T11 Arg2:T12	
+R6	AND Arg1:T13 Arg2:T15	
+T16	Scope 127 229	mean transvalvular gradient > 20 mmHg and maximal velocity = 3 m/s and effective orifice area =1.2 cm²
+R7	Has_scope Arg1:T6 Arg2:T16	
+*	OR T6 T13
+R8	AND Arg1:T4 Arg2:T5	
+T17	Scope 74 291	alteration of bioprosthesis leaflets function with a mean transvalvular gradient > 20 mmHg and maximal velocity = 3 m/s and effective orifice area =1.2 cm², and/or an aortic regurgitation more or equal to grade 2 on 4
+R9	Has_scope Arg1:T5 Arg2:T17	

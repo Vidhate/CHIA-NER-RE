@@ -1,0 +1,24 @@
+T1	Person 0 3	Age
+T2	Value 4 33	between one year and 18 years
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Condition 35 41	Sepsis
+T4	Qualifier 49 52	MDR
+R2	Has_qualifier Arg1:T3 Arg2:T4	
+T5	Condition 56 100	minimally susceptible gram-negative bacteria
+R3	AND Arg1:T5 Arg2:T3	
+T6	Qualifier 113 116	MDR
+T7	Condition 117 140	gram-negative infection
+T8	Condition 144 150	sepsis
+*	OR T8 T7
+T9	Scope 117 150	gram-negative infection or sepsis
+R4	Has_qualifier Arg1:T9 Arg2:T6	
+T10	Qualifier 168 189	sensitive to colistin
+T11	Observation 158 167	organisms
+R5	Has_qualifier Arg1:T11 Arg2:T10	
+T12	Qualifier 223 226	MDR
+T13	Condition 227 240	gram negative
+R6	Has_qualifier Arg1:T13 Arg2:T12	
+T14	Condition 291 297	sepsis
+T15	Drug 302 310	colistin
+T16	Procedure 315 339	administered empirically
+R7	AND Arg1:T16 Arg2:T15	

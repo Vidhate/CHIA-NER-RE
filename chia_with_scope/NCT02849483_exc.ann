@@ -1,0 +1,41 @@
+T1	Condition 0 8	Allergic
+T2	Drug 12 23	study drugs
+R1	AND Arg1:T1 Arg2:T2	
+T3	Drug 25 36	Antiemetics
+T4	Drug 40 52	steroids use
+T5	Temporal 53 83	within 24 hrs prior to surgery
+T6	Reference_point 76 83	surgery
+T7	Procedure 76 83	surgery
+R2	multi Arg1:T6 Arg2:T7	
+R3	Has_index Arg1:T5 Arg2:T6	
+*	OR T3 T4
+T8	Scope 25 52	Antiemetics or steroids use
+R4	Has_temporal Arg1:T8 Arg2:T5	
+T9	Condition 85 108	Dependence upon opioids
+T10	Qualifier 110 127	Insulin dependent
+T11	Drug 110 117	Insulin
+R5	multi Arg1:T10 Arg2:T11	
+T12	Condition 128 145	Diabetes Mellitus
+R6	Has_qualifier Arg1:T12 Arg2:T10	
+T13	Condition 147 161;175 182	Cardiovascular disease
+T14	Condition 165 182	pulmonary disease
+*	OR T14 T13
+T15	Condition 184 189;201 214	Renal insufficiency
+T16	Condition 193 214	hepatic insufficiency
+*	OR T16 T15
+T17	Measurement 216 219	BMI
+T18	Value 219 228	>=35kg/m2
+R7	Has_value Arg1:T17 Arg2:T18	
+T19	Observation 230 237	History
+T20	Condition 241 256	motion sickness
+T21	Condition 260 264	PONV
+*	OR T20 T21
+T22	Scope 241 264	motion sickness or PONV
+R8	Has_temporal Arg1:T22 Arg2:T19	
+T23	Observation 266 282	Cigarette smoker
+T24	Observation 284 294	Conversion
+T25	Procedure 298 313	open laparotomy
+T26	Procedure 319 339	laparoscopic surgery
+R9	Has_context Arg1:T25 Arg2:T24	
+R10	AND Arg1:T24 Arg2:T26	
+T27	Condition 341 350	Pregnants

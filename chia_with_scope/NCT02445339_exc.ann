@@ -1,0 +1,64 @@
+T1	Qualifier 0 6	Active
+T2	Condition 7 24	opioid dependence
+R1	Has_qualifier Arg1:T2 Arg2:T1	
+T3	Qualifier 26 31	Acute
+T4	Qualifier 35 42	chronic
+*	OR T3 T4
+T5	Condition 43 47	pain
+T6	Scope 26 42	Acute or chronic
+R2	Has_scope Arg1:T5 Arg2:T6	
+T7	Procedure 58 74	opioid treatment
+R3	AND Arg1:T5 Arg2:T7	
+T8	Condition 76 94	Acute liver injury
+T9	Measurement 96 133	liver aminotransferase concentrations
+T10	Value 134 168	>5 times the upper limit of normal
+R4	Has_value Arg1:T9 Arg2:T10	
+T11	Scope 96 168	liver aminotransferase concentrations >5 times the upper limit of normal
+R5	Subsumes Arg1:T8 Arg2:T11	
+T12	Condition 171 187	Health condition
+T13	Qualifier 188 219	considered unsafe for inclusion
+R6	Has_qualifier Arg1:T12 Arg2:T13	
+T14	Non-query-able 221 267	at discretion of PI and/or attending physician
+T15	Observation 290 312	willingness to consent
+T16	Negation 270 277	Lack of
+T17	Observation 278 286;302 312	capacity to consent
+*	OR T15 T17
+T18	Scope 278 312	capacity or willingness to consent
+R7	Has_negation Arg1:T18 Arg2:T16	
+T19	Condition 355 373	alcohol dependence
+T20	Procedure 335 350	pharmacotherapy
+T21	Temporal 314 323	Currently
+R8	AND Arg1:T20 Arg2:T19	
+R9	Has_temporal Arg1:T20 Arg2:T21	
+T22	Negation 375 388	not including
+T23	Procedure 389 398	treatment
+T24	Condition 402 435	acute alcohol withdrawal syndrome
+R10	AND Arg1:T23 Arg2:T24	
+R11	Has_negation Arg1:T23 Arg2:T22	
+R12	AND Arg1:T20 Arg2:T23	
+T25	Temporal 438 446	Previous
+T26	Qualifier 447 458	significant
+T27	Condition 459 475	adverse reaction
+T28	Drug 479 489	naltrexone
+T29	Drug 493 500	diluent
+*	OR T28 T29
+T30	Scope 479 500	naltrexone or diluent
+R13	Has_qualifier Arg1:T27 Arg2:T26	
+R14	Has_temporal Arg1:T27 Arg2:T25	
+R15	Has_scope Arg1:T27 Arg2:T30	
+T31	Condition 502 510	Pregnant
+T32	Condition 512 519	nursing
+T33	Negation 524 527	not
+T34	Procedure 555 568	birth control
+T35	Qualifier 534 551	effective methods
+R16	Has_qualifier Arg1:T34 Arg2:T35	
+R17	Has_negation Arg1:T34 Arg2:T33	
+*	OR T31 T32 T34
+T36	Person 570 579	Prisoners
+T37	Qualifier 595 630	Office of Human Research Protection
+R18	Has_qualifier Arg1:T36 Arg2:T37	
+T38	Temporal 632 657	at the time of enrollment
+T39	Reference_point 635 657	the time of enrollment
+R19	Has_index Arg1:T38 Arg2:T39	
+R20	Has_temporal Arg1:T36 Arg2:T38	
+T40	Non-representable 692 866	However, subjects who become prisoners after being enrolled will be included and not be withdrawn from the study. Patients on parole or probation are eligible for enrollment.

@@ -1,0 +1,16 @@
+T1	Condition 0 24	Type 2 diabetes mellitus
+T2	Measurement 30 35	HbA1c
+T3	Value 36 43	> 7.5 %
+R1	Has_value Arg1:T2 Arg2:T3	
+T4	Measurement 45 60	Body mass index
+T5	Value 61 80	> 35 and < 50 kg/m2
+R2	Has_value Arg1:T4 Arg2:T5	
+T6	Procedure 96 111	Gastric By-Pass
+T7	Mood 82 91	Candidate
+R3	Has_mood Arg1:T6 Arg2:T7	
+T8	Drug 128 165	GLP1 (glucagon-like peptide) analogue
+T9	Drug 169 176	insulin
+T10	Procedure 113 122	Treatment
+*	OR T8 T9
+T11	Scope 128 176	GLP1 (glucagon-like peptide) analogue or insulin
+R4	Has_scope Arg1:T10 Arg2:T11	

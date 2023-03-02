@@ -1,0 +1,26 @@
+T1	Drug 24 35	brentuximab
+T2	Procedure 69 90	allogeneic transplant
+T3	Condition 128 150	primary cutaneous ALCL
+T4	Condition 191 196	sALCL
+*	OR T3 T4
+T5	Condition 228 245	meningeal disease
+T6	Condition 219 227;238 245	cerebral disease
+T7	Condition 277 319	progressive multifocal leukoencephalopathy
+T8	Condition 321 324	PML
+R1	Subsumes Arg1:T7 Arg2:T8	
+*	OR T5 T6
+T9	Scope 219 245	cerebral/meningeal disease
+R2	Subsumes Arg1:T9 Arg2:T7	
+T10	Pregnancy_considerations 327 390	Female patients who are lactating and breastfeeding or pregnant
+T11	Measurement 398 426	human immunodeficiency virus
+T12	Measurement 428 431	HIV
+R3	Subsumes Arg1:T11 Arg2:T12	
+T13	Value 433 441	positive
+R4	Has_value Arg1:T11 Arg2:T13	
+T14	Measurement 449 476	hepatitis B surface antigen
+T15	Value 477 485	positive
+T16	Condition 516 537	hepatitis C infection
+T17	Qualifier 509 515	active
+R5	Has_qualifier Arg1:T16 Arg2:T17	
+R6	Has_value Arg1:T14 Arg2:T15	
+*	OR T14 T16

@@ -1,0 +1,92 @@
+T1	Temporal 0 5	Acute
+T2	Qualifier 6 14	critical
+T3	Condition 15 28	limb ischemia
+R1	Has_qualifier Arg1:T3 Arg2:T2	
+R2	Has_temporal Arg1:T3 Arg2:T1	
+T4	Qualifier 30 36	Severe
+T5	Qualifier 37 45	critical
+T6	Condition 46 59	limb ischemia
+T7	Measurement 61 80	Rutherford category
+T8	Value 81 82	6
+R3	Has_value Arg1:T7 Arg2:T8	
+T9	Scope 30 45	Severe critical
+R4	Has_scope Arg1:T6 Arg2:T9	
+R5	Subsumes Arg1:T9 Arg2:T7	
+T10	Condition 85 107	Major bleeding history
+T11	Temporal 108 129	within prior 2 months
+R6	Has_temporal Arg1:T10 Arg2:T11	
+T12	Condition 137 153	hypersensitivity
+T13	Condition 157 173	contraindication
+*	OR T13 T12
+T14	Drug 211 218	heparin
+T15	Drug 220 227	aspirin
+T16	Drug 229 240	clopidogrel
+T17	Drug 244 259	contrast agents
+*	OR T17 T16 T15 T14
+T18	Scope 211 259	heparin, aspirin, clopidogrel or contrast agents
+T19	Scope 137 173	hypersensitivity or contraindication
+R7	Subsumes Arg1:T19 Arg2:T18	
+T20	Person 261 264	Age
+T21	Value 265 275	> 85 years
+R8	Has_value Arg1:T20 Arg2:T21	
+T22	Qualifier 277 283	Severe
+T23	Condition 284 303	hepatic dysfunction
+R9	Has_qualifier Arg1:T23 Arg2:T22	
+T24	Non-representable 304 339	(> 3 times normal reference values)
+T25	Qualifier 341 352	Significant
+T26	Condition 353 370	renal dysfunction
+R10	Has_qualifier Arg1:T26 Arg2:T25	
+T27	Measurement 372 388	Serum creatinine
+T28	Value 389 400	> 2.0 mg/dl
+R11	Has_value Arg1:T27 Arg2:T28	
+R12	Subsumes Arg1:T25 Arg2:T27	
+T29	Condition 414 424	leucopenia
+T30	Condition 426 437	neutropenia
+T31	Condition 439 455	thrombocytopenia
+T32	Condition 457 463	anemia
+T33	Condition 474 492	bleeding diathesis
+T34	Qualifier 402 413	Significant
+*	OR T29 T30 T31 T32 T33
+T35	Scope 414 492	leucopenia, neutropenia, thrombocytopenia, anemia, or known bleeding diathesis
+R13	Has_qualifier Arg1:T35 Arg2:T34	
+T36	Measurement 494 498	LVEF
+T37	Value 499 503	<40%
+R14	Has_value Arg1:T36 Arg2:T37	
+T38	Qualifier 507 523	clinically overt
+T39	Condition 524 548	congestive heart failure
+R15	Has_qualifier Arg1:T39 Arg2:T38	
+*	OR T39 T36
+T40	Condition 550 558	Pregnant
+T41	Person 568 573	women
+T42	Person 559 564	women
+T43	Condition 579 601	potential childbearing
+*	OR T40 T43
+*	OR T41 T42
+T44	Observation 603 618	Life expectancy
+T45	Value 619 626	<1 year
+R16	Has_value Arg1:T44 Arg2:T45	
+T46	Condition 634 645	comorbidity
+R17	AND Arg1:T44 Arg2:T46	
+T47	Procedure 656 670	bypass surgery
+T48	Temporal 647 655	Previous
+T49	Device 674 716	stenting of the superficial femoral artery
+*	OR T47 T49
+R18	Has_temporal Arg1:T47 Arg2:T48	
+R19	Has_temporal Arg1:T49 Arg2:T48	
+T50	Qualifier 718 727	Untreated
+T51	Condition 728 742	inflow disease
+T52	Qualifier 750 777	ipsilateral pelvic arteries
+R20	Has_qualifier Arg1:T51 Arg2:T50	
+R21	Has_qualifier Arg1:T51 Arg2:T52	
+T53	Value 779 792	more than 50%
+T54	Condition 792 800	stenosis
+T55	Value 807 816	occlusion
+*	OR T55 T53
+T56	Scope 779 792;804 816	more than 50% or occlusion
+R22	Has_scope Arg1:T54 Arg2:T56	
+R23	AND Arg1:T51 Arg2:T54	
+T57	Condition 818 843	Popliteal artery stenosis
+T58	Value 844 848	>50%
+T59	Qualifier 852 868	P2 or P3 segment
+R24	Has_value Arg1:T57 Arg2:T58	
+R25	Has_qualifier Arg1:T57 Arg2:T59	

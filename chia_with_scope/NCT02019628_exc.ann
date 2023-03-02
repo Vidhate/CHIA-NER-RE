@@ -1,0 +1,71 @@
+T1	Subjective_judgement 3 152	Currently enrolled in another research trial for investigative nutritional or other therapies thought to have an impact on immune system functioning.
+T2	Post-eligibility 3 152	Currently enrolled in another research trial for investigative nutritional or other therapies thought to have an impact on immune system functioning.
+T3	Post-eligibility 157 188	Unable to consent to the study.
+T4	Non-query-able 157 188	Unable to consent to the study.
+T5	Person 193 198	Women
+T6	Condition 207 215	pregnant
+T7	Condition 299 319	spontaneous abortion
+T8	Temporal 289 298	recurrent
+R1	Has_temporal Arg1:T7 Arg2:T8	
+T9	Condition 423 435	heart attack
+T10	Temporal 416 422	recent
+R2	Has_temporal Arg1:T9 Arg2:T10	
+T11	Condition 439 445	stroke
+T12	Condition 449 471	chronic kidney disease
+*	OR T12 T11 T9
+T13	Drug 494 521	immunomodulatory medication
+T14	Undefined_semantics 494 521	immunomodulatory medication
+T15	Drug 528 538	interferon
+R3	Subsumes Arg1:T13 Arg2:T15	
+T16	Drug 641 664	chemotherapeutic agents
+T17	Undefined_semantics 641 664	chemotherapeutic agents
+T18	Condition 676 691	allergy to rice
+T19	Drug 687 691	rice
+R4	AND Arg1:T18 Arg2:T19	
+T20	Condition 676 686;693 702	allergy to rice bran
+T21	Drug 693 702	rice bran
+R5	AND Arg1:T20 Arg2:T21	
+T22	Undefined_semantics 707 728	related food products
+T23	Condition 740 760	allergy to mushrooms
+T24	Condition 802 814	malignancies
+T25	Observation 791 798	History
+T26	Qualifier 815 842	related to the NK cell line
+T27	Condition 855 872	NK cell leukemias
+T28	Condition 877 919	T-cell large granular lymphocyte leukemias
+T29	Grammar_Error 873 876	and
+T30	Condition 921 980	NK-cell lymphoproliferative disease of granular lymphocytes
+T31	Condition 986 1003	NK cell lymphomas
+T32	Condition 1021 1051	nasal-like NK/T-cell lymphomas
+T33	Condition 1011 1016;1032 1051	nasal NK/T-cell lymphomas
+T34	Grammar_Error 1017 1020	and
+*	OR T33 T32 T31 T30 T28 T27
+T35	Grammar_Error 982 985	and
+T36	Scope 855 1051	NK cell leukemias and T-cell large granular lymphocyte leukemias, NK-cell lymphoproliferative disease of granular lymphocytes, and NK cell lymphomas, e.g., nasal and nasal-like NK/T-cell lymphomas
+*	OR T24 T26
+T37	Scope 802 842	malignancies related to the NK cell line
+R6	Subsumes Arg1:T37 Arg2:T36	
+R7	Has_temporal Arg1:T37 Arg2:T25	
+T38	Qualifier 325 330	Other
+T39	Condition 331 352	medical complications
+R8	Has_qualifier Arg1:T39 Arg2:T38	
+T40	Negation 364 372	preclude
+T41	Informed_consent 382 408	participating in the study
+R9	Has_negation Arg1:T41 Arg2:T40	
+R10	AND Arg1:T39 Arg2:T41	
+T42	Scope 325 408	Other medical complications that might preclude one from participating in the study
+T43	Scope 416 471	recent heart attack or stroke or chronic kidney disease
+R11	Has_scope Arg1:T42 Arg2:T43	
+T44	Temporal 544 553	Currently
+T45	Qualifier 561 566	other
+T46	Drug 567 578	medications
+T47	Qualifier 598 633	impact on immune system functioning
+R12	Has_qualifier Arg1:T46 Arg2:T45	
+R13	Has_qualifier Arg1:T46 Arg2:T47	
+T48	Scope 561 633	other medications thought to have an impact on immune system functioning
+R14	Subsumes Arg1:T46 Arg2:T16	
+R15	Has_temporal Arg1:T48 Arg2:T44	
+T49	Condition 740 750;772 785	allergy to food products
+*	OR T49 T23
+T50	Temporal 1058 1065	Current
+T51	Observation 1066 1072	smoker
+R16	Has_temporal Arg1:T51 Arg2:T50	

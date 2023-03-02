@@ -1,0 +1,49 @@
+T1	Parsing_Error 0 9	Patients:
+T3	Measurement 110 128	post-void residual
+T4	Measurement 141 144	PVR
+T5	Value 145 152	> 100cc
+R1	Has_value Arg1:T4 Arg2:T5	
+R2	Subsumes Arg1:T3 Arg2:T4	
+T6	Value 101 109	elevated
+R3	Has_value Arg1:T3 Arg2:T6	
+T7	Condition 162 180	bleeding condition
+T8	Procedure 187 209	anti-coagulant therapy
+T9	Condition 240 243	HIV
+T10	Condition 245 253	lymphoma
+T11	Observation 216 233	immunosuppression
+*	OR T9 T10
+T12	Scope 240 253	HIV, lymphoma
+R4	Subsumes Arg1:T11 Arg2:T12	
+T13	Condition 261 279	multiple sclerosis
+T14	Condition 289 321	progressive neurological disease
+R5	Subsumes Arg1:T14 Arg2:T13	
+T15	Condition 351 369	systemic infection
+T16	Condition 381 404	urinary tract infection
+T17	Condition 342 347;360 369	local infection
+*	OR T15 T17
+T18	Scope 342 369	local or systemic infection
+R6	Subsumes Arg1:T18 Arg2:T16	
+T19	Condition 423 453	intrinsic sphincter deficiency
+T20	Measurement 470 503	maximal urethral closure pressure
+T21	Value 507 517	<20 cm H2O
+R7	Has_value Arg1:T20 Arg2:T21	
+R8	AND Arg1:T19 Arg2:T20	
+T22	Procedure 528 546	sub-urethral sling
+T23	Temporal 519 527	Previous
+R9	Has_temporal Arg1:T22 Arg2:T23	
+T24	Condition 560 587	overactive bladder symptoms
+T26	Qualifier 548 559	Predominant
+R11	Has_qualifier Arg1:T24 Arg2:T26	
+T2	Condition 19 27	pregnant
+T27	Mood 31 49	planning to become
+T28	Condition 50 58	pregnant
+T29	Temporal 59 75	during the study
+T30	Temporal 79 92	in the future
+R12	Has_mood Arg1:T28 Arg2:T27	
+*	OR T2 T28
+*	OR T30 T29
+T31	Scope 59 92	during the study or in the future
+T32	Scope 19 58	pregnant or planning to become pregnant
+R13	Has_scope Arg1:T32 Arg2:T31	
+T25	Condition 560 578	overactive bladder
+R10	multi Arg1:T24 Arg2:T25	

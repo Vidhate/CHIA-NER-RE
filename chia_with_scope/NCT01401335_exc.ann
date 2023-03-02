@@ -1,0 +1,9 @@
+T1	Person 0 3	Age
+T2	Value 4 16	less than 15
+T3	Value 20 35	greater than 25
+*	OR T2 T3
+T4	Scope 4 35	less than 15 or greater than 25
+R1	Has_scope Arg1:T1 Arg2:T4	
+T5	Observation 44 80	participating in the day care center
+T6	Negation 40 43	not
+R2	Has_negation Arg1:T5 Arg2:T6	

@@ -1,0 +1,40 @@
+T1	Value 15 33	18-45 years of age
+T2	Condition 0 7	Healthy
+T3	Person 8 14	adults
+T4	Person 27 33	of age
+R1	Has_value Arg1:T4 Arg2:T1	
+T5	Condition 39 46	smoking
+T6	Negation 35 38	Non
+R2	Has_negation Arg1:T5 Arg2:T6	
+T7	Condition 52 60	pregnant
+T8	Negation 48 51	Non
+R3	Has_negation Arg1:T7 Arg2:T8	
+T9	Condition 79 97	surgically sterile
+T10	Procedure 79 89	surgically
+R4	multi Arg1:T9 Arg2:T10	
+T11	Condition 62 77	post-menopausal
+T12	Procedure 117 139	contraceptive measures
+T13	Qualifier 107 116	effective
+T14	Undefined_semantics 107 116	effective
+R5	Has_qualifier Arg1:T12 Arg2:T13	
+*	OR T9 T12 T11
+T15	Scope 62 139	post-menopausal, surgically sterile or using effective contraceptive measures
+T16	Scope 48 60	Non-pregnant
+R6	Subsumes Arg1:T16 Arg2:T15	
+T17	Measurement 142 163	Body mass index (BMI)
+T18	Value 164 188	less than or equal to 32
+R7	Has_value Arg1:T17 Arg2:T18	
+T19	Observation 224 239	medical history
+T20	Procedure 244 264	physical examination
+T21	Condition 190 207	Medically healthy
+T22	Scope 224 264	medical history and physical examination
+R8	Has_scope Arg1:T21 Arg2:T22	
+T23	Measurement 266 276	Hemoglobin
+T24	Value 277 295	> or = to 11.5g/dL
+R9	Has_value Arg1:T23 Arg2:T24	
+T25	Temporal 333 363	within 28 days prior to dosing
+T26	Reference_point 357 363	dosing
+R10	Has_index Arg1:T25 Arg2:T26	
+T27	Procedure 315 332	screening process
+R11	Has_temporal Arg1:T27 Arg2:T25	
+T28	Post-eligibility 365 412	Provision of voluntary written informed consent

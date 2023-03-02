@@ -1,0 +1,30 @@
+T1	Person 0 3	Age
+T2	Value 4 14	> 18 years
+T3	Measurement 25 29;67 80	AJCC tumor Stage I
+T4	Measurement 31 65	American Joint Committee on Cancer
+R1	Subsumes Arg1:T3 Arg2:T4	
+T5	Value 79 80	I
+T6	Value 84 86	II
+*	OR T5 T6
+T7	Scope 79 86	I or II
+R2	Has_scope Arg1:T3 Arg2:T7	
+T8	Procedure 116 129	thyroidectomy
+T9	Qualifier 96 101	total
+T10	Qualifier 105 115	near-total
+*	OR T9 T10
+T11	Scope 96 115	total or near-total
+R3	Has_scope Arg1:T8 Arg2:T11	
+T12	Temporal 177 210	at least 18 weeks postoperatively
+T13	Reference_point 195 210	postoperatively
+R4	Has_index Arg1:T12 Arg2:T13	
+T14	Condition 144 159	TSH suppression
+T15	Value 160 172	0.1-0.5 mU/L
+R5	Has_value Arg1:T14 Arg2:T15	
+R6	Has_temporal Arg1:T14 Arg2:T12	
+T16	Measurement 219 228	serum TSH
+T17	Value 212 218	Normal
+T18	Temporal 229 263	within 12 months preceding surgery
+T19	Reference_point 256 263	surgery
+R7	Has_index Arg1:T18 Arg2:T19	
+R8	Has_value Arg1:T16 Arg2:T17	
+R9	Has_temporal Arg1:T16 Arg2:T18	

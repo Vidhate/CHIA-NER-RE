@@ -1,0 +1,39 @@
+T1	Procedure 0 17	Emergency surgery
+T2	Visit 0 9	Emergency
+R1	multi Arg1:T1 Arg2:T2	
+T3	Procedure 19 44	Monitored Anesthesia Care
+T4	Procedure 52 71	regional anesthesia
+T5	Multiplier 72 77	alone
+T6	Negation 78 85	without
+T7	Mood 86 95	plans for
+T8	Procedure 96 114	general anesthesia
+R2	Has_mood Arg1:T8 Arg2:T7	
+R3	Has_negation Arg1:T8 Arg2:T6	
+R4	Has_multiplier Arg1:T4 Arg2:T5	
+R5	AND Arg1:T4 Arg2:T8	
+T9	Scope 52 114	regional anesthesia alone without plans for general anesthesia
+R6	Subsumes Arg1:T3 Arg2:T9	
+T10	Procedure 117 124	Surgery
+T11	Qualifier 139 142	eye
+T12	Qualifier 144 151	eyebrow
+T13	Qualifier 153 161	forehead
+T14	Qualifier 166 179	frontal scalp
+T15	Non-representable 180 205	near the sensor placement
+*	OR T13 T14 T12 T11
+T16	Scope 139 179	eye, eyebrow, forehead, or frontal scalp
+R7	Has_scope Arg1:T10 Arg2:T16	
+T17	Observation 207 227	Poor health literacy
+T18	Condition 229 236	Allergy
+T19	Condition 262 275	drug reaction
+T20	Drug 279 287	ketamine
+*	OR T18 T19
+T21	Scope 229 275	Allergy, or have experienced any drug reaction
+R8	AND Arg1:T21 Arg2:T20	
+T22	Condition 289 297	Pregnant
+T23	Condition 301 310	lactating
+*	OR T22 T23
+T24	Qualifier 325 331	active
+T25	Condition 332 350	alcohol withdrawal
+R9	Has_qualifier Arg1:T25 Arg2:T24	
+T26	Temporal 312 321	Currently
+R10	Has_temporal Arg1:T25 Arg2:T26	

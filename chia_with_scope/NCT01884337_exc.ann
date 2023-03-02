@@ -1,0 +1,58 @@
+T1	Person 0 5	Women
+T2	Observation 14 22	pregnant
+T3	Observation 26 39	breastfeeding
+*	OR T2 T3
+T4	Mood 41 46	Known
+T5	Mood 50 59	suspected
+*	OR T4 T5
+T6	Condition 85 105	coagulation disorder
+T7	Condition 73 81;97 105	bleeding disorder
+T8	Condition 61 69;97 105	acquired disorder
+T9	Person 106 120	in the subject
+T10	Person 126 147	first degree relative
+*	OR T9 T10
+T11	Scope 106 147	in the subject or a first degree relative
+*	OR T7 T8 T6
+T12	Scope 61 105	acquired or bleeding or coagulation disorder
+T13	Scope 41 59	Known or suspected
+R1	Has_scope Arg1:T12 Arg2:T13	
+R2	Has_scope Arg1:T12 Arg2:T11	
+T14	Qualifier 149 155	Active
+T15	Condition 156 164	bleeding
+T16	Mood 168 184	at high risk for
+T17	Condition 185 193	bleeding
+R3	Has_mood Arg1:T17 Arg2:T16	
+*	OR T15 T17
+R4	Has_qualifier Arg1:T15 Arg2:T14	
+T18	Procedure 236 243	surgery
+T19	Condition 247 253	trauma
+*	OR T18 T19
+T20	Scope 236 253	surgery or trauma
+T21	Qualifier 230 235	major
+T22	Qualifier 211 225	ophthalmologic
+T23	Qualifier 203 209	spinal
+T24	Qualifier 196 201	Brain
+*	OR T21 T22 T23 T24
+T25	Scope 196 235	Brain, spinal, ophthalmologic, or major
+T26	Temporal 254 277	within the past 90 days
+T27	Procedure 293 306;311 318	elective knee surgery
+T28	Procedure 293 301;307 318	elective hip surgery
+*	OR T28 T27
+T29	Negation 278 288	other than
+T30	Scope 293 318	elective knee/hip surgery
+R5	Has_negation Arg1:T30 Arg2:T29	
+R6	Has_temporal Arg1:T20 Arg2:T26	
+R7	Has_scope Arg1:T20 Arg2:T25	
+R8	Has_scope Arg1:T20 Arg2:T30	
+T31	Qualifier 320 326	Active
+T32	Condition 327 348	hepatobiliary disease
+R9	Has_qualifier Arg1:T32 Arg2:T31	
+T33	Measurement 350 360	Hemoglobin
+T34	Value 361 368	<9 g/dL
+R10	Has_value Arg1:T33 Arg2:T34	
+T35	Measurement 370 384	Platelet count
+T36	Value 385 397	<100,000/mm3
+R11	Has_value Arg1:T35 Arg2:T36	
+T37	Measurement 399 419	Creatinine clearance
+T38	Value 420 430	<30 mL/min
+R12	Has_value Arg1:T37 Arg2:T38	

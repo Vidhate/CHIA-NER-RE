@@ -1,0 +1,23 @@
+T1	Measurement 3 18	Fasting glucose
+T2	Value 19 24	> 7.0
+T3	Drug 33 52	diabetes medication
+T4	Condition 33 41	diabetes
+T5	Undefined_semantics 33 52	diabetes medication
+R1	Has_value Arg1:T1 Arg2:T2	
+*	OR T3 T1
+T6	Person 58 62	Male
+T7	Person 64 75	35-80 years
+T8	Value 64 75	35-80 years
+R2	Has_value Arg1:T7 Arg2:T8	
+T9	Person 77 83	female
+T10	Condition 85 99	postmenopausal
+T11	Person 100 111	to 80 years
+T12	Value 100 111	to 80 years
+A1	Optional T6
+T13	Scope 77 99	female, postmenopausal
+A2	Optional T13
+R3	Has_value Arg1:T13 Arg2:T12	
+R4	Has_value Arg1:T6 Arg2:T8	
+*	OR T6 T13
+T14	Post-eligibility 117 151	Agree to participant in the trial.
+T15	Non-query-able 117 151	Agree to participant in the trial.

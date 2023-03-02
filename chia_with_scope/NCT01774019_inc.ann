@@ -1,0 +1,51 @@
+T1	Person 0 3	Age
+T2	Value 4 15	18 or older
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Non-query-able 17 134	Willing and able to comply with the study procedures and provide written informed consent to participate in the study
+T4	Condition 158 175	pancreatic cancer
+T5	Mood 149 157	probable
+T6	Condition 177 225	distal common bile duct (CBD) cholangiocarcinoma
+T7	Condition 236 257	periampullary cancers
+T8	Qualifier 230 235	other
+R2	Has_qualifier Arg1:T7 Arg2:T8	
+*	OR T7 T6 T4
+T9	Scope 158 257	pancreatic cancer, distal common bile duct (CBD) cholangiocarcinoma and other periampullary cancers
+R3	Has_mood Arg1:T9 Arg2:T5	
+T10	Condition 284 312	Biliary obstructive symptoms
+T11	Condition 284 303;316 321	Biliary obstructive signs
+*	OR T11 T10
+T12	Measurement 323 338	Bilirubin level
+T13	Value 339 366	at/above 100 umol per liter
+T14	Value 339 347;368 377	at/above 5.8 mg/dL
+R4	Subsumes Arg1:T13 Arg2:T14	
+R5	Has_value Arg1:T12 Arg2:T13	
+T15	Condition 380 406	Distal biliary obstruction
+T16	Condition 423 440	pancreatic cancer
+T17	Condition 442 471	distal CBD cholangiocarcinoma
+T18	Condition 481 505	periampullary malignancy
+T19	Qualifier 475 480	other
+R6	Has_qualifier Arg1:T18 Arg2:T19	
+*	OR T18 T17 T16
+T20	Condition 519 545	distal biliary obstruction
+T21	Procedure 596 601	stent
+T22	Mood 562 573	would allow
+T23	Qualifier 619 646	at least 2cm from the hilum
+R7	Has_qualifier Arg1:T21 Arg2:T23	
+R8	Has_mood Arg1:T21 Arg2:T22	
+T24	Condition 657 677	deemed as resectable
+T25	Procedure 681 703	pancreatic protocol CT
+T26	Procedure 681 700;707 710	pancreatic protocol MRI
+*	OR T26 T25
+T27	Scope 681 710	pancreatic protocol CT or MRI
+R9	AND Arg1:T27 Arg2:T24	
+T28	Condition 712 730	Surgical candidate
+T29	Qualifier 731 759	per pancreatobiliary surgeon
+R10	Has_qualifier Arg1:T28 Arg2:T29	
+T30	Procedure 797 804	Surgery
+T31	Mood 805 811	intent
+R11	Has_mood Arg1:T30 Arg2:T31	
+T32	Temporal 812 826	within 4 weeks
+R12	Has_temporal Arg1:T30 Arg2:T32	
+T33	Procedure 843 861	surgical treatment
+T34	Procedure 828 838;852 861	Endoscopic treatment
+*	OR T34 T33

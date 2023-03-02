@@ -1,0 +1,41 @@
+T1	Condition 18 35	contraindications
+T2	Condition 39 55	hypersensitivity
+T3	Procedure 67 87	antiplatelet therapy
+*	OR T1 T2
+T4	Scope 18 55	contraindications or hypersensitivity
+R1	AND Arg1:T4 Arg2:T3	
+T5	Condition 103 130	Acute Myocardial Infarction
+T6	Condition 132 166	ST elevation myocardial infarction
+T7	Condition 168 206	Non ST elevation myocardial infarction
+*	OR T6 T7
+T8	Scope 132 206	ST elevation myocardial infarction, Non ST elevation myocardial infarction
+R2	Subsumes Arg1:T5 Arg2:T8	
+T9	Mood 226 240	anticipated to
+T10	Procedure 249 258	treatment
+T11	Procedure 262 269	surgery
+T12	Procedure 319 339	antiplatelet therapy
+T13	Temporal 340 361	for 2 weeks or longer
+*	OR T10 T11
+T14	Scope 249 269	treatment or surgery
+R3	Has_mood Arg1:T14 Arg2:T9	
+R4	AND Arg1:T14 Arg2:T12	
+R5	Has_temporal Arg1:T12 Arg2:T13	
+T15	Condition 403 426	Chronic total occlusion
+T16	Condition 428 431	CTO
+T17	Condition 442 461	in-stent restenosis
+T18	Condition 463 466	ISR
+R6	Subsumes Arg1:T15 Arg2:T16	
+R7	Subsumes Arg1:T17 Arg2:T18	
+*	OR T15 T17
+T19	Condition 491 508	cardiogenic shock
+T20	Pregnancy_considerations 510 570	Women who are breastfeeding, pregnant, or desiring pregnancy
+T21	Condition 598 608	hemorrhage
+T22	Observation 626 641	life expectancy
+T23	Value 645 661	less than 1 year
+R8	Has_value Arg1:T22 Arg2:T23	
+T24	Procedure 692 710;717 726	drug-eluting stent procedure
+T25	Procedure 712 715	DES
+R9	Subsumes Arg1:T24 Arg2:T25	
+T26	Temporal 738 751	past 6 months
+R10	Has_temporal Arg1:T24 Arg2:T26	
+T27	Non-query-able 753 829	Any other patients judged by the investigator to be unsuitable for the trial

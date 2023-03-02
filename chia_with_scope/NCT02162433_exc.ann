@@ -1,0 +1,47 @@
+T1	Condition 6 13	allergy
+T2	Condition 17 33	hypersensitivity
+*	OR T1 T2
+T3	Drug 46 61	dexmedetomidine
+T4	Scope 6 33	allergy or hypersensitivity
+R1	AND Arg1:T4 Arg2:T3	
+T5	Condition 63 80	Organ dysfunction
+T6	Condition 88 103	hepatic failure
+T7	Condition 107 115	leukemia
+T8	Condition 82 87;96 103	renal failure
+*	OR T6 T8 T7
+T9	Scope 82 115	renal/hepatic failure or leukemia
+R2	Subsumes Arg1:T5 Arg2:T9	
+T10	Condition 118 133	Cardiac disease
+T11	Qualifier 135 145	congenital
+T12	Qualifier 149 157	acquired
+*	OR T11 T12
+T13	Scope 135 157	congenital or acquired
+R3	Subsumes Arg1:T10 Arg2:T13	
+T14	Condition 170 191	thoracic malformation
+T15	Condition 160 166;179 191	Airway malformation
+*	OR T14 T15
+T16	Condition 193 207	Cerebral palsy
+T17	Condition 209 218	Hypotonia
+T18	Drug 229 242	premedication
+T19	Mood 220 228	Need for
+R4	Has_mood Arg1:T18 Arg2:T19	
+T20	Temporal 244 251	Current
+T21	Temporal 252 258	recent
+T22	Condition 259 286	upper respiratory infection
+T23	Temporal 288 326	within four weeks prior to the surgery
+T24	Reference_point 315 326	the surgery
+T25	Procedure 319 326	surgery
+R5	multi Arg1:T24 Arg2:T25	
+R6	Has_index Arg1:T23 Arg2:T24	
+*	OR T21 T20
+T26	Scope 244 258	Current/recent
+R7	Has_scope Arg1:T22 Arg2:T26	
+R8	Subsumes Arg1:T26 Arg2:T23	
+T27	Condition 329 335	Asthma
+T28	Condition 337 344	Allergy
+T29	Condition 348 359	intolerance
+T30	Drug 363 372	clonidine
+*	OR T28 T29
+T31	Observation 374 402	Non-English speaking parents
+T32	Observation 374 394;403 411	Non-English speaking patients
+*	OR T32 T31

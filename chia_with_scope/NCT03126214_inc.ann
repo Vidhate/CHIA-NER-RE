@@ -1,0 +1,35 @@
+T1	Person 0 3	Age
+T2	Value 4 14	= 65 years
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Multiplier 20 34	one additional
+T4	Condition 42 53	risk factor
+T5	Condition 35 41	stroke
+R2	AND Arg1:T4 Arg2:T5	
+T6	Condition 55 67	hypertension
+T7	Condition 69 77	diabetes
+T8	Condition 79 92	heart failure
+T9	Measurement 107 141	left ventricular ejection fraction
+T10	Value 142 147	<0.40
+R3	Has_value Arg1:T9 Arg2:T10	
+*	OR T6 T7 T8 T9
+T11	Observation 93 100	history
+R4	Has_temporal Arg1:T9 Arg2:T11	
+T12	Temporal 150 158	previous
+T13	Condition 159 165	stroke
+T14	Condition 169 194	transient ischemic attack
+*	OR T13 T14
+T15	Scope 159 194	stroke or transient ischemic attack
+R5	Has_temporal Arg1:T15 Arg2:T12	
+T16	Scope 55 194	hypertension, diabetes, heart failure history of or left ventricular ejection fraction <0.40), previous stroke or transient ischemic attack
+T17	Scope 35 53	stroke risk factor
+R6	Subsumes Arg1:T17 Arg2:T16	
+R7	Has_multiplier Arg1:T17 Arg2:T3	
+T18	Condition 198 217	Atrial fibrillation
+T19	Measurement 222 225	not
+T20	Procedure 229 263	oral anticoagulation (OAC) therapy
+T21	Non-representable 264 276	but eligible
+R8	AND Arg1:T20 Arg2:T19	
+T22	Condition 278 297	Atrial fibrillation
+T23	Procedure 313 316	OAC
+T24	Qualifier 301 312	sub-optimal
+R9	Has_qualifier Arg1:T23 Arg2:T24	

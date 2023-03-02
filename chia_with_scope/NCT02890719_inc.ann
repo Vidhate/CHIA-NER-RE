@@ -1,0 +1,53 @@
+T1	Person 0 3	Age
+T2	Value 4 30	between 18 and 78 year-old
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Procedure 42 63	liver transplantation
+T4	Temporal 33 41	Previous
+R2	Has_temporal Arg1:T3 Arg2:T4	
+T5	Temporal 64 81	more than 6 month
+R3	Subsumes Arg1:T4 Arg2:T5	
+T6	Measurement 85 93	Genotype
+T7	Value 94 101	1 and 4
+R4	Has_value Arg1:T6 Arg2:T7	
+T8	Condition 102 111	infection
+R5	AND Arg1:T8 Arg2:T6	
+T9	Condition 114 125	Hepatitis C
+T10	Multiplier 126 136	recurrence
+R6	Has_multiplier Arg1:T9 Arg2:T10	
+T11	Measurement 173 192	liver function test
+T12	Value 164 172	abnormal
+T13	Measurement 203 210	HCV-RNA
+T14	Value 194 202	positive
+R7	Has_value Arg1:T13 Arg2:T14	
+R8	Has_value Arg1:T11 Arg2:T12	
+T15	Procedure 212 224	histological
+T16	Condition 234 245	hepatitis C
+T17	Multiplier 246 256	recurrence
+R9	Has_multiplier Arg1:T16 Arg2:T17	
+T18	Condition 212 256	histological signs of hepatitis C recurrence
+T19	Scope 164 256	abnormal liver function test, positive HCV-RNA, histological signs of hepatitis C recurrence
+T20	Scope 114 136	Hepatitis C recurrence
+R10	Subsumes Arg1:T20 Arg2:T19	
+T21	Measurement 259 269	Viral load
+T22	Value 270 281	≥10000UI/mL
+R11	Has_value Arg1:T21 Arg2:T22	
+T23	Procedure 284 301	Immunosuppression
+T24	Drug 307 317	tacrolimus
+T25	Drug 325 338	mycophenolate
+T26	Drug 340 350	Prednisone
+T27	Multiplier 369 377	low dose
+T28	Value 379 387	≤10 mg/d
+R14	Subsumes Arg1:T27 Arg2:T28	
+R15	Has_multiplier Arg1:T26 Arg2:T27	
+T29	Scope 307 388	tacrolimus and/or mycophenolate (Prednisone use is allowed at low dose, ≤10 mg/d)
+R12	Has_scope Arg1:T23 Arg2:T29	
+*	OR T24 T25 T26
+T30	Condition 391 406	Treatment naïve
+T31	Condition 410 431	treatment experienced
+*	OR T30 T31
+T32	Procedure 433 440	Peg-RBV
+T33	Procedure 444 458	triple therapy
+*	OR T32 T33
+T34	Scope 433 458	Peg-RBV or triple therapy
+T35	Scope 391 431	Treatment naïve or treatment experienced
+R13	Has_scope Arg1:T35 Arg2:T34	

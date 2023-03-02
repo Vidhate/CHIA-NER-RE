@@ -1,0 +1,16 @@
+T1	Procedure 27 56	pictorial pain scoring scales
+T2	Procedure 17 23;37 56	verbal pain scoring scales
+*	OR T2 T1
+T3	Condition 0 9	Inability
+T4	Scope 17 56	verbal or pictorial pain scoring scales
+R1	Has_scope Arg1:T3 Arg2:T4	
+T5	Condition 58 74	hypersensitivity
+T6	Drug 78 113	selective 5-HT receptor antagonists
+R2	AND Arg1:T5 Arg2:T6	
+T8	Condition 125 152	congenital long QT syndrome
+T7	Condition 161 179	hepatic impairment
+T9	Qualifier 154 160	severe
+R3	Has_qualifier Arg1:T7 Arg2:T9	
+T10	Condition 181 190	pregnancy
+T11	Condition 194 201	nursing
+*	OR T10 T11

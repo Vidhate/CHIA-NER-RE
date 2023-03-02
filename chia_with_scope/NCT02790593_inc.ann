@@ -1,0 +1,25 @@
+T1	Person 0 3	Age
+T2	Value 4 17	>18 years old
+R1	Has_value Arg1:T1 Arg2:T2	
+T3	Measurement 31 43	surface area
+T4	Value 19 30	1cm squared
+R2	Has_value Arg1:T3 Arg2:T4	
+T5	Condition 45 64	Venous incompetence
+T6	Procedure 78 97	clinical assessment
+T7	Procedure 102 124	duplex ultrasound scan
+T8	Scope 78 124	clinical assessment and duplex ultrasound scan
+R3	AND Arg1:T8 Arg2:T5	
+T9	Condition 141 157	arterial disease
+T10	Negation 126 128	No
+R4	Has_negation Arg1:T9 Arg2:T10	
+T11	Procedure 159 174	Arterial Duplex
+T12	Measurement 178 207	Ankle Brachial Pressure Index
+T13	Value 208 212	>0.9
+R5	Has_value Arg1:T12 Arg2:T13	
+*	OR T11 T12
+T14	Scope 159 212	Arterial Duplex or Ankle Brachial Pressure Index >0.9
+R6	AND Arg1:T14 Arg2:T9	
+T15	Post-eligibility 215 257	Patients able to complete trial procedures
+T16	Observation 275 290	life expectancy
+T17	Value 294 313	greater than 1 year
+R7	Has_value Arg1:T16 Arg2:T17	

@@ -1,0 +1,21 @@
+T1	Measurement 16 25	supine BP
+T2	Value 26 45	>140 mm Hg systolic
+T3	Value 49 68	>90 mm Hg diastolic
+*	OR T3 T2 T4 T5
+T4	Value 72 91	<100 mm Hg systolic
+T5	Value 95 114	<60 mm Hg diastolic
+T6	Scope 26 114	>140 mm Hg systolic or >90 mm Hg diastolic or <100 mm Hg systolic or <60 mm Hg diastolic
+R1	Has_scope Arg1:T1 Arg2:T6	
+T7	Measurement 155 170	Serum potassium
+T8	Value 171 183	>=5.1 mmol/L
+T9	Value 187 198	<3.5 mmol/L
+T10	Temporal 199 211	at screening
+*	OR T9 T8
+T11	Scope 171 198	>=5.1 mmol/L or <3.5 mmol/L
+R2	Has_scope Arg1:T7 Arg2:T11	
+R3	Has_temporal Arg1:T7 Arg2:T10	
+T12	Measurement 264 277	Estimated GFR
+T13	Value 278 296	<60 mL/min/1.73 m2
+T14	Observation 307 330	Cockcroft-Gault formula
+R4	Has_value Arg1:T12 Arg2:T13	
+R5	Has_context Arg1:T12 Arg2:T14	

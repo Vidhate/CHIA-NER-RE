@@ -1,0 +1,147 @@
+T1	Condition 68 73	NSCLC
+T2	Qualifier 34 54	cytologically proven
+T3	Qualifier 16 30;48 54	histologically proven
+*	OR T2 T3
+T4	Scope 16 54	histologically or cytologically proven
+R1	Has_scope Arg1:T1 Arg2:T4	
+T5	Condition 107 112;121 133	stage IIIb disease
+T6	Condition 107 117;126 133	stage IIIa disease
+*	OR T5 T6
+T7	Qualifier 75 87	Unresectable
+T8	Qualifier 89 105	locally advanced
+R2	Subsumes Arg1:T7 Arg2:T8	
+T9	Scope 107 133	stage IIIa or IIIb disease
+R3	Has_qualifier Arg1:T9 Arg2:T7	
+T10	Qualifier 224 233	esophagus
+T11	Multiplier 188 200;213 215	greater than 30
+T12	Multiplier 204 216	equal to 30%
+*	OR T12 T11
+T13	Scope 188 216	greater than or equal to 30%
+R4	Has_scope Arg1:T10 Arg2:T13	
+T14	Measurement 143 155	radiotherapy
+T15	Qualifier 135 142	Initial
+R5	Has_qualifier Arg1:T14 Arg2:T15	
+R6	Has_qualifier Arg1:T14 Arg2:T10	
+T16	Observation 235 250	Life expectancy
+T17	Value 267 284	equal to 6 months
+T18	Value 251 263;276 284	greater than 6 months
+*	OR T17 T18
+T19	Scope 251 284	greater than or equal to 6 months
+R7	Has_scope Arg1:T16 Arg2:T19	
+T20	Condition 378 396	Measurable disease
+T21	Temporal 341 376	3 months before study randomization
+T22	Reference_point 357 376	study randomization
+R8	Has_index Arg1:T21 Arg2:T22	
+T23	Measurement 286 307	Estimated weight loss
+T24	Value 321 333	equal to 10%
+T25	Value 308 317;330 333	less than 10%
+*	OR T24 T25
+T26	Scope 308 333	less than or equal to 10%
+R9	Has_scope Arg1:T23 Arg2:T26	
+R10	Has_temporal Arg1:T23 Arg2:T21	
+T28	Measurement 424 458;466 484	Eastern Cooperative Oncology Group performance status
+T29	Measurement 460 464	ECOG
+R11	Subsumes Arg1:T28 Arg2:T29	
+T30	Value 488 493	0 - 2
+R12	Has_value Arg1:T28 Arg2:T30	
+T31	Measurement 495 505	Hemoglobin
+T32	Measurement 507 510	hgb
+R13	Subsumes Arg1:T31 Arg2:T32	
+T33	Value 528 544	equal to 10 g/dL
+T34	Value 512 524;537 544	greater than 10 g/dL
+*	OR T33 T34
+T35	Scope 512 544	greater than or equal to 10 g/dL
+T36	Temporal 596 637	in the 4 weeks before study randomization
+T37	Reference_point 618 637	study randomization
+R14	Has_index Arg1:T36 Arg2:T37	
+T38	Negation 545 552	without
+T39	Observation 553 574	transfusional support
+T40	Observation 578 595	growth factor use
+*	OR T39 T40
+T41	Scope 553 595	transfusional support or growth factor use
+R15	Has_negation Arg1:T41 Arg2:T38	
+R16	Has_scope Arg1:T31 Arg2:T35	
+R17	Has_temporal Arg1:T31 Arg2:T36	
+R18	Has_temporal Arg1:T41 Arg2:T36	
+T42	Measurement 639 664	Absolute neutrophil count
+T43	Measurement 666 669	ANC
+R19	Subsumes Arg1:T42 Arg2:T43	
+T44	Value 687 708	equal to 1.5 x 10^9/L
+T45	Value 671 683;696 708	greater than 1.5 x 10^9/L
+*	OR T45 T44
+T46	Scope 671 708	greater than or equal to 1.5 x 10^9/L
+T47	Negation 709 716	without
+T48	Observation 717 734	growth factor use
+R20	Has_negation Arg1:T48 Arg2:T47	
+T49	Temporal 735 776	in the 2 weeks before study randomization
+T50	Reference_point 757 776	study randomization
+R21	Has_index Arg1:T49 Arg2:T50	
+R22	Has_scope Arg1:T42 Arg2:T46	
+R23	Has_temporal Arg1:T42 Arg2:T49	
+R24	Has_temporal Arg1:T48 Arg2:T49	
+T51	Measurement 778 792	Platelet count
+T52	Value 793 805;818 830	greater than 100 x 10^9/L
+T53	Value 809 830	equal to 100 x 10^9/L
+*	OR T53 T52
+T54	Scope 793 830	greater than or equal to 100 x 10^9/L
+R25	Has_scope Arg1:T51 Arg2:T54	
+T55	Measurement 832 847	Serum bilirubin
+T56	Value 861 917	equal to 1.5 x institutional upper limit of normal (ULN)
+T57	Value 848 857;870 917	less than 1.5 x institutional upper limit of normal (ULN)
+*	OR T56 T57
+T58	Scope 848 917	less than or equal to 1.5 x institutional upper limit of normal (ULN)
+R26	Has_scope Arg1:T55 Arg2:T58	
+T59	Measurement 919 935	Serum creatinine
+T60	Value 949 967	equal to 2.0 mg/dL
+T61	Value 936 945	less than
+T62	Value 958 967	2.0 mg/dL
+*	OR T60 T62
+T63	Scope 937 967	ess than or equal to 2.0 mg/dL
+R27	Has_scope Arg1:T59 Arg2:T63	
+T64	Measurement 991 1007	serum creatinine
+T65	Value 1024 1036;1067 1072	equal to 1.4 mg/dL
+T66	Value 1008 1020;1033 1036;1067 1072	greater than 1.4 mg/dL
+*	OR T65 T66
+T67	Value 1041 1050;1063 1072	less than 2.0 mg/dL
+T68	Value 1054 1072	equal to 2.0 mg/dL
+*	OR T68 T67
+T69	Scope 1008 1072	greater than or equal to 1.4 and less than or equal to 2.0 mg/dL
+R28	Has_scope Arg1:T64 Arg2:T69	
+T70	Measurement 1092 1128	24-hour urinary creatinine clearance
+T71	Value 1145 1163	equal to 50 mL/min
+T72	Value 1129 1141;1154 1163	greater than 50 mL/min
+*	OR T71 T72
+T73	Scope 1129 1163	greater than or equal to 50 mL/min
+R29	Has_scope Arg1:T70 Arg2:T73	
+T74	Scope 919 967	Serum creatinine less than or equal to 2.0 mg/dL
+T75	Scope 991 1163	serum creatinine greater than or equal to 1.4 and less than or equal to 2.0 mg/dL must demonstrate a 24-hour urinary creatinine clearance greater than or equal to 50 mL/min
+*	OR T74 T75
+T76	Person 1166 1173	Females
+T77	Condition 1177 1199	childbearing potential
+R30	AND Arg1:T76 Arg2:T77	
+T78	Measurement 1219 1239	urine pregnancy test
+T79	Measurement 1210 1215;1225 1239	serum pregnancy test
+*	OR T78 T79
+T80	Scope 1210 1239	serum or urine pregnancy test
+T81	Value 1201 1209	negative
+R31	Has_value Arg1:T80 Arg2:T81	
+T82	Observation 1267 1283	informed consent
+T84	Temporal 1284 1389	before participating in any study-specific procedure, randomization, or receiving investigational product
+T85	Reference_point 1291 1389	participating in any study-specific procedure, randomization, or receiving investigational product
+T86	Qualifier 1312 1326	study-specific
+T87	Procedure 1327 1336	procedure
+T88	Procedure 1338 1351	randomization
+T89	Drug 1366 1389	investigational product
+*	OR T88 T89 T87 T86
+T90	Scope 1312 1389	study-specific procedure, randomization, or receiving investigational product
+R32	multi Arg1:T85 Arg2:T90	
+R33	Has_temporal Arg1:T82 Arg2:T84	
+T83	Qualifier 1453 1461	adequate
+T91	Procedure 1462 1483	contraception methods
+R34	Has_qualifier Arg1:T91 Arg2:T83	
+T92	Condition 1406 1429	reproductive capability
+A1	Optional T92
+R35	AND Arg1:T92 Arg2:T91	
+T27	Value 398 406;414 422	18 years or older
+T93	Person 410 413	age
+R36	Has_value Arg1:T93 Arg2:T27	

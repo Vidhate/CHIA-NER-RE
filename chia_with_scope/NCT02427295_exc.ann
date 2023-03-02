@@ -1,0 +1,25 @@
+T1	Condition 7 24	co-morbid illness
+T2	Qualifier 0 6	Severe
+R1	Has_qualifier Arg1:T1 Arg2:T2	
+T3	Qualifier 33 44	untreatable
+T4	Qualifier 45 50	other
+T5	Condition 51 61	malignancy
+T6	Qualifier 69 75	active
+T7	Condition 76 86	infections
+R2	Has_qualifier Arg1:T7 Arg2:T6	
+R3	Has_qualifier Arg1:T5 Arg2:T4	
+R4	Has_qualifier Arg1:T5 Arg2:T3	
+*	OR T5 T7
+T8	Scope 33 86	untreatable other malignancy and/or active infections
+T9	Scope 0 24	Severe co-morbid illness
+R5	Subsumes Arg1:T9 Arg2:T8	
+T10	Condition 89 97	Pregnant
+T11	Condition 101 110	lactating
+T12	Person 111 116	women
+*	OR T11 T10
+T13	Condition 118 134	Hypersensitivity
+T14	Drug 138 149	Sandostatin
+T15	Drug 157 185	component of the formulation
+*	OR T14 T15
+T16	Scope 138 185	Sandostatin or any component of the formulation
+R6	Has_scope Arg1:T13 Arg2:T16	

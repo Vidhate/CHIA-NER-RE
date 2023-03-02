@@ -1,0 +1,6 @@
+T1	Condition 14 23	allergies
+T2	Condition 27 44	contraindications
+T3	Drug 48 65	study medications
+*	OR T1 T2
+T4	Scope 14 44	allergies or contraindications
+R1	AND Arg1:T4 Arg2:T3	

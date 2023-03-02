@@ -1,0 +1,26 @@
+T1	Condition 13 29	seizure disorder
+T2	Condition 50 75	childhood febrile seizure
+T3	Multiplier 43 49	single
+R1	Has_multiplier Arg1:T2 Arg2:T3	
+T4	Observation 0 7	History
+R3	Has_temporal Arg1:T1 Arg2:T4	
+T5	Observation 78 85	History
+T6	Condition 101 121;122 129;139 146	clinically important hepatic disease
+T7	Condition 101 121;133 146	clinically important renal disease
+T8	Condition 101 121;150 171	clinically important other medical disease
+T9	Observation 193 200	history
+T10	Condition 204 229	major depressive disorder
+T11	Condition 231 247	bipolar disorder
+T12	Condition 249 267	psychotic disorder
+T13	Condition 272 300	generalized anxiety disorder
+T14	Qualifier 301 318	requiring therapy
+*	OR T10 T11 T12 T13
+T15	Scope 204 300	major depressive disorder, bipolar disorder, psychotic disorder, or generalized anxiety disorder
+R4	Has_temporal Arg1:T15 Arg2:T9	
+R5	Has_qualifier Arg1:T15 Arg2:T14	
+T16	Scope 101 171	clinically important hepatic or renal disease or other medical disease
+R6	Has_temporal Arg1:T16 Arg2:T5	
+T17	Negation 30 40	other than
+R2	Has_negation Arg1:T2 Arg2:T17	
+R7	AND Arg1:T1 Arg2:T2	
+*	OR T6 T7 T8

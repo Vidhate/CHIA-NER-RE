@@ -1,0 +1,39 @@
+T1	Condition 33 46	renal disease
+T2	Condition 22 29;39 46	hepatic disease
+*	OR T1 T2
+T3	Qualifier 0 18	Clinical diagnosis
+T4	Qualifier 48 66	Clinical diagnosis
+T5	Qualifier 81 86	acute
+T6	Qualifier 70 77	chronic
+T7	Condition 87 97	alcoholism
+*	OR T6 T5
+T8	Scope 70 86	chronic or acute
+R1	Has_scope Arg1:T7 Arg2:T8	
+R2	Has_qualifier Arg1:T7 Arg2:T4	
+T9	Condition 110 117	allergy
+T10	Condition 121 137	hypersensitivity
+T11	Drug 141 151	Sugammadex
+T12	Drug 159 167	atropine
+T13	Drug 171 182	Neostigmine
+*	OR T12 T13 T11
+T14	Scope 141 182	Sugammadex and/or atropine or Neostigmine
+*	OR T9 T10
+T15	Scope 110 137	allergy or hypersensitivity
+R3	Has_scope Arg1:T15 Arg2:T14	
+T16	Condition 209 220	CNS effects
+T17	Drug 192 203	medications
+R4	AND Arg1:T17 Arg2:T16	
+T18	Condition 233 251	neurologic disease
+T19	Observation 222 229	History
+R5	Has_temporal Arg1:T18 Arg2:T19	
+T20	Condition 253 272	Diaphragmatic palsy
+T21	Condition 274 283	Pregnancy
+T22	Condition 287 294	nursing
+*	OR T21 T22
+T23	Observation 296 303	History
+T24	Condition 307 328	malignant arrhythmias
+R6	Has_temporal Arg1:T24 Arg2:T23	
+T25	Scope 22 46	hepatic or renal disease
+R7	Has_qualifier Arg1:T25 Arg2:T3	
+T26	Observation 99 106	History
+R8	Has_temporal Arg1:T15 Arg2:T26	

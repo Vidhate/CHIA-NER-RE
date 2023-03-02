@@ -1,0 +1,64 @@
+T1	Condition 21 40	Alzheimer's disease
+T2	Measurement 42 195	National Institute of Neurological and Communicative Disorders and Stroke - Alzheimer's Disease and Related Disorders Association (NINCDS-ADRDA) criteria
+R1	AND Arg1:T1 Arg2:T2	
+T3	Value 12 20	probable
+T4	Value 0 8	Possible
+*	OR T3 T4
+T5	Scope 0 20	Possible or probable
+R2	Has_scope Arg1:T2 Arg2:T5	
+T6	Measurement 203 232	Mini-Mental State Exam (MMSE)
+T7	Value 233 257	score of 10-26 inclusive
+T8	Measurement 259 263	MMSE
+T9	Value 264 279	scores above 26
+R3	Has_value Arg1:T8 Arg2:T9	
+R4	Has_value Arg1:T6 Arg2:T7	
+*	OR T6 T8
+T10	Condition 324 326	AD
+T11	Condition 423 429	apathy
+T12	Person 434 453	at least four weeks
+T13	Measurement 517 549	Neuropsychiatric Inventory (NPI)
+T14	Value 554 569	Very frequently
+R5	Has_value Arg1:T13 Arg2:T14	
+T15	Measurement 621 624	NPI
+T16	Value 629 639	Frequently
+T17	Value 645 650	Often
+*	OR T17 T16
+T18	Measurement 698 701	NPI
+T19	Observation 660 678	severity of apathy
+T20	Observation 582 601	frequency of apathy
+R6	AND Arg1:T20 Arg2:T15	
+T21	Scope 628 651	'Frequently' or 'Often'
+T22	Value 706 714	Moderate
+T23	Value 720 726	Marked
+*	OR T23 T22
+T24	Scope 705 727	'Moderate' or 'Marked'
+R7	Has_scope Arg1:T18 Arg2:T24	
+R8	Has_scope Arg1:T15 Arg2:T21	
+R9	AND Arg1:T19 Arg2:T18	
+T25	Scope 582 727	frequency of apathy as assessed by the NPI is 'Frequently' or 'Often' AND the severity of apathy as assessed by the NPI is 'Moderate' or 'Marked'
+T26	Observation 478 497	frequency of apathy
+R10	AND Arg1:T26 Arg2:T13	
+*	OR T26 T25
+T27	Drug 731 752	medication for apathy
+T28	Condition 746 752	apathy
+R11	AND Arg1:T27 Arg2:T28	
+T29	Post-eligibility 729 806	A medication for apathy is appropriate, in the opinion of the study physician
+T30	Parsing_Error 729 806	A medication for apathy is appropriate, in the opinion of the study physician
+T31	Post-eligibility 808 961	Provision of informed consent for participation in the study by patient or surrogate (if the patient is unable to provide informed consent) and caregiver
+T32	Post-eligibility 963 1157	Availability of primary caregiver, who spends greater than ten hours a week with the patient and supervises his/her care, to accompany the patient to study visits and to participate in the study
+T33	Post-eligibility 1159 1315	Sufficient fluency, of both the patient and caregiver, in written and spoken English to participate in study visits, physical exams, and outcome assessments
+T34	Drug 1330 1344	AD medications
+T35	Temporal 1345 1385	within the month preceding randomization
+T36	Reference_point 1372 1385	randomization
+R12	Has_index Arg1:T35 Arg2:T36	
+T37	Observation 1320 1344	change to AD medications
+T38	Negation 1317 1319	No
+R13	Has_negation Arg1:T37 Arg2:T38	
+R14	AND Arg1:T37 Arg2:T34	
+R15	Has_temporal Arg1:T37 Arg2:T35	
+T39	Drug 1473 1534	selective serotonin reuptake inhibitor antidepressants(SSRIs)
+T40	Qualifier 1457 1469	stable doses
+T41	Procedure 1442 1451	Treatment
+R16	AND Arg1:T41 Arg2:T39	
+R17	Has_qualifier Arg1:T39 Arg2:T40	
+T42	Context_Error 1442 1757	Treatment with stable doses of selective serotonin reuptake inhibitor antidepressants(SSRIs) is appropriate if stable for 3 months prior to randomization. Other psychotropics(with the exclusion of antipsychotics), if stable for 3 months, may be allowed only with Steering Committee approval on a case by case basis.

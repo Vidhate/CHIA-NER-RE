@@ -1,0 +1,58 @@
+T1	Condition 24 40	hypersensitivity
+T2	Condition 44 60	contraindication
+T4	Drug 98 105	Heparin
+T3	Drug 107 114	Aspirin
+T5	Drug 116 127	Clopidogrel
+T6	Drug 129 139	Cilostazol
+*	OR T4 T3 T5 T6
+*	OR T1 T2
+T7	Scope 24 60	hypersensitivity or contraindication
+T8	Scope 98 139	Heparin, Aspirin, Clopidogrel, Cilostazol
+R1	Has_scope Arg1:T7 Arg2:T8	
+T9	Qualifier 141 153	Uncontrolled
+T10	Condition 154 166	hypertension
+R2	Has_qualifier Arg1:T10 Arg2:T9	
+T11	Condition 179 197	bleeding diathesis
+T12	Observation 168 175	History
+R3	Has_temporal Arg1:T11 Arg2:T12	
+T13	Condition 207 219	coagulopathy
+*	OR T11 T13 T15
+T14	Condition 231 263	heparin-induced thrombocytopenia
+R4	Subsumes Arg1:T13 Arg2:T14	
+T15	Observation 269 295	refuses blood transfusions
+T16	Procedure 277 295	blood transfusions
+R5	multi Arg1:T15 Arg2:T16	
+T17	Procedure 307 315	hemogram
+T18	Temporal 298 306	Baseline
+R6	Has_temporal Arg1:T17 Arg2:T18	
+T19	Measurement 321 323	Hb
+T20	Value 323 330	<10g/dL
+R7	Has_value Arg1:T19 Arg2:T20	
+T21	Measurement 334 343	PLT count
+T22	Value 343 354	<100,000/μL
+R8	Has_value Arg1:T21 Arg2:T22	
+*	OR T19 T21
+T23	Scope 321 354	Hb<10g/dL or PLT count<100,000/μL
+R9	Has_scope Arg1:T17 Arg2:T23	
+T24	Drug 380 388	warfarin
+T25	Drug 390 400	cilostazol
+*	OR T24 T25 T26
+T26	Drug 422 442	anti-platelet agents
+T27	Drug 450 457	aspirin
+T28	Drug 462 473	clopidogrel
+*	OR T27 T28
+T29	Negation 443 449	except
+T30	Scope 450 473	aspirin and clopidogrel
+R10	Has_negation Arg1:T30 Arg2:T29	
+R11	Has_scope Arg1:T26 Arg2:T30	
+T31	Condition 495 517	genitourinary bleeding
+T32	Condition 475 491;509 517	Gastrointestinal bleeding
+*	OR T32 T31
+T33	Temporal 518 543	within the prior 3 months
+T34	Scope 475 517	Gastrointestinal or genitourinary bleeding
+R12	Has_temporal Arg1:T34 Arg2:T33	
+T35	Procedure 548 561	major surgery
+T36	Temporal 562 577	within 2 months
+R13	Has_temporal Arg1:T35 Arg2:T36	
+*	OR T34 T35
+T37	Condition 580 589	Pregnancy

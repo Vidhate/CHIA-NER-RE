@@ -1,0 +1,33 @@
+T1	Temporal 0 7	Current
+T2	Mood 11 18	planned
+T3	Condition 19 28	pregnancy
+*	OR T2 T1
+T4	Scope 0 18	Current or planned
+R1	Has_scope Arg1:T3 Arg2:T4	
+T5	Condition 41 57	neuropathic pain
+T6	Observation 30 37	History
+T7	Condition 59 80	chronic pain syndrome
+T8	Temporal 85 97	preoperative
+T9	Drug 105 113;134 142	narcotic medicine
+T10	Drug 117 142	neuropathic pain medicine
+*	OR T10 T9
+T11	Scope 105 142	narcotic or neuropathic pain medicine
+R2	Has_temporal Arg1:T11 Arg2:T8	
+*	OR T7 T5 T11
+T12	Scope 41 142	neuropathic pain, chronic pain syndrome, or preoperative use of narcotic or neuropathic pain medicine
+R3	Has_temporal Arg1:T12 Arg2:T6	
+T13	Mood 144 162	Radiographic signs
+T14	Procedure 144 156	Radiographic
+T15	Condition 166 180	osteoarthritis
+R4	Has_mood Arg1:T15 Arg2:T13	
+R5	multi Arg1:T13 Arg2:T14	
+T16	Measurement 184 195	Tonis grade
+T17	Value 182 183;196 197	> 1
+R6	Has_value Arg1:T16 Arg2:T17	
+R7	AND Arg1:T15 Arg2:T16	
+T18	Condition 200 209	Inability
+T19	Observation 213 236	attend follow up visits
+R8	Has_context Arg1:T18 Arg2:T19	
+T20	Condition 249 256	allergy
+T21	Drug 260 276	local anesthetic
+R9	AND Arg1:T20 Arg2:T21	

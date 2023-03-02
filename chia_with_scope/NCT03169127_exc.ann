@@ -1,0 +1,38 @@
+T1	Condition 12 29	systemic diseases
+T2	Condition 44 62	local inflammation
+T3	Condition 44 49;70 79	local infection
+*	OR T3 T2
+T4	Observation 86 93	history
+T5	Condition 97 114	allergic reaction
+T6	Drug 118 135	local anesthetics
+T7	Condition 137 162	gastrointestinal bleeding
+T8	Condition 137 153;166 176	gastrointestinal ulceration
+R1	AND Arg1:T5 Arg2:T6	
+*	OR T5 T8 T7
+T9	Scope 97 176	allergic reaction to local anesthetics, gastrointestinal bleeding or ulceration
+R2	Has_temporal Arg1:T9 Arg2:T4	
+T10	Condition 179 193;213 221	Cardiovascular diseases
+T11	Condition 195 201;213 221	kidney diseases
+T12	Condition 205 221	hepatic diseases
+*	OR T10 T11 T12
+T13	Drug 255 270	antidepressants
+T14	Drug 272 281	diuretics
+T15	Drug 285 299	anticoagulants
+*	OR T13 T14 T15
+T16	Condition 302 308	Asthma
+T17	Condition 313 320	allergy
+T18	Drug 324 331	aspirin
+T19	Drug 333 342	ibuprofen
+T20	Drug 356 390	nonsteroidal antiinflammatory drug
+T21	Qualifier 346 355	any other
+R3	Has_qualifier Arg1:T20 Arg2:T21	
+*	OR T19 T20 T18
+T22	Scope 324 390	aspirin, ibuprofen or any other nonsteroidal antiinflammatory drug
+R4	Has_scope Arg1:T17 Arg2:T22	
+*	OR T16 T17
+T23	Multiplier 393 404	Regular use
+T24	Condition 412 446	nonsteroidal antiinflammatory drug
+R5	Has_multiplier Arg1:T24 Arg2:T23	
+T25	Condition 449 458	Pregnancy
+T26	Observation 462 476	breast feeding
+*	OR T26 T25
